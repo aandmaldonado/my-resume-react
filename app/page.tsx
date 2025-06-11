@@ -40,7 +40,7 @@ export default function Home() {
         <Footer />
         <button
           onClick={() => setIsChatbotVisible(!isChatbotVisible)}
-          className="fixed bottom-4 right-4 bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 transition-colors"
+          className="fixed bottom-4 right-4 bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 transition-colors z-50"
         >
           <Bot className="w-6 h-6" />
         </button>

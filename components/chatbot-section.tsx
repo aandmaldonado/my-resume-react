@@ -11,7 +11,7 @@ const ChatbotSection: React.FC<ChatbotSectionProps> = ({ setIsChatbotVisible }) 
   const { t } = useTranslation();
 
   return (
-    <div className="fixed bottom-20 right-4 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-lg w-80 flex flex-col h-[400px]">
+    <div className="fixed bottom-20 right-4 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-lg w-80 flex flex-col h-[400px] z-50">
       {/* Chatbot Header */}
       <div className="flex items-center p-4 bg-gray-100 dark:bg-gray-700 rounded-t-lg shadow-sm">
         <div className="relative w-12 h-12 rounded-full overflow-hidden mr-3">

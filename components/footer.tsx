@@ -8,7 +8,7 @@ export default function Footer() {
   const { t, i18n } = useTranslation()
 
   return (
-    <footer className="relative bg-gradient-to-b from-gray-900 to-black text-white py-12">
+    <footer className="relative bg-gradient-to-b from-gray-900 to-black text-white py-12 z-10">
       <div className="absolute inset-0 z-0">
         <Image
           src="/footer/bg4.png"
