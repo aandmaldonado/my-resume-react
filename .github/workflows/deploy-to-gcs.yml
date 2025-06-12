@@ -38,7 +38,7 @@ jobs:
         with:
           # ¡Aquí es donde usas los IDs del pool y proveedor que configuraste!
           # Formato: projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID
-          workload_identity_provider: 'projects/251107984645/locations/global/workloadIdentityPools/github-pool/subject/SUBJECT_ATTRIBUTE_VALUE'
+          workload_identity_provider: 'projects/251107984645/locations/global/workloadIdentityPools/github-pool/providers/github-actions-provider'
           # El correo electrónico completo de tu cuenta de servicio que creaste
           service_account: 'githubactions@almapidev.iam.gserviceaccount.com'
 
