@@ -39,7 +39,7 @@ const resources = {
           "Highly adaptable to remote work and results-oriented"
         ],
         description8: "Let's connect! I am open to opportunities and collaborations that create real impact.",
-        years_experience: "Years of Experience",
+        years_experience: "YoE",
         industries: "Industries"
       },
       experience: {
@@ -224,7 +224,7 @@ const resources = {
           ]
         },
         edu3: {
-          institution: "Hackio",
+          institution: "Hackio by thePower",
           degree: "AI Development Bootcamp",
           period: "2025",
           location: "Online, Spain",
@@ -727,7 +727,7 @@ const resources = {
           ]
         },
         edu3: {
-          institution: "Hackio",
+          institution: "Hackio by thePower",
           degree: "Bootcamp en Desarrollo de IA",
           period: "2025",
           location: "Online, España",
