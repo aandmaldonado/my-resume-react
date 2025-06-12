@@ -6,10 +6,10 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Álvaro Maldonado | Senior Software Engineer & AI Specialist',
+    default: 'almap[i]',
     template: '%s | Álvaro Maldonado',
   },
-  description: 'Senior Software Engineer especializado en IA y Machine Learning. Más de 10 años de experiencia en desarrollo Java, Spring Boot, AWS, y soluciones de inteligencia artificial. Expertos en DevOps y arquitectura de software.',
+  description: 'Álvaro Maldonado | Senior Software Engineer & AI-Powered Engineer',
   keywords: [
     'Álvaro Maldonado',
     'Senior Software Engineer',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: 'Álvaro Maldonado',
-      url: 'https://www.almapi.dev',
+      url: 'https://almapi.dev',
     },
   ],
   robots: {
@@ -49,27 +49,20 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  alternates: {
-    canonical: 'https://www.almapi.dev',
-    languages: {
-      'es-ES': 'https://www.almapi.dev',
-      'en-US': 'https://www.almapi.dev/en',
-    },
-  },
   openGraph: {
-    title: 'Álvaro Maldonado | Senior Software Engineer & AI Specialist',
-    description: 'Senior Software Engineer especializado en IA y Machine Learning. Más de 10 años de experiencia en desarrollo Java, Spring Boot, AWS, y soluciones de inteligencia artificial. Expertos en DevOps y arquitectura de software.',
-    url: 'https://www.almapi.dev',
+    title: 'almap[i]',
+    description: 'Álvaro Maldonado | Senior Software Engineer & AI-Powered Engineer',
+    url: 'https://almapi.dev',
     siteName: 'almap[i]',
     images: [
       {
-        url: 'https://www.almapi.dev/profile.jpeg',
+        url: 'https://almapi.dev/about/profile2.jpg',
         width: 320,
         height: 320,
-        alt: 'Álvaro Maldonado - Senior Software Engineer & AI Specialist',
+        alt: 'Álvaro Maldonado - Senior Software Engineer & AI-Powered Engineer',
       },
       {
-        url: 'https://www.almapi.dev/logo.svg',
+        url: 'https://almapi.dev/icon/logo.svg',
         width: 1200,
         height: 630,
         alt: 'almap[i] - Portfolio de Álvaro Maldonado',
@@ -78,29 +71,17 @@ export const metadata: Metadata = {
     locale: 'es_ES',
     type: 'website',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Álvaro Maldonado | Senior Software Engineer & AI Specialist',
-    description: 'Senior Software Engineer especializado en IA y Machine Learning. Más de 10 años de experiencia en desarrollo Java, Spring Boot, AWS, y soluciones de inteligencia artificial.',
-    creator: '@tu_usuario_twitter',
-    site: '@tu_usuario_twitter',
-    images: ['https://www.almapi.dev/profile.jpeg'],
-  },
   icons: {
     icon: [
-      { url: '/code.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/icon/code.svg', type: 'image/svg+xml' },
+      { url: 'icon/favicon.ico', sizes: 'any' },
+      { url: 'icon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: 'icon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
-  metadataBase: new URL('https://www.almapi.dev'),
-  verification: {
-    google: 'tu-codigo-de-verificacion-google',
-    yandex: 'tu-codigo-de-verificacion-yandex',
-  },
+  metadataBase: new URL('https://almapi.dev'),
 }
 
 export default function RootLayout({
