@@ -1,0 +1,72 @@
+# Nombre del flujo de trabajo que aparecerá en la pestaña 'Actions' de GitHub
+name: Deploy Static Website to GCS (Workload Identity Federation)
+
+# Eventos que desencadenarán este flujo de trabajo
+on:
+  push:
+    branches:
+      - main # O la rama principal de tu sitio web (ej. master, gh-pages)
+  workflow_dispatch: # Permite ejecutar el workflow manualmente desde GitHub Actions
+
+# Definición de los "jobs" (trabajos) que se ejecutarán
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # ¡MUY IMPORTANTE! Permisos necesarios para la federación de identidades
+    permissions:
+      contents: 'read' # Permiso para que la acción de checkout lea el código del repositorio
+      id-token: 'write' # ¡Crítico! Permiso para que el runner de GitHub solicite un token OIDC
+
+    # Variables de entorno específicas para este job
+    env:
+      # ID de tu proyecto de Google Cloud. Reemplaza con el ID real de tu proyecto.
+      GCP_PROJECT_ID: almapidev
+      # Nombre de tu bucket de Cloud Storage. Reemplaza con el nombre real de tu bucket.
+      GCS_BUCKET_NAME: almapi.dev
+      # El directorio local que contiene los archivos de tu sitio web estático.
+      # '.' significa la raíz del repositorio. Si tu sitio está en una carpeta 'public' o 'dist', cámbialo aquí.
+      WEB_DIRECTORY: out
+
+    # Pasos que se ejecutarán en este job
+    steps:
+      - name: Checkout repository # Paso 1: Obtener el código de tu repositorio
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud # Paso 2: Autenticarse en Google Cloud usando Workload Identity Federation
+        uses: 'google-github-actions/auth@v2' # Usa la acción oficial de Google para autenticación
+        with:
+          # ¡Aquí es donde usas los IDs del pool y proveedor que configuraste!
+          # Formato: projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID
+          workload_identity_provider: 'projects/251107984645/locations/global/workloadIdentityPools/github-pool/subject/SUBJECT_ATTRIBUTE_VALUE'
+          # El correo electrónico completo de tu cuenta de servicio que creaste
+          service_account: 'githubactions@almapidev.iam.gserviceaccount.com'
+
+      - name: Set up Google Cloud SDK # Paso 3: Instalar y configurar el SDK de Google Cloud (incluye gsutil)
+        uses: 'google-github-actions/setup-gcloud@v2'
+
+      - name: Deploy to Google Cloud Storage # Paso 4: Sincronizar los archivos con el bucket de GCS
+        run: |
+          # El comando gsutil rsync sincroniza el contenido local con el bucket
+          # -m: Realiza operaciones en paralelo para mayor velocidad
+          # -r: Recorre recursivamente los directorios
+          # -d: Elimina archivos en el destino (bucket) que no existen en el origen (repositorio local).
+          #     ¡CUIDADO con -d! Si no quieres que se borren archivos del bucket si los quitas del repo, omite -d.
+          gsutil -m rsync -d -r ${{ env.WEB_DIRECTORY }} gs://${{ env.GCS_BUCKET_NAME }}
+        env:
+          # Asegura que gsutil use el proyecto correcto, aunque la autenticación ya lo haya hecho
+          CLOUDSDK_CORE_PROJECT: ${{ env.GCP_PROJECT_ID }}
+
+      # --- OPCIONALES (Descomenta y ajusta si los necesitas) ---
+      # - name: Set Cache Control for HTML (Opcional)
+      #   run: |
+      #     gsutil -m setmeta -h "Cache-Control: public, max-age=3600" gs://${{ env.GCS_BUCKET_NAME }}/**/*.html
+      # - name: Set Cache Control for Assets (Opcional)
+      #   run: |
+      #     gsutil -m setmeta -h "Cache-Control: public, max-age=86400" gs://${{ env.GCS_BUCKET_NAME }}/**/*.{css,js,png,jpg,svg,gif,ico,woff,woff2,ttf,eot}
+
+      # - name: Invalidate Cloud CDN Cache (Opcional, si usas CDN)
+      #   run: |
+      #     gcloud compute url-maps invalidate-cdn-cache your-url-map-name --path "/*"
+      #   env:
+      #     CLOUDSDK_CORE_PROJECT: ${{ env.GCP_PROJECT_ID }}
