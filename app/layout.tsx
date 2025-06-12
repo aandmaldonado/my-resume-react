@@ -111,9 +111,9 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/code.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon/code.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/icon/apple-touch-icon.png" />
+        <link rel="icon" href="/icon/favicon.ico" sizes="any" />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
