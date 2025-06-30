@@ -493,7 +493,7 @@ const resources = {
       },
       footer: {
         slogan: "Building the future with code",
-        made_with: "Made with AI",
+        made_with: "AI-Powered",
         copyright: "© 2024 Álvaro Maldonado. All rights reserved."
       },
       chatbot: {
@@ -995,7 +995,7 @@ const resources = {
       },
       footer: {
         slogan: "Construyendo el futuro con código",
-        made_with: "Hecho con IA",
+        made_with: "Impulsado con IA",
         copyright: "© 2024 Álvaro Maldonado. Todos los derechos reservados."
       },
       chatbot: {
