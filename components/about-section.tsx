@@ -118,6 +118,27 @@ export default function AboutSection() {
                   />
                 </a>
               </div>
+
+              <div className="grid grid-cols-2 gap-6 mt-8">
+                <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <Calendar className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                      <CountUp end={new Date().getFullYear() - 2010} duration={2.5} />
+                    </div>
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-300">{t("about.years_experience")}</div>
+                </div>
+                <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <Building2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                      <CountUp end={industries.length} duration={2.5} />
+                    </div>
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-300">{t("about.industries")}</div>
+                </div>
+              </div>
             </div>
 
             {/* Content */}
@@ -162,27 +183,6 @@ export default function AboutSection() {
                   <Inbox className="w-7 h-7 text-blue-600 dark:text-blue-400" />
                   {t("about.description8")}
                 </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-6 mt-8">
-                <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <Calendar className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                      <CountUp end={new Date().getFullYear() - 2010} duration={2.5} />
-                    </div>
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-300">{t("about.years_experience")}</div>
-                </div>
-                <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <Building2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                      <CountUp end={industries.length} duration={2.5} />
-                    </div>
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-300">{t("about.industries")}</div>
-                </div>
               </div>
             </div>
           </div>

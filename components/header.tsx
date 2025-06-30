@@ -35,8 +35,8 @@ export default function Header() {
   if (!mounted) return null
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
-      <div className="container mx-auto px-4 py-4">
+    <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95vw] max-w-5xl rounded-2xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md">
+      <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
