@@ -80,7 +80,7 @@ export default function Footer() {
           {/* Copyright */}
           <div className="pt-8 text-center">
             <p className="text-gray-400 mb-2 flex items-center justify-center gap-2">
-              {t("footer.made_with")}
+              <span className="italic">{t("footer.made_with")}</span>
               <BrainCircuit className="w-4 h-4 text-blue-600 dark:text-blue-400" />
               <Bot className="w-4 h-4 text-blue-500 dark:text-blue-300" />
               <Code2 className="w-4 h-4 text-blue-700 dark:text-blue-500" />
