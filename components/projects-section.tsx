@@ -23,31 +23,90 @@ import {
 } from "lucide-react"
 import { useState } from "react"
 
-interface Project {
-  id: string;
-  icon: LucideIcon;
-  color: string;
-  bgColor: string;
-  technologies: string[];
-  externalLink?: string;
-  githubRepo?: string;
-}
+// Asignación de iconos y colores por índice
+const iconMap: { icon: LucideIcon; color: string; bgColor: string; technologies: string[] }[] = [
+  {
+    icon: CreditCard,
+    color: "text-blue-600 dark:text-blue-400",
+    bgColor: "bg-blue-50 dark:bg-blue-900/20",
+    technologies: ["Java", "Spring Boot", "PostgreSQL", "Microservices", "API Rest", "Jenkins", "GitHub Actions", "Veracode", "SonarQube", "Checkstyle", "ArchUnit", "Karate", "Spock", "Kubernetes", "Docker"]
+  },
+  {
+    icon: BrainCircuit,
+    color: "text-purple-600 dark:text-purple-400",
+    bgColor: "bg-purple-50 dark:bg-purple-900/20",
+    technologies: ["Python", "OpenCV", "Rekognition", "SageMaker", "EC2", "S3"]
+  },
+  {
+    icon: Bot,
+    color: "text-green-600 dark:text-green-400",
+    bgColor: "bg-green-50 dark:bg-green-900/20",
+    technologies: ["Python", "SageMaker", "Tensorflow", "Keras", "Sci-Kit Learn", "CNN", "Micropython", "Raspberry Pi"]
+  },
+  {
+    icon: Users,
+    color: "text-pink-600 dark:text-pink-400",
+    bgColor: "bg-pink-50 dark:bg-pink-900/20",
+    technologies: ["Java", "MVC", "OracleDB", "PL/SQL", "Shell Script"]
+  },
+  {
+    icon: AppWindow,
+    color: "text-yellow-600 dark:text-yellow-400",
+    bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
+    technologies: ["Java", "Websphere Portal", "Websphere Application Server", "OracleDB", "HTML", "CSS", "JS", "Portlets"]
+  },
+  {
+    icon: ShoppingCart,
+    color: "text-red-600 dark:text-red-400",
+    bgColor: "bg-red-50 dark:bg-red-900/20",
+    technologies: ["Java", "PostgreSQL", "Web Services"]
+  },
+  {
+    icon: Cloud,
+    color: "text-orange-600 dark:text-orange-400",
+    bgColor: "bg-orange-50 dark:bg-orange-900/20",
+    technologies: ["AWS"]
+  },
+  {
+    icon: Clock,
+    color: "text-cyan-600 dark:text-cyan-400",
+    bgColor: "bg-cyan-50 dark:bg-cyan-900/20",
+    technologies: ["Google Cloud", "API Rest", "Swagger", "DDD", "SaaS", "OracleDB"]
+  },
+  {
+    icon: Scale,
+    color: "text-lime-600 dark:text-lime-400",
+    bgColor: "bg-lime-50 dark:bg-lime-900/20",
+    technologies: ["Java", "Spring Boot", "Spring Data JPA", "Spring Security", "JWT", "OracleDB", "Veracode", "SonarQube", "JUnit", "Mockito", "Bamboo CI/CD", "OCR"]
+  },
+  {
+    icon: ScanFace,
+    color: "text-amber-600 dark:text-amber-400",
+    bgColor: "bg-amber-50 dark:bg-amber-900/20",
+    technologies: ["Java", "OracleDB", "OpenCV", "Facial Action Coding System"]
+  },
+  {
+    icon: Banknote,
+    color: "text-teal-600 dark:text-teal-400",
+    bgColor: "bg-teal-50 dark:bg-teal-900/20",
+    technologies: ["Java", "Spring Boot", "Spring Batch", "Spring Data JPA", "Spring Security", "JWT", "OracleDB", "Fortify", "Kiuwan", "SonarQube", "JUnit", "Weblogic"]
+  },
+]
 
 export default function ProjectsSection() {
   const { t } = useTranslation()
-  const [selectedProject, setSelectedProject] = useState<string | null>(null)
+  const [selectedProject, setSelectedProject] = useState<number | null>(null)
 
-  // Obtener proyectos desde i18n
-  const projects = t("projects.projects", { returnObjects: true }) as any[];
+  // Obtén los proyectos desde i18n
+  const projects = t("projects.projects", { returnObjects: true }) as any[]
 
-  // Iconos por defecto para los proyectos (puedes personalizar esto si agregas iconos en i18n)
-  const iconList = [
-    CreditCard, BrainCircuit, Bot, Users, AppWindow, ShoppingCart, Cloud, Clock, Scale, ScanFace, Banknote, Rocket
-  ];
-
-  const renderContent = (projectId: number) => {
-    const project = projects[projectId];
-    return Array.isArray(project.contents) ? project.contents : [];
+  // Renderiza el contenido extendido del modal
+  const renderContent = (project: any) => {
+    if (Array.isArray(project.contents) && project.contents.length > 0) {
+      return project.contents
+    }
+    // Fallback a description si no hay contents
+    return project.description ? [project.description] : []
   }
 
   return (
@@ -60,33 +119,39 @@ export default function ProjectsSection() {
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project: any, idx: number) => {
-              const IconComponent = iconList[idx % iconList.length] || Rocket;
+            {projects.map((project, idx) => {
+              const { icon: Icon, color, bgColor } = iconMap[idx % iconMap.length]
               return (
                 <div
                   key={idx}
                   className="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className={`w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-lg flex items-center justify-center mb-4`}>
-                    <IconComponent className={`w-6 h-6 text-blue-600 dark:text-blue-400`} />
+                  <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center mb-4`}>
+                    {Icon && <Icon className={`w-6 h-6 ${color}`} />}
                   </div>
+
                   <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
                     {project.title}
                   </h3>
+
                   <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-justify">
                     {project.description}
                   </p>
 
+                  {/* Tecnologías: si existen en i18n, usa esas; si no, usa las del array local (hardcode) según el índice */}
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies && project.technologies.map((tech: string, index: number) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm flex items-center gap-1"
-                      >
-                        <CheckCircle2 className="w-3 h-3 text-blue-600 dark:text-blue-400" />
-                        {tech}
-                      </span>
-                    ))}
+                    {(Array.isArray(project.technologies) && project.technologies.length > 0
+                      ? project.technologies
+                      : iconMap[idx % iconMap.length]?.technologies || [])
+                      .map((tech: string, index: number) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm flex items-center gap-1"
+                        >
+                          <CheckCircle2 className="w-3 h-3 text-blue-600 dark:text-blue-400" />
+                          {tech}
+                        </span>
+                      ))}
                   </div>
 
                   <div className="flex flex-wrap gap-2 mt-4">
@@ -113,7 +178,7 @@ export default function ProjectsSection() {
                       </a>
                     )}
                     <button
-                      onClick={() => setSelectedProject(project.id)}
+                      onClick={() => setSelectedProject(idx)}
                       className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors flex items-center gap-2 text-sm dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
                     >
                       <Info className="w-4 h-4" />
@@ -126,7 +191,7 @@ export default function ProjectsSection() {
           </div>
 
           {/* Modal */}
-          {selectedProject && (
+          {selectedProject !== null && projects[selectedProject] && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
               <div className="bg-white dark:bg-gray-900 rounded-lg max-w-2xl w-full p-6 relative">
                 <button
@@ -135,29 +200,31 @@ export default function ProjectsSection() {
                 >
                   <X className="w-6 h-6" />
                 </button>
+
                 <div className="flex items-center gap-3 mb-4">
                   {(() => {
-                    const project = projects.find((p: any) => p.id === selectedProject)
-                    const IconComponent = iconList[projects.findIndex((p: any) => p.id === selectedProject) % iconList.length] || Rocket;
-                    return project && (
+                    const { icon: Icon, color, bgColor } = iconMap[selectedProject % iconMap.length]
+                    return (
                       <>
-                        <div className={`w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-lg flex items-center justify-center`}>
-                          <IconComponent className={`w-6 h-6 text-blue-600 dark:text-blue-400`} />
+                        <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center`}>
+                          {Icon && <Icon className={`w-6 h-6 ${color}`} />}
                         </div>
                         <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                          {project.title}
+                          {projects[selectedProject].title}
                         </h3>
                       </>
                     )
                   })()}
                 </div>
+
                 <div className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify space-y-4 max-h-[70vh] overflow-y-auto pr-2">
-                  {renderContent(projects.findIndex((p: any) => p.id === selectedProject)).map((description: string, index: number) => (
+                  {renderContent(projects[selectedProject]).map((description: string, index: number) => (
                     <p key={index} className="mb-0">
                       {description}
                     </p>
                   ))}
                 </div>
+
               </div>
             </div>
           )}

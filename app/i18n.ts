@@ -340,8 +340,8 @@ const resources = {
               "The project emphasizes constant innovation, improved operational efficiency, and strengthening our market position to provide customers with the best experience.",
               "This initiative is expected to mark the beginning of a new era of excellence and growth for the organization.",
             ],
-            externalLink: "https://example.com/es/project1",
-            githubRepo: "https://github.com/your-repo/project1-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "AcuaMattic Dataset",
@@ -352,8 +352,8 @@ const resources = {
               "To address this problem, the creation of a large and diversified image dataset of ornamental fish is proposed, which is fundamental for training classification models.",
               "Key phases: data collection using videos in controlled environments; processing using computer vision techniques for cropping and normalization; and creation of the final dataset with images of 30 different species. This approach avoids synthetic data, reduces overfitting, and improves the quality of the resulting dataset.",
             ],
-            externalLink: "https://example.com/es/project2",
-            githubRepo: "https://github.com/your-repo/project2-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "AcuaMattic AI & Robotics (Prototype)",
@@ -366,7 +366,7 @@ const resources = {
             ],
             externalLink:
               "https://www.elconfidencialdigital.com/monarquia/articulo/an/como-evitar-muerte-miles-millones-peces/20211105193248069486.html",
-            githubRepo: "https://github.com/your-repo/project3-es",
+            githubRepo: "",
           },
           {
             title: "SPR (Personnel & Remuneration System)",
@@ -377,8 +377,8 @@ const resources = {
               "Essentially, this system forms the backbone of employee management, efficient personnel handling, and compensation administration for all Falabella Group companies, which include Falabella Retail, Falabella Financial, Sodimac, and Tottus.",
               "Key features: Payroll, Staffing, Store Operations, Finance, Logistics, Access Control.",
             ],
-            externalLink: "https://example.com/es/project4",
-            githubRepo: "https://github.com/your-repo/project4-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "Movistar Online Channel",
@@ -391,7 +391,7 @@ const resources = {
             ],
             externalLink:
               "https://identity.movistar.cl/login?_gl=1*gan1wb*_gcl_au*MTk4NDIyMjUxNi4xNjkzMDE1NDk5&_ga=2.21479423.531242504.1693015499-1259711125.1693015499",
-            githubRepo: "https://github.com/your-repo/project5-es",
+            githubRepo: "",
           },
           {
             title: "Electronic Supervisor",
@@ -402,8 +402,8 @@ const resources = {
               "This application is specifically designed to remotely address customer requests when making payments at the checkout counter.",
               "It enables quick responses to price adjustments and product cancellations during the billing process. This tool is exclusively for authorized supermarket cashiers and supervisors.",
             ],
-            externalLink: "https://example.com/es/project6",
-            githubRepo: "https://github.com/your-repo/project6-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "on-premise2cloud",
@@ -414,8 +414,8 @@ const resources = {
               "The project included the creation of an enterprise account in AWS, data migration, process automation, specialized dataset generation, and configuration of secure and flexible environments.",
               "Services like Amazon S3, EC2, and SageMaker were implemented, along with advanced IAM security policies, achieving a modern, secure infrastructure aligned with technological innovation objectives.",
             ],
-            externalLink: "https://example.com/es/project7",
-            githubRepo: "https://github.com/your-repo/project7-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "Time & Attendance (T&A)",
@@ -426,8 +426,8 @@ const resources = {
               "The implementation of this cutting-edge technology aligns with current workforce attendance needs, emphasizing remote registration methods to promote digital channels (via apps and web), thereby reducing reliance on biometric devices. It also provides vital data for managing various associated performance indicators, aiding in attendance calculation and facilitating efficient shift management.",
               "Key objectives: ensure legal compliance, acquire data to optimize shifts, collect metrics such as absenteeism and overtime, and introduce remote registration. KPIs: employee satisfaction, overtime hours, absenteeism rates, disputed registrations, and time dedicated to monthly reconciliation.",
             ],
-            externalLink: "https://example.com/es/project8",
-            githubRepo: "https://github.com/your-repo/project8-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "Faculty Engine",
@@ -438,9 +438,8 @@ const resources = {
               "This technology enables precise customization of products and services for clients by leveraging the information obtained.",
               "This solution results in a significant improvement in the optimization of existing business processes and greater efficiency in decision-making.",
             ],
-            externalLink:
-              "https://identity.movistar.cl/login?_gl=1*gan1wb*_gcl_au*MTk4NDIyMjUxNi4xNjkzMDE1NDk5&_ga=2.21479423.531242504.1693015499-1259711125.1693015499",
-            githubRepo: "https://github.com/your-repo/project9-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "S-Box",
@@ -451,7 +450,7 @@ const resources = {
               "It includes advanced smile analysis, multimodal capture, precise automatic synchronization, intelligent smile filtering, sequence generation, and advanced visualization with AI.",
               "S-Box drives the understanding of human emotions in technological interactions, being a key tool for researchers and professionals in controlled experimental environments.",
             ],
-            externalLink: "https://example.com/es/project10",
+            externalLink: "",
             githubRepo: "https://github.com/aandmaldonado/S-Box",
           },
           {
@@ -465,7 +464,7 @@ const resources = {
               "Audit report: easily review a complete log of cancellation requests, both individual and bulk, covering up to 1 year of historical data.",
             ],
             externalLink: "https://www.youtube.com/watch?v=Nu-q-zOvibA",
-            githubRepo: "https://github.com/your-repo/project10-es",
+            githubRepo: "",
           },
         ],
       },
@@ -476,21 +475,19 @@ const resources = {
         },
         soft_skills: {
           title: "Soft Skills",
-          skills: [
-            "Communication",
-            "Teamwork",
-            "Problem Solving",
-            "Adaptability",
-            "Leadership",
-            "Time Management",
-          ],
+          communication: "Communication",
+          teamwork: "Teamwork",
+          problem_solving: "Problem Solving",
+          adaptability: "Adaptability",
+          leadership: "Leadership",
+          time_management: "Time Management"
         },
         languages: {
           title: "Languages",
-          items: [
-            { language: "Spanish", level: "Native" },
-            { language: "English", level: "B1-B2" },
-          ],
+          spanish: "Spanish",
+          english: "English",
+          native: "Native",
+          intermediate: "B1-B2"
         },
         api_design: {
           title: "API Design",
@@ -1021,8 +1018,8 @@ const resources = {
               "El proyecto enfatiza la innovación constante, la mejora en la eficacia operativa y el fortalecimiento de nuestra posición en el mercado para proporcionar a los clientes la mejor experiencia.",
               "Se espera que esta iniciativa marque el comienzo de una nueva era de excelencia y crecimiento para la organización.",
             ],
-            externalLink: "https://example.com/es/project1",
-            githubRepo: "https://github.com/your-repo/project1-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "AcuaMattic Dataset",
@@ -1033,8 +1030,8 @@ const resources = {
               "Para abordar este problema se propone la creación de un amplio y diversificado conjunto de datos de imágenes de peces ornamentales, fundamental para el entrenamiento de modelos de clasificación.",
               "Fases clave: recogida de datos mediante vídeos en entornos controlados; procesamiento usando técnicas de visión artificial para recorte y normalización; y creación del dataset final con imágenes de 30 especies diferentes. Este enfoque evita datos sintéticos, reduce el sobreajuste y mejora la calidad del conjunto resultante.",
             ],
-            externalLink: "https://example.com/es/project2",
-            githubRepo: "https://github.com/your-repo/project2-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "AcuaMattic IA & Robótica (Prototipo)",
@@ -1047,7 +1044,7 @@ const resources = {
             ],
             externalLink:
               "https://www.elconfidencialdigital.com/monarquia/articulo/an/como-evitar-muerte-miles-millones-peces/20211105193248069486.html",
-            githubRepo: "https://github.com/your-repo/project3-es",
+            githubRepo: "",
           },
           {
             title: "SPR (Sistema de Personal & Remuneraciones)",
@@ -1058,8 +1055,8 @@ const resources = {
               "En esencia, este sistema constituye la columna vertebral de la gestión de empleados, el manejo eficiente del personal y la administración de compensaciones para todas las empresas del Grupo Falabella, que engloba a Falabella Retail, Falabella Financial, Sodimac y Tottus.",
               "Características clave: Nómina, Dotación de personal, Operaciones de tienda, Finanzas, Logística, Control de acceso.",
             ],
-            externalLink: "https://example.com/es/project4",
-            githubRepo: "https://github.com/your-repo/project4-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "Movistar Canal Online",
@@ -1072,7 +1069,7 @@ const resources = {
             ],
             externalLink:
               "https://identity.movistar.cl/login?_gl=1*gan1wb*_gcl_au*MTk4NDIyMjUxNi4xNjkzMDE1NDk5&_ga=2.21479423.531242504.1693015499-1259711125.1693015499",
-            githubRepo: "https://github.com/your-repo/project5-es",
+            githubRepo: "",
           },
           {
             title: "Electronic Supervisor",
@@ -1083,8 +1080,8 @@ const resources = {
               "Esta aplicación está diseñada específicamente para atender las solicitudes de los clientes de forma remota cuando realizan pagos en el mostrador de caja.",
               "Permite respuestas rápidas a ajustes de precios y cancelaciones de productos durante el proceso de facturación. Esta herramienta está destinada exclusivamente a cajeros y supervisores de supermercados autorizados.",
             ],
-            externalLink: "https://example.com/es/project6",
-            githubRepo: "https://github.com/your-repo/project6-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "on-premise2cloud",
@@ -1095,8 +1092,8 @@ const resources = {
               "El proyecto incluyó la creación de una cuenta empresarial en AWS, migración de datos, automatización de procesos, generación de datasets especializados y configuración de entornos seguros y flexibles.",
               "Se implementaron servicios como Amazon S3, EC2 y SageMaker, junto con políticas avanzadas de seguridad IAM, logrando una infraestructura moderna, segura y alineada con los objetivos de innovación tecnológica.",
             ],
-            externalLink: "https://example.com/es/project7",
-            githubRepo: "https://github.com/your-repo/project7-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "Time & Attendance (T&A)",
@@ -1107,11 +1104,11 @@ const resources = {
               "La implementación de esta tecnología de vanguardia se alinea con las necesidades actuales de asistencia de la fuerza laboral, enfatizando los métodos de registro remoto para promover canales digitales (a través de aplicaciones y web), reduciendo así la dependencia de dispositivos biométricos. También proporciona datos vitales para la gestión de varios indicadores de desempeño asociados, ayudando en el cálculo de asistencia y facilitando una gestión eficiente de los turnos.",
               "Objetivos claves: velar por el cumplimiento legal, adquirir datos para optimizar turnos, recopilar métricas como ausentismo y horas extras, e introducir el registro remoto. KPIs: satisfacción de los empleados, horas extras, tasas de absentismo, registros en disputa y tiempo dedicado a conciliación mensual.",
             ],
-            externalLink: "https://example.com/es/project8",
-            githubRepo: "https://github.com/your-repo/project8-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
-            title: "Faculty Engine",
+            title: "Motor de Facultades",
             description:
               "Solución bancaria para análisis legal automatizado en PDF.",
             contents: [
@@ -1119,9 +1116,8 @@ const resources = {
               "Esta tecnología permite la personalización precisa de productos y servicios para los clientes, al aprovechar la información obtenida.",
               "Esta solución resulta en una mejora significativa en la optimización de procesos comerciales existentes y una mayor eficiencia en la toma de decisiones.",
             ],
-            externalLink:
-              "https://identity.movistar.cl/login?_gl=1*gan1wb*_gcl_au*MTk4NDIyMjUxNi4xNjkzMDE1NDk5&_ga=2.21479423.531242504.1693015499-1259711125.1693015499",
-            githubRepo: "https://github.com/your-repo/project9-es",
+            externalLink: "",
+            githubRepo: "",
           },
           {
             title: "S-Box",
@@ -1132,11 +1128,11 @@ const resources = {
               "Incluye análisis avanzado de sonrisas, captura multimodal, sincronización automática precisa, filtrado inteligente de sonrisas, generación de secuencias y visualización avanzada con IA.",
               "S-Box impulsa la comprensión de emociones humanas en interacciones tecnológicas, siendo una herramienta clave para investigadores y profesionales en entornos experimentales controlados.",
             ],
-            externalLink: "https://example.com/es/project10",
+            externalLink: "",
             githubRepo: "https://github.com/aandmaldonado/S-Box",
           },
           {
-            title: "Cancellations 2.0",
+            title: "Anulaciones 2.0",
             description:
               "Sistema de backoffice para gestión de cancelaciones de ventas en Transbank.",
             contents: [
@@ -1146,7 +1142,7 @@ const resources = {
               "Informe de auditoría: revise cómodamente un registro completo de solicitudes de cancelación, tanto individuales como masivas, que abarca hasta 1 año de datos históricos.",
             ],
             externalLink: "https://www.youtube.com/watch?v=Nu-q-zOvibA",
-            githubRepo: "https://github.com/your-repo/project10-es",
+            githubRepo: "",
           },
         ],
       },
@@ -1157,21 +1153,19 @@ const resources = {
         },
         soft_skills: {
           title: "Habilidades Blandas",
-          skills: [
-            "Comunicación",
-            "Trabajo en Equipo",
-            "Resolución de Problemas",
-            "Adaptabilidad",
-            "Liderazgo",
-            "Gestión del Tiempo",
-          ],
+          communication: "Comunicación",
+          teamwork: "Trabajo en Equipo",
+          problem_solving: "Resolución de Problemas",
+          adaptability: "Adaptabilidad",
+          leadership: "Liderazgo",
+          time_management: "Gestión del Tiempo"
         },
         languages: {
           title: "Idiomas",
-          items: [
-            { language: "Español", level: "Nativo" },
-            { language: "Inglés", level: "B1-B2" },
-          ],
+          spanish: "Español",
+          english: "Inglés",
+          native: "Nativo",
+          intermediate: "B1-B2"
         },
         api_design: {
           title: "Diseño de APIs",
