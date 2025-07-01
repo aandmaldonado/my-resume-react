@@ -14,6 +14,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import "./i18n"
 import { Bot } from "lucide-react"
 import ChatbotSection from "@/components/chatbot-section"
+import RecommendationsSection from "@/components/recommendations-section"
 
 export default function Home() {
   const { i18n } = useTranslation()
@@ -31,6 +32,7 @@ export default function Home() {
         <main>
           <HeroSection />
           <AboutSection />
+          <RecommendationsSection />
           <ExperienceSection />
           <EducationSection />
           <SkillsSection />

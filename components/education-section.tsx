@@ -5,65 +5,7 @@ import { GraduationCap, Calendar, School, Award, CheckCircle2, MapPin } from "lu
 
 export default function EducationSection() {
   const { t } = useTranslation()
-
-  const education = [
-    {
-      id: "edu1",
-      institution: "LIDR.co",
-      degree: "AI4DEVS",
-      period: "2025",
-      location: "Online, España",
-      logo: "/edu/lidr.jpeg?height=60&width=60"
-    },
-    {
-      id: "edu2",
-      institution: "thePower",
-      degree: "Bootcamp en Ciberseguridad",
-      period: "2025",
-      location: "Online, España",
-      logo: "/edu/thepower.jpeg?height=60&width=60"
-    },
-    {
-      id: "edu3",
-      institution: "Hackio",
-      degree: "Bootcamp en Desarrollo de IA",
-      period: "2025",
-      location: "Online, España",
-      logo: "/edu/hackio.jpeg?height=60&width=60"
-    },
-    {
-      id: "edu4",
-      institution: "Universitat Politècnica de Catalunya",
-      degree: "Máster en Inteligencia Artificial",
-      period: "2020 - 2021",
-      location: "Online, España",
-      logo: "/edu/upc.jpeg?height=60&width=60"
-    },
-    {
-      id: "edu5",
-      institution: "Universidad de Santiago de Chile",
-      degree: "Ingeniería Civil en Informática",
-      period: "2012 - 2017",
-      location: "Santiago, Chile",
-      logo: "/edu/usach.jpeg?height=60&width=60"
-    },
-    {
-      id: "edu6",
-      institution: "Universidad de Santiago de Chile",
-      degree: "Licenciatura en Ciencias de la Ingeniería",
-      period: "2012 - 2015",
-      location: "Santiago, Chile",
-      logo: "/edu/usach.jpeg?height=60&width=60"
-    },
-    {
-      id: "edu7",
-      institution: "INACAP",
-      degree: "Ingeniería en Informática",
-      period: "2006 - 2010",
-      location: "Santiago, Chile",
-      logo: "/edu/inacap.jpeg?height=60&width=60"
-    }
-  ]
+  const educations = t("education.educations", { returnObjects: true }) as any[];
 
   return (
     <section id="education" className="py-20 bg-gray-50 dark:bg-gray-800">
@@ -79,12 +21,11 @@ export default function EducationSection() {
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-600 dark:bg-blue-400"></div>
 
             <div className="space-y-12">
-              {education.map((edu, index) => {
-                const concepts = t(`education.${edu.id}.concepts`, { returnObjects: true })
-                const hasConcepts = Array.isArray(concepts) && concepts.length > 0
-
+              {educations.map((edu, index) => {
+                const concepts = Array.isArray(edu.concepts) ? edu.concepts : [];
+                const hasConcepts = concepts.length > 0;
                 return (
-                  <div key={edu.id} className="relative flex items-start">
+                  <div key={index} className="relative flex items-start">
                     {/* Timeline dot */}
                     <div className="absolute left-6 w-4 h-4 bg-blue-600 dark:bg-blue-400 rounded-full border-4 border-white dark:border-gray-800"></div>
 
@@ -106,22 +47,22 @@ export default function EducationSection() {
                           <Award className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
                           <div>
                             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                              {t(`education.${edu.id}.degree`)}
+                              {edu.degree}
                             </h3>
                             <p className="text-blue-600 dark:text-blue-400 font-medium flex items-center gap-2">
                               <School className="w-4 h-4" />
-                              {t(`education.${edu.id}.institution`)}
+                              {edu.institution}
                             </p>
                             <p className="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-2 mt-1">
                               <MapPin className="w-4 h-4" />
-                              {t(`education.${edu.id}.location`)}
+                              {edu.location}
                             </p>
                           </div>
                         </div>
                         
                         <div className="flex items-center text-gray-500 dark:text-gray-400 mt-2 sm:mt-0">
                           <Calendar className="w-4 h-4 mr-2" />
-                          <span className="text-sm">{t(`education.${edu.id}.period`)}</span>
+                          <span className="text-sm">{edu.period}</span>
                         </div>
                       </div>
 
@@ -129,7 +70,7 @@ export default function EducationSection() {
                       {hasConcepts && (
                         <div className="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
                           <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                            {concepts.map((concept, idx) => (
+                            {concepts.map((concept: string, idx: number) => (
                               <li key={idx} className="flex items-start gap-2 text-gray-600 dark:text-gray-300 text-sm">
                                 <CheckCircle2 className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
                                 <span>{concept}</span>

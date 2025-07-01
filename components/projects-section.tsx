@@ -37,112 +37,17 @@ export default function ProjectsSection() {
   const { t } = useTranslation()
   const [selectedProject, setSelectedProject] = useState<string | null>(null)
 
-  const projects: Project[] = [
-    {
-      id: "project1",
-      icon: CreditCard,
-      color: "text-blue-600 dark:text-blue-400",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      technologies: ["Java", "Spring Boot", "PostgreSQL", "Microservices", "API Rest", "Jenkins", "GitHub Actions", "Veracode", "SonarQube", "Checkstyle", "ArchUnit", "Karate", "Spock", "Kubernetes", "Docker"]
-    },
-    {
-      id: "project2",
-      icon: BrainCircuit,
-      color: "text-purple-600 dark:text-purple-400",
-      bgColor: "bg-purple-50 dark:bg-purple-900/20",
-      technologies: ["Python", "OpenCV", "Rekognition", "SageMaker", "EC2", "S3"]
-    },
-    {
-      id: "project3",
-      icon: Bot,
-      color: "text-green-600 dark:text-green-400",
-      bgColor: "bg-green-50 dark:bg-green-900/20",
-      technologies: ["Python", "SageMaker", "Tensorflow", "Keras", "Sci-Kit Learn", "CNN", "Micropython", "Raspberry Pi"],
-      externalLink: t("projects.project3.externalLink")
-    },
-    {
-      id: "project4",
-      icon: Users,
-      color: "text-pink-600 dark:text-pink-400",
-      bgColor: "bg-pink-50 dark:bg-pink-900/20",
-      technologies: ["Java", "MVC", "OracleDB", "PL/SQL", "Shell Script"]
-    },
-    {
-      id: "project5",
-      icon: AppWindow,
-      color: "text-yellow-600 dark:text-yellow-400",
-      bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
-      technologies: ["Java", "Websphere Portal", "Websphere Application Server", "OracleDB", "HTML", "CSS", "JS", "Portlets"],
-      externalLink: t("projects.project5.externalLink")
-    },
-    {
-      id: "project6",
-      icon: ShoppingCart,
-      color: "text-red-600 dark:text-red-400",
-      bgColor: "bg-red-50 dark:bg-red-900/20",
-      technologies: ["Java", "PostgreSQL", "Web Services"]
-    },
-    {
-      id: "project7",
-      icon: Cloud,
-      color: "text-orange-600 dark:text-orange-400",
-      bgColor: "bg-orange-50 dark:bg-orange-900/20",
-      technologies: ["AWS"]
-    },
-    {
-      id: "project8",
-      icon: Clock,
-      color: "text-cyan-600 dark:text-cyan-400",
-      bgColor: "bg-cyan-50 dark:bg-cyan-900/20",
-      technologies: ["Google Cloud", "API Rest", "Swagger", "DDD", "SaaS", "OracleDB"]
-    },
-    {
-      id: "project9",
-      icon: Scale,
-      color: "text-lime-600 dark:text-lime-400",
-      bgColor: "bg-lime-50 dark:bg-lime-900/20",
-      technologies: ["Java", "Spring Boot", "Spring Data JPA", "Spring Security", "JWT", "OracleDB", "Veracode", "SonarQube", "JUnit", "Mockito", "Bamboo CI/CD", "OCR"]
-    },
-    {
-      id: "project10",
-      icon: ScanFace,
-      color: "text-amber-600 dark:text-amber-400",
-      bgColor: "bg-amber-50 dark:bg-amber-900/20",
-      technologies: ["Java", "OracleDB", "OpenCV", "Facial Action Coding System"],
-      githubRepo: t("projects.project10.githubRepo")
-    },
-    {
-      id: "project11",
-      icon: Banknote,
-      color: "text-teal-600 dark:text-teal-400",
-      bgColor: "bg-teal-50 dark:bg-teal-900/20",
-      technologies: ["Java", "Spring Boot", "Spring Batch", "Spring Data JPA", "Spring Security", "JWT", "OracleDB", "Fortify", "Kiuwan", "SonarQube", "JUnit", "Weblogic"],
-      externalLink: t("projects.project11.externalLink")
-    },
-  ]
+  // Obtener proyectos desde i18n
+  const projects = t("projects.projects", { returnObjects: true }) as any[];
 
-  const renderContent = (projectId: string) => {
-    // Try to get content as an array first
-    const contentArray = t(`projects.${projectId}.contents`, { returnObjects: true }) as string[];
-    
-    if (Array.isArray(contentArray) && contentArray.length > 0) {
-      return contentArray;
-    }
+  // Iconos por defecto para los proyectos (puedes personalizar esto si agregas iconos en i18n)
+  const iconList = [
+    CreditCard, BrainCircuit, Bot, Users, AppWindow, ShoppingCart, Cloud, Clock, Scale, ScanFace, Banknote, Rocket
+  ];
 
-    // Fallback to descriptionX if content array is not found or empty
-    const descriptions = []
-    let index = 1
-    let descriptionKey = `projects.${projectId}.description${index}`
-    let description = t(descriptionKey)
-    
-    while (description && description !== descriptionKey) {
-      descriptions.push(description)
-      index++
-      descriptionKey = `projects.${projectId}.description${index}`
-      description = t(descriptionKey)
-    }
-    
-    return descriptions
+  const renderContent = (projectId: number) => {
+    const project = projects[projectId];
+    return Array.isArray(project.contents) ? project.contents : [];
   }
 
   return (
@@ -155,27 +60,25 @@ export default function ProjectsSection() {
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => {
-              const IconComponent = project.icon
+            {projects.map((project: any, idx: number) => {
+              const IconComponent = iconList[idx % iconList.length] || Rocket;
               return (
                 <div
-                  key={project.id}
+                  key={idx}
                   className="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className={`w-12 h-12 ${project.bgColor} rounded-lg flex items-center justify-center mb-4`}>
-                    <IconComponent className={`w-6 h-6 ${project.color}`} />
+                  <div className={`w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-lg flex items-center justify-center mb-4`}>
+                    <IconComponent className={`w-6 h-6 text-blue-600 dark:text-blue-400`} />
                   </div>
-
                   <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-                    {t(`projects.${project.id}.title`)}
+                    {project.title}
                   </h3>
-
                   <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-justify">
-                    {t(`projects.${project.id}.description`)}
+                    {project.description}
                   </p>
 
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.map((tech, index) => (
+                    {project.technologies && project.technologies.map((tech: string, index: number) => (
                       <span
                         key={index}
                         className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm flex items-center gap-1"
@@ -232,32 +135,29 @@ export default function ProjectsSection() {
                 >
                   <X className="w-6 h-6" />
                 </button>
-                
                 <div className="flex items-center gap-3 mb-4">
                   {(() => {
-                    const project = projects.find(p => p.id === selectedProject)
-                    const IconComponent = project?.icon as LucideIcon
+                    const project = projects.find((p: any) => p.id === selectedProject)
+                    const IconComponent = iconList[projects.findIndex((p: any) => p.id === selectedProject) % iconList.length] || Rocket;
                     return project && (
                       <>
-                        <div className={`w-12 h-12 ${project.bgColor} rounded-lg flex items-center justify-center`}>
-                          <IconComponent className={`w-6 h-6 ${project.color}`} />
+                        <div className={`w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-lg flex items-center justify-center`}>
+                          <IconComponent className={`w-6 h-6 text-blue-600 dark:text-blue-400`} />
                         </div>
                         <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                          {t(`projects.${selectedProject}.title`)}
+                          {project.title}
                         </h3>
                       </>
                     )
                   })()}
                 </div>
-
                 <div className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify space-y-4 max-h-[70vh] overflow-y-auto pr-2">
-                  {renderContent(selectedProject).map((description, index) => (
+                  {renderContent(projects.findIndex((p: any) => p.id === selectedProject)).map((description: string, index: number) => (
                     <p key={index} className="mb-0">
                       {description}
                     </p>
                   ))}
                 </div>
-
               </div>
             </div>
           )}

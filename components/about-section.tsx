@@ -2,7 +2,7 @@
 
 import { useTranslation } from "react-i18next"
 import Image from "next/image"
-import { Calendar, Building2, Haze, CircleUser, ScanSearch, Handshake, Inbox, Rocket, Earth, Bot, Brain, Puzzle, Globe } from "lucide-react"
+import { Calendar, Building2, Haze, CircleUser, ScanSearch, Handshake, Inbox, Rocket, Earth, Bot, Brain, Puzzle, Globe, MessageCircle } from "lucide-react"
 import CountUp from 'react-countup'
 
 export default function AboutSection() {
@@ -18,6 +18,12 @@ export default function AboutSection() {
     "Aerolineas",
     "IA"
   ]
+
+  // Obtener datos de i18n
+  const descriptions = t("about.descriptions", { returnObjects: true }) as string[];
+  const searchGoals = t("about.search_goals", { returnObjects: true }) as string[];
+  const collaborationReasons = t("about.collaboration_reasons", { returnObjects: true }) as string[];
+  const recommendations = t("recommendations", { returnObjects: true }) as any[];
 
   return (
     <section id="about" className="py-20 bg-gray-50 dark:bg-gray-800">
@@ -144,45 +150,51 @@ export default function AboutSection() {
             {/* Content */}
             <div className="space-y-6">
               <div className="space-y-6 text-justify">
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{t("about.description1")}</p>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{t("about.description2")}</p>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{t("about.description3")}</p>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex items-center gap-2">
-                  <ScanSearch className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                  <strong>{t("about.description4")}</strong>
-                </p>
-                <ul className="list-none list-inside space-y-1 mt-1 text-gray-700 dark:text-gray-300">
-                  {(t("about.description5", { returnObjects: true }) as string[]).map((item: string, index: number) => {
-                    const icons = [Rocket, Earth, Bot];
-                    const IconComponent = icons[index % icons.length];
-                    return (
-                      <li key={index} className="leading-relaxed flex items-center gap-2">
-                        <IconComponent className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                        {item}
-                      </li>
-                    );
-                  })}
-                </ul>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex items-center gap-2">
-                  <Handshake className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                  <strong>{t("about.description6")}</strong>
-                </p>
-                <ul className="list-none list-inside space-y-1 mt-1 text-gray-700 dark:text-gray-300">
-                  {(t("about.description7", { returnObjects: true }) as string[]).map((item: string, index: number) => {
-                    const icons = [Brain, Puzzle, Globe];
-                    const IconComponent = icons[index % icons.length];
-                    return (
-                      <li key={index} className="leading-relaxed flex items-center gap-2">
-                        <IconComponent className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                        {item}
-                      </li>
-                    );
-                  })}
-                </ul>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex gap-2">
-                  <Inbox className="w-7 h-7 text-blue-600 dark:text-blue-400" />
-                  {t("about.description8")}
-                </p>
+                {descriptions.map((desc, idx) => (
+                  <p key={idx} className="text-gray-700 dark:text-gray-300 leading-relaxed">{desc}</p>
+                ))}
+                {/* Tarjeta de objetivos de búsqueda */}
+                <div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg p-4 my-4 shadow-sm">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex items-center gap-2 mb-2">
+                    <ScanSearch className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <strong>{t("about.looking_for")}</strong>
+                  </p>
+                  <ul className="list-none list-inside space-y-1 mt-1 text-gray-700 dark:text-gray-300">
+                    {searchGoals.map((item, index) => {
+                      const icons = [Rocket, Earth, Bot];
+                      const IconComponent = icons[index % icons.length];
+                      return (
+                        <li key={index} className="leading-relaxed flex items-center gap-2">
+                          <IconComponent className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                          {item}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                {/* Tarjeta de colaboración */}
+                <div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg p-4 my-4 shadow-sm">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex items-center gap-2 mb-2">
+                    <Handshake className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <strong>{t("about.why_collaborate")}</strong>
+                  </p>
+                  <ul className="list-none list-inside space-y-1 mt-1 text-gray-700 dark:text-gray-300">
+                    {collaborationReasons.map((item, index) => {
+                      const icons = [Brain, Puzzle, Globe];
+                      const IconComponent = icons[index % icons.length];
+                      return (
+                        <li key={index} className="leading-relaxed flex items-center gap-2">
+                          <IconComponent className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                          {item}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex gap-2 mt-4">
+                    <Inbox className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+                    {t("about.connect_message")}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
