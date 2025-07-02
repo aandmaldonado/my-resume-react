@@ -63,7 +63,7 @@ const resources = {
           HR: "Human Resources",
           Banca: "Banking",
           Aerolineas: "Airlines",
-          IA: "Artificial Intelligence"
+          IA: "Artificial Intelligence",
         },
         industries_modal_title: "Industries I have worked in",
       },
@@ -703,9 +703,9 @@ const resources = {
         },
       ],
       footer: {
-        slogan: "Building the future with code",
+        slogan: "Solving problems with technology",
         made_with: "AI-Powered",
-        copyright: "© 2024 Álvaro Maldonado. All rights reserved.",
+        copyright: "© {year} almap[i] · almapi.dev. All rights reserved.",
       },
       chatbot: {
         name: "Álvaro Maldonado",
@@ -713,6 +713,23 @@ const resources = {
         welcome_message:
           "Hello! 👋 I'm Álvaro. I'm here to answer your questions about my professional experience, education, and other work-related topics. Feel free to ask! 😊",
         input_placeholder: "Type your message...",
+      },
+      contact: {
+        title: "Let's Connect!",
+        subtitle:
+          "Interested in working together or have a proposal? Contact me!",
+        ariaFront: "Business card: front",
+        ariaBack: "Business card: back",
+        front: {
+          name: "Álvaro Andrés Maldonado Pinto",
+          role: "Senior Software Engineer | AI-Powered Engineer",
+        },
+        back: {
+          email: "readme.md@almapi.dev",
+          whatsapp: "+34 641 96 23 96",
+          linkedin: "https://www.linkedin.com/in/almapidev/",
+          city: "Gandia, Spain",
+        },
       },
     },
   },
@@ -778,7 +795,7 @@ const resources = {
           HR: "Recursos Humanos",
           Banca: "Banca",
           Aerolineas: "Aerolíneas",
-          IA: "Inteligencia Artificial"
+          IA: "Inteligencia Artificial",
         },
         industries_modal_title: "Industrias en las que he trabajado",
       },
@@ -1390,7 +1407,7 @@ const resources = {
           name: "Pablo Puelma Hernández",
           position: "Senior Project & Service Leader",
           company: "NTT DATA Europe & LATAM",
-          relation: "Supervisaba directamente a Álvaro",
+          relation: "Direct supervisor of Álvaro",
           text: "Álvaro es una persona con un perfil técnico muy completo, capaz de resolver problemas complejos de forma rápida y con calidad, orientado al logro y con un gran compromiso por su trabajo y compañeros. En lo personal, es muy responsable, confiable y un gran compañero de equipo, siempre dispuesto a enseñar a los demás y a apoyarlos cuando lo necesitan y está siempre dispuesto a dar un poco más para lograr las metas.",
           date: "9 de agosto de 2023",
           picture:
@@ -1423,9 +1440,10 @@ const resources = {
         },
       ],
       footer: {
-        slogan: "Construyendo el futuro con código",
+        slogan: "Resolviendo problemas con tecnologIA",
         made_with: "Impulsado con IA",
-        copyright: "© 2024 Álvaro Maldonado. Todos los derechos reservados.",
+        copyright:
+          "© {year} almap[i] · almapi.dev. Todos los derechos reservados.",
       },
       chatbot: {
         name: "Álvaro Maldonado",
@@ -1433,6 +1451,23 @@ const resources = {
         welcome_message:
           "¡Hola! 👋 Soy Álvaro. Estoy aquí para responder tus preguntas sobre mi experiencia profesional, educación y otros temas laborales. ¡Pregúntame lo que necesites! 😊",
         input_placeholder: "Escribe tu mensaje...",
+      },
+      contact: {
+        title: "¡Conectemos!",
+        subtitle:
+          "¿Te interesa trabajar juntos o tienes una propuesta? ¡Contáctame!",
+        ariaFront: "Tarjeta de presentación: anverso",
+        ariaBack: "Tarjeta de presentación: reverso",
+        front: {
+          name: "Álvaro Andrés Maldonado Pinto",
+          role: "Senior Software Engineer | AI-Powered Engineer",
+        },
+        back: {
+          email: "readme.md@almapi.dev",
+          whatsapp: "+34 641 96 23 96",
+          linkedin: "https://www.linkedin.com/in/almapidev/",
+          city: "Gandia, Spain",
+        },
       },
     },
   },

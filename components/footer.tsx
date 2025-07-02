@@ -2,10 +2,14 @@
 
 import { useTranslation } from "react-i18next"
 import Image from "next/image"
-import {Code2, BrainCircuit, Bot, Sparkles } from "lucide-react"
+import {Code2, BrainCircuit, Bot, Sparkles} from "lucide-react"
 
 export default function Footer() {
   const { t, i18n } = useTranslation()
+  const year = new Date().getFullYear()
+  const copyright = t("footer.copyright").replace("{year}", year.toString())
+  const slogan = t("footer.slogan")
+  const madeWith = t("footer.made_with")
 
   return (
     <footer className="relative bg-gradient-to-b from-gray-900 to-black text-white py-12 z-10">
@@ -20,21 +24,6 @@ export default function Footer() {
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
-          {/* Logo and Slogan */}
-          <div className="flex flex-col items-center justify-center mb-8">
-            <div className="flex items-center">
-              <BrainCircuit className="w-6 h-6 text-blue-600 dark:text-blue-400 mr-2" />
-              <span className="text-2xl font-bold text-gray-900 text-white">
-                almap<span className="text-blue-600">[i]</span>
-              </span>
-            </div>
-            <p className="text-gray-300 text-center text-lg flex items-center justify-center gap-2">
-              <Sparkles className="w-5 h-5 text-blue-400" />
-              <span className="italic">{t("footer.slogan")}</span>
-              <Sparkles className="w-5 h-5 text-blue-400" />
-            </p>
-          </div>
-
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-8">
             <a
@@ -80,13 +69,13 @@ export default function Footer() {
           {/* Copyright */}
           <div className="pt-8 text-center">
             <p className="text-gray-400 mb-2 flex items-center justify-center gap-2">
-              <span className="italic">{t("footer.made_with")}</span>
+              <span className="italic">{madeWith}</span>
               <BrainCircuit className="w-4 h-4 text-blue-600 dark:text-blue-400" />
               <Bot className="w-4 h-4 text-blue-500 dark:text-blue-300" />
               <Code2 className="w-4 h-4 text-blue-700 dark:text-blue-500" />
             </p>
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} almap[i] · almapi.dev
+              {copyright}
             </p>
           </div>
         </div>

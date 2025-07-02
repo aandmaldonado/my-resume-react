@@ -15,6 +15,7 @@ import "./i18n"
 import { Bot } from "lucide-react"
 import ChatbotSection from "@/components/chatbot-section"
 import RecommendationsSection from "@/components/recommendations-section"
+import ContactCard from "@/components/contact-card"
 
 export default function Home() {
   const { i18n } = useTranslation()
@@ -37,6 +38,7 @@ export default function Home() {
           <SkillsSection />
           <ProjectsSection />
           <RecommendationsSection />
+          <ContactCard locale={i18n.language as 'en' | 'es'} />
           {isChatbotVisible && (
             <ChatbotSection setIsChatbotVisible={setIsChatbotVisible} />
           )}
