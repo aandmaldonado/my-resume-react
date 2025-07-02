@@ -32,12 +32,14 @@ export default function Home() {
         <main>
           <HeroSection />
           <AboutSection />
-          <RecommendationsSection />
           <ExperienceSection />
           <EducationSection />
           <SkillsSection />
           <ProjectsSection />
-          {isChatbotVisible && <ChatbotSection setIsChatbotVisible={setIsChatbotVisible} />}
+          <RecommendationsSection />
+          {isChatbotVisible && (
+            <ChatbotSection setIsChatbotVisible={setIsChatbotVisible} />
+          )}
         </main>
         <Footer />
         {/*
@@ -50,5 +52,5 @@ export default function Home() {
         */}
       </div>
     </ThemeProvider>
-  )
+  );
 }

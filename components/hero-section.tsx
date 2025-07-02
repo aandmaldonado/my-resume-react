@@ -3,6 +3,7 @@
 import { useTranslation } from "react-i18next"
 import Typewriter from "typewriter-effect"
 import { ArrowDown, Code2, Rocket } from "lucide-react"
+import CVDownloadModal from "@/components/cv-download-modal"
 
 export default function HeroSection() {
   const { t } = useTranslation()
@@ -50,6 +51,11 @@ export default function HeroSection() {
           <strong>{t("hero.subtitle")}</strong>
           <Rocket className="w-6 h-6 text-white-400" />
         </p>
+        
+        {/* Download CV Button */}
+        <div className="animate-fade-in-delay-2">
+          <CVDownloadModal />
+        </div>
       </div>
 
       {/* Scroll indicator */}

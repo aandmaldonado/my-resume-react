@@ -23,7 +23,6 @@ export default function AboutSection() {
   const descriptions = t("about.descriptions", { returnObjects: true }) as string[];
   const searchGoals = t("about.search_goals", { returnObjects: true }) as string[];
   const collaborationReasons = t("about.collaboration_reasons", { returnObjects: true }) as string[];
-  const recommendations = t("recommendations", { returnObjects: true }) as any[];
 
   return (
     <section id="about" className="py-20 bg-gray-50 dark:bg-gray-800">
