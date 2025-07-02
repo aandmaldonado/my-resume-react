@@ -355,6 +355,7 @@ const resources = {
         more_info: "More Info",
         external_link: "External Link",
         github_repo: "GitHub",
+        close: "Back",
         projects: [
           {
             title: "Andes Online",
@@ -1073,6 +1074,7 @@ const resources = {
         more_info: "Más Información",
         external_link: "Link Externo",
         github_repo: "GitHub",
+        close: "Volver",
         projects: [
           {
             title: "Andes Online",
