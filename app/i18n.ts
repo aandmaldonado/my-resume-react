@@ -55,6 +55,17 @@ const resources = {
           "Let's connect! I am open to opportunities and collaborations that create real impact.",
         years_experience: "Years of Experience",
         industries: "Industries",
+        industries_list: {
+          Telecomunicaciones: "Telecommunications",
+          AFP: "Pension Funds",
+          Gobierno: "Government",
+          Retail: "Retail",
+          HR: "Human Resources",
+          Banca: "Banking",
+          Aerolineas: "Airlines",
+          IA: "Artificial Intelligence"
+        },
+        industries_modal_title: "Industries I have worked in",
       },
       experience: {
         title: "Work Experience",
@@ -742,7 +753,7 @@ const resources = {
           "He trabajado en diversas industrias como telecomunicaciones, servicios financieros, entre otros, asumiendo roles clave: desde Desarrollador Backend y Consultor TI, hasta Líder Técnico y CTO.",
           "Mi motor es la tecnología y la innovación. Hoy, enfoco mi evolución profesional hacia la Inteligencia Artificial y Machine Learning, en busca de desafíos que conecten propósito, impacto y crecimiento.",
         ],
-        looking_for: "En búsqueda de:",
+        looking_for: "Buscando:",
         search_goals: [
           "Proyectos desafiantes en IA & Machine Learning",
           "Roles estratégicos con posibilidad de trabajo remoto",
@@ -755,9 +766,20 @@ const resources = {
           "Alta adaptabilidad al trabajo remoto y orientación a resultados",
         ],
         connect_message:
-          "¿Conectamos? Estoy abierto a oportunidades y colaboraciones que generen impacto real.",
-        years_experience: "Años de Experiencia",
+          "¡Conectemos! Estoy abierto a oportunidades y colaboraciones que generen impacto real.",
+        years_experience: "Años de experiencia",
         industries: "Industrias",
+        industries_list: {
+          Telecomunicaciones: "Telecomunicaciones",
+          AFP: "AFP",
+          Gobierno: "Gobierno",
+          Retail: "Retail",
+          HR: "Recursos Humanos",
+          Banca: "Banca",
+          Aerolineas: "Aerolíneas",
+          IA: "Inteligencia Artificial"
+        },
+        industries_modal_title: "Industrias en las que he trabajado",
       },
       experience: {
         title: "Experiencia Laboral",
@@ -1390,8 +1412,8 @@ const resources = {
           position:
             "Head of Security / PMI-ACP / Project Manager / Certified ISO IEC 27001 Lead Implementer / Certified ISO 27001:2022 Foundation / Diploma in Information Security / Financial Services / Business Processes",
           company: "Falabella",
-          relation: "Supervisaba directamente a Álvaro",
-          text: "Conocí a Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
+          relation: "Direct supervisor of Álvaro",
+          text: "I met Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
           date: "4 de agosto de 2023",
           picture:
             "https://media.licdn.com/dms/image/v2/D4E35AQHq8019P1jTbA/profile-framedphoto-shrink_100_100/B4EZWmVoYrHUAw-/0/1742252443482?e=1751997600&v=beta&t=c152Rh2Xlm08eM6JyIa6Grossz27pFbN2sgKcWVWWbA",

@@ -2,21 +2,22 @@
 
 import { useTranslation } from "react-i18next"
 import Image from "next/image"
-import { Calendar, Building2, Haze, CircleUser, ScanSearch, Handshake, Inbox, Rocket, Earth, Bot, Brain, Puzzle, Globe, MessageCircle } from "lucide-react"
+import { Calendar, Building2, Haze, CircleUser, ScanSearch, Handshake, Inbox, Rocket, Earth, Bot, Brain, Puzzle, Globe, MessageCircle, ShoppingCart, Banknote, Award } from "lucide-react"
 import CountUp from 'react-countup'
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "./ui/dialog"
 
 export default function AboutSection() {
   const { t, i18n } = useTranslation()
 
   const industries = [
-    "Telecomunicaciones",
-    "AFP",
-    "Gobierno",
-    "Retail",
-    "HR",
-    "Banca",
-    "Aerolineas",
-    "IA"
+    { key: "Telecomunicaciones", icon: Globe, color: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200" },
+    { key: "AFP", icon: Award, color: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200" },
+    { key: "Gobierno", icon: Building2, color: "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200" },
+    { key: "Retail", icon: ShoppingCart, color: "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200" },
+    { key: "HR", icon: Handshake, color: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" },
+    { key: "Banca", icon: Banknote, color: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200" },
+    { key: "Aerolineas", icon: Rocket, color: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200" },
+    { key: "IA", icon: Bot, color: "bg-violet-100 text-violet-800 dark:bg-violet-900 dark:text-violet-200" },
   ]
 
   // Obtener datos de i18n
@@ -134,15 +135,40 @@ export default function AboutSection() {
                   </div>
                   <div className="text-gray-600 dark:text-gray-300">{t("about.years_experience")}</div>
                 </div>
-                <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <Building2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                      <CountUp end={industries.length} duration={2.5} />
+                {/* Modal de industrias */}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow cursor-pointer hover:shadow-lg transition-all">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <Building2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                        <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                          <CountUp end={industries.length} duration={2.5} />
+                        </div>
+                      </div>
+                      <div className="text-gray-600 dark:text-gray-300">{t("about.industries")}</div>
                     </div>
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-300">{t("about.industries")}</div>
-                </div>
+                  </DialogTrigger>
+                  <DialogContent className="bg-white dark:bg-gray-800">
+                    <DialogTitle className="mb-4 text-blue-600 dark:text-blue-400 text-center">
+                      {t("about.industries_modal_title")}
+                    </DialogTitle>
+                    <div className="flex flex-wrap gap-3 justify-center my-2">
+                      {industries.map((industry, idx) => {
+                        const IconComponent = industry.icon
+                        return (
+                          <div
+                            key={industry.key}
+                            className={`group relative flex items-center px-4 py-2 rounded-full font-semibold shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105 hover:shadow-lg ${industry.color}`}
+                            tabIndex={0}
+                          >
+                            <IconComponent className="w-5 h-5 mr-2" />
+                            <span>{t(`about.industries_list.${industry.key}`)}</span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
 
@@ -152,6 +178,7 @@ export default function AboutSection() {
                 {descriptions.map((desc, idx) => (
                   <p key={idx} className="text-gray-700 dark:text-gray-300 leading-relaxed">{desc}</p>
                 ))}
+
                 {/* Tarjeta de objetivos de búsqueda */}
                 <div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg p-4 my-4 shadow-sm">
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex items-center gap-2 mb-2">
