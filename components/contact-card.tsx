@@ -54,7 +54,12 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
               </p>
               </div>
               {/* Back */}
-              <div className="absolute w-full h-full bg-blue-900 text-white rounded-2xl shadow-2xl flex flex-row items-center justify-center [transform:rotateY(180deg)] [backface-visibility:hidden] p-8 gap-8">
+              <div
+                className="absolute w-full h-full text-white rounded-2xl shadow-2xl flex flex-row items-center justify-center [transform:rotateY(180deg)] [backface-visibility:hidden] p-8 gap-8"
+                style={{
+                  background: 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #60a5fa 100%)',
+                }}
+              >
                 {/* Icono grande a la izquierda */}
                 <div className="flex flex-col items-center justify-center h-full">
                   <BrainCircuit className="w-24 h-24 text-blue-300 drop-shadow-lg" />
