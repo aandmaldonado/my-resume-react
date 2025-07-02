@@ -705,7 +705,7 @@ const resources = {
       footer: {
         slogan: "Solving problems with technology",
         made_with: "AI-Powered",
-        copyright: "© {year} almap[i] · almapi.dev. All rights reserved.",
+        copyright: "© {year} almap[i]. All rights reserved",
       },
       chatbot: {
         name: "Álvaro Maldonado",
@@ -1443,7 +1443,7 @@ const resources = {
         slogan: "Resolviendo problemas con tecnologIA",
         made_with: "Impulsado con IA",
         copyright:
-          "© {year} almap[i] · almapi.dev. Todos los derechos reservados.",
+          "© {year} almap[i]. Todos los derechos reservados",
       },
       chatbot: {
         name: "Álvaro Maldonado",
