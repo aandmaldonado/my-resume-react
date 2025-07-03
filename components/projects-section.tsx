@@ -9,7 +9,6 @@ import {
   Cloud,
   Rocket,
   CheckCircle2,
-  X,
   LucideIcon,
   Link,
   Github,
@@ -25,71 +24,82 @@ import {
 import { useState } from "react"
 
 // Asignación de iconos y colores por índice
-const iconMap: { icon: LucideIcon; color: string; bgColor: string; technologies: string[] }[] = [
+const iconMap: { icon: LucideIcon; color: string; bgColor: string; borderColor: string; technologies: string[] }[] = [
   {
     icon: CreditCard,
     color: "text-blue-600 dark:text-blue-400",
     bgColor: "bg-blue-50 dark:bg-blue-900/20",
+    borderColor: "border-blue-200 dark:border-blue-800",
     technologies: ["Java/Spring Boot", "PostgreSQL", "Microservices", "API Rest", "Jenkins/GitHub Actions", "Veracode", "SonarQube", "Checkstyle", "ArchUnit", "Karate", "Spock"]
   },
   {
     icon: BrainCircuit,
     color: "text-purple-600 dark:text-purple-400",
     bgColor: "bg-purple-50 dark:bg-purple-900/20",
+    borderColor: "border-purple-200 dark:border-purple-800",
     technologies: ["Python", "OpenCV", "Rekognition", "SageMaker", "EC2", "S3"]
   },
   {
     icon: Bot,
     color: "text-green-600 dark:text-green-400",
     bgColor: "bg-green-50 dark:bg-green-900/20",
+    borderColor: "border-green-200 dark:border-green-800",
     technologies: ["Python", "SageMaker", "Tensorflow", "Keras", "Sci-Kit Learn", "CNN", "Micropython", "Raspberry Pi"]
   },
   {
     icon: Users,
     color: "text-pink-600 dark:text-pink-400",
     bgColor: "bg-pink-50 dark:bg-pink-900/20",
+    borderColor: "border-pink-200 dark:border-pink-800",
     technologies: ["Java", "MVC", "OracleDB", "PL/SQL", "Shell Script"]
   },
   {
     icon: AppWindow,
     color: "text-yellow-600 dark:text-yellow-400",
     bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
+    borderColor: "border-yellow-200 dark:border-yellow-800",
     technologies: ["Java", "Websphere Portal", "Websphere Application Server", "OracleDB", "HTML", "CSS", "JS", "Portlets"]
   },
   {
     icon: ShoppingCart,
     color: "text-red-600 dark:text-red-400",
     bgColor: "bg-red-50 dark:bg-red-900/20",
+    borderColor: "border-red-200 dark:border-red-800",
     technologies: ["Java", "PostgreSQL", "Web Services"]
   },
   {
     icon: Cloud,
     color: "text-orange-600 dark:text-orange-400",
     bgColor: "bg-orange-50 dark:bg-orange-900/20",
+    borderColor: "border-orange-200 dark:border-orange-800",
     technologies: ["AWS"]
   },
   {
     icon: Clock,
     color: "text-cyan-600 dark:text-cyan-400",
     bgColor: "bg-cyan-50 dark:bg-cyan-900/20",
+    borderColor: "border-cyan-200 dark:border-cyan-800",
     technologies: ["Google Cloud", "API Rest", "Swagger", "DDD", "SaaS", "OracleDB"]
   },
   {
     icon: Scale,
     color: "text-lime-600 dark:text-lime-400",
     bgColor: "bg-lime-50 dark:bg-lime-900/20",
+    borderColor: "border-lime-200 dark:border-lime-800",
     technologies: ["Java", "Spring Boot", "Spring Data JPA", "Spring Security", "JWT", "OracleDB", "Veracode", "SonarQube", "JUnit", "Mockito", "Bamboo CI/CD", "OCR"]
   },
   {
     icon: ScanFace,
     color: "text-amber-600 dark:text-amber-400",
     bgColor: "bg-amber-50 dark:bg-amber-900/20",
+    borderColor: "border-amber-200 dark:border-amber-800",
     technologies: ["Java", "OracleDB", "OpenCV", "Facial Action Coding System"]
   },
   {
     icon: Banknote,
     color: "text-teal-600 dark:text-teal-400",
     bgColor: "bg-teal-50 dark:bg-teal-900/20",
+    borderColor: "border-teal-200 dark:border-teal-800",
     technologies: ["Java", "Spring Boot", "Spring Batch", "Spring Data JPA", "Spring Security", "JWT", "OracleDB", "Fortify", "Kiuwan", "SonarQube", "JUnit", "Weblogic"]
   },
 ]
@@ -122,7 +132,7 @@ export default function ProjectsSection() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
             {projects.map((project, idx) => {
-              const { icon: Icon, color, bgColor } = iconMap[idx % iconMap.length]
+              const { icon: Icon, color, bgColor, borderColor } = iconMap[idx % iconMap.length]
               const isFlipped = flipped[idx]
               return (
                 <div
@@ -135,7 +145,7 @@ export default function ProjectsSection() {
                     style={{ minHeight: 420 }}
                   >
                     {/* Cara frontal */}
-                    <div className="absolute inset-0 w-full min-h-full h-auto bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow [backface-visibility:hidden] flex flex-col">
+                    <div className={`absolute inset-0 w-full min-h-full h-auto bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border ${borderColor} [backface-visibility:hidden] flex flex-col`}>
                       <div className="flex items-center gap-3 mb-4">
                         <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center ${(Icon === Bot || Icon === Users) ? 'p-2' : ''}`}>
                           {Icon && (
@@ -158,7 +168,7 @@ export default function ProjectsSection() {
                               key={index}
                               className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm flex items-center gap-1"
                             >
-                              <CheckCircle2 className="w-3 h-3 text-blue-600 dark:text-blue-400" />
+                              
                               {tech}
                             </span>
                           ))}
@@ -196,7 +206,7 @@ export default function ProjectsSection() {
                       </div>
                     </div>
                     {/* Cara trasera */}
-                    <div className="absolute inset-0 w-full min-h-full h-auto bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg [transform:rotateY(180deg)] [backface-visibility:hidden] flex flex-col">
+                    <div className={`absolute inset-0 w-full min-h-full h-auto bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg border ${borderColor} [transform:rotateY(180deg)] [backface-visibility:hidden] flex flex-col`}>
                       <div className="flex items-center gap-3 mb-4">
                         <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center ${(Icon === Bot || Icon === Users) ? 'p-2' : ''}`}>
                           {Icon && (

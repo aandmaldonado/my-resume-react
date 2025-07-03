@@ -1,80 +1,85 @@
 # 🚀 My Resume React
 
-A modern, responsive personal portfolio website built with React. Showcase your professional journey, skills, and projects in style!
+Una web de portafolio personal moderna y responsiva construida con Next.js y Tailwind CSS. ¡Muestra tu trayectoria profesional, habilidades y proyectos con estilo!
 
-## ✨ Features
+## ✨ Características
 
-- 🎨 Modern and clean design
-- 📱 Fully responsive layout
-- ⚡ Fast and optimized performance
-- 🌙 Dark/Light mode support
-- 🎯 Interactive UI elements
-- 📊 Skills visualization
-- 📝 Project showcase
-- 🌐 Internationalization support
+- 🎨 Diseño moderno y limpio
+- 📱 Layout 100% responsivo
+- 🌙 Soporte para modo claro/oscuro
+- 🌐 Internacionalización (i18n) con múltiples idiomas
+- 🃏 Tarjetas de proyectos y skills con efecto flip y tags tipo nube
+- 🧑‍💼 Sección de contacto tipo business card con flip
+- 🦾 Accesibilidad y UX profesional
+- ⚡ Optimización y rendimiento Next.js
+- 📝 Visualización de skills y tecnologías
+- 💬 Footer y header minimalistas
 
 ## 🛠️ Tech Stack
 
-- ⚛️ React.js
+- ⚛️ Next.js (React)
 - 🎨 Tailwind CSS
-- 🔄 React Router
-- 🎯 TypeScript
-- 📦 Vite
-- 🎭 Framer Motion
-- 📱 Responsive Design
+- 🌍 i18next
+- 🦾 TypeScript
+- 💡 Lucide Icons
+- 🖼️ Next/Image
 
-## 🚀 Getting Started
+## 🚀 Primeros pasos
 
-1. Clone the repository
+1. Clona el repositorio
 ```bash
 git clone https://github.com/yourusername/my-resume-react.git
 ```
 
-2. Install dependencies
+2. Instala las dependencias
 ```bash
 cd my-resume-react
 npm install
 ```
 
-3. Run the development server
+3. Ejecuta el servidor de desarrollo
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:5173](http://localhost:5173) in your browser
+4. Abre [http://localhost:3000](http://localhost:3000) en tu navegador
 
-## 📁 Project Structure
+## 📁 Estructura del Proyecto
 
 ```
 my-resume-react/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── assets/
-│   ├── styles/
-│   └── utils/
+├── app/
+├── components/
+│   └── ui/
+├── hooks/
+├── lib/
 ├── public/
-└── package.json
+├── styles/
+├── README.md
+├── package.json
+└── ...
 ```
 
-## 🎯 Features to Come
+## 🎯 Features implementados
 
-- [ ] Blog section
-- [ ] Multi-language support
-- [ ] Custom animations
-- [ ] SEO optimization
-- [ ] Analytics integration
+- [x] Modo claro/oscuro
+- [x] Internacionalización (i18n)
+- [x] Tarjetas de proyectos con flip y tags nube
+- [x] Sección de skills con tags nube y colores únicos
+- [x] Sección de contacto tipo business card con flip
+- [x] Footer y header minimalistas
+- [x] Accesibilidad y diseño responsivo
 
-## 👨‍💻 Author
+## 👨‍💻 Autor
 
 Álvaro Maldonado
 - <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" alt="github" width="20" height="20"/> [@aandmaldonado](https://github.com/aandmaldonado)
 - <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linkedin/linkedin-original.svg" alt="linkedin" width="20" height="20"/> [/in/almapidev](https://linkedin.com/in/almapidev)
 
-## ⭐ Show your support
+## ⭐ Apoya el proyecto
 
-Give a ⭐️ if this project helped you!
+¡Dale una ⭐️ si este proyecto te ayudó!
 
 ---
 
-Made with ❤️ and ☕
+Hecho con ❤️, ☕️ y Next.js

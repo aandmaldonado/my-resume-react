@@ -41,7 +41,7 @@ export default function EducationSection() {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm">
+                    <div className="border border-blue-200 dark:border-blue-800 flex-1 bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                         <div className="flex items-start gap-3">
                           <Award className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />

@@ -126,7 +126,7 @@ export default function AboutSection() {
               </div>
 
               <div className="grid grid-cols-2 gap-6 mt-8">
-                <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                <div className="border border-blue-200 dark:border-blue-800 text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
                   <div className="flex items-center justify-center gap-2 mb-2">
                     <Calendar className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                     <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
@@ -138,7 +138,7 @@ export default function AboutSection() {
                 {/* Modal de industrias */}
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow cursor-pointer hover:shadow-lg transition-all">
+                    <div className="border border-blue-200 dark:border-blue-800 text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow cursor-pointer hover:shadow-lg transition-all">
                       <div className="flex items-center justify-center gap-2 mb-2">
                         <Building2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                         <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">

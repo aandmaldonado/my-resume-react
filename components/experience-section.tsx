@@ -48,7 +48,7 @@ export default function ExperienceSection() {
 
                   {/* Company logo */}
                   <div className="ml-16 mr-6 flex-shrink-0">
-                    <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+                    <div className="border border-blue-200 dark:border-blue-800 w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
                       <img 
                         src={exp.logo} 
                         alt={`${exp.company} logo`}
@@ -58,7 +58,7 @@ export default function ExperienceSection() {
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-sm">
+                  <div className="border border-blue-200 dark:border-blue-800 flex-1 bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-sm">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                       <div className="flex items-start gap-3">
                         <Building2 className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />

@@ -26,7 +26,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
       </h2>
       <p className="text-lg text-center text-gray-600 dark:text-gray-300 mb-8 max-w-xl">{subtitle}</p>
       <div className="[perspective:1200px] flex justify-center items-center">
-        <div className="bg-gradient-to-br from-blue-400 via-blue-300 to-blue-600 p-1 rounded-2xl shadow-2xl">
+        <div className="border border-blue-200 dark:border-blue-800 rounded-2xl shadow-2xl">
           <div
             className={`relative w-[480px] h-[320px] bg-white dark:bg-neutral-900 rounded-2xl cursor-pointer`}
             tabIndex={0}

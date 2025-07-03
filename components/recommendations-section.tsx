@@ -17,7 +17,7 @@ export default function RecommendationsSection() {
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             {recommendations.map((rec, idx) => (
-              <div key={idx} className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-sm flex flex-col items-center">
+              <div key={idx} className="border border-blue-200 dark:border-blue-800 bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-sm flex flex-col items-center">
                 {/* Foto o icono de usuario */}
                 {rec.picture ? (
                   <Image
