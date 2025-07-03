@@ -497,24 +497,13 @@ const resources = {
       skills: {
         title: "Skills",
         description: "Technical skills, languages, and soft skills",
-        technical: {
-          title: "Technical Skills",
-        },
         soft_skills: {
           title: "Soft Skills",
-          communication: "Communication",
-          teamwork: "Teamwork",
-          problem_solving: "Problem Solving",
-          adaptability: "Adaptability",
-          leadership: "Leadership",
-          time_management: "Time Management",
+          skills: "Communication, Teamwork, Problem Solving, Adaptability, Leadership, Time Management",
         },
         languages: {
           title: "Languages",
-          spanish: "Spanish",
-          english: "English",
-          native: "Native",
-          intermediate: "B1-B2",
+          skills: "Spanish Native, English B1-B2",
         },
         api_design: {
           title: "API Design",
@@ -526,7 +515,7 @@ const resources = {
         },
         project_management: {
           title: "Project Management",
-          skills: "Jira, Confluence",
+          skills: "Jira, Confluence, Trello, Scrum, Agile Methodologies",
         },
         frontend: {
           title: "Frontend",
@@ -1234,24 +1223,13 @@ const resources = {
       skills: {
         title: "Habilidades",
         description: "Habilidades técnicas, idiomas y habilidades blandas",
-        technical: {
-          title: "Habilidades Técnicas",
-        },
         soft_skills: {
           title: "Habilidades Blandas",
-          communication: "Comunicación",
-          teamwork: "Trabajo en Equipo",
-          problem_solving: "Resolución de Problemas",
-          adaptability: "Adaptabilidad",
-          leadership: "Liderazgo",
-          time_management: "Gestión del Tiempo",
+          skills: "Comunicación, Trabajo en Equipo, Resolución de Problemas, Adaptabilidad, Liderazgo, Gestión del Tiempo",
         },
         languages: {
           title: "Idiomas",
-          spanish: "Español",
-          english: "Inglés",
-          native: "Nativo",
-          intermediate: "B1-B2",
+          skills: "Español Nativo, Inglés B1-B2",
         },
         api_design: {
           title: "Diseño de APIs",
@@ -1263,7 +1241,7 @@ const resources = {
         },
         project_management: {
           title: "Gestión de Proyectos",
-          skills: "Jira, Confluence",
+          skills: "Jira, Confluence, Trello, Scrum, Agile Methodologies",
         },
         frontend: {
           title: "Frontend",

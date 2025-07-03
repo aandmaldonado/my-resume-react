@@ -136,12 +136,16 @@ export default function ProjectsSection() {
                   >
                     {/* Cara frontal */}
                     <div className="absolute inset-0 w-full min-h-full h-auto bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow [backface-visibility:hidden] flex flex-col">
-                      <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center mb-4`}>
-                        {Icon && <Icon className={`w-6 h-6 ${color}`} />}
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center ${(Icon === Bot || Icon === Users) ? 'p-2' : ''}`}>
+                          {Icon && (
+                            <Icon className={`w-6 h-6 ${color}`} />
+                          )}
+                        </div>
+                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                          {project.title}
+                        </h3>
                       </div>
-                      <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-                        {project.title}
-                      </h3>
                       <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-justify">
                         {project.description}
                       </p>
@@ -194,10 +198,12 @@ export default function ProjectsSection() {
                     {/* Cara trasera */}
                     <div className="absolute inset-0 w-full min-h-full h-auto bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg [transform:rotateY(180deg)] [backface-visibility:hidden] flex flex-col">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center`}>
-                          {Icon && <Icon className={`w-6 h-6 ${color}`} />}
+                        <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center ${(Icon === Bot || Icon === Users) ? 'p-2' : ''}`}>
+                          {Icon && (
+                            <Icon className={`w-6 h-6 ${color}`} />
+                          )}
                         </div>
-                        <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                           {project.title}
                         </h3>
                       </div>
