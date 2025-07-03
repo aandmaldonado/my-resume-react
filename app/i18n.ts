@@ -30,6 +30,7 @@ const resources = {
         select_all: "Select all",
         deselect_all: "Deselect all",
         select_all_sections: "Select all sections",
+        contact_button: "Contact me",
       },
       about: {
         location: "Gandia, Spain",
@@ -751,6 +752,7 @@ const resources = {
         select_all: "Seleccionar todas",
         deselect_all: "Deseleccionar todas",
         select_all_sections: "Seleccionar todas las secciones",
+        contact_button: "Contáctame",
       },
       about: {
         location: "Gandía, España",
