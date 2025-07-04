@@ -22,6 +22,7 @@ import {
   ArrowLeft
 } from "lucide-react"
 import React, { useRef, useEffect, useState } from "react"
+import { useInfiniteCarousel } from "../hooks/use-infinite-carousel";
 
 // Asignación de iconos y colores por índice
 const iconMap: { icon: LucideIcon; color: string; bgColor: string; borderColor: string; technologies: string[] }[] = [
@@ -106,81 +107,18 @@ const iconMap: { icon: LucideIcon; color: string; bgColor: string; borderColor: 
 
 export default function ProjectsSection() {
   const { t } = useTranslation()
-  // Estado de flip por tarjeta
   const [flipped, setFlipped] = useState<{ [key: number]: boolean }>({})
-
-  // Obtén los proyectos desde i18n
   const projects = t("projects.projects", { returnObjects: true }) as any[]
-  // Carrusel infinito: duplicamos el array
-  const marqueeProjects = [...projects, ...projects]
-  const cardWidth = 370 // igual que recommendations-section
-  const totalCards = marqueeProjects.length
-  const trackRef = useRef<HTMLDivElement>(null)
-  const [trackWidth, setTrackWidth] = useState(cardWidth * totalCards)
-  const [isPaused, setIsPaused] = useState(false)
-  const [dragging, setDragging] = useState(false)
-  const [dragStartX, setDragStartX] = useState<number | null>(null)
-  const [dragStartOffset, setDragStartOffset] = useState(0)
-  const [offset, setOffset] = useState(0)
-  const speed = 1.0 // igual que recommendations-section
-
-  useEffect(() => {
-    setTrackWidth(cardWidth * totalCards)
-  }, [cardWidth, totalCards])
-
-  // Animación manual con requestAnimationFrame
-  useEffect(() => {
-    if (dragging) return
-    if (isPaused) return
-    let frame: number
-    function step() {
-      setOffset(prev => {
-        let next = prev - speed
-        if (next <= -trackWidth / 2) return 0
-        return next
-      })
-      frame = requestAnimationFrame(step)
-    }
-    frame = requestAnimationFrame(step)
-    return () => cancelAnimationFrame(frame)
-  }, [dragging, isPaused, trackWidth])
-
-  // Drag/swipe handlers
-  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    setIsPaused(true)
-    setDragging(true)
-    setDragStartX(e.clientX)
-    setDragStartOffset(offset)
-  }
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragging || dragStartX === null) return
-    const delta = e.clientX - dragStartX
-    let next = dragStartOffset + delta
-    if (next < -trackWidth / 2) next += trackWidth / 2
-    if (next > 0) next -= trackWidth / 2
-    setOffset(next)
-  }
-  const handlePointerUp = () => {
-    setDragging(false)
-    setIsPaused(false)
-    setDragStartX(null)
-  }
-  // Touch events for mobile
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    setIsPaused(true)
-    setDragging(true)
-    setDragStartX(e.touches[0].clientX)
-    setDragStartOffset(offset)
-  }
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!dragging || dragStartX === null) return
-    const delta = e.touches[0].clientX - dragStartX
-    let next = dragStartOffset + delta
-    if (next < -trackWidth / 2) next += trackWidth / 2
-    if (next > 0) next -= trackWidth / 2
-    setOffset(next)
-  }
-  const handleTouchEnd = handlePointerUp
+  const cardWidth = 370
+  const speed = 1.0
+  const {
+    marqueeItems,
+    offset,
+    trackWidth,
+    trackRef,
+    dragging,
+    handlers
+  } = useInfiniteCarousel({ items: projects, cardWidth, speed })
 
   // Renderiza el contenido extendido del modal
   const renderContent = (project: any) => {
@@ -202,15 +140,6 @@ export default function ProjectsSection() {
             <div
               ref={trackRef}
               className="flex gap-8 items-center select-none touch-pan-x"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={handlePointerUp}
-              onPointerLeave={handlePointerUp}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
               style={{
                 width: `${trackWidth}px`,
                 transform: `translateX(${offset}px)`,
@@ -218,8 +147,9 @@ export default function ProjectsSection() {
                 userSelect: 'none',
                 transition: dragging ? 'none' : 'transform 0.1s linear',
               }}
+              {...handlers}
             >
-              {marqueeProjects.map((project, idx) => {
+              {marqueeItems.map((project, idx) => {
                 const { icon: Icon, color, bgColor, borderColor } = iconMap[idx % iconMap.length]
                 const isFlipped = flipped[idx]
                 return (
