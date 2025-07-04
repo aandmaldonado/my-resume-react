@@ -623,7 +623,7 @@ const resources = {
           linkedin: "https://www.linkedin.com/in/sam-hidalgo-nava",
         },
         {
-          name: "Carlos Francisco Osorio Calmels",
+          name: "Carlos Osorio Calmels",
           position: "Senior Software Developer",
           company: "NTT DATA Europe & LATAM",
           relation: "Worked in the same team",
@@ -634,7 +634,7 @@ const resources = {
           linkedin: "https://www.linkedin.com/in/carlosfosorioc",
         },
         {
-          name: "Juan Nicolas Reckmann Cardenas",
+          name: "Juan Reckmann Cardenas",
           position: "Solutions Team Leader",
           company: "NTT DATA Europe & LATAM",
           relation: "Worked in the same team",
@@ -1350,7 +1350,7 @@ const resources = {
           linkedin: "https://www.linkedin.com/in/sam-hidalgo-nava",
         },
         {
-          name: "Carlos Francisco Osorio Calmels",
+          name: "Carlos Osorio Calmels",
           position: "Senior Software Developer",
           company: "NTT DATA Europe & LATAM",
           relation: "Trabajó en el mismo equipo",
@@ -1361,7 +1361,7 @@ const resources = {
           linkedin: "https://www.linkedin.com/in/carlosfosorioc",
         },
         {
-          name: "Juan Nicolas Reckmann Cardenas",
+          name: "Juan Reckmann Cardenas",
           position: "Solutions Team Leader",
           company: "NTT DATA Europe & LATAM",
           relation: "Trabajó en el mismo equipo",
@@ -1412,7 +1412,7 @@ const resources = {
             "Head of Security / PMI-ACP / Project Manager / Certified ISO IEC 27001 Lead Implementer / Certified ISO 27001:2022 Foundation / Diploma in Information Security / Financial Services / Business Processes",
           company: "Falabella",
           relation: "Direct supervisor of Álvaro",
-          text: "I met Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
+          text: "Conocí a Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
           date: "4 de agosto de 2023",
           picture:
             "https://media.licdn.com/dms/image/v2/D4E35AQHq8019P1jTbA/profile-framedphoto-shrink_100_100/B4EZWmVoYrHUAw-/0/1742252443482?e=1751997600&v=beta&t=c152Rh2Xlm08eM6JyIa6Grossz27pFbN2sgKcWVWWbA",
