@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Ruta al archivo i18n.ts
-const I18N_PATH = path.join(__dirname, '../app', 'i18n.ts');
+const I18N_PATH = path.join(__dirname, '../../app', 'i18n.ts');
 
 // Leer el archivo como texto
 const i18nRaw = fs.readFileSync(I18N_PATH, 'utf8');

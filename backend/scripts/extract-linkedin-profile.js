@@ -19,8 +19,9 @@ if (!profileUrl || !Array.isArray(cookies)) {
 (async () => {
   const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
+  await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36');
   await page.setCookie(...cookies);
-  await page.goto(profileUrl, { waitUntil: 'networkidle2' });
+  await page.goto(profileUrl, { waitUntil: 'networkidle2', timeout: 120000 });
 
   // Esperar a que cargue el perfil
   await page.waitForSelector('main');
@@ -39,12 +40,14 @@ if (!profileUrl || !Array.isArray(cookies)) {
     const sector = clean(document.querySelector('.text-body-small.inline.t-black--light:not(.break-words)')?.innerText);
     // About
     let about = '';
-    const aboutSection = document.querySelector('section.pv-about-section, section.summary') || document.querySelector('section:has([id^="about"]), section:has([data-section="summary"])');
-    if (aboutSection) {
-      about = clean(aboutSection.innerText);
-    } else {
-      const about = document.querySelector('section:has(h2[id*="about"]), section:has(h2:has(span:contains("Acerca de")))');
-      if (about) about = clean(about.innerText);
+    // Buscar sección About por id o por texto en el encabezado
+    const aboutSections = Array.from(document.querySelectorAll('section'));
+    for (const section of aboutSections) {
+      const h2 = section.querySelector('h2');
+      if (h2 && /about|acerca de/i.test(h2.innerText)) {
+        about = clean(section.innerText);
+        break;
+      }
     }
     // Featured
     const featured = [];
