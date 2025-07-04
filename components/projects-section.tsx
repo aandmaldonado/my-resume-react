@@ -1,7 +1,7 @@
 "use client"
 
 import { useTranslation } from "react-i18next"
-import { 
+import {
   ShoppingCart,
   BrainCircuit,
   Bot,
@@ -21,7 +21,7 @@ import {
   Info,
   ArrowLeft
 } from "lucide-react"
-import { useState } from "react"
+import React, { useRef, useEffect, useState } from "react"
 
 // Asignación de iconos y colores por índice
 const iconMap: { icon: LucideIcon; color: string; bgColor: string; borderColor: string; technologies: string[] }[] = [
@@ -100,7 +100,7 @@ const iconMap: { icon: LucideIcon; color: string; bgColor: string; borderColor: 
     color: "text-teal-600 dark:text-teal-400",
     bgColor: "bg-teal-50 dark:bg-teal-900/20",
     borderColor: "border-teal-200 dark:border-teal-800",
-    technologies: ["Java", "Spring Boot", "Spring Batch", "Spring Data JPA", "Spring Security", "JWT", "OracleDB", "Fortify", "Kiuwan", "SonarQube", "JUnit", "Weblogic"]
+    technologies: ["Java", "Spring Boot", "Spring Batch", "Spring Data JPA", "Spring Security", "JWT", "OracleDB", "Fortify/Kiuwan", "SonarQube", "JUnit", "Weblogic"]
   },
 ]
 
@@ -111,133 +111,221 @@ export default function ProjectsSection() {
 
   // Obtén los proyectos desde i18n
   const projects = t("projects.projects", { returnObjects: true }) as any[]
+  // Carrusel infinito: duplicamos el array
+  const marqueeProjects = [...projects, ...projects]
+  const cardWidth = 370 // igual que recommendations-section
+  const totalCards = marqueeProjects.length
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [trackWidth, setTrackWidth] = useState(cardWidth * totalCards)
+  const [isPaused, setIsPaused] = useState(false)
+  const [dragging, setDragging] = useState(false)
+  const [dragStartX, setDragStartX] = useState<number | null>(null)
+  const [dragStartOffset, setDragStartOffset] = useState(0)
+  const [offset, setOffset] = useState(0)
+  const speed = 1.0 // igual que recommendations-section
+
+  useEffect(() => {
+    setTrackWidth(cardWidth * totalCards)
+  }, [cardWidth, totalCards])
+
+  // Animación manual con requestAnimationFrame
+  useEffect(() => {
+    if (dragging) return
+    if (isPaused) return
+    let frame: number
+    function step() {
+      setOffset(prev => {
+        let next = prev - speed
+        if (next <= -trackWidth / 2) return 0
+        return next
+      })
+      frame = requestAnimationFrame(step)
+    }
+    frame = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(frame)
+  }, [dragging, isPaused, trackWidth])
+
+  // Drag/swipe handlers
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    setIsPaused(true)
+    setDragging(true)
+    setDragStartX(e.clientX)
+    setDragStartOffset(offset)
+  }
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!dragging || dragStartX === null) return
+    const delta = e.clientX - dragStartX
+    let next = dragStartOffset + delta
+    if (next < -trackWidth / 2) next += trackWidth / 2
+    if (next > 0) next -= trackWidth / 2
+    setOffset(next)
+  }
+  const handlePointerUp = () => {
+    setDragging(false)
+    setIsPaused(false)
+    setDragStartX(null)
+  }
+  // Touch events for mobile
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setIsPaused(true)
+    setDragging(true)
+    setDragStartX(e.touches[0].clientX)
+    setDragStartOffset(offset)
+  }
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!dragging || dragStartX === null) return
+    const delta = e.touches[0].clientX - dragStartX
+    let next = dragStartOffset + delta
+    if (next < -trackWidth / 2) next += trackWidth / 2
+    if (next > 0) next -= trackWidth / 2
+    setOffset(next)
+  }
+  const handleTouchEnd = handlePointerUp
 
   // Renderiza el contenido extendido del modal
   const renderContent = (project: any) => {
     if (Array.isArray(project.contents) && project.contents.length > 0) {
       return project.contents
     }
-    // Fallback a description si no hay contents
     return project.description ? [project.description] : []
   }
 
   return (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
+    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800 w-full">
+      <div className="w-full px-2 sm:px-4">
+        <div className="w-full">
           <h2 className="text-4xl font-bold text-center mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-3">
             <Rocket className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             {t("projects.title")}
           </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-            {projects.map((project, idx) => {
-              const { icon: Icon, color, bgColor, borderColor } = iconMap[idx % iconMap.length]
-              const isFlipped = flipped[idx]
-              return (
-                <div
-                  key={idx}
-                  className="relative group [perspective:1200px] min-h-[420px] h-auto overflow-hidden"
-                  style={{ minHeight: 420 }}
-                >
+          <div className="relative overflow-hidden w-full">
+            <div
+              ref={trackRef}
+              className="flex gap-8 items-center select-none touch-pan-x"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerLeave={handlePointerUp}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              style={{
+                width: `${trackWidth}px`,
+                transform: `translateX(${offset}px)`,
+                cursor: dragging ? 'grabbing' : 'grab',
+                userSelect: 'none',
+                transition: dragging ? 'none' : 'transform 0.1s linear',
+              }}
+            >
+              {marqueeProjects.map((project, idx) => {
+                const { icon: Icon, color, bgColor, borderColor } = iconMap[idx % iconMap.length]
+                const isFlipped = flipped[idx]
+                return (
                   <div
-                    className={`transition-transform duration-700 [transform-style:preserve-3d] w-full min-h-full h-auto ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
-                    style={{ minHeight: 420 }}
+                    key={idx + project.title}
+                    className="relative group [perspective:1200px] h-auto overflow-visible"
+                    style={{ width: `${cardWidth}px`, minHeight: 420 }}
                   >
-                    {/* Cara frontal */}
-                    <div className={`absolute inset-0 w-full min-h-full h-auto bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border ${borderColor} [backface-visibility:hidden] flex flex-col`}>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center ${(Icon === Bot || Icon === Users) ? 'p-2' : ''}`}>
-                          {Icon && (
-                            <Icon className={`w-6 h-6 ${color}`} />
-                          )}
+                    <div
+                      className={`transition-transform duration-700 [transform-style:preserve-3d] w-full min-h-full h-auto ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
+                      style={{ minHeight: 420 }}
+                    >
+                      {/* Cara frontal */}
+                      <div className={`absolute inset-0 w-full min-h-full h-auto bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border ${borderColor} [backface-visibility:hidden] flex flex-col`}>
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center ${(Icon === Bot || Icon === Users) ? 'p-2' : ''}`}> 
+                            {Icon && (
+                              <Icon className={`w-6 h-6 ${color}`} />
+                            )}
+                          </div>
+                          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                            {project.title}
+                          </h3>
                         </div>
-                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                          {project.title}
-                        </h3>
-                      </div>
-                      <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-justify">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {(Array.isArray(project.technologies) && project.technologies.length > 0
-                          ? project.technologies
-                          : iconMap[idx % iconMap.length]?.technologies || [])
-                          .map((tech: string, index: number) => (
-                            <span
-                              key={index}
-                              className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm flex items-center gap-1"
+                        <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-justify">
+                          {project.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-6">
+                          {(Array.isArray(project.technologies) && project.technologies.length > 0
+                            ? project.technologies
+                            : iconMap[idx % iconMap.length]?.technologies || [])
+                            .map((tech: string, index: number) => (
+                              <span
+                                key={index}
+                                className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm flex items-center gap-1"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                        </div>
+                        <div className="flex flex-wrap gap-2 mt-auto">
+                          {project.externalLink && (
+                            <a
+                              href={project.externalLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 text-sm"
                             >
-                              
-                              {tech}
-                            </span>
-                          ))}
-                      </div>
-                      <div className="flex flex-wrap gap-2 mt-auto">
-                        {project.externalLink && (
-                          <a
-                            href={project.externalLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 text-sm"
-                          >
-                            <Link className="w-4 h-4" />
-                            {t("projects.external_link")}
-                          </a>
-                        )}
-                        {project.githubRepo && (
-                          <a
-                            href={project.githubRepo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors flex items-center gap-2 text-sm"
-                          >
-                            <Github className="w-4 h-4" />
-                            {t("projects.github_repo")}
-                          </a>
-                        )}
-                        <button
-                          onClick={() => setFlipped(f => ({ ...f, [idx]: true }))}
-                          className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors flex items-center gap-2 text-sm dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
-                        >
-                          <Info className="w-4 h-4" />
-                          {t("projects.more_info")}
-                        </button>
-                      </div>
-                    </div>
-                    {/* Cara trasera */}
-                    <div className={`absolute inset-0 w-full min-h-full h-auto bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg border ${borderColor} [transform:rotateY(180deg)] [backface-visibility:hidden] flex flex-col`}>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center ${(Icon === Bot || Icon === Users) ? 'p-2' : ''}`}>
-                          {Icon && (
-                            <Icon className={`w-6 h-6 ${color}`} />
+                              <Link className="w-4 h-4" />
+                              {t("projects.external_link")}
+                            </a>
                           )}
+                          {project.githubRepo && (
+                            <a
+                              href={project.githubRepo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors flex items-center gap-2 text-sm"
+                            >
+                              <Github className="w-4 h-4" />
+                              {t("projects.github_repo")}
+                            </a>
+                          )}
+                          <button
+                            onClick={() => setFlipped(f => ({ ...f, [idx]: true }))}
+                            className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors flex items-center gap-2 text-sm dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+                          >
+                            <Info className="w-4 h-4" />
+                            {t("projects.more_info")}
+                          </button>
                         </div>
-                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                          {project.title}
-                        </h3>
                       </div>
-                      <div className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify space-y-4 max-h-[220px] overflow-y-auto pr-2 mb-4">
-                        {renderContent(project).map((description: string, index: number) => (
-                          <p key={index} className="mb-0">
-                            {description}
-                          </p>
-                        ))}
-                      </div>
-                      <div className="mt-auto flex justify-center w-full">
-                        <button
-                          onClick={() => setFlipped(f => ({ ...f, [idx]: false }))}
-                          className="flex items-center justify-center px-5 py-2 bg-gradient-to-r from-blue-600 to-blue-400 text-white rounded-lg shadow-md hover:from-blue-700 hover:to-blue-500 transition-all gap-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 cursor-pointer select-none"
-                        >
-                          <ArrowLeft className="w-4 h-4" />
-                          {t('projects.close') || 'Volver'}
-                        </button>
+                      {/* Cara trasera */}
+                      <div className={`absolute inset-0 w-full min-h-full h-auto bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg border ${borderColor} [transform:rotateY(180deg)] [backface-visibility:hidden] flex flex-col`}>
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center ${(Icon === Bot || Icon === Users) ? 'p-2' : ''}`}>
+                            {Icon && (
+                              <Icon className={`w-6 h-6 ${color}`} />
+                            )}
+                          </div>
+                          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                            {project.title}
+                          </h3>
+                        </div>
+                        <div className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify space-y-4 max-h-[220px] overflow-y-auto pr-2 mb-4">
+                          {renderContent(project).map((description: string, index: number) => (
+                            <p key={index} className="mb-0">
+                              {description}
+                            </p>
+                          ))}
+                        </div>
+                        <div className="mt-auto flex justify-center w-full">
+                          <button
+                            onClick={() => setFlipped(f => ({ ...f, [idx]: false }))}
+                            className="flex items-center justify-center px-5 py-2 bg-gradient-to-r from-blue-600 to-blue-400 text-white rounded-lg shadow-md hover:from-blue-700 hover:to-blue-500 transition-all gap-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 cursor-pointer select-none"
+                          >
+                            <ArrowLeft className="w-4 h-4" />
+                            {t('projects.close') || 'Volver'}
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>

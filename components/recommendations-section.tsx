@@ -19,7 +19,7 @@ export default function RecommendationsSection() {
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [dragStartOffset, setDragStartOffset] = useState(0);
   const [offset, setOffset] = useState(0); // offset actual del carrusel
-  const speed = 0.5; // px por frame (ajusta para velocidad)
+  const speed = 1.0; // px por frame (ajusta para velocidad)
 
   useEffect(() => {
     setTrackWidth(cardWidth * totalCards);

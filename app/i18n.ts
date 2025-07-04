@@ -1079,7 +1079,7 @@ const resources = {
       projects: {
         title: "Proyectos Destacados",
         counter: "proyectos",
-        more_info: "Más Información",
+        more_info: "Más Info",
         external_link: "Link Externo",
         github_repo: "GitHub",
         close: "Volver",
