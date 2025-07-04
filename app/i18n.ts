@@ -357,6 +357,15 @@ const resources = {
         external_link: "External Link",
         github_repo: "GitHub",
         close: "Back",
+        filters: {
+          all: "All",
+          bank: "Bank",
+          hr: "HR",
+          cloud: "Cloud",
+          ai: "AI",
+          telecommunications: "Telecommunications",
+          retail: "Retail"
+        },
         projects: [
           {
             title: "Andes Online",
@@ -498,6 +507,16 @@ const resources = {
       skills: {
         title: "Skills",
         description: "Technical skills, languages, and soft skills",
+        filters: {
+          all: "All",
+          backend: "Backend",
+          frontend: "Frontend",
+          cloud: "Cloud",
+          ai: "AI",
+          devops: "DevOps",
+          soft_skills: "Soft Skills",
+          languages: "Languages"
+        },
         soft_skills: {
           title: "Soft Skills",
           skills: "Communication, Teamwork, Problem Solving, Adaptability, Leadership, Time Management",
@@ -1083,6 +1102,15 @@ const resources = {
         external_link: "Link Externo",
         github_repo: "GitHub",
         close: "Volver",
+        filters: {
+          all: "Todos",
+          bank: "Banca",
+          hr: "RRHH",
+          cloud: "Cloud",
+          ai: "IA",
+          telecommunications: "Telecomunicaciones",
+          retail: "Retail"
+        },
         projects: [
           {
             title: "Andes Online",
@@ -1225,6 +1253,16 @@ const resources = {
       skills: {
         title: "Habilidades",
         description: "Habilidades técnicas, idiomas y habilidades blandas",
+        filters: {
+          all: "Todos",
+          backend: "Backend",
+          frontend: "Frontend",
+          cloud: "Cloud",
+          ai: "IA",
+          devops: "DevOps",
+          soft_skills: "Habilidades Blandas",
+          languages: "Idiomas"
+        },
         soft_skills: {
           title: "Habilidades Blandas",
           skills: "Comunicación, Trabajo en Equipo, Resolución de Problemas, Adaptabilidad, Liderazgo, Gestión del Tiempo",
@@ -1234,7 +1272,7 @@ const resources = {
           skills: "Español Nativo, Inglés B1-B2",
         },
         api_design: {
-          title: "Diseño de APIs",
+          title: "API Design",
           skills: "Swagger, OpenAPI",
         },
         code_review: {
@@ -1254,7 +1292,7 @@ const resources = {
           skills: "Java, Spring Boot, Python, Flask, FastAPI, API Rest",
         },
         database: {
-          title: "Base de Datos",
+          title: "Database",
           skills:
             "SQL, PL/SQL, Oracle, MySQL, PostgreSQL, NoSQL, MongoDB, JPA, Hibernate",
         },
@@ -1412,7 +1450,7 @@ const resources = {
             "Head of Security / PMI-ACP / Project Manager / Certified ISO IEC 27001 Lead Implementer / Certified ISO 27001:2022 Foundation / Diploma in Information Security / Financial Services / Business Processes",
           company: "Falabella",
           relation: "Direct supervisor of Álvaro",
-          text: "Conocí a Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
+          text: "I met Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
           date: "4 de agosto de 2023",
           picture:
             "https://media.licdn.com/dms/image/v2/D4E35AQHq8019P1jTbA/profile-framedphoto-shrink_100_100/B4EZWmVoYrHUAw-/0/1742252443482?e=1751997600&v=beta&t=c152Rh2Xlm08eM6JyIa6Grossz27pFbN2sgKcWVWWbA",

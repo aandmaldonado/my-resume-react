@@ -161,14 +161,14 @@ export default function SkillsSection() {
     }));
 
   const filters = [
-    { id: "all", label: "All", icon: Filter },
-    { id: "backend", label: "Backend", icon: Server },
-    { id: "frontend", label: "Frontend", icon: Monitor },
-    { id: "cloud", label: "Cloud", icon: Cloud },
-    { id: "ai", label: "AI", icon: BrainCircuit },
-    { id: "devops", label: "DevOps", icon: Workflow },
-    { id: "soft_skills", label: "Soft Skills", icon: Heart },
-    { id: "languages", label: "Languages", icon: Languages },
+    { id: "all", icon: Filter },
+    { id: "backend", icon: Server },
+    { id: "frontend", icon: Monitor },
+    { id: "cloud", icon: Cloud },
+    { id: "ai", icon: BrainCircuit },
+    { id: "devops", icon: Workflow },
+    { id: "soft_skills", icon: Heart },
+    { id: "languages", icon: Languages },
   ];
 
   const filteredCategories = skillCategories.filter(
@@ -197,7 +197,7 @@ export default function SkillsSection() {
                   className="flex items-center gap-2"
                 >
                   <IconComponent className="w-4 h-4" />
-                  {filter.label}
+                  {t(`skills.filters.${filter.id}`)}
                 </Button>
               );
             })}
@@ -237,7 +237,7 @@ export default function SkillsSection() {
                         {category.skills.map((skill: string, index: number) => (
                           <span
                             key={index}
-                            className="flex items-center px-4 py-2 rounded-full font-semibold shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105 hover:shadow-lg bg-gray-700 text-gray-100 dark:bg-gray-700 dark:text-gray-100"
+                            className="flex items-center px-4 py-2 rounded-full shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105 hover:shadow-lg bg-gray-100 !bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-700"
                           >
                             {skill}
                           </span>
