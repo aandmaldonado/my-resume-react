@@ -125,50 +125,35 @@ export default function AboutSection() {
                 </a>
               </div>
 
-              <div className="grid grid-cols-2 gap-6 mt-8">
-                <div className="border border-blue-200 dark:border-blue-800 text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <Calendar className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                      <CountUp end={new Date().getFullYear() - 2010} duration={2.5} />
+              <div className="flex justify-center mt-8">
+                <div className="border border-blue-200 dark:border-blue-800 text-center p-6 bg-white dark:bg-gray-700 rounded-lg shadow w-full max-w-xl">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-4">
+                    {/* Años de experiencia */}
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                      <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                        <CountUp end={new Date().getFullYear() - 2010} duration={2.5} />
+                      </div>
+                      <span className="text-gray-600 dark:text-gray-300 ml-2">{t("about.years_experience")}</span>
                     </div>
                   </div>
-                  <div className="text-gray-600 dark:text-gray-300">{t("about.years_experience")}</div>
-                </div>
-                {/* Modal de industrias */}
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <div className="border border-blue-200 dark:border-blue-800 text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow cursor-pointer hover:shadow-lg transition-all">
-                      <div className="flex items-center justify-center gap-2 mb-2">
-                        <Building2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                        <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                          <CountUp end={industries.length} duration={2.5} />
+                  {/* Chips de industrias con efecto nube */}
+                  <div className="flex flex-wrap gap-3 justify-center my-2">
+                    {industries.map((industry, idx) => {
+                      const IconComponent = industry.icon
+                      return (
+                        <div
+                          key={industry.key}
+                          className={`group relative flex items-center px-4 py-2 rounded-full font-semibold shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105 hover:shadow-lg ${industry.color}`}
+                          tabIndex={0}
+                        >
+                          <IconComponent className="w-5 h-5 mr-2" />
+                          <span>{t(`about.industries_list.${industry.key}`)}</span>
                         </div>
-                      </div>
-                      <div className="text-gray-600 dark:text-gray-300">{t("about.industries")}</div>
-                    </div>
-                  </DialogTrigger>
-                  <DialogContent className="bg-white dark:bg-gray-800">
-                    <DialogTitle className="mb-4 text-blue-600 dark:text-blue-400 text-center">
-                      {t("about.industries_modal_title")}
-                    </DialogTitle>
-                    <div className="flex flex-wrap gap-3 justify-center my-2">
-                      {industries.map((industry, idx) => {
-                        const IconComponent = industry.icon
-                        return (
-                          <div
-                            key={industry.key}
-                            className={`group relative flex items-center px-4 py-2 rounded-full font-semibold shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105 hover:shadow-lg ${industry.color}`}
-                            tabIndex={0}
-                          >
-                            <IconComponent className="w-5 h-5 mr-2" />
-                            <span>{t(`about.industries_list.${industry.key}`)}</span>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </DialogContent>
-                </Dialog>
+                      )
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
 
