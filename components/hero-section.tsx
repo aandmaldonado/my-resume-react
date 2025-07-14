@@ -5,9 +5,14 @@ import Typewriter from "typewriter-effect"
 import { ArrowDown, Code2, Rocket, Mail } from "lucide-react"
 import CVDownloadModal from "@/components/cv-download-modal"
 import { Button } from "@/components/ui/button"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
 export default function HeroSection() {
   const { t } = useTranslation()
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -20,16 +25,26 @@ export default function HeroSection() {
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        <video
-          className="w-full h-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
-          <source src="/hero/video_background.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {mounted && (
+          <video
+            key={resolvedTheme}
+            className="w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source
+              src={
+                resolvedTheme === "dark"
+                  ? "/hero/video_bg_dark.mp4"
+                  : "/hero/video_bg_light.mp4"
+              }
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        )}
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
