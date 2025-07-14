@@ -707,7 +707,7 @@ const resources = {
           text: "I met Álvaro by chance and today I dare to say that he is one of the best technical leaders I have worked with. His results-oriented approach stands out above all and having knowledge of artificial intelligence his vision fosters ethical, responsible values and teamwork is remarkable. It was an excellent experience working with you.",
           date: "August 4, 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E35AQHq8019P1jTbA/profile-framedphoto-shrink_100_100/B4EZWmVoYrHUAw-/0/1742252443482?e=1751997600&v=beta&t=c152Rh2Xlm08eM6JyIa6Grossz27pFbN2sgKcWVWWbA",
+            "https://media.licdn.com/dms/image/v2/D4E35AQHq8019P1jTbA/profile-framedphoto-shrink_800_800/B4EZWmVoYrHUAs-/0/1742252443557?e=1753124400&v=beta&t=qwlOWOlLCg4aU93Y0hosvTFK1P7WlDGRQCisJwAGIns",
           linkedin: "https://www.linkedin.com/in/nellymanterola",
         },
       ],
@@ -1453,7 +1453,7 @@ const resources = {
           text: "I met Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
           date: "4 de agosto de 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E35AQHq8019P1jTbA/profile-framedphoto-shrink_100_100/B4EZWmVoYrHUAw-/0/1742252443482?e=1751997600&v=beta&t=c152Rh2Xlm08eM6JyIa6Grossz27pFbN2sgKcWVWWbA",
+            "https://media.licdn.com/dms/image/v2/D4E35AQHq8019P1jTbA/profile-framedphoto-shrink_800_800/B4EZWmVoYrHUAs-/0/1742252443557?e=1753124400&v=beta&t=qwlOWOlLCg4aU93Y0hosvTFK1P7WlDGRQCisJwAGIns",
           linkedin: "https://www.linkedin.com/in/nellymanterola",
         },
       ],
