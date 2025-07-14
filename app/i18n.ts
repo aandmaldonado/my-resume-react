@@ -1450,7 +1450,7 @@ const resources = {
             "Head of Security / PMI-ACP / Project Manager / Certified ISO IEC 27001 Lead Implementer / Certified ISO 27001:2022 Foundation / Diploma in Information Security / Financial Services / Business Processes",
           company: "Falabella",
           relation: "Direct supervisor of Álvaro",
-          text: "I met Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
+          text: "Conocí a Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
           date: "4 de agosto de 2023",
           picture:
             "https://media.licdn.com/dms/image/v2/D4E35AQHq8019P1jTbA/profile-framedphoto-shrink_800_800/B4EZWmVoYrHUAs-/0/1742252443557?e=1753124400&v=beta&t=qwlOWOlLCg4aU93Y0hosvTFK1P7WlDGRQCisJwAGIns",
