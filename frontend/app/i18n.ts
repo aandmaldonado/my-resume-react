@@ -19,7 +19,7 @@ const resources = {
       },
       hero: {
         title: "Hello World! I'm Álvaro Maldonado",
-        subtitle: "Senior Software Engineer | AI-Powered Engineer",
+        subtitle: "Senior Software Engineer | AI-Powered Dev | Product Engineer",
         download_cv: "Download CV",
         customize_cv: "Customize CV",
         select_sections: "Select the sections you want to include in CV:",
@@ -731,7 +731,7 @@ const resources = {
         ariaBack: "Business card: back",
         front: {
           name: "Álvaro Andrés Maldonado Pinto",
-          role: "Senior Software Engineer | AI-Powered Engineer",
+          role: "Senior Software Engineer | AI-Powered Dev | Product Engineer",
         },
         back: {
           email: "readme.md@almapi.dev",
@@ -759,7 +759,7 @@ const resources = {
       },
       hero: {
         title: "¡Hola Mundo! Soy Álvaro Maldonado",
-        subtitle: "Senior Software Engineer | AI-Powered Engineer",
+        subtitle: "Senior Software Engineer | AI-Powered Dev | Product Engineer",
         download_cv: "Descargar CV",
         customize_cv: "Personalizar CV",
         select_sections:
@@ -1478,7 +1478,7 @@ const resources = {
         ariaBack: "Tarjeta de presentación: reverso",
         front: {
           name: "Álvaro Andrés Maldonado Pinto",
-          role: "Senior Software Engineer | AI-Powered Engineer",
+          role: "Senior Software Engineer | AI-Powered Dev | Product Engineer",
         },
         back: {
           email: "readme.md@almapi.dev",

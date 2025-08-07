@@ -21,6 +21,9 @@ export default function HeroSection() {
     }
   }
 
+  // Split subtitle by '|' and trim whitespace
+  const subtitleParts = t("hero.subtitle").split('|').map(part => part.trim())
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background */}
@@ -51,22 +54,33 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+        <div className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+          {(() => {
+            const title = t("hero.title");
+            const words = title.split(' ');
+            const firstPart = words.slice(0, -2).join(' '); // "¡Hola Mundo! Soy"
+            const secondPart = words.slice(-2).join(' ');   // "Álvaro Maldonado"
+            
+            return (
+              <>
+                <div className="mb-4">{firstPart}</div>
+                <div>{secondPart}</div>
+              </>
+            );
+          })()}
+        </div>
+        <div className="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in-delay">
           <Typewriter
             options={{
-              strings: [t("hero.title")],
+              strings: subtitleParts,
               autoStart: true,
               loop: true,
               cursor: "|",
               delay: 50,
+              deleteSpeed: 30,
             }}
           />
-        </h1>
-        <p className="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in-delay flex items-center justify-center gap-3">
-          <Code2 className="w-6 h-6 text-white-400" />
-          <strong>{t("hero.subtitle")}</strong>
-          <Rocket className="w-6 h-6 text-white-400" />
-        </p>
+        </div>
         
         {/* Download CV Button + Contact Button */}
         <div className="animate-fade-in-delay-2 flex flex-col sm:flex-row gap-4 justify-center items-center">
