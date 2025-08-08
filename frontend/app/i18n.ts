@@ -4,6 +4,171 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
+      cv: {
+        header: {
+          title: "Álvaro Andrés Maldonado Pinto",
+          subtitle: "Senior Software Engineer | AI-Powered Dev | Product Engineer",
+        },
+        contactInfo: {
+          location: "Gandia, Spain",
+          email: "readme.md@almapi.dev",
+          linkedin: "https://www.linkedin.com/in/almapidev/",
+          web: "https://almapi.dev",
+          github: "https://github.com/aandmaldonado",
+          phone: "+34 641 96 23 96",
+        },
+        about: {
+          title: "About Me",
+          text: "I am a Senior Software Engineer with a solid background in developing and integrating technology solutions, involved in the entire software development lifecycle.",
+        },
+        experience: {
+          title: "Experience",
+          jobs: [
+            {
+              company: "InAdvance Consulting Group",
+              position: "Senior Software Engineer",
+              period: "2024 - Present",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Active participation in the migration of critical financial systems", 
+                "Technical design and implementation of scalable microservices", 
+                "Development with modern architecture, Agile methodologies, and DevOps/DevSecOps practices",
+                "Quality assurance through code reviews and comprehensive testing"
+              ]
+            },
+            {
+              company: "Imagemaker",
+              position: "Senior Software Engineer",
+              period: "2023 - 2024",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Technical consulting for optimization and problem-solving in projects",
+                "Research and development of AI POCs for legal document processing",
+                "Microservices development with Java and Spring Boot following best practices",
+                "Proactive service monitoring with ElasticSearch, Splunk, and Dynatrace"
+              ]
+            },
+            {
+              company: "Falabella",
+              position: "Technical Lead",
+              period: "2022 - 2023",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Technical leadership in the development of a corporate attendance management system",
+                "Design of distributed and resilient solutions applying DDD and event-driven architecture",
+                "Decomposition of legacy systems and decoupling of critical functionalities",
+                "Coordination between internal and external teams as a bridge between development and business areas"
+              ]
+            },
+            {
+              company: "Neurogenesis IA Technologies",
+              position: "CTO & Co-Founder | AI Engineer",
+              period: "2021 - 2022",
+              location: "Barcelona, Spain",
+              responsibilities: [
+                "Applied research in AI technologies, focused on Deep Learning and computer vision",
+                "Design and implementation of cloud architecture on AWS for AI projects",
+                "Development of image classification models using convolutional neural networks",
+                "Application of NLP techniques for legal document analysis"
+              ]
+            },
+            {
+              company: "NTT DATA Europe & LATAM",
+              position: "Senior Software Engineer",
+              period: "2019 - 2021",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Modernization of core systems in the financial ecosystem",
+                "Development of secure applications with Spring Security and JWT",
+                "Implementation of robust and scalable solutions for high-data-flow environments",
+                "Application of OWASP and PCI standards to ensure software quality"
+              ]
+            },
+            {
+              company: "Falabella",
+              position: "Senior IT Analyst",
+              period: "2015 - 2019",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Development and integration of corporate solutions for business units of the Falabella Group",
+                "Leadership in key projects to improve operational efficiency and internal user experience",
+                "Construction of Java web solutions to integrate legacy systems",
+                "Supervision of technical team assignments and external providers"
+              ]
+            },
+            {
+              company: "NTT DATA Europe & LATAM",
+              position: "Solutions Analyst",
+              period: "2010 - 2014",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Migration of the private customer portal for Movistar Chile",
+                "Development of front-end portlets using WebSphere Portlet Factory",
+                "Implementation of SOAP Web Services with Java for back-end",
+                "Code quality evaluation with tools like SonarQube"
+              ]
+            }
+          ]
+        },
+        education: {
+          title: "Education",
+          degrees: [
+            {
+              institution: "LIDR.co",
+              degree: "AI4DEVS",
+              period: "2025 - Present",
+              location: "Online, Spain"
+            },
+            {
+              institution: "thePower",
+              degree: "Cybersecurity Bootcamp",
+              period: "2025",
+              location: "Online, Spain"
+            },
+            {
+              institution: "Hackio by thePower",
+              degree: "AI Development Bootcamp",
+              period: "2025",
+              location: "Online, Spain"
+            },
+            {
+              institution: "Universitat Politècnica de Catalunya",
+              degree: "Master in Artificial Intelligence",
+              period: "2020 - 2021",
+              location: "Online, Spain"
+            },
+            {
+              institution: "Universidad de Santiago de Chile",
+              degree: "Computer Science Engineering",
+              period: "2012 - 2017",
+              location: "Santiago, Chile"
+            },
+          ]
+        },
+        skills: {
+          title: "Skills",
+          categories:[
+            { name: "Java, Spring Boot, Microservices", category: "Backend" },
+            { name: "JavaScript, TypeScript, React", category: "Frontend" },
+            { name: "AWS, Docker, Kubernetes", category: "DevOps" },
+            { name: "Python, TensorFlow, PyTorch", category: "AI/ML" },
+            { name: "SQL, MongoDB, Redis", category: "Databases" },
+            { name: "Git, CI/CD, Jenkins", category: "Tools" },
+            { name: "Agile, Scrum, Kanban", category: "Methodologies" },
+            { name: "Technical leadership, Mentoring", category: "Soft Skills" }
+          ],
+        },
+        lang:{
+          title: "Languages",
+          languages:[
+            { name: "Spanish", level: "Native" },
+            { name: "English", level: "B1-B2" },
+          ],
+        },
+        footer: {
+          text: "CV automatically generated by almap[i] | almapi.dev"
+        }
+      },
       nav: {
         home: "Home",
         about: "About",
@@ -752,7 +917,7 @@ const resources = {
           city: "Gandia, Spain",
         },
       },
-    },
+    }
   },
   es: {
     translation: {
@@ -1486,6 +1651,7 @@ const resources = {
         made_with: "Impulsado con IA",
         copyright:
           "© {year} almap[i]. Todos los derechos reservados",
+        text: "CV generado automáticamente por almap[i] | almapi.dev"
       },
       chatbot: {
         name: "Álvaro Maldonado",
@@ -1510,6 +1676,170 @@ const resources = {
           linkedin: "https://www.linkedin.com/in/almapidev/",
           city: "Gandia, Spain",
         },
+      },
+      cv: {
+        header: {
+          title: "Álvaro Andrés Maldonado Pinto",
+          subtitle: "Senior Software Engineer | AI-Powered Dev | Product Engineer",
+        },
+        contactInfo: {
+          location: "Gandia, Spain",
+          email: "readme.md@almapi.dev",
+          linkedin: "https://www.linkedin.com/in/almapidev/",
+          web: "https://almapi.dev",
+          github: "https://github.com/aandmaldonado",
+          phone: "+34 641 96 23 96",
+        },
+        about: {
+          title: "Sobre Mí",
+          text: "Soy Ingeniero de Software Senior con una trayectoria consolidada en el desarrollo e integración de soluciones tecnológicas, participando en todo el ciclo de vida del software.",
+        },
+        experience: {
+          title: "Experiencia",
+          jobs: [
+            {
+              company: "InAdvance Consulting Group",
+              position: "Senior Software Engineer",
+              period: "2024 - Present",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Participación activa en la migración de sistemas financieros críticos", 
+                "Diseño técnico e implementación de microservicios escalables", 
+                "Desarrollo con arquitectura moderna, metodologías Ágiles y prácticas DevOps/DevSecOps",
+                "Aseguramiento de calidad mediante revisiones de código y pruebas exhaustivas"
+              ]
+            },
+            {
+              company: "Imagemaker",
+              position: "Senior Software Engineer",
+              period: "2023 - 2024",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Consultoría técnica para optimización y resolución de problemas en proyectos",
+                "Investigación y desarrollo de POCs con IA para procesamiento de documentos legales",
+                "Desarrollo de microservicios con Java y Spring Boot siguiendo mejores prácticas",
+                "Monitoreo proactivo de servicios con ElasticSearch, Splunk y Dynatrace"
+              ]
+            },
+            {
+              company: "Falabella",
+              position: "Technical Lead",
+              period: "2022 - 2023",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Liderazgo técnico en el desarrollo de sistema corporativo de gestión de asistencia",
+                "Diseño de soluciones distribuidas y resilientes aplicando DDD y arquitectura event-driven",
+                "Descomposición de sistemas legacy y desacoplamiento de funcionalidades críticas",
+                "Coordinación entre equipos internos y externos como puente entre desarrollo y áreas de negocio"
+              ]
+            },
+            {
+              company: "Neurogenesis IA Technologies",
+              position: "CTO & Co-Founder | AI Engineer",
+              period: "2021 - 2022",
+              location: "Barcelona, Spain",
+              responsibilities: [
+                "Investigación aplicada en tecnologías de IA, enfocada en Deep Learning y visión por computador",
+                "Diseño e implementación de arquitectura cloud en AWS para proyectos de IA",
+                "Desarrollo de modelos de clasificación de imágenes usando redes neuronales convolucionales",
+                "Aplicación de técnicas de NLP para análisis de documentos legales"
+              ]
+            },
+            {
+              company: "NTT DATA Europe & LATAM",
+              position: "Senior Software Engineer",
+              period: "2019 - 2021",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Modernización de sistemas core en el ecosistema financiero",
+                "Desarrollo de aplicaciones seguras con Spring Security y JWT",
+                "Implementación de soluciones robustas y escalables para entornos de alto flujo de datos",
+                "Aplicación de estándares OWASP y PCI para asegurar la calidad del software"
+              ]
+            },
+            {
+              company: "Falabella",
+              position: "Senior IT Analyst",
+              period: "2015 - 2019",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Desarrollo e integración de soluciones corporativas para unidades de negocio del Grupo Falabella",
+                "Liderazgo en proyectos clave para mejorar la eficiencia operativa y experiencia de usuarios internos",
+                "Construcción de soluciones web Java para integrar sistemas legacy",
+                "Supervisión de asignaciones de equipo técnico y proveedores externos"
+              ]
+            },
+            {
+              company: "NTT DATA Europe & LATAM",
+              position: "Solutions Analyst",
+              period: "2010 - 2014",
+              location: "Santiago, Chile",
+              responsibilities: [
+                "Migración del portal de clientes privados para Movistar Chile",
+                "Desarrollo de portlets front-end usando WebSphere Portlet Factory",
+                "Implementación de Web Services SOAP con Java para back-end",
+                "Evaluación de calidad de código con herramientas como SonarQube"
+              ]
+            }
+          ]
+        },
+        education: {
+          title: "Educación",
+          degrees: [
+            {
+              institution: "LIDR.co",
+              degree: "AI4DEVS",
+              period: "2025 - Present",
+              location: "Online, España"
+            },
+            {
+              institution: "thePower",
+              degree: "Cybersecurity Bootcamp",
+              period: "2025",
+              location: "Online, España"
+            },
+            {
+              institution: "Hackio by thePower",
+              degree: "AI Development Bootcamp",
+              period: "2025",
+              location: "Online, España"
+            },
+            {
+              institution: "Universitat Politècnica de Catalunya",
+              degree: "Máster en Inteligencia Artificial",
+              period: "2020 - 2021",
+              location: "Online, España"
+            },
+            {
+              institution: "Universidad de Santiago de Chile",
+              degree: "Ingeniería en Ciencias de la Computación",
+              period: "2012 - 2017",
+              location: "Santiago, Chile"
+            },
+          ]
+        },
+        skills: {
+          title: "Habilidades",
+          categories:[
+            { name: "Java, Spring Boot, Microservicios", category: "Backend" },
+            { name: "JavaScript, TypeScript, React", category: "Frontend" },
+            { name: "AWS, Docker, Kubernetes", category: "DevOps" },
+            { name: "Python, TensorFlow, PyTorch", category: "IA/ML" },
+            { name: "SQL, MongoDB, Redis", category: "Bases de Datos" },
+            { name: "Git, CI/CD, Jenkins", category: "Herramientas" },
+            { name: "Agile, Scrum, Kanban", category: "Metodologías" },
+          ],
+        },
+        lang:{
+          title: "Idiomas",
+          languages:[
+            { name: "Español", level: "Nativo" },
+            { name: "Inglés", level: "B1-B2" },
+          ],
+        },
+        footer: {
+          text: "CV generado automáticamente por almap[i] | almapi.dev"
+        }
       },
     },
   },

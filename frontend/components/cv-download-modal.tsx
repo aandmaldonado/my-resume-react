@@ -14,7 +14,21 @@ export default function CVDownloadModal() {
     setIsGenerating(true)
     try {
       // Generar CV completo
-      await generateCV(i18n.language)
+      const pdfBlob = await generateCV(i18n.language)
+      
+      // Crear URL para el blob
+      const blobUrl = URL.createObjectURL(pdfBlob)
+      
+      // Crear un enlace temporal y hacer clic en él para descargar
+      const link = document.createElement('a')
+      link.href = blobUrl
+      link.download = `CV_Álvaro_Maldonado_${i18n.language.toUpperCase()}_${new Date().toISOString().slice(0, 10)}.pdf`
+      document.body.appendChild(link)
+      link.click()
+      
+      // Limpiar
+      document.body.removeChild(link)
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 100)
     } catch (error) {
       console.error('Error generating CV:', error)
     } finally {
@@ -41,4 +55,4 @@ export default function CVDownloadModal() {
       )}
     </Button>
   )
-} 
+}
