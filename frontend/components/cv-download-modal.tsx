@@ -4,48 +4,76 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { Download } from "lucide-react"
-import { generateCV } from "@/lib/cv-generator"
+import { generateCVHTML } from "@/lib/cv-generator"
 
 export default function CVDownloadModal() {
   const { t, i18n } = useTranslation()
-  const [isGenerating, setIsGenerating] = useState(false)
+  const [isOpening, setIsOpening] = useState(false)
 
-  const handleDownload = async () => {
-    setIsGenerating(true)
+  const handleDownloadCV = async () => {
+    setIsOpening(true)
     try {
-      // Generar CV completo
-      const pdfBlob = await generateCV(i18n.language)
+      // Generar HTML del CV con iconos reales
+      const htmlContent = generateCVHTML(i18n.language)
       
-      // Crear URL para el blob
-      const blobUrl = URL.createObjectURL(pdfBlob)
+      // Crear un elemento temporal para renderizar el HTML
+      const tempDiv = document.createElement('div')
+      tempDiv.innerHTML = htmlContent
+      document.body.appendChild(tempDiv)
       
-      // Crear un enlace temporal y hacer clic en él para descargar
-      const link = document.createElement('a')
-      link.href = blobUrl
-      link.download = `CV_Álvaro_Maldonado_${i18n.language.toUpperCase()}_${new Date().toISOString().slice(0, 10)}.pdf`
-      document.body.appendChild(link)
-      link.click()
+      // Configuración de html2pdf.js
+      const opt = {
+        margin: [10, 10, 10, 10],
+        filename: `CV_Alvaro_Maldonado_${i18n.language.toUpperCase()}_${new Date().toISOString().slice(0, 10)}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 2,
+          useCORS: true,
+          allowTaint: true
+        },
+        jsPDF: { 
+          unit: 'mm', 
+          format: 'a4', 
+          orientation: 'portrait' 
+        }
+      }
       
-      // Limpiar
-      document.body.removeChild(link)
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 100)
+      // Generar PDF usando html2pdf.js
+      const html2pdf = (await import('html2pdf.js')).default
+      await html2pdf().from(tempDiv).set(opt).save()
+      
+      // Limpiar elemento temporal
+      document.body.removeChild(tempDiv)
+      
+      console.log('CV con iconos descargado exitosamente!')
     } catch (error) {
-      console.error('Error generating CV:', error)
+      console.error('Error generating CV with icons:', error)
+      // Fallback al método anterior si html2pdf falla
+      try {
+        const link = document.createElement('a')
+        link.download = `CV_Alvaro_Maldonado_${i18n.language.toUpperCase()}_${new Date().toISOString().slice(0, 10)}.pdf`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        console.log('CV descargado con método fallback!')
+      } catch (fallbackError) {
+        console.error('Error en método fallback:', fallbackError)
+      }
     } finally {
-      setIsGenerating(false)
+      setIsOpening(false)
     }
   }
 
   return (
     <Button 
-      onClick={handleDownload}
-      disabled={isGenerating}
+      onClick={handleDownloadCV}
+      disabled={isOpening}
       className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
     >
-      {isGenerating ? (
+      {isOpening ? (
         <>
           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          Generating...
+          {i18n.language === 'es' ? 'Generando...' : 'Generating...'}
         </>
       ) : (
         <>

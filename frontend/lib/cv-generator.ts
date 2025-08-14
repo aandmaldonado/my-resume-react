@@ -1,8 +1,6 @@
-
 interface CVData {
   name: string
   title: string
-  location: string
   email: string
   linkedin: string
   web: string
@@ -12,27 +10,7 @@ interface CVData {
   experience: any[]
   education: any[]
   skills: any[]
-}
-
-export const generateCV = async (language: string = 'en'): Promise<Blob> => {
-  try {
-    // Dynamic import to avoid SSR issues
-    const jsPDF = await import('jspdf')
-    await import('jspdf-autotable')
-    const doc = new jsPDF.default()
-    
-    // Prepare data for CV from i18n resources
-    const cvData = prepareCVData(language)
-    
-    // Generate PDF with MCS template layout
-    generateMCSTemplatePDF(doc, cvData, language)
-    
-    // Return as blob
-    return doc.output('blob')
-  } catch (error) {
-    console.error('Error generating CV:', error)
-    throw new Error(`Failed to generate CV in ${language}: ${error instanceof Error ? error.message : String(error)}`)
-  }
+  languages: any[]
 }
 
 const prepareCVData = (language: string): CVData => {
@@ -43,40 +21,21 @@ const prepareCVData = (language: string): CVData => {
     const skills = getSkillsFromI18n(language)
     const contactInfo = getContactInfoFromI18n(language)
     const about = getAboutFromI18n(language)
-    
-    // Process experiences to ensure they have all required fields for MCS template
-    const processedExperiences = experiences.map((exp: any) => {
-      return {
-        ...exp,
-        // Ensure achievements is an array
-        achievements: exp.achievements || [],
-        // Ensure responsibilities is an array
-        responsibilities: exp.responsibilities || []
-      }
-    })
-    
-    // Process educations to ensure they have all required fields for MCS template
-    const processedEducations = educations.map((edu: any) => {
-      return {
-        ...edu,
-        // Ensure concepts is an array
-        concepts: edu.concepts || []
-      }
-    })
+    const languages = getLanguagesFromI18n(language)
     
     return {
       name: contactInfo.name || "Álvaro Andrés Maldonado Pinto",
       title: contactInfo.title || "Senior Software Engineer",
-      location: contactInfo.location || "Gandia, Spain",
       email: contactInfo.email || "readme.md@almapi.dev",
       linkedin: contactInfo.linkedin || "https://www.linkedin.com/in/almapidev/",
       web: contactInfo.web || "https://almapi.dev",
       phone: contactInfo.phone || "+34 641962396",
       github: contactInfo.github || "https://github.com/aandmaldonado",
       about: about || [],
-      experience: processedExperiences || [],
-      education: processedEducations || [],
-      skills: skills || []
+      experience: experiences || [],
+      education: educations || [],
+      skills: skills || [],
+      languages: languages || []
     }
   } catch (error) {
     console.error('Error preparing CV data:', error)
@@ -84,229 +43,8 @@ const prepareCVData = (language: string): CVData => {
   }
 }
 
-// New MCS Template PDF generator
-const generateMCSTemplatePDF = (doc: any, data: CVData, language: string) => {
-  // Set font
-  doc.setFont('helvetica')
-  
-  // Get footer text from i18n
-  const footerText = getFooterTextFromI18n(language)
-  
-  // Name in bold
-  doc.setFontSize(14)
-  doc.setFont('helvetica', 'bold')
-  doc.setTextColor(0, 0, 0) // Black for name
-  doc.text(data.name, 20, 20)
-
-  // Role in bold
-  doc.setFontSize(14)
-  doc.setFont('helvetica', 'bold')
-  doc.setTextColor(0, 0, 0) // Black for role
-  doc.text(data.title, 20, 25)
-  
-  // Contact info line
-  doc.setFontSize(10)
-  doc.setFont('helvetica', 'normal')
-  doc.setTextColor(0, 0, 0) // Black for contact info
-  const contactLine = `${data.location} • ${data.email} • ${data.linkedin} • ${data.web} • ${data.phone} • ${data.github}`
-  doc.text(contactLine, 20, 35)
-  
-  let yPosition = 45
-  
-  // Education section
-  if (data.education && data.education.length > 0) {
-    yPosition = addMCSSectionHeader(doc, language === 'en' ? 'Education' : 'Educación', yPosition)
-    
-    data.education.forEach((edu) => {
-      if (yPosition > 270) {
-        doc.addPage()
-        yPosition = 20
-      }
-      
-      // Institution name and location
-      doc.setFontSize(12)
-      doc.setFont('helvetica', 'bold')
-      doc.setTextColor(0, 0, 0)
-      doc.text(edu.institution, 20, yPosition)
-      doc.setFont('helvetica', 'normal')
-      doc.text(edu.location, 150, yPosition, { align: 'right' })
-      
-      // Degree and period
-      yPosition += 6
-      doc.setFontSize(10)
-      doc.setFont('helvetica', 'normal')
-      doc.text(`${edu.degree}`, 20, yPosition)
-      doc.text(edu.period, 150, yPosition, { align: 'right' })
-      
-      // Add concepts if available (from i18n)
-      if (edu.concepts && edu.concepts.length > 0) {
-        yPosition += 6
-        doc.setFontSize(10)
-        edu.concepts.forEach((concept: string) => {
-          const conceptLines = doc.splitTextToSize(`• ${concept}`, 170)
-          conceptLines.forEach((line: string) => {
-            doc.text(line, 25, yPosition)
-            yPosition += 5
-          })
-        })
-      }
-      
-      yPosition += 8
-    })
-  }
-  
-  // Experience section
-  if (data.experience && data.experience.length > 0) {
-    if (yPosition > 250) {
-      doc.addPage()
-      yPosition = 20
-    }
-    
-    yPosition = addMCSSectionHeader(doc, language === 'en' ? 'Experience' : 'Experiencia', yPosition)
-    
-    data.experience.forEach((exp: any) => {
-      if (yPosition > 250) {
-        doc.addPage()
-        yPosition = 20
-      }
-      
-      // Organization/Company
-      doc.setFontSize(12)
-      doc.setFont('helvetica', 'bold')
-      doc.setTextColor(0, 0, 0)
-      doc.text(exp.company, 20, yPosition)
-      doc.setFont('helvetica', 'normal')
-      doc.text(exp.location, 150, yPosition, { align: 'right' })
-      
-      // Position and period
-      yPosition += 6
-      doc.setFontSize(10)
-      doc.setFont('helvetica', 'bold')
-      doc.text(exp.position, 20, yPosition)
-      doc.setFont('helvetica', 'normal')
-      doc.text(exp.period, 150, yPosition, { align: 'right' })
-      
-      // Achievements as bullet points
-      if (exp.achievements && exp.achievements.length > 0) {
-        yPosition += 6
-        doc.setFontSize(10)
-        doc.setFont('helvetica', 'normal')
-        
-        exp.achievements.forEach((achievement: string) => {
-          const achievementLines = doc.splitTextToSize(`• ${achievement}`, 170)
-          achievementLines.forEach((line: string) => {
-            doc.text(line, 25, yPosition)
-            yPosition += 5
-          })
-        })
-      }
-      
-      // Add responsibilities if needed
-      if (exp.responsibilities && exp.responsibilities.length > 0) {
-        yPosition += 3
-        doc.setFontSize(10)
-        doc.setFont('helvetica', 'normal')
-        
-        exp.responsibilities.slice(0, 3).forEach((responsibility: string) => {
-          const respLines = doc.splitTextToSize(`• ${responsibility}`, 170)
-          respLines.forEach((line: string) => {
-            doc.text(line, 25, yPosition)
-            yPosition += 5
-          })
-        })
-      }
-      
-      yPosition += 8
-    })
-  }
-  
-  // Skills section
-  if (data.skills && data.skills.length > 0) {
-    if (yPosition > 250) {
-      doc.addPage()
-      yPosition = 20
-    }
-    
-    yPosition = addMCSSectionHeader(doc, language === 'en' ? 'Skills & Interests' : 'Habilidades e Intereses', yPosition)
-    
-    // Group skills by category
-    const skillsByCategory = groupSkillsByCategory(data.skills)
-    
-    Object.entries(skillsByCategory).forEach(([category, skills]) => {
-      if (yPosition > 270) {
-        doc.addPage()
-        yPosition = 20
-      }
-      
-      doc.setFontSize(10)
-      doc.setFont('helvetica', 'bold')
-      doc.setTextColor(0, 0, 0)
-      doc.text(`${category === 'IA' ? 'AI' : category}:`, 20, yPosition)
-      
-      doc.setFontSize(10)
-      doc.setFont('helvetica', 'normal')
-      
-      const skillsText = skills.join(', ')
-      const skillsLines = doc.splitTextToSize(skillsText, 170)
-      yPosition += 5
-      skillsLines.forEach((line: string) => {
-        doc.text(line, 25, yPosition)
-        yPosition += 5
-      })
-      
-      yPosition += 3
-    })
-  }
-  
-  // Add footer at the bottom of the last page
-  doc.setFontSize(8)
-  doc.setFont('helvetica', 'italic')
-  doc.setTextColor(128, 128, 128) // Gray color for footer
-  
-  // Get the total number of pages
-  const totalPages = doc.internal.getNumberOfPages()
-  
-  // Add footer to the last page
-  doc.setPage(totalPages)
-  
-  // Calculate position for footer (bottom of page with margin)
-  const pageHeight = doc.internal.pageSize.height
-  const footerY = pageHeight - 10
-  
-  // Center the footer text
-  const textWidth = doc.getStringUnitWidth(footerText) * 8 / doc.internal.scaleFactor
-  const textX = (doc.internal.pageSize.width - textWidth) / 2
-  
-  // Add the footer text
-  doc.text(footerText, textX, footerY)
-}
-
-const addSectionHeader = (doc: any, title: string, yPosition: number): number => {
-  doc.setFontSize(16)
-  doc.setFont('helvetica', 'bold')
-  doc.setTextColor(41, 128, 185) // Blue
-  doc.text(title, 20, yPosition)
-  
-  // Add underline
-  doc.setDrawColor(41, 128, 185)
-  doc.setLineWidth(0.5)
-  doc.line(20, yPosition + 2, 190, yPosition + 2)
-  
-  return yPosition + 10
-}
-
-// MCS Template section header format
-const addMCSSectionHeader = (doc: any, title: string, yPosition: number): number => {
-  doc.setFontSize(14)
-  doc.setFont('helvetica', 'bold')
-  doc.setTextColor(0, 0, 0) // Black for MCS template
-  doc.text(`${title}`, 20, yPosition)
-  
-  return yPosition + 10
-}
-
-const groupSkillsByCategory = (skills: any[]): Record<string, string[]> => {
-  const grouped: Record<string, string[]> = {}
+const groupSkillsByCategory = (skills: any[]): Record<string, any> => {
+  const grouped: Record<string, any> = {}
   
   skills.forEach(skill => {
     if (!grouped[skill.category]) {
@@ -318,25 +56,29 @@ const groupSkillsByCategory = (skills: any[]): Record<string, string[]> => {
   return grouped
 }
 
+// Import the resources directly from i18n
+import { cvResources } from './cv-i18n';
+
 // Helper functions to get data from i18n
 const getContactInfoFromI18n = (language: string): any => {
   try {
-    // Get data from i18n.ts dynamically
-    const i18nData = require('../app/i18n').default.getResourceBundle(language, 'translation');
+    // Get data directly from the imported resources object
+    const i18nData = cvResources[language as keyof typeof cvResources];
     if (!i18nData || !i18nData.cv) {
       throw new Error('CV data not found in i18n resources');
     }
     
-    // Combine header and contactInfo data
+    const cv = i18nData.cv;
+    
+    // Get data from cv.contact section
     const contactInfo = {
-      name: i18nData.cv.header?.title, // Use title as name since there's no name property
-      title: i18nData.cv.header?.subtitle, // Use subtitle as title
-      location: i18nData.cv.contactInfo?.location,
-      email: i18nData.cv.contactInfo?.email,
-      linkedin: i18nData.cv.contactInfo?.linkedin,
-      web: i18nData.cv.contactInfo?.web,
-      github: i18nData.cv.contactInfo?.github,
-      phone: i18nData.cv.contactInfo?.phone,
+      name: cv.fullName,
+      title: cv.degree,
+      email: cv.contact?.email,
+      linkedin: cv.contact?.linkedin,
+      web: cv.contact?.portfolio,
+      github: cv.contact?.github,
+      phone: cv.contact?.phone,
     };
     
     // Verify all required fields are present
@@ -347,79 +89,119 @@ const getContactInfoFromI18n = (language: string): any => {
     return contactInfo;
   } catch (error) {
     console.error('Error loading contact info from i18n:', error);
-    throw error; // Re-throw to handle at higher level
+    throw error;
   }
 }
 
 const getAboutFromI18n = (language: string): string[] => {
   try {
-    // Get data from i18n.ts dynamically
-    const i18nData = require('../app/i18n').default.getResourceBundle(language, 'translation');
-    if (i18nData && i18nData.cv && i18nData.cv.about) {
-      // If text is a string, convert to array with one element
-      if (typeof i18nData.cv.about.text === 'string') {
-        return [i18nData.cv.about.text];
+    const i18nData = cvResources[language as keyof typeof cvResources];
+    if (i18nData && i18nData.cv && i18nData.cv.profile) {
+      const profile = i18nData.cv.profile;
+      if (typeof profile === 'string') {
+        return [profile];
       }
-      // If text is already an array, return it
-      if (Array.isArray(i18nData.cv.about.text)) {
-        return i18nData.cv.about.text;
+      if (Array.isArray(profile)) {
+        return profile;
       }
     }
     throw new Error('About data not found in i18n resources');
   } catch (error) {
     console.error('Error loading about data from i18n:', error);
-    throw error; // Re-throw to handle at higher level
+    throw error;
+  }
+}
+
+const getKeySkillsFromI18n = (language: string): string[] => {
+  try {
+    const i18nData = cvResources[language as keyof typeof cvResources];
+    if (i18nData && i18nData.cv && i18nData.cv.keySkills) {
+      return i18nData.cv.keySkills;
+    }
+    return [];
+  } catch (error) {
+    console.error('Error loading key skills from i18n:', error);
+    throw error;
   }
 }
 
 const getExperiencesFromI18n = (language: string): any[] => {
   try {
-    // Get data from i18n.ts dynamically
-    const i18nData = require('../app/i18n').default.getResourceBundle(language, 'translation');
-    if (i18nData && i18nData.cv && i18nData.cv.experience && i18nData.cv.experience.jobs) {
-      return i18nData.cv.experience.jobs;
+    const i18nData = cvResources[language as keyof typeof cvResources];
+    
+    if (i18nData && i18nData.cv && i18nData.cv.experience) {
+      return i18nData.cv.experience;
     }
     throw new Error('Experience data not found in i18n resources');
   } catch (error) {
     console.error('Error loading experience data from i18n:', error);
-    throw error; // Re-throw to handle at higher level
+    throw error;
   }
 }
 
 const getEducationsFromI18n = (language: string): any[] => {
   try {
-    // Get data from i18n.ts dynamically
-    const i18nData = require('../app/i18n').default.getResourceBundle(language, 'translation');
-    if (i18nData && i18nData.cv && i18nData.cv.education && i18nData.cv.education.degrees) {
-      return i18nData.cv.education.degrees;
+    const i18nData = cvResources[language as keyof typeof cvResources];
+    if (i18nData && i18nData.cv && i18nData.cv.education) {
+      return i18nData.cv.education.map((education: any) => ({
+        degree: education.degree,
+        university: education.university,
+        location: education.city,
+        period: education.period
+      }));
     }
     throw new Error('Education data not found in i18n resources');
   } catch (error) {
     console.error('Error loading education data from i18n:', error);
-    throw error; // Re-throw to handle at higher level
+    throw error;
   }
 }
 
 const getSkillsFromI18n = (language: string): any[] => {
   try {
-    // Get data from i18n.ts dynamically
-    const i18nData = require('../app/i18n').default.getResourceBundle(language, 'translation');
-    if (i18nData && i18nData.cv && i18nData.cv.skills && i18nData.cv.skills.categories) {
-      return i18nData.cv.skills.categories;
+    const i18nData = cvResources[language as keyof typeof cvResources];
+    if (i18nData && i18nData.cv && i18nData.cv.techSkills) {
+      // Convert the new techSkills array structure to the expected format
+      const skillsArray: Array<{category: string, name: string}> = [];
+      const techSkills = i18nData.cv.techSkills;
+      
+      // Process each skill category object
+      techSkills.forEach((skillCategory: any) => {
+        if (skillCategory.category && skillCategory.skills && Array.isArray(skillCategory.skills)) {
+          skillsArray.push({
+            category: skillCategory.category,
+            name: skillCategory.skills.join(', ')
+          });
+        }
+      });
+      
+      return skillsArray;
     }
     throw new Error('Skills data not found in i18n resources');
   } catch (error) {
     console.error('Error loading skills data from i18n:', error);
-    throw error; // Re-throw to handle at higher level
+    throw error;
+  }
+}
+
+const getLanguagesFromI18n = (language: string): any[] => {
+  try {
+    const i18nData = cvResources[language as keyof typeof cvResources];
+    if (i18nData && i18nData.cv && i18nData.cv.languages) {
+      return i18nData.cv.languages;
+    }
+    return [];
+  } catch (error) {
+    console.error('Error loading languages data from i18n:', error);
+    throw error;
   }
 }
 
 const getFooterTextFromI18n = (language: string): string => {
   try {
-    // Get data from i18n.ts dynamically
-    const i18nData = require('../app/i18n').default.getResourceBundle(language, 'translation');
-    if (i18nData && i18nData.cv && i18nData.cv.footer && i18nData.cv.footer.text) {
-      return i18nData.cv.footer.text;
+    const i18nData = cvResources[language as keyof typeof cvResources];
+    if (i18nData && i18nData.cv && i18nData.cv.footer) {
+      return i18nData.cv.footer;
     }
     // Default text if not found in i18n
     return language === 'en' 
@@ -427,11 +209,347 @@ const getFooterTextFromI18n = (language: string): string => {
       : "CV generado automáticamente por almap[i] | almapi.dev";
   } catch (error) {
     console.error('Error loading footer text from i18n:', error);
-    // Default text if error occurs
+    // Return default text if error occurs
     return language === 'en' 
-      ? "CV automatically generated by almap[i] | almapi.dev" 
+      ? "CV automatically generated by almap[i] | almapi.dev"
       : "CV generado automáticamente por almap[i] | almapi.dev";
   }
 }
 
-// Todas las funciones legacy han sido eliminadas para usar exclusivamente datos dinámicos de i18n.ts
+// Generate HTML CV with real icons for html2pdf.js
+export const generateCVHTML = (language: string): string => {
+  const data = prepareCVData(language)
+  
+  // Function to calculate years of experience since 2010
+  const calculateYearsOfExperience = (): number => {
+    const currentYear = new Date().getFullYear();
+    return currentYear - 2010;
+  };
+  
+  // Function to convert text between single quotes to bold
+  const convertQuotesToBold = (text: string): string => {
+    return text.replace(/'([^']*)'/g, (match, p1) => `<strong>${p1}</strong>`);
+  };
+  
+  return `
+<!DOCTYPE html>
+<html lang="${language}">
+    <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - ${data.name}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.3; color: #333; background: white; }
+        .cv-container { max-width: 100%; margin: 0; padding: 8px; background: white; }
+        
+        /* Header - Optimized for space */
+        .cv-header { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 20px; border-radius: 6px; margin-bottom: 15px; text-align: center; }
+        .cv-name { font-size: 18px; font-weight: bold; margin-bottom: 6px; }
+        .cv-title { font-size: 16px; opacity: 0.9; }
+        
+        /* Contact info - Compact layout */
+        .contact-info { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; align-items: center; justify-content: center; width: 100%; }
+        .contact-item { display: flex; align-items: center; gap: 4px; padding: 2px 0; }
+        .contact-icon { color: #3b82f6; font-size: 12px; width: 16px; text-align: center; flex-shrink: 0; }
+        .contact-value { color: #555; font-size: 11px; white-space: nowrap; }
+        .contact-separator { color: #ccc; margin: 0 2px; font-size: 10px; flex-shrink: 0; }
+        
+        /* Section typography - Reduced margins */
+        .section { margin-bottom: 12px; }
+        .section-title { font-size: 12px; font-weight: bold; color: #3b82f6; border-bottom: 1px solid #3b82f6; padding-bottom: 6px; margin-bottom: 12px; display: flex; align-items: center; gap: 4px; }
+        .section-icon { color: #3b82f6; font-size: 12px; }
+        
+        /* Content typography - Optimized spacing */
+        .profile-text { text-align: justify; margin-bottom: 12px; color: #555; font-size: 11px; line-height: 1.2; }
+        .experience-item, .project-item, .education-item { margin-bottom: 10px; padding: 8px 10px; border-left: 2px solid #3b82f6; background: #f8fafc; border-radius: 0 4px 4px 0; }
+        .item-header { margin-bottom: 4px; }
+        .item-title { font-size: 11px; font-weight: bold; color: #1f2937; margin-bottom: 2px; }
+        .item-subtitle { color: #6b7280; font-size: 11px; }
+        .item-bullets { list-style: none; margin-top: 4px; }
+        .item-bullets li { margin-bottom: 2px; padding-left: 14px; position: relative; font-size: 11px; line-height: 1.2; }
+        .item-bullets li:before { content: "•"; color: #3b82f6; font-weight: bold; position: absolute; left: 0; }
+        
+        /* Additional content - Compact */
+        .technologies { margin-top: 4px; font-style: italic; color: #6b7280; font-size: 11px; }
+        .skills { margin-top: 4px; color: #555; font-size: 11px; }
+        .languages { display: flex; gap: 15px; margin-top: 0; }
+        .language-item { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+        
+        /* Page break control and PDF optimization */
+        .section { 
+            margin-bottom: 12px;
+        }
+        
+        /* Experience section - allow page breaks between items */
+        .experience-section { 
+            page-break-inside: auto;
+            break-inside: auto;
+            orphans: 2;
+            widows: 2;
+        }
+        
+        /* Prevent border cutting and ensure complete elements */
+        .experience-item, .education-item {
+            border-left: none;
+            background: #f8fafc;
+            border-radius: 0 4px 4px 0;
+            page-break-inside: avoid; 
+            break-inside: avoid;
+            margin-bottom: 8px; 
+            padding: 6px 8px; 
+            position: relative;
+            /* Control orphan and widow lines */
+            orphans: 4;
+            widows: 4;
+            /* Use border-image for robust page break handling */
+            border-image: linear-gradient(to bottom, #3b82f6 0%, #3b82f6 100%) 1;
+            border-left: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        /* Additional visual indicator that won't be cut */
+        .experience-item::after, .education-item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #3b82f6;
+            z-index: 1;
+        }
+        
+        .item-header {
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+        
+        .item-bullets {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        
+        .skills-grid {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        
+        /* Footer positioning - always at bottom of current page */
+        .footer {
+            position: relative;
+            margin-top: 15px;
+            padding-top: 8px;
+            border-top: none;
+            text-align: center;
+            color: #6b7280;
+            font-size: 10px;
+            font-style: italic;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            /* Ensure footer is not attached to previous section */
+            clear: both;
+            display: block;
+        }
+        
+        /* Print optimization with page break control */
+        @media print { 
+            body { margin: 0; } 
+            .cv-container { padding: 0; }
+            .cv-header { 
+                margin-bottom: 8px; 
+                padding: 12px;
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+            .section { 
+                margin-bottom: 12px;
+            }
+            
+            /* Experience section - allow page breaks between items in print */
+            .experience-section { 
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+            .experience-item, .education-item { 
+                margin-bottom: 10px; 
+                padding: 8px 10px;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                position: relative;
+                /* Use border-image for robust page break handling in print */
+                border-image: linear-gradient(to bottom, #3b82f6 0%, #3b82f6 100%) 1;
+                border-left: 2px solid transparent;
+                background-clip: padding-box;
+            }
+            
+            /* Ensure pseudo-element works in print */
+            .experience-item::after, .education-item::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 2px;
+                background: #3b82f6;
+                z-index: 1;
+            }
+            .item-bullets li { margin-bottom: 2px; }
+            .technologies { margin-top: 4px; }
+            .skills { margin-top: 4px; }
+            .footer { 
+                margin-top: 12px; 
+                padding-top: 6px;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                /* Ensure footer is not attached to previous section in print */
+                clear: both;
+                display: block;
+            }
+            
+            /* Force page breaks at strategic points */
+            .experience-section { 
+                page-break-before: auto;
+                break-before: auto;
+            }
+            
+            /* Ensure contact info stays with header */
+            .contact-info {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <!-- Header -->
+        <div class="cv-header" style="page-break-after: avoid; break-after: avoid;">
+            <h1 class="cv-name">${data.name}</h1>
+            <p class="cv-title">${data.title}</p>
+        </div>
+        
+        <!-- Contact Info -->
+        <div class="contact-info" style="page-break-after: avoid; break-after: avoid;">
+            <div class="contact-item">
+                <i class="fas fa-phone contact-icon"></i>
+                <span class="contact-value">${data.phone}</span>
+            </div>
+            <span class="contact-separator">&nbsp;</span>
+            <div class="contact-item">
+                <i class="fas fa-envelope contact-icon"></i>
+                <span class="contact-value">${data.email}</span>
+            </div>
+            <span class="contact-separator">&nbsp;</span>
+            <div class="contact-item">
+                <i class="fas fa-globe contact-icon"></i>
+                <span class="contact-value">${data.web}</span>
+            </div>
+            <span class="contact-separator">&nbsp;</span>
+            <div class="contact-item">
+                <i class="fab fa-linkedin contact-icon"></i>
+                <span class="contact-value">${data.linkedin}</span>
+            </div>
+            <span class="contact-separator">&nbsp;</span>
+            <div class="contact-item">
+                <i class="fab fa-github contact-icon"></i>
+                <span class="contact-value">${data.github}</span>
+            </div>
+        </div>
+        
+        <!-- Profile -->
+        <div class="section" style="page-break-inside: avoid; break-inside: avoid;">
+            <h2 class="section-title">
+                <i class="fas fa-user section-icon"></i>
+                ${language === 'en' ? 'Profile' : 'Perfil'}
+            </h2>
+            <p class="profile-text">${data.about ? convertQuotesToBold(data.about.join(' ').replace('{year}', calculateYearsOfExperience().toString())) : ''}</p>
+            
+            <div class="technologies">
+              <strong>${language === 'en' ? 'Key Skills:' : 'Habilidades Clave:'}</strong> ${getKeySkillsFromI18n(language).map((tech: string) => `<code>${convertQuotesToBold(tech)}</code>`).join(', ')}
+            </div>
+        </div>
+        
+        <!-- Experience -->
+        <div class="section experience-section">
+            <h2 class="section-title">
+                <i class="fas fa-briefcase section-icon"></i>
+                ${language === 'en' ? 'Experience' : 'Experiencia'}
+            </h2>
+            ${data.experience ? data.experience.map((exp: any) => `
+                <div class="experience-item" style="page-break-inside: avoid; break-inside: avoid;">
+                    <div class="item-header">
+                        <div class="item-title">${convertQuotesToBold(exp.role)} - ${convertQuotesToBold(exp.company)}</div>
+                        <div class="item-subtitle">
+                          <i class="fas fa-map-marker-alt" style="color: #3b82f6; margin-right: 5px;"></i>${convertQuotesToBold(exp.city)} 
+                          <span style="margin: 0 8px;">&nbsp;</span>
+                          <i class="fas fa-calendar-alt" style="color: #3b82f6; margin-right: 5px;"></i>${convertQuotesToBold(exp.period)}
+                        </div>
+                    </div>
+                    <ul class="item-bullets">
+                        ${exp.bullets.map((bullet: string) => `<li>${convertQuotesToBold(bullet)}</li>`).join('')}
+                    </ul>
+                    ${exp.technologies ? `<div class="technologies"><strong>${language === 'en' ? 'Technologies:' : 'Tecnologías:'}</strong> ${exp.technologies.map((tech: string) => `<code>${convertQuotesToBold(tech)}</code>`).join(', ')}</div>` : ''}
+                </div>
+            `).join('') : ''}
+        </div>
+        
+        <!-- Tech Skills -->
+        <div class="section" style="page-break-inside: avoid; break-inside: avoid;">
+            <h2 class="section-title">
+                <i class="fas fa-bolt section-icon"></i>
+                ${language === 'en' ? 'Tech Skills' : 'Habilidades Técnicas'}
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px;">
+                ${Object.entries(groupSkillsByCategory(data.skills)).map(([category, skills]) => `
+                    <div class="skills" style="margin: 0;"><strong>${convertQuotesToBold(category)}:</strong> ${skills.map((skill: string) => `${convertQuotesToBold(skill)}`).join(', ')}</div>
+                `).join('')}
+            </div>
+        </div>
+        
+        <!-- Education -->
+        <div class="section" style="page-break-inside: avoid; break-inside: avoid;">
+            <h2 class="section-title">
+                <i class="fas fa-graduation-cap section-icon"></i>
+                ${language === 'en' ? 'Education' : 'Educación'}
+            </h2>
+            ${data.education ? data.education.map((edu: any) => `
+                <div class="education-item" style="page-break-inside: avoid; break-inside: avoid;">
+                    <div class="item-header">
+                        <div class="item-title">${convertQuotesToBold(edu.degree)} - ${convertQuotesToBold(edu.university)}</div>
+                        <div class="item-subtitle">
+                          <i class="fas fa-map-marker-alt" style="color: #3b82f6; margin-right: 5px;"></i>${convertQuotesToBold(edu.location)} 
+                          <span style="margin: 0 8px;">&nbsp;</span>
+                          <i class="fas fa-calendar-alt" style="color: #3b82f6; margin-right: 5px;"></i>${convertQuotesToBold(edu.period)}
+                        </div>
+                    </div>
+                </div>
+            `).join('') : ''}
+        </div>
+        
+        <!-- Languages -->
+        <div class="section" style="page-break-inside: avoid; break-inside: avoid;">
+            <h2 class="section-title">
+                <i class="fas fa-language section-icon"></i>
+                ${language === 'en' ? 'Languages' : 'Idiomas'}
+            </h2>
+            <div class="languages">
+                ${data.languages ? data.languages.map((lang: any) => `
+                    <div class="language-item">
+                        <span><strong>${convertQuotesToBold(lang.language)}:</strong> ${convertQuotesToBold(lang.level)}</span>
+                    </div>
+                `).join('') : ''}
+            </div>
+        </div>
+        
+        <!-- Footer - Always at bottom of page -->
+        <div class="footer" style="margin-top: 15px; padding-top: 8px; clear: both; display: block;">
+            ${convertQuotesToBold(getFooterTextFromI18n(language))}
+        </div>
+    </div>
+</body>
+</html>
+  `
+}
