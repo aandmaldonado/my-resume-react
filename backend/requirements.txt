@@ -1,7 +1,0 @@
-fastapi
-uvicorn[standard]
-pydantic
-httpx
-python-dotenv
-google-cloud-aiplatform
-google-auth 
