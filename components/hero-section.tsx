@@ -88,7 +88,7 @@ export default function HeroSection() {
           <Button
             type="button"
             onClick={() => scrollToSection("contact")}
-            className="inline-flex items-center gap-2 px-4 xs:px-6 py-2.5 xs:py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl w-full sm:w-auto"
+            className="inline-flex items-center gap-2 px-4 xs:px-6 py-2.5 xs:py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
             aria-label={t("hero.contact_button", "Contáctame")}
           >
             <Mail className="w-4 h-4 xs:w-5 xs:h-5" />
