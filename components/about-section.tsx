@@ -140,13 +140,16 @@ export default function AboutSection() {
                   <div className="flex flex-wrap gap-3 justify-center my-2">
                     {industries.map((industry, idx) => {
                       const IconComponent = industry.icon
+                      // Ajustar tamaño del icono basado en la longitud del texto
+                      const textLength = t(`about.industries_list.${industry.key}`).length;
+                      const iconSize = textLength > 15 ? 'w-6 h-6' : 'w-5 h-5';
                       return (
                         <div
                           key={industry.key}
                           className={`group relative flex items-center px-4 py-2 rounded-full font-semibold shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105 hover:shadow-lg ${industry.color}`}
                           tabIndex={0}
                         >
-                          <IconComponent className="w-5 h-5 mr-2" />
+                          <IconComponent className={`${iconSize} mr-2 flex-shrink-0`} />
                           <span>{t(`about.industries_list.${industry.key}`)}</span>
                         </div>
                       )
@@ -164,18 +167,21 @@ export default function AboutSection() {
                 ))}
 
                 {/* Tarjeta de objetivos de búsqueda */}
-                <div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg p-4 my-4 shadow-sm">
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex items-center gap-2 mb-2">
-                    <ScanSearch className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                <div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg p-6 my-6 shadow-sm">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex items-center gap-2 mb-4">
+                    <ScanSearch className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                     <strong>{t("about.looking_for")}</strong>
                   </p>
-                  <ul className="list-none list-inside space-y-1 mt-1 text-gray-700 dark:text-gray-300">
+                  <ul className="list-none list-inside space-y-3 mt-1 text-gray-700 dark:text-gray-300">
                     {searchGoals.map((item, index) => {
                       const icons = [Rocket, Earth, Bot];
                       const IconComponent = icons[index % icons.length];
+                      // Ajustar tamaño del icono basado en la longitud del texto
+                      const textLength = item.length;
+                      const iconSize = textLength > 80 ? 'w-6 h-6' : textLength > 50 ? 'w-5 h-5' : 'w-4 h-4';
                       return (
                         <li key={index} className="leading-relaxed flex items-center gap-2">
-                          <IconComponent className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                          <IconComponent className={`${iconSize} text-blue-600 dark:text-blue-400 flex-shrink-0`} />
                           {item}
                         </li>
                       );
@@ -183,25 +189,28 @@ export default function AboutSection() {
                   </ul>
                 </div>
                 {/* Tarjeta de colaboración */}
-                <div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg p-4 my-4 shadow-sm">
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex items-center gap-2 mb-2">
-                    <Handshake className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                <div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg p-6 my-6 shadow-sm">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex items-center gap-2 mb-4">
+                    <Handshake className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                     <strong>{t("about.why_collaborate")}</strong>
                   </p>
-                  <ul className="list-none list-inside space-y-1 mt-1 text-gray-700 dark:text-gray-300">
+                  <ul className="list-none list-inside space-y-3 mt-1 text-gray-700 dark:text-gray-300">
                     {collaborationReasons.map((item, index) => {
                       const icons = [Brain, Puzzle, Globe];
                       const IconComponent = icons[index % icons.length];
+                      // Ajustar tamaño del icono basado en la longitud del texto
+                      const textLength = item.length;
+                      const iconSize = textLength > 80 ? 'w-6 h-6' : textLength > 50 ? 'w-5 h-5' : 'w-4 h-4';
                       return (
                         <li key={index} className="leading-relaxed flex items-center gap-2">
-                          <IconComponent className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                          <IconComponent className={`${iconSize} text-blue-600 dark:text-blue-400 flex-shrink-0`} />
                           {item}
                         </li>
                       );
                     })}
                   </ul>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex gap-2 mt-4">
-                    <Inbox className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+                    <Inbox className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                     {t("about.connect_message")}
                   </p>
                 </div>
