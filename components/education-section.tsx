@@ -11,14 +11,14 @@ export default function EducationSection() {
     <section id="education" className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-3">
-            <GraduationCap className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-3">
+            <GraduationCap className="w-8 h-8 xs:w-7 xs:h-7 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400" />
             {t("education.title")}
           </h2>
 
           <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-600 dark:bg-blue-400"></div>
+            {/* Timeline line - Ajustado para mobile */}
+            <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-blue-600 dark:bg-blue-400"></div>
 
             <div className="space-y-12">
               {educations.map((edu, index) => {
@@ -26,11 +26,11 @@ export default function EducationSection() {
                 const hasConcepts = concepts.length > 0;
                 return (
                   <div key={index} className="relative flex items-start">
-                    {/* Timeline dot */}
-                    <div className="absolute left-6 w-4 h-4 bg-blue-600 dark:bg-blue-400 rounded-full border-4 border-white dark:border-gray-800"></div>
+                    {/* Timeline dot - Ajustado para mobile */}
+                    <div className="absolute left-2 sm:left-6 w-4 h-4 bg-blue-600 dark:bg-blue-400 rounded-full border-4 border-white dark:border-gray-800"></div>
 
-                    {/* Institution logo */}
-                    <div className="ml-16 mr-6 flex-shrink-0">
+                    {/* Institution logo - Oculto en mobile */}
+                    <div className="hidden sm:block ml-16 mr-6 flex-shrink-0">
                       <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
                         <img 
                           src={edu.logo} 
@@ -41,7 +41,7 @@ export default function EducationSection() {
                     </div>
 
                     {/* Content */}
-                    <div className="border border-blue-200 dark:border-blue-800 flex-1 bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm">
+                    <div className="border border-blue-200 dark:border-blue-800 flex-1 bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm sm:ml-0 ml-8">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                         <div className="flex items-start gap-3">
                           <Award className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />

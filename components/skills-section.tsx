@@ -179,8 +179,8 @@ export default function SkillsSection() {
     <section id="skills" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-3">
-            <Brain className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-3">
+            <Brain className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400" />
             {t("skills.title")}
           </h2>
 

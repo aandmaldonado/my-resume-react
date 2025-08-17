@@ -23,8 +23,8 @@ export default function RecommendationsSection() {
     <section id="recommendations" className="py-20 bg-white dark:bg-gray-900 w-full">
       <div className="w-full px-2 sm:px-4">
         <div className="w-full">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white flex items-center justify-center gap-3">
-            <MessageCircle className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-3">
+            <MessageCircle className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400" />
             {i18n.language === "es" ? "Recomendaciones" : "Recommendations"}
           </h2>
           <div className="relative overflow-hidden w-full">
