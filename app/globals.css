@@ -85,6 +85,38 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* Optimizaciones para mobile */
+body {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+}
+
+/* Prevenir zoom en inputs en iOS */
+@media (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* Optimizaciones de performance */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mejorar legibilidad en mobile */
+@media (max-width: 640px) {
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+  }
+  
+  p {
+    line-height: 1.6;
+  }
 }
 
 /* Custom scrollbar */

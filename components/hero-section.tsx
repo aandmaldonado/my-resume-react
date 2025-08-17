@@ -53,8 +53,8 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-        <div className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+      <div className="relative z-10 text-center text-white px-4 xs:px-6 sm:px-8 max-w-4xl mx-auto">
+        <div className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 xs:mb-6 animate-fade-in">
           {(() => {
             const title = t("hero.title");
             const words = title.split(' ');
@@ -69,7 +69,7 @@ export default function HeroSection() {
             );
           })()}
         </div>
-        <div className="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in-delay">
+        <div className="text-lg xs:text-xl sm:text-xl md:text-2xl mb-6 xs:mb-8 text-gray-200 animate-fade-in-delay">
           <Typewriter
             options={{
               strings: subtitleParts,
@@ -83,15 +83,15 @@ export default function HeroSection() {
         </div>
         
         {/* Download CV Button + Contact Button */}
-        <div className="animate-fade-in-delay-2 flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="animate-fade-in-delay-2 flex flex-col sm:flex-row gap-3 xs:gap-4 justify-center items-center px-4 xs:px-0">
           <CVDownloadModal />
           <Button
             type="button"
             onClick={() => scrollToSection("contact")}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-4 xs:px-6 py-2.5 xs:py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl w-full sm:w-auto"
             aria-label={t("hero.contact_button", "Contáctame")}
           >
-            <Mail className="w-5 h-5" />
+            <Mail className="w-4 h-4 xs:w-5 xs:h-5" />
             {t("hero.contact_button", "Contáctame")}
           </Button>
         </div>
