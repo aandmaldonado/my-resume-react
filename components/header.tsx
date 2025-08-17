@@ -11,9 +11,9 @@ const SECTION_IDS = [
   "hero",
   "about",
   "experience",
-  "education",
-  "skills",
   "projects",
+  "skills",
+  "education",
   "recommendations"
 ];
 

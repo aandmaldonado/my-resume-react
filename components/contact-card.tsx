@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Mail, BrainCircuit, Linkedin, MapPin, MessageCircle, Sparkles } from 'lucide-react';
+import { Mail, BrainCircuit, Linkedin, MapPin, Sparkles, Github } from 'lucide-react';
 
 interface ContactCardProps {
   locale: 'en' | 'es';
@@ -12,11 +12,10 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
   const [flipped, setFlipped] = useState(false);
 
   // Datos parametrizables vía i18n
-  const front = t('contact.front', { returnObjects: true }) as any;
   const back = t('contact.back', { returnObjects: true }) as any;
   const title = t('contact.title');
   const subtitle = t('contact.subtitle');
-  const slogan = t('footer.slogan')
+  const slogan = t('contact.slogan')
 
   return (
     <section id="contact" className="w-full py-16 bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">
@@ -74,16 +73,16 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
                       <a href={`mailto:${back.email}`} className="underline text-white text-base" onClick={e => e.stopPropagation()}>{back.email}</a>
                     </div>
                   )}
-                  {back.whatsapp && (
+                  {back.github && (
                     <div className="flex items-center gap-3">
-                      <MessageCircle className="w-6 h-6 text-blue-200" />
-                      <a href={`https://wa.me/${back.whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="underline text-white text-base" onClick={e => e.stopPropagation()}>{back.whatsapp}</a>
+                      <Github className="w-6 h-6 text-blue-200" />
+                      <a href={back.github} target="_blank" rel="noopener noreferrer" className="underline text-white text-base" onClick={e => e.stopPropagation()}>@aandmaldonado</a>
                     </div>
                   )}
                   {back.linkedin && (
                     <div className="flex items-center gap-3">
                       <Linkedin className="w-6 h-6 text-blue-200" />
-                      <a href={back.linkedin} target="_blank" rel="noopener noreferrer" className="underline text-white" onClick={e => e.stopPropagation()}>/in/almapidev</a>
+                      <a href={back.linkedin} target="_blank" rel="noopener noreferrer" className="underline text-white" onClick={e => e.stopPropagation()}>@almapidev</a>
                     </div>
                   )}
                   {back.city && (

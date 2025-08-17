@@ -34,9 +34,9 @@ export default function Home() {
           <HeroSection />
           <AboutSection />
           <ExperienceSection />
-          <EducationSection />
-          <SkillsSection />
           <ProjectsSection />
+          <SkillsSection />
+          <EducationSection />
           <RecommendationsSection />
           <ContactCard locale={i18n.language as 'en' | 'es'} />
           {isChatbotVisible && (

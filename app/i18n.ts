@@ -19,43 +19,33 @@ const resources = {
       },
       hero: {
         title: "Hello World! I'm Álvaro Maldonado",
-        subtitle: "Senior Software Engineer | AI-Powered Dev | Product Engineer",
+        subtitle: "Computer Science Engineer | Software Engineer | AI-Powered Developer",
         download_cv: "Download CV",
-        customize_cv: "Customize CV",
-        select_sections: "Select the sections you want to include in CV:",
-        sections_selected: "sections selected",
         generating: "Generating...",
-        download: "Download CV",
-        cancel: "Cancel",
-        select_all: "Select all",
-        deselect_all: "Deselect all",
-        select_all_sections: "Select all sections",
         contact_button: "Contact me",
       },
       about: {
         location: "Gandia, Spain",
         title: "About Me",
         descriptions: [
-          "I am a Senior Software Engineer with a solid background in developing and integrating technology solutions, involved in the entire software development lifecycle.",
-          "I have worked across various industries, including telecommunications and financial services, holding key roles such as Backend Developer, IT Consultant, Technical Lead, and CTO.",
-          "My drive is technology and innovation. Currently, I am focusing my professional growth on Artificial Intelligence and Machine Learning, seeking challenges that align purpose, impact, and growth.",
+          "I am a Senior Software Engineer with a solid track record of leading the development and integration of solutions across the entire software lifecycle. My experience spans diverse industries, where I have taken on roles of increasing responsibility, from developer and consultant to Technical Lead and CTO.",
+          "My passion is technology with a purpose. Today, my professional focus is firmly centered on Artificial Intelligence, not as an end in itself, but as a means to solve complex business problems. I embrace a 'Product Engineer' mindset, dedicating time to deeply understand the 'why' behind a challenge before engineering the 'how'.",
+          "I believe in technology that empowers people and optimizes processes. My goal is to collaborate on innovative projects where I can apply my experience to build robust, scalable solutions that deliver a measurable impact."
         ],
-        looking_for: "Seeking:",
+        looking_for: "Where I Thrive",
         search_goals: [
-          "Challenging AI & Machine Learning projects",
-          "Strategic roles with remote work opportunities",
-          "Teams where critical thinking and innovation are paramount",
+          "Projects that apply AI to solve real-world business challenges.",
+          "Roles with autonomy and flexibility, focused on delivering results.",
+          "Team cultures built on critical thinking, collaboration, and continuous learning."
         ],
-        why_collaborate: "Why collaborate with me?",
+        why_collaborate: "My Value Proposition",
         collaboration_reasons: [
-          "Technical expertise in development, integration, and leadership",
-          "Ability to connect technology with business objectives",
-          "Highly adaptable to remote work and results-oriented",
+          "Technical Leadership & Architectural Vision: Ability to guide projects from conception to deployment.",
+          "Bridge Between Business & Technology: Skill in translating strategic objectives into effective technical solutions.",
+          "Adaptability & Complex Problem-Solving: Proven experience in rapid learning and solving complex challenges in diverse environments."
         ],
-        connect_message:
-          "Let's connect! I am open to opportunities and collaborations that create real impact.",
+        connect_message: "Let's connect! I am open to opportunities and collaborations that create real impact.",
         years_experience: "Years of Experience",
-        industries: "Industries",
         industries_list: {
           Telecomunicaciones: "Telecommunications",
           AFP: "Pension Funds",
@@ -64,61 +54,53 @@ const resources = {
           HR: "Human Resources",
           Banca: "Banking",
           Aerolineas: "Airlines",
-          IA: "Artificial Intelligence",
-        },
-        industries_modal_title: "Industries I have worked in",
+          IA: "Artificial Intelligence"
+        }
       },
       experience: {
         title: "Work Experience",
         counter: "experiences",
         description: "Description",
-        achievements: "Achievements",
-        responsibilities: "Responsibilities",
+        achievements: "Key Achievements",
+        responsibilities: "Core Responsibilities",
         experiences: [
           {
             company: "InAdvance Consulting Group",
-            position: "Senior Software Engineer",
+            position: "Senior Software Engineer (for BCI Bank)",
             period: "2024 - Present",
             location: "Santiago, Chile",
             logo: "/exp/inadvance.jpeg",
-            description:
-              "Participated as a backend developer in a key technological migration project for a credit card processing platform. My focus was on designing and implementing modern microservices, ensuring quality, scalability, and standard compliance through Agile methodologies and a DevOps/DevSecOps culture. I also actively contributed to the technical evaluation of new talent for the team.",
+            description: "As an integration specialist on the strategic 'Andes Online' project, I led the backend modernization for a new credit card processing platform, focusing on the transition to a robust and scalable microservices architecture.",
             responsibilities: [
-              "Active participation in the migration of critical financial systems.",
-              "Analysis, requirements gathering, and technical design of scalable microservices.",
-              "Development of microservices focusing on modern architecture, Agile methodologies, and DevOps/DevSecOps practices.",
-              "Implementation of secure and efficient solutions, adhering to development best practices.",
-              "Execution of unit, functional, performance, and architectural tests.",
-              "Ensuring quality through code reviews with tools like Veracode and SonarQube.",
-              "Participation in technical selection processes through candidate interviews.",
+              "Analysis and translation of complex financial requirements into technical specifications.",
+              "Design and implementation of resilient and secure APIs for system interoperability.",
+              "Application of Clean Code principles and 'shift-left' testing strategies.",
+              "Active participation in the technical selection and evaluation of new engineering talent."
             ],
             achievements: [
-              "Key role in microservices implementation and technological migration, promoting agility and development automation.",
-              "Ensured solution performance and stability through exhaustive testing and continuous validation.",
-              "Direct contribution to team strengthening through effective technical recruitment processes.",
-            ],
+              "Designed and implemented a resilient microservices solution, crafting APIs that ensured seamless and secure communication between legacy systems and the new platform.",
+              "Applied a 'shift-left testing' strategy within a DevOps culture, taking ownership of code quality (Clean Code) and security from the earliest stages of development.",
+              "Served as the primary liaison between business areas and development, translating complex financial system requirements into clear, actionable technical specifications for the team."
+            ]
           },
           {
             company: "Imagemaker",
-            position: "Senior Software Engineer",
+            position: "Senior Software Engineer (for Banco de Chile)",
             period: "2023 - 2024",
             location: "Santiago, Chile",
             logo: "/exp/imagemaker.jpeg",
-            description:
-              "In this project, I acted as a technical consultant and backend developer, designing and implementing custom solutions for clients in the legal and corporate sector. A highlight was the applied research in artificial intelligence techniques for intelligent document processing. The focus was on software quality, microservice performance, and observability, using cutting-edge technologies throughout the development cycle.",
+            description: "Acted as a technical consultant and backend developer, designing and implementing custom solutions for clients in the legal and corporate sectors. My work focused on software quality, microservice performance, and system observability, leveraging cutting-edge technologies throughout the development cycle.",
             responsibilities: [
-              "External technical consulting for optimization and problem-solving in projects and services.",
-              "Design and implementation of efficient client-oriented solutions, following development best practices.",
-              "Research and development of Proofs of Concept (POCs) with AI techniques to process legal PDF documents.",
-              "Development of microservices using Java (8, 11, 17) and Spring Boot (2 and 3).",
-              "Code review with tools like Veracode, SonarQube, and PMD.",
-              "Proactive service monitoring with ElasticSearch, Splunk, and Dynatrace.",
+              "Provided external technical consulting to optimize projects and resolve complex service issues.",
+              "Developed microservices using modern Java versions and Spring Boot.",
+              "Conducted automated code reviews to ensure quality and security standards (Veracode, SonarQube).",
+              "Ensured system health through proactive service monitoring with Splunk and Dynatrace."
             ],
             achievements: [
-              "Led an artificial intelligence POC to automate the reading and analysis of legal documents in PDF, generating innovation and added value for the client.",
-              "Consolidated quality and monitoring best practices in critical backend solutions.",
-              "Consistent delivery of high-performance solutions aligned with specific client needs.",
-            ],
+              "Led a Proof of Concept (PoC) with AI to redefine service offerings for SME clients by automating the analysis of legal documents with NLP and Computer Vision.",
+              "Designed and implemented robust microservices, establishing cloud-native best practices and automated quality standards.",
+              "Acted as a key technical consultant for clients, implementing proactive monitoring solutions that significantly reduced system downtime."
+            ]
           },
           {
             company: "Falabella",
@@ -126,24 +108,18 @@ const resources = {
             period: "2022 - 2023",
             location: "Santiago, Chile",
             logo: "/exp/falabella.jpeg",
-            description:
-              "I led the development of a corporate attendance management system implemented across various business units of the Falabella group in Latin America. The project involved decomposing legacy systems, designing distributed and resilient solutions, and creating reusable components. I applied Domain-Driven Design (DDD) principles and event-driven architecture, collaborating closely with technical and business teams to ensure a solution aligned with strategic objectives.",
+            description: "I led the development of a corporate attendance management system implemented across various business units of the Falabella group in Latin America. The project involved decomposing legacy systems, designing distributed and resilient solutions, and applying Domain-Driven Design (DDD) principles and event-driven architecture.",
             responsibilities: [
-              "Collaborative requirements analysis with the Product Owner and business stakeholders.",
-              "Solution design adapted to technical regulations and modern architectural patterns like SAGA and DDD.",
-              "Backlog management and prioritization of key project functionalities.",
-              "Technical leadership of the development team, ensuring compliance with technical guidelines and best practices.",
-              "Design and implementation of distributed, resilient, and reusable systems at an international level.",
-              "Decomposition of legacy systems and decoupling of critical functionalities.",
-              "API design using Swagger and OpenAPI, promoting standardization and clear documentation.",
-              "Validation of technical decisions in conjunction with the Architecture team.",
-              "Coordination with internal and external teams, acting as a bridge between development and business areas.",
+              "Collaborated with Product Owners and business stakeholders to define requirements.",
+              "Managed the backlog and prioritized key project functionalities.",
+              "Provided technical leadership to the development team, ensuring compliance with architectural guidelines.",
+              "Coordinated with internal and external teams, including managing SaaS provider relationships."
             ],
             achievements: [
-              "Successful implementation of a Corporate Attendance Management System deployed in multiple countries, optimizing shift management and indicator calculation.",
-              "Transformation of legacy systems into modern solutions using event-driven architecture and Domain-Driven Design (DDD).",
-              "Construction of reusable components aligned with the Falabella group's technological strategy.",
-            ],
+              "Led the delivery of a multi-country attendance management system, orchestrating the full product lifecycle and significantly optimizing the company's regional operational efficiency.",
+              "Spearheaded the modernization of legacy systems by applying Domain-Driven Design (DDD) and an event-driven architecture to decouple complex business domains.",
+              "Led the implementation and integration strategy with a SaaS provider, serving as the main liaison between technical teams, business stakeholders, and external vendors."
+            ]
           },
           {
             company: "Neurogenesis IA Technologies",
@@ -151,54 +127,39 @@ const resources = {
             period: "2021 - 2022",
             location: "Barcelona, Spain",
             logo: "/exp/neurogenesis.jpeg",
-            description:
-              "I led the development of Artificial Intelligence solutions focused on social and environmental impact, integrating image processing, NLP, and deep learning technologies. I migrated and managed cloud infrastructure with AWS, implementing scalable architectures to support Machine Learning and Deep Learning models. I designed computer vision models with CNN for ornamental fish classification and built a diversified dataset from real images and videos. I also oversaw multidisciplinary projects in AI, DevOps, UX/UI, and Industry 4.0, connecting academia with industry.",
+            description: "I led the development of Artificial Intelligence solutions focused on social and environmental impact. I managed the cloud infrastructure and oversaw multidisciplinary projects, connecting academia with industry.",
             responsibilities: [
-              "Applied research in AI technologies, focusing on Deep Learning and computer vision.",
-              "Design and implementation of cloud architecture on AWS (EC2, S3, Lambda, etc.) for AI projects.",
-              "Development of image classification models using convolutional neural networks (CNN).",
-              "Construction of a proprietary dataset of images and videos for training classification models.",
-              "Application of Natural Language Processing (NLP) techniques to analyze legal documents.",
-              "Automation of tasks using chatbots based on Amazon Lex.",
-              "Management of master's final projects in areas such as AI, DevOps, UX/UI, and Industry 4.0.",
+              "Defined the company's initial product vision and technology strategy.",
+              "Designed and implemented a scalable cloud architecture on AWS for AI projects.",
+              "Applied R&D in Deep Learning and Computer Vision.",
+              "Managed and mentored master's thesis projects in AI, DevOps, UX/UI, and Industry 4.0."
             ],
             achievements: [
-              "Successful migration of the company's infrastructure to AWS, optimizing performance and scalability.",
-              "Creation of a robust visual dataset for ornamental fish classification with computer vision.",
-              "Development of a Deep Learning model based on CNN for accurate species classification.",
-              "Implementation of NLP solutions for automated information extraction from PDF documents.",
-              "Delivery of a functional chatbot in production using Amazon Lex.",
-              "Strategic alignment of technological innovation projects with environmental and social objectives.",
-            ],
+              "As a Co-Founder, I participated in the company's conception, legal incorporation, and registration.",
+              "Led the 'AcuaMattic' project, an end-to-end AI system including a proprietary dataset (+10,000 images), a CNN model (92% accuracy), and integration with a robot prototype.",
+              "Orchestrated the complete infrastructure migration to AWS, laying the foundation for large-scale Machine Learning model training and deployment.",
+              "Expanded the company's AI solutions portfolio, developing NLP prototypes for document analysis and a production-ready chatbot using Amazon Lex.",
+              "Served as a bridge between industry and academia, mentoring multiple master's thesis projects for my alma mater."
+            ]
           },
           {
             company: "NTT DATA Europe & LATAM",
-            position: "Senior Software Engineer",
+            position: "Senior Software Engineer (for Transbank)",
             period: "2019 - 2021",
             location: "Santiago, Chile",
             logo: "/exp/nttdata.jpeg",
-            description:
-              "I actively participated in modernizing core systems of the financial ecosystem, addressing the migration of legacy platforms to modern architectures based on Java and Spring Boot. I developed secure applications with Spring Security and JWT, ensuring the protection of critical resources through robust authentication and authorization. I ensured the availability and scalability of the developed solutions, incorporating security best practices (OWASP, PCI) and automated testing. I acted as a technical reference in the analysis, design, and deployment of solutions, promoting quality and risk mitigation using tools like Kiuwan, Fortify, and SonarQube.",
+            description: "I played an active role in modernizing core systems of the financial ecosystem, addressing the migration of legacy platforms to modern architectures. My focus was on developing highly available and secure applications in a demanding, regulated environment.",
             responsibilities: [
-              "Analysis of technical and functional requirements for clients in the financial sector.",
-              "Proactive identification of risks and vulnerabilities in existing solutions.",
-              "Design of robust and secure IT strategies and solutions.",
-              "Development of RESTful Web Services with Java 8 and Spring Boot 2.",
-              "Implementation of authentication and authorization with Spring Security and JWT.",
-              "Construction of highly available and fault-tolerant applications.",
-              "Unit and integration testing with JUnit.",
-              "Code review with tools like Kiuwan, Fortify, and SonarQube.",
-              "Application of OWASP and PCI standards to ensure software quality.",
-              "Deployment of components on Oracle Weblogic servers.",
-              "Technical reference for the team and allied business areas.",
+              "Analyzed technical and functional requirements for financial sector clients.",
+              "Designed robust and secure IT solutions and strategies.",
+              "Developed RESTful Web Services with Java 8 and Spring Boot 2.",
+              "Implemented robust authentication and authorization with Spring Security and JWT."
             ],
             achievements: [
-              "Successful migration of Transbank's backoffice systems, improving efficiency and maintainability.",
-              "Effective implementation of secure systems using Spring Security and JWT.",
-              "Development of robust and scalable applications for high-data-flow environments.",
-              "Risk reduction through static code analysis and secure development practices.",
-              "Consolidation of the role as a technical reference in a regulated and highly demanding environment.",
-            ],
+              "Led the modernization and migration of Transbank's back-office systems, dramatically enhancing the maintainability and performance of the core banking platform.",
+              "Designed and implemented high-availability solutions capable of handling over 1 million daily transactions, applying financial security standards (OWASP, PCI).",
+              "Acted as the team's technical reference, establishing quality standards that reduced technical debt through static code analysis tools."
+            ]
           },
           {
             company: "Falabella",
@@ -206,49 +167,41 @@ const resources = {
             period: "2015 - 2019",
             location: "Santiago, Chile",
             logo: "/exp/falabella.jpeg",
-            description:
-              "Responsible for the development and integration of corporate solutions for various business units of the Falabella Group. I led key projects aimed at improving operational efficiency and the internal user experience through personalized platforms developed in Java. Ensuring the continuity of processes and fostering an ethical organizational culture, I actively participated in modernizing legacy systems using patterns like MVC.",
+            description: "I was responsible for the development and integration of corporate solutions for various business units of the Falabella Group. I led key projects aimed at improving operational efficiency and the internal user experience through custom Java platforms.",
             responsibilities: [
-              "Management and development of requirements for internal business units.",
-              "Construction of Java web solutions to integrate legacy systems.",
-              "Application of the MVC design pattern in application development.",
-              "Participation in the development and integration of Human Resources systems.",
-              "Supervision of technical team assignments and external providers.",
-              "Ensuring the operational continuity of corporate processes.",
-              "Direct collaboration with different areas for the implementation of custom solutions.",
+              "Managed and developed requirements for internal business units.",
+              "Built Java web solutions to integrate legacy systems.",
+              "Supervised technical team assignments and external providers.",
+              "Collaborated directly with different areas to implement custom solutions."
             ],
             achievements: [
-              "Led the creation of a corporate platform for free time management, increasing employee autonomy and improving the work experience.",
-              "Design and implementation of a platform for declaring conflicts of interest for senior executives, strengthening transparency and corporate ethics.",
-              "Development of effective web solutions in Java that facilitated the integration of legacy systems, improving the interoperability and efficiency of the group's internal systems.",
-            ],
+              "Led the development of the 'Personnel and Payroll System' (SPR), a key corporate platform that unified HR management for over 50,000 employees.",
+              "Designed and implemented a platform for declaring conflicts of interest, strengthening corporate transparency and ethics.",
+              "Served as the main point of contact for non-technical business stakeholders, leading requirements gathering to translate their needs into user-oriented software solutions."
+            ]
           },
           {
             company: "NTT DATA Europe & LATAM",
-            position: "Solutions Analyst",
+            position: "Solutions Analyst (for Movistar Chile)",
             period: "2010 - 2014",
             location: "Santiago, Chile",
             logo: "/exp/nttdata.jpeg",
-            description:
-              "Responsible for migrating the private customer portal for Movistar Chile, developing front-end and back-end components on the IBM WebSphere platform. I contributed to improving customer experience through new functionalities, extensively documented the system, and ensured compliance with technical and quality standards.",
+            description: "I was responsible for migrating the private customer portal for Movistar Chile, developing front-end and back-end components on the IBM WebSphere platform, with the goal of improving customer experience and adding new functionalities.",
             responsibilities: [
-              "Migration of the private customer portal for Movistar Chile.",
-              "Development of front-end portlets (HTML, CSS, JavaScript, JSP) using WebSphere Portlet Factory.",
-              "Deployment of portlets on IBM WebSphere Portal.",
-              "Development of SOAP Web Services with Java for back-end, deployed on IBM WebSphere Application Server.",
-              "Application of the DAO design pattern for data abstraction.",
-              "Code quality evaluation with tools like SonarQube.",
-              "Writing technical documentation and user guides to facilitate system maintenance and understanding.",
+              "Developed front-end portlets (HTML, CSS, JavaScript, JSP) with WebSphere Portlet Factory.",
+              "Developed backend SOAP Web Services with Java.",
+              "Applied the DAO design pattern for data abstraction.",
+              "Authored technical documentation and user guides."
             ],
             achievements: [
-              "Led the successful migration of the Movistar Chile customer portal on IBM WebSphere, incorporating new functionalities and significantly improving user experience.",
-              "Increased customer autonomy through intuitive interfaces and integrated services, strengthening account management and contracted services.",
-            ],
-          },
-        ],
+              "Played a key role in the successful migration of the Movistar Chile customer portal on IBM WebSphere, incorporating new functionalities.",
+              "Contributed to a significant improvement in user experience and increased customer autonomy through intuitive interfaces and integrated services."
+            ]
+          }
+        ]
       },
       education: {
-        title: "Education",
+        title: "Education & Professional Development",
         counter: "educations",
         educations: [
           {
@@ -258,26 +211,11 @@ const resources = {
             location: "Online, Spain",
             logo: "/edu/lidr.jpeg",
             concepts: [
-              "Application of AI across all software development stages.",
-              "Proficiency in tools like Github Copilot, ChatGPT, Cursor, and more.",
-              "AI-powered code, documentation, and test generation.",
-              "Improving productivity and code quality with AI.",
-              "Final project with comprehensive AI application.",
-              "Practical training with a professional and current focus.",
-            ],
-          },
-          {
-            institution: "thePower",
-            degree: "Cybersecurity Bootcamp",
-            period: "2025",
-            location: "Online, Spain",
-            logo: "/edu/thepower.jpeg",
-            concepts: [
-              "Fundamentals, threats, and attack vectors.",
-              "Infrastructure, networks, systems, and scripting.",
-              "Offensive security and secure development.",
-              "Incident management, privacy, and cyber intelligence.",
-            ],
+              "Strategic application of AI across all stages of the software development lifecycle.",
+              "Advanced proficiency in AI-assisted development tools (Copilot, ChatGPT, Cursor).",
+              "Efficient generation of code, documentation, and tests using AI.",
+              "Methodologies for improving productivity and code quality with AI."
+            ]
           },
           {
             institution: "Hackio by thePower",
@@ -286,29 +224,37 @@ const resources = {
             location: "Online, Spain",
             logo: "/edu/hackio.jpeg",
             concepts: [
-              "Programming in Python for AI and ML.",
-              "Data analysis with Pandas, NumPy, SQL, and MongoDB.",
-              "Generative models and NLP with Hugging Face, OpenAI, and Google AI.",
-              "Computer vision, audio, and multimodal models.",
-              "Backend with Flask and FastAPI.",
-              "Integration with AWS and Azure.",
-              "Conversational agents and chains with LangChain.",
-              "RAG technologies for augmented generation.",
-            ],
+              "Advanced Python programming for Artificial Intelligence and Machine Learning.",
+              "Data analysis and manipulation with Pandas, NumPy, SQL, and MongoDB.",
+              "Development of generative models and NLP with Hugging Face and OpenAI.",
+              "Backend implementation for AI solutions with Flask and FastAPI."
+            ]
+          },
+          {
+            institution: "thePower",
+            degree: "Cybersecurity Bootcamp",
+            period: "2025",
+            location: "Online, Spain",
+            logo: "/edu/thepower.jpeg",
+            concepts: [
+              "Understanding of fundamentals, threats, and attack vectors.",
+              "Security across infrastructure, networks, and systems.",
+              "Offensive security and secure development (DevSecOps) practices.",
+              "Incident management, privacy, and cyber intelligence."
+            ]
           },
           {
             institution: "Universitat Politècnica de Catalunya",
-            degree: "Master in Artificial Intelligence",
+            degree: "Master's Degree in Artificial Intelligence",
             period: "2020 - 2021",
-            location: "Online, Spain",
+            location: "Barcelona, Spain",
             logo: "/edu/upc.jpeg",
             concepts: [
-              "Key fundamentals of AI and associated technologies.",
-              "Practical application of Machine Learning models and Neural Networks.",
-              "Main frameworks for AI model development.",
-              "Effective implementation of AI projects, covering all phases from development to management.",
-              "Analysis of commercial AI applications and their impact.",
-            ],
+              "Awarded 'Best Final Project' of the graduating class.",
+              "Mastery of the theoretical and practical fundamentals of AI.",
+              "Development and application of Machine Learning and Neural Network models.",
+              "Management and implementation of end-to-end AI projects."
+            ]
           },
           {
             institution: "Universidad de Santiago de Chile",
@@ -317,23 +263,23 @@ const resources = {
             location: "Santiago, Chile",
             logo: "/edu/usach.jpeg",
             concepts: [
-              "Basic Sciences: Proficiency in mathematics and physics.",
-              "Engineering: Experience in applied mathematics, project, and systems management.",
-              "Computer Science: Expertise in information technologies and communication networks.",
-              "Humanities and Social Sciences: Knowledge in economics, organization, human behavior, ethics, and bilingualism.",
-            ],
+              "Awarded 'Top Student of the Graduating Class'.",
+              "Solid foundation in basic sciences and applied mathematics.",
+              "Competence in project management and engineering systems.",
+              "Mastery of information technologies, algorithms, and software architecture."
+            ]
           },
           {
             institution: "Universidad de Santiago de Chile",
-            degree: "Bachelor in Engineering Sciences",
+            degree: "Bachelor's Degree in Engineering Sciences",
             period: "2012 - 2015",
             location: "Santiago, Chile",
             logo: "/edu/usach.jpeg",
             concepts: [
-              "Basic Sciences.",
-              "Engineering Sciences.",
-              "Human and Social Sciences.",
-            ],
+              "Foundational studies in Basic Sciences (Calculus, Algebra, Physics).",
+              "Core curriculum in Engineering Sciences.",
+              "Complementary studies in Human and Social Sciences."
+            ]
           },
           {
             institution: "INACAP",
@@ -342,13 +288,13 @@ const resources = {
             location: "Santiago, Chile",
             logo: "/edu/inacap.jpeg",
             concepts: [
-              "Creation of complete solutions supported by software engineering.",
+              "Development of comprehensive software solutions.",
               "Effective administration of technical, financial, and human resources.",
-              "Strong leadership in technological and strategic projects.",
-              "Adoption of emerging technologies with the aim of promoting digital transformation.",
-            ],
-          },
-        ],
+              "Leadership in the execution of technological and strategic projects.",
+              "Application of emerging technologies to drive digital transformation."
+            ]
+          }
+        ]
       },
       projects: {
         title: "Featured Projects",
@@ -361,148 +307,70 @@ const resources = {
           all: "All",
           bank: "Bank",
           hr: "HR",
-          cloud: "Cloud",
-          ai: "AI",
-          telecommunications: "Telecommunications",
-          retail: "Retail"
+          ai: "AI"
         },
         projects: [
           {
-            title: "Andes Online",
-            description: "Strategic transformation of credit card processing.",
+            title: "AcuaMattic",
+            description: "AI & Robotics for Aquariums. This project aimed to create a tool to facilitate responsible aquarium ownership, blending AI with social and environmental well-being.",
             contents: [
-              "Migration project representing a significant strategic transformation in credit card processing, replacing the current platform with a more advanced solution provided by a new vendor.",
-              "This fundamental change will not only ensure operational continuity but also enhance our technological and business capabilities related to credit cards.",
-              "The project emphasizes constant innovation, improved operational efficiency, and strengthening our market position to provide customers with the best experience.",
-              "This initiative is expected to mark the beginning of a new era of excellence and growth for the organization.",
+              "As CTO, I led the creation of the AI system from conception through to the initial integration phases. My role encompassed building a proprietary dataset (+10,000 images) and training a high-accuracy CNN model (92% accuracy), defining the architecture for its future integration with a robot prototype.",
+              "The system was designed to provide users with personalized, data-driven care recommendations, demonstrating the application of complex AI in a product with a clear purpose."
             ],
-            externalLink: "",
-            githubRepo: "",
+            externalLink: "https://www.elconfidencialdigital.com/monarquia/articulo/an/como-evitar-muerte-miles-millones-peces/20211105193248069486.html",
+            githubRepo: ""
           },
           {
-            title: "AcuaMattic Dataset",
-            description:
-              "Real and diversified dataset for ornamental fish classification.",
+            title: "JuezSW",
+            description: "AI for Insolvency Administration. This system assists companies facing insolvency, who must generate complex liquidation plans that adhere to strict legal regulations for submission in court.",
             contents: [
-              "The urgent need arises from the lack of specialized image banks for ornamental fish, which hinders research and development of technologies related to the preservation and care of these species. Furthermore, obtaining varied images and videos of specimens of the same species represents a significant challenge.",
-              "To address this problem, the creation of a large and diversified image dataset of ornamental fish is proposed, which is fundamental for training classification models.",
-              "Key phases: data collection using videos in controlled environments; processing using computer vision techniques for cropping and normalization; and creation of the final dataset with images of 30 different species. This approach avoids synthetic data, reduces overfitting, and improves the quality of the resulting dataset.",
+              "My contribution focused on defining the architecture for a two-stage AI system: creating a dataset by analyzing a legal corpus, and designing an NLP model capable of interpreting legislation to generate the plans.",
+              "The concept was designed to drastically reduce plan creation time and ensure regulatory compliance, facilitating efficient and legally sound auction processes."
             ],
-            externalLink: "",
-            githubRepo: "",
-          },
-          {
-            title: "AcuaMattic AI & Robotics (Prototype)",
-            description:
-              "Intelligent aquarium assistant based on computer vision and robotics.",
-            contents: [
-              "The goal of this project is to improve social well-being by creating a tool that facilitates the responsible and sustainable acquisition and installation of aquariums for users of all levels, whether experienced enthusiasts or newcomers to the hobby.",
-              "It is a fish classifier model, meticulously trained with a vast collection of thousands of videos and images covering the most common ornamental species. This approach allows for highly personalized support for each user, adapted to the specific characteristics of the identified species in their aquarium.",
-              "Once the system detects and recognizes the species in question, it communicates with a robot installed in the aquarium to collect precise data on current water parameters. Precise recommendations are then provided for optimal configuration of these parameters, contributing to aquarium maintenance and the well-being of the species inhabiting it.",
-            ],
-            externalLink:
-              "https://www.elconfidencialdigital.com/monarquia/articulo/an/como-evitar-muerte-miles-millones-peces/20211105193248069486.html",
-            githubRepo: "",
-          },
-          {
-            title: "SPR (Personnel & Remuneration System)",
-            description:
-              "Corporate HR system for comprehensive personnel management of the Falabella Group.",
-            contents: [
-              "Corporate HR system, integrated into the Falabella Group's corporate intranet, addressing the needs of various Latin American countries, including Chile, Peru, Colombia, Argentina, and Uruguay.",
-              "Essentially, this system forms the backbone of employee management, efficient personnel handling, and compensation administration for all Falabella Group companies, which include Falabella Retail, Falabella Financial, Sodimac, and Tottus.",
-              "Key features: Payroll, Staffing, Store Operations, Finance, Logistics, Access Control.",
-            ],
-            externalLink: "",
-            githubRepo: "",
-          },
-          {
-            title: "Movistar Online Channel",
-            description:
-              "Migration of the Movistar Chile portal to improve customer experience and autonomy.",
-            contents: [
-              "Migration of the private portal for Movistar Chile clients using IBM WebSphere, with front-end portlet development and back-end web services to expand functionalities and reduce manual processes.",
-              "Key functionalities include detailed access to home and mobile plans, billing information, contracting additional services, secure online payments, and equipment renewal.",
-              "This significant update optimizes the customer experience, increasing their autonomy and convenience in managing services and accounts.",
-            ],
-            externalLink:
-              "https://identity.movistar.cl/login?_gl=1*gan1wb*_gcl_au*MTk4NDIyMjUxNi4xNjkzMDE1NDk5&_ga=2.21479423.531242504.1693015499-1259711125.1693015499",
-            githubRepo: "",
-          },
-          {
-            title: "Electronic Supervisor",
-            description:
-              "Electronic supervision solution to optimize the purchase process at Walmart Chile.",
-            contents: [
-              "An electronic point-of-sale (POS) supervision solution, designed to streamline the purchase process at Walmart Chile (including Líder, Express, and Super Bodega a cuenta).",
-              "This application is specifically designed to remotely address customer requests when making payments at the checkout counter.",
-              "It enables quick responses to price adjustments and product cancellations during the billing process. This tool is exclusively for authorized supermarket cashiers and supervisors.",
-            ],
-            externalLink: "",
-            githubRepo: "",
-          },
-          {
-            title: "on-premise2cloud",
-            description:
-              "Migration of on-premise infrastructure to AWS to scale and modernize operations.",
-            contents: [
-              "The company migrated its operations to Amazon Web Services (AWS) to address key challenges such as scalability, massive data processing, and the development of artificial intelligence solutions.",
-              "The project included the creation of an enterprise account in AWS, data migration, process automation, specialized dataset generation, and configuration of secure and flexible environments.",
-              "Services like Amazon S3, EC2, and SageMaker were implemented, along with advanced IAM security policies, achieving a modern, secure infrastructure aligned with technological innovation objectives.",
-            ],
-            externalLink: "",
-            githubRepo: "",
-          },
-          {
-            title: "Time & Attendance (T&A)",
-            description:
-              "Digital attendance system to improve management and work experience in multiple countries.",
-            contents: [
-              "Corporate Attendance Management System, designed to improve the overall employee experience in different countries (Chile, Peru, and Colombia) and various businesses of the Falabella group (including Falabella Retail, Sodimac, Tottus, Falabella Financial, Mall Plaza, Falabella.com, Falabella Corporate, and IKEA).",
-              "The implementation of this cutting-edge technology aligns with current workforce attendance needs, emphasizing remote registration methods to promote digital channels (via apps and web), thereby reducing reliance on biometric devices. It also provides vital data for managing various associated performance indicators, aiding in attendance calculation and facilitating efficient shift management.",
-              "Key objectives: ensure legal compliance, acquire data to optimize shifts, collect metrics such as absenteeism and overtime, and introduce remote registration. KPIs: employee satisfaction, overtime hours, absenteeism rates, disputed registrations, and time dedicated to monthly reconciliation.",
-            ],
-            externalLink: "",
-            githubRepo: "",
+            externalLink: "https://digitalfinanzas.com/estilo-de-vida/la-tormenta-perfecta-esta-a-punto-de-llegar-a-espana/",
+            githubRepo: ""
           },
           {
             title: "Faculty Engine",
-            description:
-              "Banking solution for automated legal analysis in PDF.",
+            description: "AI-Powered Legal Analysis. A banking solution designed to accelerate the analysis of legal documents to customize product offerings for SME clients.",
             contents: [
-              "This project involves the development of an advanced banking solution for the corporate sector with the main function of processing and analyzing legal authorization PDF documents in detail.",
-              "This technology enables precise customization of products and services for clients by leveraging the information obtained.",
-              "This solution results in a significant improvement in the optimization of existing business processes and greater efficiency in decision-making.",
+              "I led a Proof of Concept (PoC) applying NLP and Computer Vision techniques to automatically extract and analyze information from PDFs.",
+              "The PoC demonstrated a radical improvement in processing efficiency, enabling faster, more accurate data-driven business decision-making."
             ],
             externalLink: "",
-            githubRepo: "",
+            githubRepo: ""
           },
           {
-            title: "S-Box",
-            description:
-              "An environment for analyzing videos related to smile episodes.",
+            title: "Time & Attendance",
+            description: "Corporate HR System. A multi-country digital attendance platform for Falabella Group, which needed to modernize attendance tracking for over 50,000 employees and gain better operational insights.",
             contents: [
-              "The S-Box Project is an innovative solution in Affective Computing that uses Artificial Intelligence and Computer Vision to meticulously analyze videos with smiles.",
-              "It includes advanced smile analysis, multimodal capture, precise automatic synchronization, intelligent smile filtering, sequence generation, and advanced visualization with AI.",
-              "S-Box drives the understanding of human emotions in technological interactions, being a key tool for researchers and professionals in controlled experimental environments.",
+              "As Technical Lead, I orchestrated the full product lifecycle, from decomposing legacy systems to designing an event-driven, microservices-based architecture and integrating with a SaaS provider.",
+              "The system significantly improved operational efficiency in shift management and KPI tracking (absenteeism, overtime), while enhancing the employee experience."
             ],
             externalLink: "",
-            githubRepo: "https://github.com/aandmaldonado/S-Box",
+            githubRepo: ""
           },
           {
-            title: "Cancellations 2.0",
-            description:
-              "Backoffice system for managing sales cancellations at Transbank.",
+            title: "Transbank Migration",
+            description: "Banking Backoffice Modernization. Transbank's transactional back-office system required a major overhaul to improve maintainability, performance, and security in a high-volume environment.",
             contents: [
-              "This system is part of Transbank's transactional backoffice, specifically designed to process sales cancellation requests.",
-              "Cancellation requests: easily initiate individual cancellation requests and batch cancellations by uploading files. Cancellations can be total (covering the entire sale amount) or partial (for amounts less than the total sale value).",
-              "Bulk cancellation log: conveniently retrieve a detailed history of all bulk cancellation requests made by a specific merchant.",
-              "Audit report: easily review a complete log of cancellation requests, both individual and bulk, covering up to 1 year of historical data.",
+              "I played a key role in migrating the legacy platform to a modern microservices architecture (Java), designing high-availability solutions for over 1 million daily transactions.",
+              "The migration resulted in a more efficient, scalable, and secure platform, significantly reducing technical debt and operational risks for the client."
             ],
             externalLink: "https://www.youtube.com/watch?v=Nu-q-zOvibA",
-            githubRepo: "",
+            githubRepo: ""
           },
-        ],
+          {
+            title: "Andes Online",
+            description: "Payment Platform Transformation. A strategic project to modernize a credit card processing platform to ensure operational continuity and strengthen market position.",
+            contents: [
+              "As an Integration Specialist, I am leading the backend modernization, designing a resilient microservices architecture and ensuring seamless integration between legacy systems and the new platform.",
+              "As a project currently in development, my current role focuses on ensuring the integration is successful and scalable, with the goal of enhancing operational efficiency and the customer experience."
+            ],
+            externalLink: "",
+            githubRepo: ""
+          }
+        ]
       },
       skills: {
         title: "Skills",
@@ -724,9 +592,9 @@ const resources = {
         },
       ],
       footer: {
-        slogan: "Solving problems with technology",
-        made_with: "AI-Powered",
-        copyright: "© {year} almap[i]. All rights reserved",
+        slogan: "AI-Powered Product Engineering",
+        made_with: "Designed & Built by almap[i]",
+        copyright: "© {year}. All rights reserved"
       },
       chatbot: {
         name: "Álvaro Maldonado",
@@ -737,20 +605,16 @@ const resources = {
       },
       contact: {
         title: "Let's Connect!",
-        subtitle:
-          "Interested in working together or have a proposal? Contact me!",
+        subtitle: "Interested in working together or have a proposal? Contact me!",
+        slogan: "AI-Powered Product Engineering",
         ariaFront: "Business card: front",
         ariaBack: "Business card: back",
-        front: {
-          name: "Álvaro Andrés Maldonado Pinto",
-          role: "Senior Software Engineer | AI-Powered Dev | Product Engineer",
-        },
         back: {
           email: "readme.md@almapi.dev",
-          whatsapp: "+34 641 96 23 96",
           linkedin: "https://www.linkedin.com/in/almapidev/",
-          city: "Gandia, Spain",
-        },
+          github: "https://github.com/aandmaldonado",
+          city: "Gandia, Spain"
+        }
       },
     }
   },
@@ -771,44 +635,33 @@ const resources = {
       },
       hero: {
         title: "¡Hola Mundo! Soy Álvaro Maldonado",
-        subtitle: "Senior Software Engineer | AI-Powered Dev | Product Engineer",
+        subtitle: "Ingeniero en Informática | Ingeniero de Software | Desarrollador Impulsado por IA",
         download_cv: "Descargar CV",
-        customize_cv: "Personalizar CV",
-        select_sections:
-          "Selecciona las secciones que quieres incluir en el CV:",
-        sections_selected: "secciones seleccionadas",
         generating: "Generando...",
-        download: "Descargar CV",
-        cancel: "Cancelar",
-        select_all: "Seleccionar todas",
-        deselect_all: "Deseleccionar todas",
-        select_all_sections: "Seleccionar todas las secciones",
         contact_button: "Contáctame",
       },
       about: {
         location: "Gandía, España",
         title: "Sobre Mí",
         descriptions: [
-          "Soy Ingeniero de Software Senior con una trayectoria consolidada en el desarrollo e integración de soluciones tecnológicas, participando en todo el ciclo de vida del software.",
-          "He trabajado en diversas industrias como telecomunicaciones, servicios financieros, entre otros, asumiendo roles clave: desde Desarrollador Backend y Consultor TI, hasta Líder Técnico y CTO.",
-          "Mi motor es la tecnología y la innovación. Hoy, enfoco mi evolución profesional hacia la Inteligencia Artificial y Machine Learning, en busca de desafíos que conecten propósito, impacto y crecimiento.",
+          "Soy un Ingeniero de Software Senior con una sólida trayectoria liderando el desarrollo y la integración de soluciones a lo largo de todo el ciclo de vida del software. Mi experiencia abarca diversas industrias, donde he asumido roles de creciente responsabilidad, desde desarrollador y consultor hasta Líder Técnico y CTO.",
+          "Mi pasión es la tecnología con propósito. Hoy, mi enfoque profesional está firmemente centrado en la Inteligencia Artificial, no como un fin, sino como una herramienta para resolver problemas de negocio complejos. Adopto una mentalidad de 'Product Engineer', dedicando tiempo a entender profundamente el 'porqué' de un desafío antes de diseñar el 'cómo' técnico.",
+          "Creo en la tecnología que potencia a las personas y optimiza los procesos. Mi objetivo es colaborar en proyectos innovadores donde pueda aplicar mi experiencia para construir soluciones robustas, escalables y que generen un impacto medible."
         ],
-        looking_for: "Buscando:",
+        looking_for: "Mi Entorno Ideal",
         search_goals: [
-          "Proyectos desafiantes en IA & Machine Learning",
-          "Roles estratégicos con posibilidad de trabajo remoto",
-          "Equipos donde el pensamiento crítico y la innovación sean clave",
+          "Proyectos que apliquen IA para resolver desafíos de negocio reales.",
+          "Roles con autonomía y flexibilidad, orientados a la entrega de resultados.",
+          "Culturas de equipo basadas en el pensamiento crítico, la colaboración y el aprendizaje continuo."
         ],
-        why_collaborate: "¿Por qué colaborar conmigo?",
+        why_collaborate: "Mi Propuesta de Valor",
         collaboration_reasons: [
-          "Experiencia técnica en desarrollo, integración y liderazgo",
-          "Capacidad de conectar tecnología con objetivos de negocio",
-          "Alta adaptabilidad al trabajo remoto y orientación a resultados",
+          "Liderazgo Técnico y Visión de Arquitectura: Capacidad para guiar proyectos desde la concepción hasta el despliegue.",
+          "Puente entre Negocio y Tecnología: Habilidad para traducir objetivos estratégicos en soluciones técnicas efectivas.",
+          "Adaptabilidad y Resolución de Problemas: Experiencia probada en aprender rápido y resolver desafíos complejos en diversos entornos."
         ],
-        connect_message:
-          "¡Conectemos! Estoy abierto a oportunidades y colaboraciones que generen impacto real.",
+        connect_message: "¡Conectemos! Estoy abierto a oportunidades y colaboraciones que generen un impacto real.",
         years_experience: "Años de experiencia",
-        industries: "Industrias",
         industries_list: {
           Telecomunicaciones: "Telecomunicaciones",
           AFP: "AFP",
@@ -817,61 +670,53 @@ const resources = {
           HR: "Recursos Humanos",
           Banca: "Banca",
           Aerolineas: "Aerolíneas",
-          IA: "Inteligencia Artificial",
-        },
-        industries_modal_title: "Industrias en las que he trabajado",
+          IA: "Inteligencia Artificial"
+        }
       },
       experience: {
         title: "Experiencia Laboral",
         counter: "experiencias",
         description: "Descripción",
-        achievements: "Logros",
-        responsibilities: "Responsabilidades",
+        achievements: "Logros Clave",
+        responsibilities: "Responsabilidades Principales",
         experiences: [
           {
             company: "InAdvance Consulting Group",
-            position: "Senior Software Engineer",
+            position: "Ingeniero de Software Senior (para Banco BCI)",
             period: "2024 - Presente",
             location: "Santiago, Chile",
             logo: "/exp/inadvance.jpeg",
-            description:
-              "Participé como desarrollador backend en un proyecto clave de migración tecnológica para una plataforma de procesamiento de tarjetas de crédito. Mi enfoque estuvo en el diseño e implementación de microservicios modernos, asegurando calidad, escalabilidad y cumplimiento de estándares mediante la aplicación de metodologías ágiles y cultura DevOps/DevSecOps. Además, contribuí activamente en la evaluación técnica de nuevos talentos para el equipo.",
+            description: "Como especialista en integración en el proyecto estratégico 'Andes Online', lideré la modernización del backend para una nueva plataforma de procesamiento de tarjetas de crédito, enfocándome en la transición hacia una arquitectura de microservicios robusta y escalable.",
             responsibilities: [
-              "Participación activa en la migración de sistemas críticos financieros.",
-              "Análisis, levantamiento y diseño técnico de microservicios escalables.",
-              "Desarrollo de microservicios con enfoque en arquitectura moderna, metodologías ágiles y prácticas DevOps/DevSecOps.",
-              "Implementación de soluciones seguras y eficientes, siguiendo buenas prácticas de desarrollo.",
-              "Ejecución de pruebas unitarias, funcionales, de rendimiento y arquitectura.",
-              "Aseguramiento de calidad mediante revisiones de código con herramientas como Veracode y SonarQube.",
-              "Participación en procesos de selección técnica mediante entrevistas a candidatos.",
+              "Análisis y traducción de complejos requerimientos financieros a especificaciones técnicas.",
+              "Diseño e implementación de APIs resilientes y seguras para la interoperabilidad de sistemas.",
+              "Aplicación de principios de Clean Code y estrategias de 'shift-left testing'.",
+              "Participación activa en la selección y evaluación técnica de nuevos ingenieros."
             ],
             achievements: [
-              "Rol clave en la implementación de microservicios y migración tecnológica, promoviendo la agilidad y automatización del desarrollo.",
-              "Garantía del rendimiento y estabilidad de las soluciones a través de pruebas exhaustivas y validaciones continuas.",
-              "Contribución directa al fortalecimiento del equipo mediante procesos efectivos de reclutamiento técnico.",
-            ],
+              "Diseñé e implementé una solución de microservicios resiliente, creando APIs que aseguraron la comunicación fluida y segura entre sistemas legados y la nueva plataforma.",
+              "Apliqué una estrategia de 'shift-left testing' dentro de la cultura DevOps, responsabilizándome de la calidad del código y la seguridad desde las fases iniciales del desarrollo.",
+              "Actué como puente entre las áreas de negocio y desarrollo, traduciendo los complejos requerimientos del sistema financiero en especificaciones técnicas claras y viables para el equipo."
+            ]
           },
           {
             company: "Imagemaker",
-            position: "Senior Software Engineer",
+            position: "Ingeniero de Software Senior (para Banco de Chile)",
             period: "2023 - 2024",
             location: "Santiago, Chile",
             logo: "/exp/imagemaker.jpeg",
-            description:
-              "En este proyecto actué como consultor técnico y desarrollador backend, diseñando e implementando soluciones a medida para clientes del sector legal y corporativo. Destaca la investigación aplicada en técnicas de inteligencia artificial para el procesamiento inteligente de documentos. El enfoque estuvo en la calidad del software, rendimiento de los microservicios y observabilidad, utilizando tecnologías de punta en todo el ciclo de desarrollo.",
+            description: "Actué como consultor técnico y desarrollador backend, diseñando e implementando soluciones a medida para clientes del sector legal y corporativo. Mi trabajo se centró en la calidad del software, el rendimiento de los microservicios y la observabilidad del sistema.",
             responsibilities: [
-              "Asesoría técnica externa para optimización y solución de problemas en proyectos y servicios.",
-              "Diseño e implementación de soluciones eficientes orientadas al cliente, con buenas prácticas de desarrollo.",
-              "Investigación y desarrollo de pruebas de concepto (POC) con técnicas de IA para procesar documentos PDF con aplicaciones legales.",
-              "Desarrollo de microservicios utilizando Java (8, 11, 17) y Spring Boot (2 y 3).",
-              "Revisión de código fuente con herramientas como Veracode, SonarQube y PMD.",
-              "Monitoreo proactivo de servicios con ElasticSearch, Splunk y Dynatrace.",
+              "Consultoría técnica externa para optimizar proyectos y resolver problemas complejos.",
+              "Desarrollo de microservicios con versiones modernas de Java y Spring Boot.",
+              "Revisiones de código automatizadas para asegurar estándares de calidad (Veracode, SonarQube).",
+              "Garantía de la salud del sistema mediante monitoreo proactivo de servicios con Splunk y Dynatrace."
             ],
             achievements: [
-              "Lideré una POC de inteligencia artificial para automatizar la lectura y análisis de documentos legales en PDF, generando innovación y valor añadido para el cliente.",
-              "Consolidación de buenas prácticas de calidad y monitoreo en soluciones backend críticas.",
-              "Entregas consistentes de alto rendimiento alineadas con las necesidades específicas del cliente.",
-            ],
+              "Lideré una Prueba de Concepto (PoC) con IA para redefinir la oferta de servicios a clientes PYME, automatizando el análisis de documentos legales con NLP y Visión por Computador.",
+              "Diseñé e implementé microservicios robustos, estableciendo mejores prácticas cloud-native y estándares de calidad automatizados.",
+              "Actué como consultor técnico clave para clientes, implementando soluciones de monitoreo proactivo que redujeron significativamente el tiempo de inactividad del sistema."
+            ]
           },
           {
             company: "Falabella",
@@ -879,24 +724,18 @@ const resources = {
             period: "2022 - 2023",
             location: "Santiago, Chile",
             logo: "/exp/falabella.jpeg",
-            description:
-              "Lideré el desarrollo de un sistema corporativo de gestión de asistencia implementado en diversas unidades de negocio del grupo Falabella en América Latina. El proyecto involucró la descomposición de sistemas legados, el diseño de soluciones distribuidas y resilientes, y la creación de componentes reutilizables. Apliqué principios de Domain-Driven Design (DDD) y arquitectura basada en eventos, colaborando estrechamente con equipos técnicos y de negocio para asegurar una solución alineada con los objetivos estratégicos.",
+            description: "Lideré el desarrollo de un sistema corporativo de gestión de asistencia implementado en diversas unidades de negocio del grupo Falabella en América Latina. El proyecto involucró la descomposición de sistemas legados, el diseño de soluciones distribuidas y la aplicación de principios de Domain-Driven Design (DDD) y arquitectura basada en eventos.",
             responsibilities: [
-              "Análisis colaborativo de requerimientos junto al Product Owner y stakeholders del negocio.",
-              "Diseño de soluciones adaptadas a normativas técnicas y patrones de arquitectura moderna como SAGA y DDD.",
+              "Colaboración con Product Owners y stakeholders para la definición de requerimientos.",
               "Gestión del backlog y priorización de funcionalidades clave del proyecto.",
-              "Liderazgo técnico del equipo de desarrollo, asegurando el cumplimiento de directrices técnicas y buenas prácticas.",
-              "Diseño e implementación de sistemas distribuidos, resilientes y reutilizables a nivel internacional.",
-              "Descomposición de sistemas legados y desacoplamiento de funcionalidades críticas.",
-              "Diseño de APIs utilizando Swagger y OpenAPI, fomentando la estandarización y documentación clara.",
-              "Validación de decisiones técnicas en conjunto con el equipo de Arquitectura.",
-              "Coordinación con equipos internos y externos, actuando como puente entre desarrollo y áreas de negocio.",
+              "Liderazgo técnico del equipo de desarrollo, asegurando el cumplimiento de las guías de arquitectura.",
+              "Coordinación con equipos internos y externos, incluyendo la gestión de proveedores de SaaS."
             ],
             achievements: [
-              "Implementación exitosa de un Sistema Corporativo de Gestión de Asistencia desplegado en múltiples países, optimizando la gestión de turnos y cálculo de indicadores.",
-              "Transformación de sistemas legados en soluciones modernas mediante arquitectura basada en eventos y diseño orientado al dominio (DDD).",
-              "Construcción de componentes reutilizables y alineados con la estrategia tecnológica del grupo Falabella.",
-            ],
+              "Lideré la entrega de un sistema de gestión de asistencia multi-país, orquestando el ciclo de vida completo del producto y optimizando la eficiencia operacional de la compañía a nivel regional.",
+              "Impulsé la modernización de sistemas legados mediante la aplicación de Domain-Driven Design (DDD) y una arquitectura basada en eventos para desacoplar dominios de negocio complejos.",
+              "Dirigí la estrategia de implementación e integración con un proveedor de SaaS, sirviendo como el nexo principal entre equipos técnicos, stakeholders y proveedores externos."
+            ]
           },
           {
             company: "Neurogenesis IA Technologies",
@@ -904,54 +743,39 @@ const resources = {
             period: "2021 - 2022",
             location: "Barcelona, España",
             logo: "/exp/neurogenesis.jpeg",
-            description:
-              "Lideré el desarrollo de soluciones de Inteligencia Artificial orientadas al impacto social y medioambiental, integrando tecnologías de procesamiento de imágenes, NLP y aprendizaje profundo.",
+            description: "Lideré el desarrollo de soluciones de Inteligencia Artificial orientadas al impacto social y medioambiental. Gestioné la infraestructura en la nube y supervisé proyectos multidisciplinarios, conectando la academia con la industria.",
             responsibilities: [
-              "Investigación aplicada en tecnologías de IA, con foco en Deep Learning y visión por computador.",
-              "Diseño e implementación de arquitectura cloud en AWS (EC2, S3, Lambda, etc.) para proyectos de IA.",
-              "Desarrollo de modelos de clasificación de imágenes utilizando redes neuronales convolucionales (CNN).",
-              "Construcción de un dataset propio de imágenes y videos para entrenamiento de modelos de clasificación.",
-              "Aplicación de técnicas de procesamiento de lenguaje natural (NLP) para analizar documentos legales.",
-              "Automatización de tareas mediante chatbots basados en Amazon Lex.",
-              "Gestión de proyectos de fin de máster en áreas como IA, DevOps, UX/UI e Industria 4.0.",
+              "Definición de la visión de producto inicial y la estrategia tecnológica de la compañía.",
+              "Diseño e implementación de una arquitectura cloud escalable en AWS para proyectos de IA.",
+              "Investigación y Desarrollo aplicado en Deep Learning y Visión por Computador.",
+              "Gestión y mentoría de proyectos de fin de máster en IA, DevOps, UX/UI e Industria 4.0."
             ],
             achievements: [
-              "Migración exitosa de la infraestructura de la compañía a AWS, optimizando rendimiento y escalabilidad.",
-              "Creación de un dataset visual robusto para clasificación de peces ornamentales con visión artificial.",
-              "Desarrollo de un modelo de Deep Learning basado en CNN para clasificación precisa de especies.",
-              "Implementación de soluciones NLP para extracción automatizada de información desde documentos PDF.",
-              "Entrega de un chatbot funcional en producción usando Amazon Lex.",
-              "Alineación estratégica de proyectos de innovación tecnológica con objetivos medioambientales y sociales.",
-            ],
+              "Como Co-Fundador, participé en la concepción, constitución y registro legal de la empresa.",
+              "Lideré el proyecto 'AcuaMattic', un sistema de IA de extremo a extremo que incluyó un dataset propio (+10.000 imágenes), un modelo CNN (92% de precisión) y su integración con un prototipo de robot.",
+              "Orquesté la migración completa de la infraestructura a AWS, sentando las bases para el entrenamiento y despliegue de modelos de Machine Learning a gran escala.",
+              "Amplié el portafolio de soluciones de IA, desarrollando prototipos para el análisis de documentos con NLP y un chatbot productivo con Amazon Lex.",
+              "Actué como puente entre la industria y la academia, mentorizando múltiples proyectos de fin de máster para mi alma máter."
+            ]
           },
           {
             company: "NTT DATA Europe & LATAM",
-            position: "Senior Software Engineer",
+            position: "Ingeniero de Software Senior (para Transbank)",
             period: "2019 - 2021",
             location: "Santiago, Chile",
             logo: "/exp/nttdata.jpeg",
-            description:
-              "Participé activamente en la modernización de sistemas core del ecosistema financiero, abordando la migración de plataformas legacy hacia arquitecturas modernas basadas en Java y Spring Boot.",
+            description: "Participé activamente en la modernización de sistemas core del ecosistema financiero, abordando la migración de plataformas legacy a arquitecturas modernas. Mi enfoque fue el desarrollo de aplicaciones de alta disponibilidad y seguras en un entorno regulado y de alta exigencia.",
             responsibilities: [
               "Análisis de requerimientos técnicos y funcionales para clientes del sector financiero.",
-              "Identificación proactiva de riesgos y vulnerabilidades en soluciones existentes.",
-              "Diseño de estrategias y soluciones informáticas robustas y seguras.",
-              "Desarrollo de Web Services Restful con Java 8 y Spring Boot 2.",
-              "Implementación de autenticación y autorización con Spring Security y JWT.",
-              "Construcción de aplicaciones con alta disponibilidad y tolerancia a fallos.",
-              "Pruebas unitarias y de integración con JUnit.",
-              "Revisión de código con herramientas como Kiuwan, Fortify y SonarQube.",
-              "Aplicación de estándares OWASP y PCI para asegurar la calidad del software.",
-              "Despliegue de componentes en servidores Oracle Weblogic.",
-              "Referencia técnica para el equipo y áreas de negocio aliadas.",
+              "Diseño de soluciones y estrategias de TI robustas y seguras.",
+              "Desarrollo de Web Services RESTful con Java 8 y Spring Boot 2.",
+              "Implementación de autenticación y autorización robusta con Spring Security y JWT."
             ],
             achievements: [
-              "Migración exitosa de los sistemas de backoffice de Transbank, mejorando eficiencia y mantenibilidad.",
-              "Implementación efectiva de sistemas seguros mediante Spring Security y JWT.",
-              "Desarrollo de aplicaciones robustas y escalables para entornos con alto flujo de datos.",
-              "Reducción de riesgos mediante análisis estático de código y prácticas seguras de desarrollo.",
-              "Consolidación del rol como referente técnico en un entorno regulado y de alta exigencia.",
-            ],
+              "Lideré la modernización y migración de los sistemas de backoffice de Transbank, mejorando drásticamente la mantenibilidad y el rendimiento de la plataforma core bancaria.",
+              "Diseñé e implementé soluciones de alta disponibilidad capaces de gestionar más de 1 millón de transacciones diarias, aplicando estándares de seguridad financiera (OWASP, PCI).",
+              "Actué como referente técnico del equipo, estableciendo estándares de calidad que redujeron la deuda técnica mediante herramientas de análisis estático de código."
+            ]
           },
           {
             company: "Falabella",
@@ -959,52 +783,41 @@ const resources = {
             period: "2015 - 2019",
             location: "Santiago, Chile",
             logo: "/exp/falabella.jpeg",
-            description:
-              "Responsable del desarrollo e integración de soluciones corporativas para diversas unidades de negocio del Grupo Falabella. Lideré proyectos clave orientados a mejorar la eficiencia operativa y la experiencia del usuario interno mediante plataformas personalizadas desarrolladas en Java. Garantizando la continuidad de los procesos y fomentando una cultura organizacional ética, participé activamente en la modernización de los sistemas legados mediante patrones como MVC.",
+            description: "Fui responsable del desarrollo e integración de soluciones corporativas para diversas unidades de negocio del Grupo Falabella. Lideré proyectos clave orientados a mejorar la eficiencia operativa y la experiencia del usuario interno a través de plataformas personalizadas en Java.",
             responsibilities: [
-              "Funciones destacadas",
               "Gestión y desarrollo de requerimientos para unidades de negocio internas.",
-              "Construcción de soluciones web en Java para integrar sistemas legados.",
-              "Aplicación del patrón de diseño MVC en el desarrollo de aplicaciones.",
-              "Participación en el desarrollo e integración de sistemas de Recursos Humanos.",
-              "Supervisión de asignaciones de equipo técnico y proveedores externos.",
-              "Aseguramiento de la continuidad operativa de los procesos corporativos.",
-              "Colaboración directa con distintas áreas para la implementación de soluciones a medida.",
+              "Construcción de soluciones web Java para integrar sistemas legados.",
+              "Supervisión de asignaciones del equipo técnico y proveedores externos.",
+              "Colaboración directa con diferentes áreas para implementar soluciones a medida."
             ],
             achievements: [
-              "Liderazgo en la creación de una plataforma corporativa para la gestión de tiempo libre, aumentando la autonomía de los empleados y mejorando la experiencia laboral.",
-              "Diseño e implementación de una plataforma para la declaración de conflictos de interés dirigida a altos ejecutivos, fortaleciendo la transparencia y la ética corporativa.",
-              "Desarrollo de soluciones web efectivas en Java que facilitaron la integración de sistemas legados, mejorando la interoperabilidad y eficiencia de los sistemas internos del grupo.",
-            ],
+              "Lideré el desarrollo del 'Sistema de Personal y Remuneraciones' (SPR), una plataforma corporativa clave que unificó la gestión de RRHH para más de 50.000 empleados.",
+              "Diseñé e implementé una plataforma para la declaración de conflictos de interés, fortaleciendo la transparencia y la ética corporativa.",
+              "Actué como el principal punto de contacto con stakeholders no técnicos, liderando la toma de requerimientos y traduciendo sus necesidades en soluciones de software orientadas al usuario."
+            ]
           },
           {
             company: "NTT DATA Europe & LATAM",
-            position: "Analista de Soluciones",
+            position: "Analista de Soluciones (para Movistar Chile)",
             period: "2010 - 2014",
             location: "Santiago, Chile",
             logo: "/exp/nttdata.jpeg",
-            description:
-              "Responsable de la migración del portal privado de clientes de Movistar Chile, desarrollando componentes front-end y back-end sobre la plataforma IBM WebSphere. Aporté a la mejora de la experiencia del cliente mediante nuevas funcionalidades, documenté ampliamente el sistema y aseguré el cumplimiento de estándares técnicos y de calidad.",
+            description: "Fui responsable de la migración del portal privado de clientes de Movistar Chile, desarrollando componentes front-end y back-end sobre la plataforma IBM WebSphere, con el objetivo de mejorar la experiencia del cliente y añadir nuevas funcionalidades.",
             responsibilities: [
-              "Funciones destacadas",
-              "Migración del portal privado de clientes para Movistar Chile.",
-              "Desarrollo de portlets front-end (HTML, CSS, JavaScript, JSP) utilizando WebSphere Portlet Factory.",
-              "Despliegue de portlets en IBM WebSphere Portal.",
-              "Desarrollo de Web Services SOAP con Java para back-end, desplegados en IBM WebSphere Application Server.",
+              "Desarrollo de portlets front-end (HTML, CSS, JavaScript, JSP) con WebSphere Portlet Factory.",
+              "Desarrollo de servicios web SOAP con Java para el backend.",
               "Aplicación del patrón de diseño DAO para la abstracción de datos.",
-              "Evaluación de la calidad del código con herramientas como SonarQube.",
-              "Redacción de documentación técnica y guías de usuario para facilitar el mantenimiento y entendimiento del sistema.",
-              "Análisis de requerimientos del cliente y diseño de estrategias de desarrollo acordes.",
+              "Redacción de documentación técnica y guías de usuario."
             ],
             achievements: [
-              "Lideré la migración exitosa del portal de clientes Movistar Chile sobre IBM WebSphere, incorporando nuevas funcionalidades y mejorando notablemente la experiencia de usuario.",
-              "Incrementé la autonomía del cliente mediante interfaces intuitivas y servicios integrados, fortaleciendo la gestión de cuentas y servicios contratados.",
-            ],
-          },
-        ],
+              "Jugué un rol decisivo en la exitosa migración del portal de clientes de Movistar Chile sobre IBM WebSphere, incorporando nuevas funcionalidades.",
+              "Contribuí a una mejora significativa en la experiencia de usuario e incrementé la autonomía del cliente a través de interfaces intuitivas y servicios integrados."
+            ]
+          }
+        ]
       },
       education: {
-        title: "Educación",
+        title: "Educación y Desarrollo Profesional",
         counter: "formaciones",
         educations: [
           {
@@ -1014,27 +827,11 @@ const resources = {
             location: "Online, España",
             logo: "/edu/lidr.jpeg",
             concepts: [
-              "Aplicación de IA en todas las etapas del desarrollo de software.",
-              "Dominio de herramientas como Github Copilot, ChatGPT, Cursor y más.",
-              "Generación de código, documentación y tests con IA.",
-              "Mejora de productividad y calidad del código con IA.",
-              "Proyecto final aplicando IA de forma integral.",
-              "Formación práctica con enfoque profesional y actual.",
-            ],
-          },
-          {
-            institution: "thePower",
-            degree: "Bootcamp en Ciberseguridad",
-            period: "2025",
-            location: "Online, España",
-            logo: "/edu/thepower.jpeg",
-            concepts: [
-              "Fundamentos, amenazas y vectores de ataque.",
-              "Infraestructura, redes, sistemas y scripting.",
-              "Seguridad ofensiva y desarrollo seguro.",
-              "Gestión de incidentes, privacidad y ciberinteligencia.",
-              "Enfoque en empleabilidad y orientación profesional.",
-            ],
+              "Aplicación estratégica de IA en todas las etapas del ciclo de vida del software.",
+              "Dominio avanzado de herramientas de desarrollo asistido por IA (Copilot, ChatGPT, Cursor).",
+              "Generación eficiente de código, documentación y pruebas utilizando IA.",
+              "Metodologías para la mejora de la productividad y calidad del código mediante IA."
+            ]
           },
           {
             institution: "Hackio by thePower",
@@ -1043,15 +840,24 @@ const resources = {
             location: "Online, España",
             logo: "/edu/hackio.jpeg",
             concepts: [
-              "Programación en Python para IA y ML.",
-              "Análisis de datos con Pandas, NumPy, SQL y MongoDB.",
-              "Modelos generativos y NLP con Hugging Face, OpenAI y Google AI.",
-              "Visión por computador, audio y modelos multimodales.",
-              "Backend con Flask y FastAPI.",
-              "Integración en AWS y Azure.",
-              "Agentes conversacionales y cadenas con LangChain.",
-              "Tecnologías RAG para generación aumentada.",
-            ],
+              "Programación avanzada en Python para Inteligencia Artificial y Machine Learning.",
+              "Análisis y manipulación de datos con Pandas, NumPy, SQL y MongoDB.",
+              "Desarrollo de modelos generativos y NLP con Hugging Face y OpenAI.",
+              "Implementación de backend para soluciones de IA con Flask y FastAPI."
+            ]
+          },
+          {
+            institution: "thePower",
+            degree: "Bootcamp en Ciberseguridad",
+            period: "2025",
+            location: "Online, España",
+            logo: "/edu/thepower.jpeg",
+            concepts: [
+              "Comprensión de fundamentos, amenazas y vectores de ataque.",
+              "Seguridad en infraestructura, redes y sistemas.",
+              "Prácticas de seguridad ofensiva y desarrollo seguro (DevSecOps).",
+              "Gestión de incidentes, privacidad y ciberinteligencia."
+            ]
           },
           {
             institution: "Universitat Politècnica de Catalunya",
@@ -1060,12 +866,11 @@ const resources = {
             location: "Barcelona, España",
             logo: "/edu/upc.jpeg",
             concepts: [
-              "Fundamentos claves de IA y tecnologías asociadas.",
-              "Aplicación práctica de modelos de Machine Learning y Redes Neuronales.",
-              "Principales frameworks para desarrollo de modelos de IA.",
-              "Implementación efectiva de proyectos de IA, cubriendo todas las fases desde desarrollo a gestión.",
-              "Análisis de aplicaciones comerciales de IA y su impacto.",
-            ],
+              "Reconocimiento al 'Mejor Proyecto de Fin de Máster' de la promoción.",
+              "Dominio de los fundamentos teóricos y prácticos de la IA.",
+              "Desarrollo y aplicación de modelos de Machine Learning y Redes Neuronales.",
+              "Gestión e implementación de proyectos de IA de extremo a extremo."
+            ]
           },
           {
             institution: "Universidad de Santiago de Chile",
@@ -1074,11 +879,11 @@ const resources = {
             location: "Santiago, Chile",
             logo: "/edu/usach.jpeg",
             concepts: [
-              "Ciencias Básicas: Dominio en matemáticas y física.",
-              "Ingeniería: Experiencia en matemáticas aplicadas, gestión de proyectos y sistemas.",
-              "Informática: Experticia en tecnologías informáticas y redes de comunicación.",
-              "Humanidades y Sociales: Conocimiento en economía, organización, comportamiento humano, ética y bilingüismo.",
-            ],
+              "Reconocimiento como 'Mejor Alumno de la Promoción'.",
+              "Sólida formación en ciencias básicas y matemáticas aplicadas.",
+              "Competencia en gestión de proyectos y sistemas de ingeniería.",
+              "Dominio de tecnologías de la información, algoritmos y arquitecturas de software."
+            ]
           },
           {
             institution: "Universidad de Santiago de Chile",
@@ -1087,28 +892,28 @@ const resources = {
             location: "Santiago, Chile",
             logo: "/edu/usach.jpeg",
             concepts: [
-              "Ciencias Básicas.",
-              "Ciencias de la Ingeniería.",
-              "Ciencias Humanas y Sociales.",
-            ],
+              "Estudios fundacionales en Ciencias Básicas (Cálculo, Álgebra, Física).",
+              "Currículum central en Ciencias de la Ingeniería.",
+              "Estudios complementarios en Ciencias Humanas y Sociales."
+            ]
           },
           {
             institution: "INACAP",
-            degree: "Ingenería en Informática",
+            degree: "Ingeniería en Informática",
             period: "2006 - 2010",
             location: "Santiago, Chile",
             logo: "/edu/inacap.jpeg",
             concepts: [
-              "Creación de soluciones completas apoyadas en ingeniería de software.",
-              "Administración eficaz de recursos técnicos, financieros y humanos.",
-              "Liderazgo fuerte en proyectos tecnológicos y estratégicos.",
-              "Adopción de tecnologías emergentes con el objetivo de promover la transformación digital.",
-            ],
-          },
-        ],
+              "Desarrollo de soluciones de software integrales.",
+              "Administración de recursos técnicos, financieros y humanos.",
+              "Liderazgo en la ejecución de proyectos tecnológicos y estratégicos.",
+              "Aplicación de tecnologías emergentes para la transformación digital."
+            ]
+          }
+        ]
       },
       projects: {
-        title: "Proyectos Destacados",
+        title: "Proyectos Destacos",
         counter: "proyectos",
         more_info: "Más Info",
         external_link: "Link Externo",
@@ -1118,149 +923,70 @@ const resources = {
           all: "Todos",
           bank: "Banca",
           hr: "RRHH",
-          cloud: "Cloud",
-          ai: "IA",
-          telecommunications: "Telecomunicaciones",
-          retail: "Retail"
+          ai: "IA"
         },
         projects: [
           {
-            title: "Andes Online",
-            description:
-              "Transformación estratégica del procesamiento de tarjetas de crédito.",
+            title: "AcuaMattic",
+            description: "IA y Robótica para Acuarios. Este proyecto buscaba crear una herramienta para facilitar la tenencia responsable de acuarios, uniendo la IA con el bienestar social y medioambiental.",
             contents: [
-              "Proyecto migratorio que representa una importante transformación estratégica en el procesamiento de tarjetas de crédito, sustituyendo la plataforma actual por una solución más avanzada proporcionada por un nuevo proveedor.",
-              "Este cambio fundamental no sólo asegurará la continuidad operacional, sino que también mejorará nuestras capacidades tecnológicas y de negocio relacionadas con las tarjetas de crédito.",
-              "El proyecto enfatiza la innovación constante, la mejora en la eficacia operativa y el fortalecimiento de nuestra posición en el mercado para proporcionar a los clientes la mejor experiencia.",
-              "Se espera que esta iniciativa marque el comienzo de una nueva era de excelencia y crecimiento para la organización.",
+              "Como CTO, lideré la creación del sistema de IA desde la concepción hasta las fases iniciales de integración. Mi rol abarcó la creación de un dataset propio (+10.000 imágenes) y el entrenamiento de un modelo CNN (92% de precisión), definiendo la arquitectura para su futura integración con un prototipo de robot.",
+              "El sistema fue diseñado para ofrecer recomendaciones de cuidado personalizadas y basadas en datos, demostrando la aplicación de IA compleja en un producto con un propósito claro."
             ],
-            externalLink: "",
-            githubRepo: "",
+            externalLink: "https://www.elconfidencialdigital.com/monarquia/articulo/an/como-evitar-muerte-miles-millones-peces/20211105193248069486.html",
+            githubRepo: ""
           },
           {
-            title: "AcuaMattic Dataset",
-            description:
-              "Conjunto de datos reales y diversificados para clasificación de peces ornamentales.",
+            title: "JuezSW",
+            description: "IA para Administración Concursal. Este sistema asiste a empresas en suspensión de pagos, que necesitan generar complejos planes de liquidación cumpliendo con una estricta normativa legal para ser presentados ante un juez.",
             contents: [
-              "La necesidad imperante surge por la falta de bancos de imágenes especializados en peces ornamentales, lo que representa un obstáculo para la investigación y desarrollo de tecnologías relacionadas con la preservación y cuidado de estas especies. Además, obtener imágenes y videos variados de ejemplares de una misma especie representa un desafío importante.",
-              "Para abordar este problema se propone la creación de un amplio y diversificado conjunto de datos de imágenes de peces ornamentales, fundamental para el entrenamiento de modelos de clasificación.",
-              "Fases clave: recogida de datos mediante vídeos en entornos controlados; procesamiento usando técnicas de visión artificial para recorte y normalización; y creación del dataset final con imágenes de 30 especies diferentes. Este enfoque evita datos sintéticos, reduce el sobreajuste y mejora la calidad del conjunto resultante.",
+              "Participé en la fase de concepción y diseño, definiendo la arquitectura de un sistema de IA de dos fases: la creación de un dataset mediante el análisis de un corpus legal, y el diseño de un modelo de NLP capaz de interpretar la legislación para generar los planes.",
+              "El concepto fue diseñado para reducir drásticamente el tiempo de elaboración de planes y garantizar el cumplimiento normativo, facilitando procesos de subasta eficientes y legalmente sólidos."
             ],
-            externalLink: "",
-            githubRepo: "",
-          },
-          {
-            title: "AcuaMattic IA & Robótica (Prototipo)",
-            description:
-              "Asistente inteligente para acuarios basado en visión artificial y robótica.",
-            contents: [
-              "El objetivo de este proyecto es mejorar el bienestar social mediante la creación de una herramienta que facilite la adquisición e instalación responsable y sostenible de acuarios para usuarios de todos los niveles, ya sean entusiastas experimentados o recién llegados a la afición.",
-              "Es un modelo clasificador de peces, meticulosamente entrenado con una vasta colección de miles de videos e imágenes que cubren las especies ornamentales más comunes. Este enfoque permite ofrecer un soporte altamente personalizado a cada usuario, adaptado a las características específicas de las especies identificadas en su acuario.",
-              "Una vez que el sistema detecta y reconoce la especie en cuestión, se comunica con un robot instalado en el acuario para recopilar datos precisos sobre los parámetros actuales del agua. A continuación se proporcionan recomendaciones precisas para la configuración óptima de estos parámetros, lo que contribuye al mantenimiento del acuario y al bienestar de las especies que lo habitan.",
-            ],
-            externalLink:
-              "https://www.elconfidencialdigital.com/monarquia/articulo/an/como-evitar-muerte-miles-millones-peces/20211105193248069486.html",
-            githubRepo: "",
-          },
-          {
-            title: "SPR (Sistema de Personal & Remuneraciones)",
-            description:
-              "Sistema corporativo de RRHH para la gestión integral del personal del Grupo Falabella.",
-            contents: [
-              "Sistema de RRHH corporativo, integrado a la intranet corporativa del Grupo Falabella, atendiendo las necesidades de diversos países de América Latina, incluidos Chile, Perú, Colombia, Argentina y Uruguay.",
-              "En esencia, este sistema constituye la columna vertebral de la gestión de empleados, el manejo eficiente del personal y la administración de compensaciones para todas las empresas del Grupo Falabella, que engloba a Falabella Retail, Falabella Financial, Sodimac y Tottus.",
-              "Características clave: Nómina, Dotación de personal, Operaciones de tienda, Finanzas, Logística, Control de acceso.",
-            ],
-            externalLink: "",
-            githubRepo: "",
-          },
-          {
-            title: "Movistar Canal Online",
-            description:
-              "Migración del portal Movistar Chile para mejorar la experiencia y autonomía del cliente.",
-            contents: [
-              "Migración del portal privado para clientes de Movistar Chile utilizando IBM WebSphere, con desarrollo front-end de portlets y back-end de servicios web para ampliar funcionalidades y reducir procesos manuales.",
-              "Key functionalities include detailed access to home and mobile plans, billing information, contracting additional services, pagos seguros en línea y renovación de equipos.",
-              "Esta actualización significativa optimiza la experiencia del cliente, aumentando su autonomía y comodidad en la gestión de servicios y cuentas.",
-            ],
-            externalLink:
-              "https://identity.movistar.cl/login?_gl=1*gan1wb*_gcl_au*MTk4NDIyMjUxNi4xNjkzMDE1NDk5&_ga=2.21479423.531242504.1693015499-1259711125.1693015499",
-            githubRepo: "",
-          },
-          {
-            title: "Electronic Supervisor",
-            description:
-              "Solución de supervisión electrónica para optimizar el proceso de compra en Walmart Chile.",
-            contents: [
-              "Una solución de supervisión electrónica de puntos de venta (POS), diseñada para agilizar el proceso de compra en Walmart Chile (incluidos Líder, Express y Super Bodega a cuenta).",
-              "Esta aplicación está diseñada específicamente para atender las solicitudes de los clientes de forma remota cuando realizan pagos en el mostrador de caja.",
-              "Permite respuestas rápidas a ajustes de precios y cancelaciones de productos durante el proceso de facturación. Esta herramienta está destinada exclusivamente a cajeros y supervisores de supermercados autorizados.",
-            ],
-            externalLink: "",
-            githubRepo: "",
-          },
-          {
-            title: "on-premise2cloud",
-            description:
-              "Migración de infraestructura on-premise a AWS para escalar y modernizar operaciones.",
-            contents: [
-              "La empresa migró sus operaciones a Amazon Web Services (AWS) para abordar desafíos clave como la escalabilidad, el procesamiento masivo de datos y el desarrollo de soluciones de inteligencia artificial.",
-              "El proyecto incluyó la creación de una cuenta empresarial en AWS, migración de datos, automatización de procesos, generación de datasets especializados y configuración de entornos seguros y flexibles.",
-              "Se implementaron servicios como Amazon S3, EC2 y SageMaker, junto con políticas avanzadas de seguridad IAM, logrando una infraestructura moderna, segura y alineada con los objetivos de innovación tecnológica.",
-            ],
-            externalLink: "",
-            githubRepo: "",
-          },
-          {
-            title: "Time & Attendance (T&A)",
-            description:
-              "Sistema de asistencia digital para mejorar la gestión y experiencia laboral en múltiples países.",
-            contents: [
-              "Sistema de Gestión de Asistencia Corporativa, diseñado para mejorar la experiencia general de los empleados en diferentes países (Chile, Perú y Colombia) y diversos negocios del grupo Falabella (incluyendo Falabella Retail, Sodimac, Tottus, Falabella Financial, Mall Plaza, Falabella.com, Corporativo Falabella e IKEA).",
-              "La implementación de esta tecnología de vanguardia se alinea con las necesidades actuales de asistencia de la fuerza laboral, enfatizando los métodos de registro remoto para promover canales digitales (a través de aplicaciones y web), reduciendo así la dependencia de dispositivos biométricos. También proporciona datos vitales para la gestión de varios indicadores de desempeño asociados, ayudando en el cálculo de asistencia y facilitando una gestión eficiente de los turnos.",
-              "Objetivos claves: velar por el cumplimiento legal, adquirir datos para optimizar turnos, recopilar métricas como ausentismo y horas extras, e introducir el registro remoto. KPIs: satisfacción de los empleados, horas extras, tasas de absentismo, registros en disputa y tiempo dedicado a conciliación mensual.",
-            ],
-            externalLink: "",
-            githubRepo: "",
+            externalLink: "https://digitalfinanzas.com/estilo-de-vida/la-tormenta-perfecta-esta-a-punto-de-llegar-a-espana/",
+            githubRepo: ""
           },
           {
             title: "Motor de Facultades",
-            description:
-              "Solución bancaria para análisis legal automatizado en PDF.",
+            description: "Análisis Legal con IA. Una solución bancaria diseñada para acelerar el análisis de documentos legales y así personalizar la oferta de productos a clientes del sector PYME.",
             contents: [
-              "Este proyecto consiste en el desarrollo de una avanzada solución bancaria para el sector corporativo con la función principal de procesar y analizar detalladamente documentos PDF con autorizaciones legales.",
-              "Esta tecnología permite la personalización precisa de productos y servicios para los clientes, al aprovechar la información obtenida.",
-              "Esta solución resulta en una mejora significativa en la optimización de procesos comerciales existentes y una mayor eficiencia en la toma de decisiones.",
+              "Lideré una Prueba de Concepto (PoC) aplicando técnicas de NLP y Visión por Computador para extraer y analizar automáticamente la información de los PDFs.",
+              "La PoC demostró una mejora radical en la eficiencia del procesamiento, permitiendo una toma de decisiones de negocio más rápida y precisa basada en datos."
             ],
             externalLink: "",
-            githubRepo: "",
+            githubRepo: ""
           },
           {
-            title: "S-Box",
-            description:
-              "Un entorno para analizar vídeos relacionados con episodios de sonrisas.",
+            title: "Time & Attendance",
+            description: "Sistema Corporativo de RRHH. Una plataforma de asistencia digital multi-país para el Grupo Falabella, que necesitaba modernizar su seguimiento de asistencia para más de 50.000 empleados y obtener mejores insights operativos.",
             contents: [
-              "El Proyecto S-Box es una solución innovadora en Computación Afectiva que utiliza Inteligencia Artificial y Visión por Computadora para analizar minuciosamente videos con sonrisas.",
-              "Incluye análisis avanzado de sonrisas, captura multimodal, sincronización automática precisa, filtrado inteligente de sonrisas, generación de secuencias y visualización avanzada con IA.",
-              "S-Box impulsa la comprensión de emociones humanas en interacciones tecnológicas, siendo una herramienta clave para investigadores y profesionales en entornos experimentales controlados.",
+              "Como Líder Técnico, orquesté el ciclo de vida completo del producto, desde la descomposición de sistemas legados hasta el diseño de una arquitectura de microservicios basada en eventos y la integración con un proveedor SaaS.",
+              "El sistema mejoró significativamente la eficiencia operativa en la gestión de turnos y el seguimiento de KPIs (ausentismo, horas extras), mientras mejoraba la experiencia del empleado."
             ],
             externalLink: "",
-            githubRepo: "https://github.com/aandmaldonado/S-Box",
+            githubRepo: ""
           },
           {
-            title: "Anulaciones 2.0",
-            description:
-              "Sistema de backoffice para gestión de cancelaciones de ventas en Transbank.",
+            title: "Migración Transbank",
+            description: "Modernización de Backoffice Bancario. El sistema de backoffice transaccional de Transbank requería una revisión mayor para mejorar la mantenibilidad, el rendimiento y la seguridad en un entorno de alto volumen.",
             contents: [
-              "Este sistema es parte del backoffice transaccional de Transbank, diseñado específicamente para procesar solicitudes de cancelación de ventas.",
-              "Solicitudes de cancelación: inicie sin esfuerzo solicitudes de cancelación individuales y cancelaciones por lotes cargando archivos. Las cancelaciones pueden ser totales (cubriendo todo el importe de la venta) o parciales (por importes inferiores al valor total de la venta).",
-              "Registro de cancelaciones masivas: recupere fácilmente un historial detallado de todas las solicitudes de cancelación masiva realizadas por un comerciante específico.",
-              "Informe de auditoría: revise cómodamente un registro completo de solicitudes de cancelación, tanto individuales como masivas, que abarca hasta 1 año de datos históricos.",
+              "Jugué un papel clave en la migración del sistema legado a una arquitectura moderna de microservicios (Java), diseñando soluciones de alta disponibilidad para más de 1 millón de transacciones diarias.",
+              "La migración resultó en una plataforma más eficiente, escalable y segura, reduciendo significativamente la deuda técnica y los riesgos operativos para el cliente."
             ],
             externalLink: "https://www.youtube.com/watch?v=Nu-q-zOvibA",
-            githubRepo: "",
+            githubRepo: ""
           },
-        ],
+          {
+            title: "Andes Online",
+            description: "Transformación de Plataforma de Pagos. Un proyecto estratégico para modernizar la plataforma de procesamiento de tarjetas y asegurar la continuidad operativa en el mercado.",
+            contents: [
+              "Como Especialista en Integración, estoy liderando la modernización del backend, diseñando una arquitectura de microservicios resiliente y asegurando la integración fluida entre los sistemas legados y la nueva plataforma.",
+              "Como proyecto actualmente en desarrollo, mi rol se centra en garantizar que la integración sea exitosa y escalable, con el objetivo de mejorar la eficiencia operativa y la experiencia del cliente."
+            ],
+            externalLink: "",
+            githubRepo: ""
+          }
+        ]
       },
       skills: {
         title: "Habilidades",
@@ -1482,11 +1208,9 @@ const resources = {
         },
       ],
       footer: {
-        slogan: "Resolviendo problemas con tecnologIA",
-        made_with: "Impulsado con IA",
-        copyright:
-          "© {year} almap[i]. Todos los derechos reservados",
-        text: "CV generado automáticamente por almap[i] | almapi.dev"
+        slogan: "Ingeniería de Producto Impulsada por IA",
+        made_with: "Diseñado y construido por almap[i]",
+        copyright: "© {year}. Todos los derechos reservados"
       },
       chatbot: {
         name: "Álvaro Maldonado",
@@ -1497,20 +1221,16 @@ const resources = {
       },
       contact: {
         title: "¡Conectemos!",
-        subtitle:
-          "¿Te interesa trabajar juntos o tienes una propuesta? ¡Contáctame!",
+        subtitle: "¿Te interesa trabajar juntos o tienes una propuesta? ¡Contáctame!",
+        slogan: "Ingeniería de producto impulsada por IA",
         ariaFront: "Tarjeta de presentación: anverso",
         ariaBack: "Tarjeta de presentación: reverso",
-        front: {
-          name: "Álvaro Andrés Maldonado Pinto",
-          role: "Senior Software Engineer | AI-Powered Dev | Product Engineer",
-        },
         back: {
           email: "readme.md@almapi.dev",
-          whatsapp: "+34 641 96 23 96",
           linkedin: "https://www.linkedin.com/in/almapidev/",
-          city: "Gandia, Spain",
-        },
+          github: "https://github.com/aandmaldonado",
+          city: "Gandía, España"
+        }
       },
     },
   },
