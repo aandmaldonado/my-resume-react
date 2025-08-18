@@ -4,7 +4,6 @@ interface CVData {
   email: string
   linkedin: string
   web: string
-  phone: string
   github: string
   about: string[]
   experience: any[]
@@ -29,7 +28,6 @@ const prepareCVData = (language: string): CVData => {
       email: contactInfo.email || "readme.md@almapi.dev",
       linkedin: contactInfo.linkedin || "https://www.linkedin.com/in/almapidev/",
       web: contactInfo.web || "https://almapi.dev",
-      phone: contactInfo.phone || "+34 641962396",
       github: contactInfo.github || "https://github.com/aandmaldonado",
       about: about || [],
       experience: experiences || [],
@@ -77,8 +75,7 @@ const getContactInfoFromI18n = (language: string): any => {
       email: cv.contact?.email,
       linkedin: cv.contact?.linkedin,
       web: cv.contact?.portfolio,
-      github: cv.contact?.github,
-      phone: cv.contact?.phone,
+      github: cv.contact?.github
     };
     
     // Verify all required fields are present
@@ -432,10 +429,6 @@ export const generateCVHTML = (language: string): string => {
         
         <!-- Contact Info -->
         <div class="contact-info" style="page-break-after: avoid; break-after: avoid;">
-            <div class="contact-item">
-                <i class="fas fa-phone contact-icon"></i>
-                <span class="contact-value">${data.phone}</span>
-            </div>
             <span class="contact-separator">&nbsp;</span>
             <div class="contact-item">
                 <i class="fas fa-envelope contact-icon"></i>

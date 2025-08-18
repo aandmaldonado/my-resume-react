@@ -4,6 +4,8 @@
 
 Crear un CV que sea **100% compatible con sistemas ATS** mientras mantiene un **diseño limpio, profesional y atractivo** para reclutadores humanos. El equilibrio perfecto entre funcionalidad técnica y estética visual, optimizado para máximo 2 páginas en formato A4.
 
+> **Nota:** Este documento contiene ejemplos genéricos y placeholders para demostrar la estructura del CV. Reemplaza todos los datos de ejemplo con tu información personal real.
+
 ---
 
 ## 📋 Reglas Fundamentales ATS
@@ -158,15 +160,15 @@ body { line-height: 1.3; }     /* Reducido para ahorrar espacio */
 ```html
 <!-- Estructura HTML recomendada -->
 <div class="cv-header">
-  <h1 class="cv-name">Álvaro Andrés Maldonado Pinto</h1>
-  <h2 class="cv-title">Senior Software Engineer | AI-Powered Developer | Product Engineer</h2>
+  <h1 class="cv-name">[TU_NOMBRE_COMPLETO]</h1>
+  <h2 class="cv-title">[TU_TITULO_PROFESIONAL] | [ESPECIALIDAD_1] | [ESPECIALIDAD_2]</h2>
   <div class="cv-contact">
-    <span>📍 Gandia, Spain</span>
-    <span>📱 +34 641 96 23 96</span>
-    <span>✉️ readme.md@almapi.dev</span>
-    <span>🌐 almapi.dev</span>
-    <span>💼 linkedin.com/in/almapidev</span>
-    <span>📚 github.com/aandmaldonado</span>
+    <span>📍 [CIUDAD], [PAIS]</span>
+    <span>📱 [TU_TELEFONO]</span>
+    <span>✉️ [TU_EMAIL]</span>
+    <span>🌐 [TU_WEBSITE]</span>
+    <span>💼 linkedin.com/in/[TU_LINKEDIN]</span>
+    <span>📚 github.com/[TU_GITHUB]</span>
   </div>
 </div>
 ```
@@ -227,25 +229,25 @@ body { line-height: 1.3; }     /* Reducido para ahorrar espacio */
   
   <div class="experience-item">
     <div class="experience-header">
-      <h4 class="job-title">Senior Software Engineer</h4>
-      <span class="company-name">InAdvance Consulting Group</span>
-      <span class="job-period">2024 - Present</span>
-      <span class="job-location">Santiago, Chile</span>
+      <h4 class="job-title">[PUESTO_ACTUAL]</h4>
+      <span class="company-name">[NOMBRE_EMPRESA_ACTUAL]</span>
+      <span class="job-period">[AÑO_INICIO] - Present</span>
+      <span class="job-location">[CIUDAD_EMPLEO], [PAIS_EMPLEO]</span>
     </div>
     
     <ul class="job-achievements">
-      <li>[Logro 1]</li>
-      <li>[Logro 2]</li>
-      <li>[Logro 3]</li>
-      <li>[Logro 4]</li>
-      <li>[Logro 5]</li> <!-- Mostrar TODOS los bullets -->
+      <li>[Logro profesional 1 - Describir impacto cuantificable]</li>
+      <li>[Logro profesional 2 - Describir responsabilidades clave]</li>
+      <li>[Logro profesional 3 - Describir tecnologías implementadas]</li>
+      <li>[Logro profesional 4 - Describir liderazgo o colaboración]</li>
+      <li>[Logro profesional 5 - Describir resultados medibles]</li> <!-- Mostrar TODOS los bullets -->
     </ul>
     
     <div class="job-technologies">
-      <span class="tech-tag">Java</span>
-      <span class="tech-tag">Spring Boot</span>
-      <span class="tech-tag">Microservices</span>
-      <!-- ... más tecnologías -->
+      <span class="tech-tag">[TECNOLOGIA_1]</span>
+      <span class="tech-tag">[TECNOLOGIA_2]</span>
+      <span class="tech-tag">[TECNOLOGIA_3]</span>
+      <!-- ... más tecnologías relevantes para el puesto -->
     </div>
   </div>
 </div>
@@ -356,10 +358,10 @@ body { line-height: 1.3; }     /* Reducido para ahorrar espacio */
   
   <div class="education-item">
     <div class="education-header">
-      <h4 class="degree-name">Master in Artificial Intelligence</h4>
-      <span class="university-name">Universitat Politècnica de Catalunya</span>
-      <span class="education-period">2020 - 2021</span>
-      <span class="education-location">Barcelona, Spain</span>
+      <h4 class="degree-name">[NOMBRE_TITULO_ACADEMICO]</h4>
+      <span class="university-name">[NOMBRE_UNIVERSIDAD_INSTITUCION]</span>
+      <span class="education-period">[AÑO_INICIO] - [AÑO_FIN]</span>
+      <span class="education-location">[CIUDAD_EDUCACION], [PAIS_EDUCACION]</span>
     </div>
   </div>
 </div>
@@ -389,10 +391,10 @@ body { line-height: 1.3; }     /* Reducido para ahorrar espacio */
   
   <div class="languages">
     <div class="language-item">
-      <span><strong>Spanish:</strong> Native</span>
+      <span><strong>[IDIOMA_1]:</strong> [NIVEL_IDIOMA_1]</span>
     </div>
     <div class="language-item">
-      <span><strong>English:</strong> Professional Working Proficiency</span>
+      <span><strong>[IDIOMA_2]:</strong> [NIVEL_IDIOMA_2]</span>
     </div>
   </div>
 </div>
@@ -416,7 +418,7 @@ body { line-height: 1.3; }     /* Reducido para ahorrar espacio */
 ### 7. FOOTER
 ```html
 <div class="footer">
-  CV dinámico y optimizado para ATS | Generado por almap[i] en almapi.dev
+  CV dinámico y optimizado para ATS | Generado por [TU_NOMBRE] en [TU_WEBSITE]
 </div>
 ```
 
@@ -615,7 +617,7 @@ const openCVPreview = () => {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>CV - Álvaro Maldonado | Vista Previa</title>
+  <title>CV - [TU_NOMBRE] | Vista Previa</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/cv-styles.css">
@@ -728,7 +730,7 @@ const downloadPDF = async () => {
   try {
     const opt = {
       margin: [10, 10, 10, 10],
-      filename: 'CV_Alvaro_Maldonado.pdf',
+      filename: 'CV_[TU_NOMBRE].pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -757,7 +759,7 @@ const downloadTXT = () => {
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'CV_Alvaro_Maldonado.txt';
+  a.download = 'CV_[TU_NOMBRE].txt';
   a.click();
   
   // Limpiar
@@ -779,7 +781,7 @@ const downloadHTML = () => {
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>CV - Álvaro Maldonado</title>
+  <title>CV - [TU_NOMBRE]</title>
   <style>
     ${getComputedStyles()}
   </style>
@@ -793,7 +795,7 @@ const downloadHTML = () => {
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'CV_Alvaro_Maldonado.html';
+  a.download = 'CV_[TU_NOMBRE].html';
   a.click();
   
   window.URL.revokeObjectURL(url);

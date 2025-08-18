@@ -6,35 +6,29 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: 'almap[i]',
-    template: '%s | Álvaro Maldonado',
+    default: 'Alvaro Maldonado | Product Engineer & AI',
+    template: '%s | Alvaro Maldonado',
   },
-  description: 'Álvaro Maldonado | Senior Software Engineer & AI-Powered Engineer',
+  description: 'Portfolio of Alvaro Maldonado, a Senior Software Engineer and Product Engineer. Explore AI projects focused on solving complex business problems across diverse industries.',
   keywords: [
-    'Álvaro Maldonado',
+    'Alvaro Maldonado',
+    'Product Engineer',
     'Senior Software Engineer',
     'AI Specialist',
-    'Machine Learning Engineer',
-    'Java Developer',
-    'Spring Boot',
-    'AWS Cloud',
-    'DevOps Engineer',
-    'Full Stack Developer',
-    'Inteligencia Artificial',
-    'Ciencia de Datos',
-    'Desarrollo de Software',
-    'Backend Development',
-    'Cloud Architecture',
+    'Technical Leadership',
     'Software Architecture',
-    'Microservices',
-    'API Development',
-    'Big Data',
-    'Deep Learning',
-    'Neural Networks'
+    'Artificial Intelligence',
+    'Machine Learning',
+    'Enterprise AI',
+    'Java',
+    'Python',
+    'Spring Boot',
+    'AWS',
+    'Microservices'
   ],
   authors: [
     {
-      name: 'Álvaro Maldonado',
+      name: 'Alvaro Maldonado',
       url: 'https://almapi.dev',
     },
   ],
@@ -50,8 +44,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'almap[i]',
-    description: 'Álvaro Maldonado | Senior Software Engineer & AI-Powered Engineer',
+    title: 'Alvaro Maldonado | Product Engineer & AI',
+    description: 'Portfolio of a Senior Software Engineer and Product Engineer. Explore AI projects focused on solving complex business problems across diverse industries.',
     url: 'https://almapi.dev',
     siteName: 'almap[i]',
     images: [
@@ -59,16 +53,16 @@ export const metadata: Metadata = {
         url: 'https://almapi.dev/about/profile2.jpg',
         width: 320,
         height: 320,
-        alt: 'Álvaro Maldonado - Senior Software Engineer & AI-Powered Engineer',
+        alt: 'Profile picture of Alvaro Maldonado, a Product Engineer and AI expert.',
       },
       {
         url: 'https://almapi.dev/icon/logo.svg',
         width: 1200,
         height: 630,
-        alt: 'almap[i] - Portfolio de Álvaro Maldonado',
+        alt: 'Logo of almap[i] - Portfolio of Alvaro Maldonado.',
       }
     ],
-    locale: 'es_ES',
+    locale: 'en_US',
     type: 'website',
   },
   icons: {

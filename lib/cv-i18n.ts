@@ -4,7 +4,6 @@ export const cvResources = {
       fullName: "Álvaro Andrés Maldonado Pinto",
       degree: "Computer Science Engineer | Software Engineer | AI-Powered Developer",
       contact: {
-        phone: "+34 641962396",
         email: "readme.md@almapi.dev",
         portfolio: "almapi.dev",
         linkedin: "@almapidev",
@@ -153,7 +152,6 @@ export const cvResources = {
       fullName: "Álvaro Andrés Maldonado Pinto",
       degree: "Ingeniero en Informática | Ingeniero de Software | Desarrollador Impulsado por IA",
       contact: {
-        phone: "+34 641962396",
         email: "readme.md@almapi.dev",
         portfolio: "almapi.dev",
         linkedin: "@almapidev",
