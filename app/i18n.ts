@@ -616,6 +616,19 @@ const resources = {
           city: "Gandia, Spain"
         }
       },
+      captcha: {
+        title: "Verify you're human",
+        subtitle: "Click verify to confirm you are human",
+        placeholder: "Your answer",
+        verify: "Verify",
+        cancel: "Cancel",
+        attempts: "Attempts",
+        new_question: "New Question",
+        too_many_attempts: "Too many failed attempts. You can wait {minutes} minutes or reset now.",
+        rate_limit_exceeded: "Rate limit exceeded. You can wait or reset now.",
+        suspicious_activity: "Suspicious activity detected. Too many attempts in one hour.",
+        reset: "Reset"
+      },
     }
   },
   es: {
@@ -1231,6 +1244,19 @@ const resources = {
           github: "https://github.com/aandmaldonado",
           city: "Gandía, España"
         }
+      },
+      captcha: {
+        title: "Verifica que eres humano",
+        subtitle: "Haz clic en verificar para confirmar que eres humano",
+        placeholder: "Tu respuesta",
+        verify: "Verificar",
+        cancel: "Cancelar",
+        attempts: "Intentos",
+        new_question: "Nueva Pregunta",
+        too_many_attempts: "Demasiados intentos fallidos. Puedes esperar {minutes} minutos o reiniciar ahora.",
+        rate_limit_exceeded: "Límite de descargas excedido. Puedes esperar o reiniciar ahora.",
+        suspicious_activity: "Actividad sospechosa detectada. Demasiados intentos en una hora.",
+        reset: "Reiniciar"
       },
     },
   },
