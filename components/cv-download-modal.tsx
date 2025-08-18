@@ -421,8 +421,7 @@ export default function CVDownloadModal() {
         {downloadCount > 0 && (
           <div className="flex items-center gap-1 text-xs text-gray-100">
             <Shield className="w-3 h-3 flex-shrink-0" />
-            <span className="hidden xs:inline">{downloadCount}/{RATE_LIMIT.maxDownloads}</span>
-            <span className="xs:hidden">{downloadCount}</span>
+            <span>{downloadCount}/{RATE_LIMIT.maxDownloads}</span>
           </div>
         )}
     </div>
