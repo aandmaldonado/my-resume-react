@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { Moon, Sun, Menu, X, BrainCircuit } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
@@ -65,24 +64,39 @@ export default function Header() {
   }, [mounted]);
 
   const scrollToSection = (sectionId: string) => {
+    // Cerrar el menú móvil
+    setIsMenuOpen(false)
+    
+    // Hacer scroll a la sección
     const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView({ 
+        behavior: "smooth",
+        block: "start"
+      })
     }
-    setIsMenuOpen(false)
   }
 
   const currentLanguage = languages.find((lang) => lang.code === i18n.language) || languages[0]
 
   if (!mounted) return null
 
+  // Estilos idénticos para header y menú desplegable
+  const headerStyle = "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md"
+  const menuStyle = "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md" // Exactamente igual al header ni sombra
+  
   return (
-    <header className="fixed top-2 xs:top-4 left-1/2 transform -translate-x-1/2 z-50 w-[calc(100vw-1rem)] xs:w-[calc(100vw-2rem)] sm:w-[calc(100vw-3rem)] md:w-[calc(100vw-4rem)] lg:w-[calc(100vw-6rem)] xl:w-[calc(100vw-8rem)] max-w-6xl rounded-xl xs:rounded-2xl bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md px-3 xs:px-4 sm:px-6 py-2 overflow-hidden">
+    <header className={`fixed top-2 xs:top-4 left-1/2 transform -translate-x-1/2 z-50 w-[calc(100vw-1rem)] xs:w-[calc(100vw-2rem)] sm:w-[calc(100vw-3rem)] md:w-[calc(100vw-4rem)] lg:w-[calc(100vw-6rem)] xl:w-[calc(100vw-8rem)] max-w-6xl ${headerStyle} px-3 xs:px-4 sm:px-6 py-2 sm:py-3 lg:py-4 overflow-visible rounded-xl xs:rounded-2xl ${
+      isMenuOpen ? 'pb-4' : '' // Más padding inferior cuando menú está abierto
+    }`} style={{
+      backdropFilter: 'blur(12px)', // CSS personalizado que funciona
+      WebkitBackdropFilter: 'blur(12px)' // Soporte para Safari
+    }}>
       <div className="flex items-center w-full justify-between gap-2">
         {/* Logo */}
         <div className="flex items-center flex-shrink-0">
-          <BrainCircuit className="w-5 h-5 xs:w-6 xs:h-6 text-blue-600 dark:text-blue-400 mr-1.5 xs:mr-2" />
-          <span className="text-lg xs:text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+          <BrainCircuit className="w-5 h-5 xs:w-6 xs:h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-blue-600 dark:text-blue-400 mr-1.5 xs:mr-2" />
+          <span className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
             almap<span className="text-blue-600">[i]</span>
           </span>
         </div>
@@ -100,14 +114,14 @@ export default function Header() {
           ))}
         </nav>
         
-        {/* Controles */}
+        {/* Controles - 3 botones en mobile, 2 en desktop */}
         <div className="flex items-center gap-1 xs:gap-2 flex-shrink-0">
-          {/* Idioma - Solo visible en desktop */}
+          {/* Idioma - Visible en todos los dispositivos */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="hidden lg:flex text-xs min-h-[32px] h-8 px-2">
+              <button className="inline-flex items-center justify-center rounded-md text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8 sm:h-9 sm:w-9 p-0">
                 {currentLanguage.code.toUpperCase()}
-              </Button>
+              </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               {languages.map((lang) => (
@@ -126,83 +140,69 @@ export default function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
           
-          {/* Dark mode */}
-          <Button
-            variant="outline"
-            size="sm"
+          {/* Dark mode - Visible en todos los dispositivos */}
+          <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="min-h-[32px] h-8 w-8 p-0"
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8 sm:h-9 sm:w-9 p-0"
           >
             {theme === "dark" ? (
-              <Sun className="h-3 w-3" />
+              <Sun className="h-4 w-4 sm:h-5 sm:w-5" />
             ) : (
-              <Moon className="h-3 w-3" />
+              <Moon className="h-4 w-4 sm:h-5 sm:w-5" />
             )}
-          </Button>
+          </button>
           
-          {/* Mobile Menu Toggle */}
-          <Button
-            variant="outline"
-            size="sm"
-            className="lg:hidden min-h-[32px] h-8 w-8 p-0"
+          {/* Mobile Menu Toggle - Solo visible en mobile */}
+          <button
+            className="lg:hidden inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8 sm:h-9 sm:w-9 p-0"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle mobile menu"
           >
             {isMenuOpen ? (
-              <X className="h-3 w-3" />
+              <X className="h-4 w-4 sm:h-5 sm:w-5" />
             ) : (
-              <Menu className="h-3 w-3" />
+              <Menu className="h-4 w-4 sm:h-5 sm:w-5" />
             )}
-          </Button>
+          </button>
+          
+
         </div>
       </div>
 
-      {/* Mobile Navigation - Mejorado y optimizado */}
-      {isMenuOpen && (
-        <div className="lg:hidden mt-3 xs:mt-4 pb-3 xs:pb-4 border-t border-gray-200 dark:border-gray-700 pt-3 xs:pt-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-lg">
-          <div className="flex flex-col space-y-2 xs:space-y-3">
-            {/* Navegación principal */}
-            {SECTION_IDS.map((id) => (
-              <button
-                key={id}
-                onClick={() => scrollToSection(id)}
-                className={`text-left p-2.5 xs:p-3 rounded-lg transition-all duration-200 min-h-[44px] flex items-center justify-between w-full ${
-                  activeSection === id
-                    ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 font-semibold shadow-sm"
-                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
-                }`}
-              >
-                <span className="text-sm xs:text-base font-medium">{t(`nav.${id === "hero" ? "home" : id}`)}</span>
-                {activeSection === id && (
-                  <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full flex-shrink-0"></div>
-                )}
-              </button>
-            ))}
-            
-            {/* Separador */}
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-2 xs:pt-3 mt-1 xs:mt-2">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 xs:mb-3 px-2 xs:px-3 font-medium">IDIOMA</p>
+      {/* Mobile Navigation - Completamente transparente para integración perfecta */}
+      <div className={`lg:hidden mt-0 pb-2 xs:pb-3 pt-0 bg-transparent rounded-b-xl xs:rounded-b-2xl transition-all duration-700 ease-in-out ${
+        isMenuOpen 
+          ? 'opacity-100 max-h-96 translate-y-0' 
+          : 'opacity-0 max-h-0 translate-y-[-20px] pointer-events-none'
+      }`} style={{
+        marginTop: isMenuOpen ? '-1px' : '0px' // Conectar perfectamente con el header
+      }}>
+        <div className="flex flex-col space-y-1 xs:space-y-2">
+          {/* Navegación principal - Estilo Devin.ai con punto a la izquierda */}
+          {SECTION_IDS.map((id) => (
+            <button
+              key={id}
+              onClick={() => scrollToSection(id)}
+              className={`text-left p-3 xs:p-4 rounded-lg transition-all duration-200 min-h-[44px] flex items-center w-full ${
+                activeSection === id
+                  ? "text-blue-600 dark:text-blue-400 font-semibold"
+                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+              }`}
+            >
+              {/* Punto indicador a la izquierda - Estilo Devin.ai */}
+              <div className={`w-2 h-2 rounded-full mr-4 flex-shrink-0 ${
+                activeSection === id
+                  ? "bg-blue-600 dark:bg-blue-400"
+                  : "bg-gray-300 dark:bg-gray-600"
+              }`}></div>
               
-              {/* Mobile Language Selector - Mejorado */}
-              <div className="grid grid-cols-2 gap-2 px-2 xs:px-3">
-                {languages.map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => i18n.changeLanguage(lang.code)}
-                    className={`p-2.5 xs:p-3 rounded-lg text-sm font-medium transition-all duration-200 min-h-[44px] ${
-                      i18n.language === lang.code
-                        ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 border-2 border-blue-200 dark:border-blue-700"
-                        : "text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700"
-                    }`}
-                  >
-                    {lang.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
+              <span className="text-sm xs:text-base font-medium">{t(`nav.${id === "hero" ? "home" : id}`)}</span>
+            </button>
+          ))}
+          
+          
         </div>
-      )}
+      </div>
     </header>
   );
 }
