@@ -292,4 +292,4 @@ dist
 .turbo
 
 # Local development
-.qodo
+.qodo.env.local

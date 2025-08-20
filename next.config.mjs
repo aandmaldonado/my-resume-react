@@ -7,6 +7,16 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false, // Enable type checking
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'media.licdn.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
   // Security headers
   async headers() {
     return [
