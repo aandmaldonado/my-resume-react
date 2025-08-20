@@ -1,14 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: 'standalone', // Enable standalone output for Cloud Run
   eslint: {
     ignoreDuringBuilds: false, // Enable security checks
   },
   typescript: {
     ignoreBuildErrors: false, // Enable type checking
-  },
-  images: {
-    unoptimized: true,
   },
   // Security headers
   async headers() {
