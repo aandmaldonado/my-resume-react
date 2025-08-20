@@ -86,7 +86,7 @@ export default function Header() {
   const menuStyle = "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md" // Exactamente igual al header ni sombra
   
   return (
-    <header className={`fixed top-2 xs:top-4 left-1/2 transform -translate-x-1/2 z-50 w-[calc(100vw-1rem)] xs:w-[calc(100vw-2rem)] sm:w-[calc(100vw-3rem)] md:w-[calc(100vw-4rem)] lg:w-[calc(100vw-6rem)] xl:w-[calc(100vw-8rem)] max-w-6xl ${headerStyle} px-3 xs:px-4 sm:px-6 py-2 sm:py-3 lg:py-4 overflow-visible rounded-xl xs:rounded-2xl ${
+    <header className={`fixed top-2 xs:top-4 left-1/2 transform -translate-x-1/2 z-[9999] w-[calc(100vw-1rem)] xs:w-[calc(100vw-2rem)] sm:w-[calc(100vw-3rem)] md:w-[calc(100vw-4rem)] lg:w-[calc(100vw-6rem)] xl:w-[calc(100vw-8rem)] max-w-6xl ${headerStyle} px-3 xs:px-4 sm:px-6 py-2 sm:py-3 lg:py-4 overflow-visible rounded-xl xs:rounded-2xl ${
       isMenuOpen ? 'pb-4' : '' // Más padding inferior cuando menú está abierto
     }`} style={{
       backdropFilter: 'blur(12px)', // CSS personalizado que funciona
@@ -172,7 +172,7 @@ export default function Header() {
       {/* Mobile Navigation - Completamente transparente para integración perfecta */}
       <div className={`lg:hidden mt-0 pb-2 xs:pb-3 pt-0 bg-transparent rounded-b-xl xs:rounded-b-2xl transition-all duration-700 ease-in-out ${
         isMenuOpen 
-          ? 'opacity-100 max-h-96 translate-y-0' 
+          ? 'opacity-100 max-h-[80vh] translate-y-0' 
           : 'opacity-0 max-h-0 translate-y-[-20px] pointer-events-none'
       }`} style={{
         marginTop: isMenuOpen ? '-1px' : '0px' // Conectar perfectamente con el header

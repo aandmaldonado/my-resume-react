@@ -25,8 +25,8 @@ export default function AboutSection() {
   const collaborationReasons = t("about.collaboration_reasons", { returnObjects: true }) as string[];
 
   return (
-    <section id="about" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4">
+    <section id="about" className="relative -mt-11 pt-11 pb-20 bg-gray-50 dark:bg-gray-800">
+      <div className="container mx-auto px-4 pt-8 sm:pt-16">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-3">
             <CircleUser className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400" />

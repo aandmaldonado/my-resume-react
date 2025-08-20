@@ -18,7 +18,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
   const slogan = t('contact.slogan')
 
   return (
-    <section id="contact" className="w-full py-16 bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">
+    <section id="contact" className="w-full py-16 bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center pt-8 sm:pt-14">
       <h2 className="flex items-center justify-center gap-3 text-2xl xs:text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-2">
         <Mail className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400" aria-hidden="true" />
         {title}

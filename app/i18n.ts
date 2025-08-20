@@ -391,7 +391,7 @@ const resources = {
         },
         languages: {
           title: "Languages",
-          skills: "Spanish Native, English B1-B2",
+          skills: "Spanish Native, English Professional Working Proficiency",
         },
         api_design: {
           title: "API Design",
@@ -1020,7 +1020,7 @@ const resources = {
         },
         languages: {
           title: "Idiomas",
-          skills: "Español Nativo, Inglés B1-B2",
+          skills: "Español Nativo, Inglés Competencia Profesional",
         },
         api_design: {
           title: "API Design",

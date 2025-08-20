@@ -98,12 +98,15 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-10">
         <ArrowDown
           className="w-8 h-8 text-white animate-bounce cursor-pointer"
           onClick={() => scrollToSection("about")}
         />
       </div>
+      
+      {/* Negative margin bottom to allow next section overlap */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 -mb-32"></div>
     </section>
   )
 }
