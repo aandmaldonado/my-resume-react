@@ -13,11 +13,11 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'docker build --tag="europe-west1-docker.pkg.dev/almapidev/cloud-run-source-deploy/my-resume-react/my-resume-react:latest" --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt) .'
+      - 'docker build --tag="gcr.io/almapidev/my-resume-react:latest" --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt) .'
 
-  # 3. Sube la imagen a Artifact Registry
+  # 3. Sube la imagen a Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-west1-docker.pkg.dev/almapidev/cloud-run-source-deploy/my-resume-react/my-resume-react:latest']
+    args: ['push', 'gcr.io/almapidev/my-resume-react:latest']
 
   # 4. Despliega la imagen final en Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -27,7 +27,7 @@ steps:
       - 'deploy'
       - 'my-resume-react'
       - '--image'
-      - 'europe-west1-docker.pkg.dev/almapidev/cloud-run-source-deploy/my-resume-react/my-resume-react:latest'
+      - 'gcr.io/almapidev/my-resume-react:latest'
       - '--region'
       - 'europe-west1'
       - '--platform'
@@ -35,8 +35,8 @@ steps:
       - '--allow-unauthenticated'
       - '--service-account'
       - '251107984645-compute@developer.gserviceaccount.com'
-      - '--set-env-vars'
-      - 'NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt)'
+      - '--set-secrets'
+      - 'NEXT_PUBLIC_RECAPTCHA_SITE_KEY=RECAPTCHA_SITE_KEY:latest'
 
 images:
-  - 'europe-west1-docker.pkg.dev/almapidev/cloud-run-source-deploy/my-resume-react/my-resume-react:latest'
+  - 'gcr.io/almapidev/my-resume-react:latest'
