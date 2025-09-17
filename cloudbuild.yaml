@@ -35,8 +35,8 @@ steps:
       - '--allow-unauthenticated'
       - '--service-account'
       - '251107984645-compute@developer.gserviceaccount.com'
-      - '--set-secrets'
-      - 'NEXT_PUBLIC_RECAPTCHA_SITE_KEY=RECAPTCHA_SITE_KEY:latest'
+      - '--set-env-vars'
+      - 'NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt)'
 
 images:
   - 'gcr.io/almapidev/my-resume-react:latest'
