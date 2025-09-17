@@ -35,6 +35,8 @@ steps:
       - '--allow-unauthenticated'
       - '--service-account'
       - '251107984645-compute@developer.gserviceaccount.com'
+      - '--set-env-vars'
+      - 'NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt)'
 
 images:
   - 'europe-west1-docker.pkg.dev/almapidev/my-resume-repo/my-resume-react:latest'
