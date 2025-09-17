@@ -1133,8 +1133,7 @@ const resources = {
           relation: "Trabajó en el mismo equipo",
           text: "Trabajé con Álvaro en la misma área. Es una persona comprometida y proactiva. Firme y resolutivo, se adapta muy bien al trabajo en equipo mostrándose seguro. Durante el periodo que trabajamos juntos pude validar las habilidades que tiene para el trabajo colaborativo y la resolución de problemas.",
           date: "16 de septiembre de 2023",
-          picture:
-            "",
+          picture: "",
           linkedin: "https://www.linkedin.com/in/sam-hidalgo-nava",
         },
         {
