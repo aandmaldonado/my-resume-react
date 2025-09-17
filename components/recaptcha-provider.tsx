@@ -13,37 +13,56 @@ declare global {
 
 export function useReCaptcha() {
   const [isLoaded, setIsLoaded] = useState(false)
+  const [siteKey, setSiteKey] = useState<string | null>(null)
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.grecaptcha) {
-      setIsLoaded(true)
-    } else {
-      // Wait for reCAPTCHA to load
-      const checkReCaptcha = () => {
-        if (typeof window !== 'undefined' && window.grecaptcha) {
-          setIsLoaded(true)
-        } else {
-          setTimeout(checkReCaptcha, 100)
+    // Get site key from API
+    const getSiteKey = async () => {
+      try {
+        const response = await fetch('/api/recaptcha-key')
+        const data = await response.json()
+        if (data.siteKey) {
+          setSiteKey(data.siteKey)
+          // Load reCAPTCHA with the correct site key
+          loadReCaptcha(data.siteKey)
         }
+      } catch (error) {
+        console.error('Failed to get reCAPTCHA site key:', error)
       }
-      checkReCaptcha()
     }
+
+    getSiteKey()
   }, [])
 
+  const loadReCaptcha = (siteKey: string) => {
+    if (typeof window === 'undefined') return
+
+    // Remove existing script if any
+    const existingScript = document.querySelector('script[src*="recaptcha"]')
+    if (existingScript) {
+      existingScript.remove()
+    }
+
+    // Create new script with site key
+    const script = document.createElement('script')
+    script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`
+    script.async = true
+    script.defer = true
+    script.onload = () => {
+      setIsLoaded(true)
+    }
+    document.head.appendChild(script)
+  }
+
   const verifyReCaptcha = async (action: string = 'download_cv'): Promise<string | null> => {
-    if (!isLoaded || typeof window === 'undefined' || !window.grecaptcha) {
-      console.error('reCAPTCHA not loaded')
+    if (!isLoaded || !siteKey || typeof window === 'undefined' || !window.grecaptcha) {
+      console.error('reCAPTCHA not ready or site key not available')
       return null
     }
 
     try {
-      const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-      console.log(`CLIENT_SIDE_KEY: ${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`);
-      if (!siteKey) {
-        console.error('reCAPTCHA site key not found')
-        return null
-      }
-
+      console.log(`CLIENT_SIDE_KEY: ${siteKey}`)
+      
       return new Promise((resolve, reject) => {
         window.grecaptcha.ready(async () => {
           try {
@@ -60,5 +79,5 @@ export function useReCaptcha() {
     }
   }
 
-  return { verifyReCaptcha, isLoaded }
+  return { verifyReCaptcha, isLoaded: isLoaded && !!siteKey }
 }

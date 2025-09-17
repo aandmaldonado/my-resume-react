@@ -13,7 +13,7 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'docker build --tag="gcr.io/almapidev/my-resume-react:latest" --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt) .'
+      - 'docker build --tag="gcr.io/almapidev/my-resume-react:latest" .'
 
   # 3. Sube la imagen a Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
@@ -36,7 +36,7 @@ steps:
       - '--service-account'
       - '251107984645-compute@developer.gserviceaccount.com'
       - '--set-env-vars'
-      - 'NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt)'
+      - 'RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt)'
 
 images:
   - 'gcr.io/almapidev/my-resume-react:latest'
