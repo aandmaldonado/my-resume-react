@@ -37,7 +37,7 @@ export function useReCaptcha() {
     }
 
     try {
-      const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+      const siteKey = process.env.RECAPTCHA_KEY
       if (!siteKey) {
         console.error('reCAPTCHA site key not found')
         return null
