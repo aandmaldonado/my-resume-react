@@ -1,0 +1,40 @@
+# cloudbuild.yaml
+
+steps:
+  # 1. Obtiene el secreto de Secret Manager
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'gcloud secrets versions access latest --secret="RECAPTCHA_SITE_KEY" > /workspace/recaptcha-key.txt'
+
+  # 2. Construye la imagen, pasando el secreto como un argumento de build
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'docker build --tag="europe-west1-docker.pkg.dev/almapidev/my-resume-repo/my-resume-react:latest" --build-arg NEXT_PUBLIC_RECAPTCHA_KEY=$(cat /workspace/recaptcha-key.txt) .'
+
+  # 3. Sube la imagen a Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west1-docker.pkg.dev/almapidev/my-resume-repo/my-resume-react:latest']
+
+  # 4. Despliega la imagen final en Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'my-resume-react'
+      - '--image'
+      - 'europe-west1-docker.pkg.dev/almapidev/my-resume-repo/my-resume-react:latest'
+      - '--region'
+      - 'europe-west1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--service-account'
+      - '251107984645-compute@developer.gserviceaccount.com'
+
+images:
+  - 'europe-west1-docker.pkg.dev/almapidev/my-resume-repo/my-resume-react:latest'
