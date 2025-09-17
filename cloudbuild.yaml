@@ -13,7 +13,7 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'docker build --tag="europe-west1-docker.pkg.dev/almapidev/my-resume-repo/my-resume-react:latest" --build-arg NEXT_PUBLIC_RECAPTCHA_KEY=$(cat /workspace/recaptcha-key.txt) .'
+      - 'docker build --tag="europe-west1-docker.pkg.dev/almapidev/my-resume-repo/my-resume-react:latest" --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt) .'
 
   # 3. Sube la imagen a Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
