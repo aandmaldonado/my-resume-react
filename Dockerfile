@@ -22,7 +22,12 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Environment variables will be set during deployment
+# ==================== CAMBIOS AQUÍ ====================
+# 1. Acepta el argumento de build que pasaremos desde cloudbuild.yaml
+ARG NEXT_PUBLIC_RECAPTCHA_KEY
+# 2. Conviértelo en una variable de entorno para que `npm run build` pueda usarla
+ENV NEXT_PUBLIC_RECAPTCHA_KEY=$NEXT_PUBLIC_RECAPTCHA_KEY
+# ======================================================
 
 RUN npm run build
 
