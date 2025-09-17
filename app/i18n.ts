@@ -459,7 +459,7 @@ const resources = {
           text: "Great professional and person, it was a pleasure to be part of the team and great work!",
           date: "April 23, 2024",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E03AQF21sbdzZSdTQ/profile-displayphoto-shrink_100_100/B4EZaigiBSHYAY-/0/1746483159674?e=1756944000&v=beta&t=fDqarkbJawqywb6EZK_x86FkBcFXmGxjqPthDBvJXJg",
+            "",
           linkedin: "https://www.linkedin.com/in/dayli-velasquez",
         },
         {
@@ -471,7 +471,7 @@ const resources = {
           text: "I highly recommend Álvaro Maldonado! As a full stack developer, during our collaboration at Everis, he demonstrated exceptional ability to solve complex problems and collaborate effectively in a team. His passion, eagerness to keep learning, work ethic, and communication skills make him a valuable asset to any project.",
           date: "February 1, 2024",
           picture:
-            "https://media.licdn.com/dms/image/v2/C4E03AQE3XkDxYVDF1g/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516818621856?e=1756944000&v=beta&t=Ap1Kc0XTn0cTyJg4pcVHKIlcGR_YPLM8RTPSFbT9Yeg",
+            "",
           linkedin: "https://www.linkedin.com/in/denys-lopez",
         },
         {
@@ -494,7 +494,7 @@ const resources = {
           text: "Álvaro is a proactive person, I learned a lot from him and he is always motivated in his work.",
           date: "October 6, 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/C4D03AQHGnBPgayrhBQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1658272238383?e=1756944000&v=beta&t=TfLIPMGuDM2_NaHC5ma7L-Z421izwS2e5vatw4XpgtQ",
+            "",
           linkedin: "https://www.linkedin.com/in/nalvaradov85",
         },
         {
@@ -506,7 +506,7 @@ const resources = {
           text: "I worked with Álvaro in the same area. He is a committed and proactive person. Firm and decisive, he adapts very well to teamwork, showing confidence. During the period we worked together, I was able to validate the skills he has for collaborative work and problem solving.",
           date: "September 16, 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E03AQH2GNkpjW_KHQ/profile-displayphoto-shrink_100_100/B4EZYnmlisHMAU-/0/1744421150058?e=1756944000&v=beta&t=Qc9cVTyQdMvmatXaj_OjmLpqiiYGYoTujT87CoBxH3s",
+            "",
           linkedin: "https://www.linkedin.com/in/sam-hidalgo-nava",
         },
         {
@@ -517,7 +517,7 @@ const resources = {
           text: "An excellent professional, passionate, and 100% committed, as a developer very objective and with a broad knowledge of abstraction and process optimization.",
           date: "September 14, 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E03AQFLX_nVnabnCg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1701710053965?e=1756944000&v=beta&t=T7GXOjWbzTAaXSBFBt8Jpe2nFNC2ksULMy0jmNc7zSI",
+            "",
           linkedin: "https://www.linkedin.com/in/carlosfosorioc",
         },
         {
@@ -540,7 +540,7 @@ const resources = {
           text: "I worked with Álvaro during the Time & Attendance project and he has been a great help, providing knowledge and skilled in the technical area, he is a person with integrity, well-developed soft skills, it was a pleasure to work with him!",
           date: "August 10, 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D5603AQHBGa6DGAMp_A/profile-displayphoto-scale_100_100/B56Zgz4oWdHMAg-/0/1753217141536?e=1757548800&v=beta&t=FP70g-SvfmazI-NnDTzmgL769oZLff2kP_3ObgjeQvU",
+            "",
           linkedin: "https://www.linkedin.com/in/antonella-amodio-alvarez",
         },
         {
@@ -552,7 +552,7 @@ const resources = {
           text: "It is a pleasure to recommend Álvaro for his exceptional capabilities and soft skills. With his solid background in Computer Engineering and his Master's in Artificial Intelligence, he has demonstrated over a decade of experience in various sectors. His versatility is reflected in his leadership, problem-solving, and adaptability, in both technical and strategic roles. His proficiency in AI/ML/DL, cloud computing, and backend development makes him stand out. His pursuit of dynamic challenges and his commitment to achieving goals are unmatched. Álvaro is a valuable addition to any technology and leadership team.",
           date: "August 9, 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E03AQGaE2lpLHK7tw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1714493552503?e=1757548800&v=beta&t=1FTg-fSzddskYtaHms3MehxHwK_yv4iyiR3IvkkiSrk",
+            "",
           linkedin: "https://www.linkedin.com/in/bruno-ivan-aguilera-silva-808b61166/",
         },
         {
@@ -563,7 +563,7 @@ const resources = {
           text: "Álvaro is a person with a very complete technical profile, capable of solving complex problems quickly and with quality, goal-oriented and with great commitment to his work and colleagues. Personally, he is very responsible, reliable and a great team player, always willing to teach others and support them when they need it and always willing to give a little more to achieve goals.",
           date: "August 9, 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/C4E03AQH6CRjUTLn-mQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1561497780876?e=1756944000&v=beta&t=KaX-6zilFH168oNoLfmC8g0fAy8wb3Fwi9XNr9Eunm4",
+            "",
           linkedin: "https://www.linkedin.com/in/pablopuelmah",
         },
         {
@@ -574,7 +574,7 @@ const resources = {
           text: "I sincerely recommend Álvaro for his professionalism and collaboration during our time working together. His attention to detail, experience and dedication are truly valuable to any team.",
           date: "August 7, 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/C4E03AQHjJYr9SZPBXA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1588953766292?e=1756944000&v=beta&t=YyxgQEcnERCkVJtd8Awj6792rZklRKAZfXTnHzZAOxc",
+            "",
           linkedin:
             "https://www.linkedin.com/in/pedro-alejandro-oronoz-5025385a",
         },
@@ -587,7 +587,7 @@ const resources = {
           text: "I met Álvaro by chance and today I dare to say that he is one of the best technical leaders I have worked with. His results-oriented approach stands out above all and having knowledge of artificial intelligence his vision fosters ethical, responsible values and teamwork is remarkable. It was an excellent experience working with you.",
           date: "August 4, 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E03AQEeT_kLf3tMxA/profile-displayphoto-shrink_100_100/B4EZWmVn4DGwAY-/0/1742252441761?e=1757548800&v=beta&t=D78XAtO6IQwAKHD9hDZkGtQLhhKYofUcff7VkxBeyn4",
+            "",
           linkedin: "https://www.linkedin.com/in/nellymanterola",
         },
       ],
@@ -1088,7 +1088,7 @@ const resources = {
           text: "Gran profesional y persona, todo un gusto haber formado equipo y buen trabajo!",
           date: "23 de abril de 2024",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E03AQF21sbdzZSdTQ/profile-displayphoto-shrink_100_100/B4EZaigiBSHYAY-/0/1746483159674?e=1756944000&v=beta&t=fDqarkbJawqywb6EZK_x86FkBcFXmGxjqPthDBvJXJg",
+            "",
           linkedin: "https://www.linkedin.com/in/dayli-velasquez",
         },
         {
@@ -1100,7 +1100,7 @@ const resources = {
           text: "¡Recomiendo encarecidamente a Álvaro Maldonado! Como desarrollador full stack, durante nuestra colaboración en Everis, demostró una excepcional capacidad para resolver problemas complejos y colaborar eficazmente en equipo. Su pasión, ánimo de seguir aprendiendo, ética de trabajo y habilidades de comunicación hacen de él un valioso activo para cualquier proyecto.",
           date: "1 de febrero de 2024",
           picture:
-            "https://media.licdn.com/dms/image/v2/C4E03AQE3XkDxYVDF1g/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516818621856?e=1756944000&v=beta&t=Ap1Kc0XTn0cTyJg4pcVHKIlcGR_YPLM8RTPSFbT9Yeg",
+            "",
           linkedin: "https://www.linkedin.com/in/denys-lopez",
         },
         {
@@ -1110,8 +1110,7 @@ const resources = {
           relation: "Supervisaba directamente a Álvaro",
           text: "Álvaro es un excelente profesional y una gran persona. Tiene un buen nivel técnico, muy proactivo y dedicado, capaz de investigar y resolver problemas complejos. Trabaja muy bien en equipo, contribuyendo siempre a mantener un buen ambiente. Es muy responsable y comprometido, lo recomiendo 100%.",
           date: "2 de enero de 2024",
-          picture:
-            "https://media.licdn.com/dms/image/v2/C4E03AQHQqh74lznY5Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1565176798787?e=1756944000&v=beta&t=fqgzMD3wDsExSZjuNU5_u2drnR-unmwc33KfS7XGezE",
+          picture: "",
           linkedin:
             "https://www.linkedin.com/in/rodrigo-parra-cárcamo-a1872324",
         },
@@ -1123,7 +1122,7 @@ const resources = {
           text: "Álvaro es una persona proactiva, aprendí mucho de él y siempre motivado en su trabajo.",
           date: "6 de octubre de 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/C4D03AQHGnBPgayrhBQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1658272238383?e=1756944000&v=beta&t=TfLIPMGuDM2_NaHC5ma7L-Z421izwS2e5vatw4XpgtQ",
+            "",
           linkedin: "https://www.linkedin.com/in/nalvaradov85",
         },
         {
@@ -1135,7 +1134,7 @@ const resources = {
           text: "Trabajé con Álvaro en la misma área. Es una persona comprometida y proactiva. Firme y resolutivo, se adapta muy bien al trabajo en equipo mostrándose seguro. Durante el periodo que trabajamos juntos pude validar las habilidades que tiene para el trabajo colaborativo y la resolución de problemas.",
           date: "16 de septiembre de 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E03AQH2GNkpjW_KHQ/profile-displayphoto-shrink_100_100/B4EZYnmlisHMAU-/0/1744421150058?e=1756944000&v=beta&t=Qc9cVTyQdMvmatXaj_OjmLpqiiYGYoTujT87CoBxH3s",
+            "",
           linkedin: "https://www.linkedin.com/in/sam-hidalgo-nava",
         },
         {
@@ -1146,7 +1145,7 @@ const resources = {
           text: "Un excelente profesional, apasionado, y comprometido al 100%, como desarrollador muy objetivo y con un amplio conocimiento de abstracción y optimización de procesos.",
           date: "14 de septiembre de 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E03AQFLX_nVnabnCg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1701710053965?e=1756944000&v=beta&t=T7GXOjWbzTAaXSBFBt8Jpe2nFNC2ksULMy0jmNc7zSI",
+            "",
           linkedin: "https://www.linkedin.com/in/carlosfosorioc",
         },
         {
@@ -1169,7 +1168,7 @@ const resources = {
           text: "Trabajé con Álvaro durante el proyecto de Time & Attendance y ha sido de gran ayuda aportando conocimientos y capacitado en el área técnica, es una persona con integridad, habilidades blandas desarrolladas, fue un placer trabajar con él!",
           date: "10 de agosto de 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D5603AQHBGa6DGAMp_A/profile-displayphoto-scale_100_100/B56Zgz4oWdHMAg-/0/1753217141536?e=1757548800&v=beta&t=FP70g-SvfmazI-NnDTzmgL769oZLff2kP_3ObgjeQvU",
+            "",
           linkedin: "https://www.linkedin.com/in/antonella-amodio-alvarez",
         },
         {
@@ -1181,7 +1180,7 @@ const resources = {
           text: "Es un placer recomendar a Álvaro por sus excepcionales capacidades y habilidades blandas. Con su sólida formación en Ingeniería Civil en Informática y su Máster en Inteligencia Artificial, ha demostrado más de una década de experiencia en diversos sectores. Su versatilidad se refleja en su liderazgo, resolución de problemas y adaptabilidad, tanto en roles técnicos como estratégicos. Su destreza en IA/ML/DL, cloud computing y desarrollo backend lo hace sobresalir. Su búsqueda de desafíos dinámicos y su compromiso para lograr metas son inigualables. Álvaro es una valiosa adición para cualquier equipo tecnológico y de liderazgo.",
           date: "9 de agosto de 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E03AQGaE2lpLHK7tw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1714493552503?e=1757548800&v=beta&t=1FTg-fSzddskYtaHms3MehxHwK_yv4iyiR3IvkkiSrk",
+            "",
           linkedin: "https://www.linkedin.com/in/bruno-ivan-aguilera-silva-808b61166/",
         },
         {
@@ -1192,7 +1191,7 @@ const resources = {
           text: "Álvaro es una persona con un perfil técnico muy completo, capaz de resolver problemas complejos de forma rápida y con calidad, orientado al logro y con un gran compromiso por su trabajo y compañeros. En lo personal, es muy responsable, confiable y un gran compañero de equipo, siempre dispuesto a enseñar a los demás y a apoyarlos cuando lo necesitan y está siempre dispuesto a dar un poco más para lograr las metas.",
           date: "9 de agosto de 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/C4E03AQH6CRjUTLn-mQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1561497780876?e=1756944000&v=beta&t=KaX-6zilFH168oNoLfmC8g0fAy8wb3Fwi9XNr9Eunm4",
+            "",
           linkedin: "https://www.linkedin.com/in/pablopuelmah",
         },
         {
@@ -1203,7 +1202,7 @@ const resources = {
           text: "Quiero recomendar sinceramente a Álvaro por su profesionalismo y colaboración durante nuestro tiempo de trabajo conjunto. Su atención a los detalles, su experiencia y dedicación son verdaderamente valiosas para cualquier equipo.",
           date: "7 de agosto de 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/C4E03AQHjJYr9SZPBXA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1588953766292?e=1756944000&v=beta&t=YyxgQEcnERCkVJtd8Awj6792rZklRKAZfXTnHzZAOxc",
+            "",
           linkedin:
             "https://www.linkedin.com/in/pedro-alejandro-oronoz-5025385a",
         },
@@ -1216,7 +1215,7 @@ const resources = {
           text: "Conocí a Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
           date: "4 de agosto de 2023",
           picture:
-            "https://media.licdn.com/dms/image/v2/D4E03AQEeT_kLf3tMxA/profile-displayphoto-shrink_100_100/B4EZWmVn4DGwAY-/0/1742252441761?e=1757548800&v=beta&t=D78XAtO6IQwAKHD9hDZkGtQLhhKYofUcff7VkxBeyn4",
+            "",
           linkedin: "https://www.linkedin.com/in/nellymanterola",
         },
       ],
