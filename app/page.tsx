@@ -34,7 +34,7 @@ export default function Home() {
   // Generar session_id una sola vez al montar el componente
   const sessionIdRef = useRef(`user-${Date.now()}-${Math.random().toString(36).slice(2)}`)
 
-  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080/api/v1';
+  const API_URL = process.env.BACKEND_URL || 'http://localhost:8080/api/v1';
 
   useEffect(() => {
     // Set default language to Spanish
@@ -46,7 +46,9 @@ export default function Home() {
     if (chatMessages.length === 0) {
       const initializeChatbot = async () => {
         try {
-          const response = await fetch(`${BACKEND_URL}/health`)
+          
+          const response = await fetch(`${API_URL}/health`)
+
           const data = await response.json()
           if (data.status === 'healthy') {
             setChatStatus({ text: `🟢 ${t("chatbot.online_status")}`, isError: false })

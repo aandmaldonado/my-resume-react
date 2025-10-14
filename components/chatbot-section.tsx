@@ -22,7 +22,7 @@ interface ChatbotSectionProps {
   sessionId: string;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080/api/v1';
+const API_URL = process.env.BACKEND_URL || 'http://localhost:8080/api/v1';
 
 const ChatbotSection: React.FC<ChatbotSectionProps> = ({ 
   setIsChatbotVisible, 
