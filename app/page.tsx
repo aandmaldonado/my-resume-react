@@ -46,7 +46,9 @@ export default function Home() {
     if (chatMessages.length === 0) {
       const initializeChatbot = async () => {
         try {
+          
           const response = await fetch(`${API_URL}/health`)
+
           const data = await response.json()
           if (data.status === 'healthy') {
             setChatStatus({ text: `🟢 ${t("chatbot.online_status")}`, isError: false })
