@@ -599,6 +599,13 @@ const resources = {
       chatbot: {
         name: "Álvaro Maldonado",
         online_status: "Online",
+        offline_status: "Offline",
+        connecting_status: "Connecting...",
+        writing_status: "Typing...",
+        error_status: "Connection error",
+        error_message: "Sorry, there was an error sending the message. Please try again.",
+        offline_message: "I'm currently unable to respond. Please try again later or send me an email at readme.md@almapi.dev.",
+        notification_message: "Hello! 👋 How can I help you?",
         welcome_message:
           "Hello! 👋 I'm Álvaro. I'm here to answer your questions about my professional experience, education, and other work-related topics. Feel free to ask! 😊",
         input_placeholder: "Type your message...",
@@ -1226,6 +1233,13 @@ const resources = {
       chatbot: {
         name: "Álvaro Maldonado",
         online_status: "En línea",
+        offline_status: "Fuera de línea",
+        connecting_status: "Conectando...",
+        writing_status: "Escribiendo...",
+        error_status: "Error de conexión",
+        error_message: "Lo siento, hubo un error al enviar el mensaje. Por favor, intenta de nuevo.",
+        offline_message: "En este momento no puedo responder. Por favor, intenta de nuevo más tarde o enviame un email a readme.md@almapi.dev.",
+        notification_message: "¡Hola! 👋 ¿En qué puedo ayudarte?",
         welcome_message:
           "¡Hola! 👋 Soy Álvaro. Estoy aquí para responder tus preguntas sobre mi experiencia profesional, educación y otros temas laborales. ¡Pregúntame lo que necesites! 😊",
         input_placeholder: "Escribe tu mensaje...",
