@@ -36,10 +36,10 @@ export default function Home() {
   // Generar session_id una sola vez al montar el componente
   const sessionIdRef = useRef(`user-${Date.now()}-${Math.random().toString(36).slice(2)}`)
 
-  const API_URL = config?.backendUrl || 'http://localhost:8080/api/v1'
+  const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080/api/v1'
   
   // Variable de entorno para controlar la visibilidad del chatbot
-  const isChatbotEnabled = config?.chatbotEnabled || false
+  const isChatbotEnabled = process.env.NEXT_PUBLIC_CHATBOT_ENABLED === 'true'
 
   useEffect(() => {
     // Set default language to Spanish
@@ -70,7 +70,7 @@ export default function Home() {
       }
       initializeChatbot()
     }
-  }, [t, chatMessages.length, config, configLoading, API_URL])
+  }, [t, chatMessages.length, API_URL])
 
   // Actualizar textos del chatbot cuando cambia el idioma
   useEffect(() => {
