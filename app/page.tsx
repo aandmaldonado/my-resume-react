@@ -35,6 +35,7 @@ export default function Home() {
   const sessionIdRef = useRef(`user-${Date.now()}-${Math.random().toString(36).slice(2)}`)
 
   const API_URL = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080/api/v1';
+
   console.log('🔍 DEBUG - BACKEND_URL:', process.env.BACKEND_URL);
   console.log('🔍 DEBUG - NEXT_PUBLIC_BACKEND_URL:', process.env.NEXT_PUBLIC_BACKEND_URL);
   console.log('🔍 DEBUG - API_URL final:', API_URL);
