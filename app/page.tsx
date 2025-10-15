@@ -71,6 +71,7 @@ export default function Home() {
     }
   }, [t, chatMessages.length, API_URL, backendLoading, chatbotLoading])
 
+
   // Actualizar textos del chatbot cuando cambia el idioma
   useEffect(() => {
     if (chatMessages.length > 0) {
