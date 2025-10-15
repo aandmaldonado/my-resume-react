@@ -36,7 +36,6 @@ const ChatbotSection: React.FC<ChatbotSectionProps> = ({
   const { t } = useTranslation();
   const [messageInput, setMessageInput] = useState('');
   const chatContainerRef = useRef<HTMLDivElement>(null);
-  const isInitialized = useRef(false);
 
   // Usar hook para obtener la URL del backend
   const { backendUrl: API_URL } = useBackendUrl();

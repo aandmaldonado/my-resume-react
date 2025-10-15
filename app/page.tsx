@@ -17,7 +17,6 @@ import ChatbotSection from "@/components/chatbot-section"
 import RecommendationsSection from "@/components/recommendations-section"
 import ContactCard from "@/components/contact-card"
 import { useBackendUrl } from "@/hooks/useBackendUrl"
-import { useChatbotEnabled } from "@/hooks/useChatbotEnabled"
 
 interface Message {
   type: 'user' | 'bot';
@@ -38,7 +37,6 @@ export default function Home() {
 
   // Usar hooks para obtener configuración desde APIs
   const { backendUrl: API_URL, loading: backendLoading } = useBackendUrl()
-  const { chatbotEnabled: isChatbotEnabled, loading: chatbotLoading } = useChatbotEnabled()
 
   useEffect(() => {
     // Set default language to Spanish
@@ -47,7 +45,7 @@ export default function Home() {
 
   // Inicializar chatbot solo una vez cuando tengamos la configuración
   useEffect(() => {
-    if (chatMessages.length === 0 && !backendLoading && !chatbotLoading && API_URL) {
+    if (chatMessages.length === 0 && !backendLoading && API_URL) {
       const initializeChatbot = async () => {
         try {
           
@@ -69,7 +67,7 @@ export default function Home() {
       }
       initializeChatbot()
     }
-  }, [t, chatMessages.length, API_URL, backendLoading, chatbotLoading])
+  }, [t, chatMessages.length, API_URL, backendLoading])
 
 
   // Actualizar textos del chatbot cuando cambia el idioma
@@ -107,7 +105,7 @@ export default function Home() {
           <EducationSection />
           <RecommendationsSection />
           <ContactCard locale={i18n.language as 'en' | 'es'} />
-          {isChatbotEnabled && isChatbotVisible && (
+          {isChatbotVisible && (
             <ChatbotSection 
               setIsChatbotVisible={setIsChatbotVisible}
               messages={chatMessages}
@@ -121,9 +119,8 @@ export default function Home() {
           )}
         </main>
         <Footer />
-        {/* Botón del chatbot con notificación - Solo visible si está habilitado */}
-        {isChatbotEnabled && (
-          <div className="fixed bottom-4 right-4 z-50">
+        {/* Botón del chatbot con notificación */}
+        <div className="fixed bottom-4 right-4 z-50">
             <button
               onClick={() => {
                 setIsChatbotVisible(!isChatbotVisible)
@@ -149,7 +146,6 @@ export default function Home() {
               )}
             </button>
           </div>
-        )}
       </div>
     </ThemeProvider>
   );
