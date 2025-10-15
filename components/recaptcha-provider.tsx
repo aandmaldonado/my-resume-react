@@ -61,7 +61,6 @@ export function useReCaptcha() {
     }
 
     try {
-      console.log(`CLIENT_SIDE_KEY: ${siteKey}`)
       
       return new Promise((resolve, reject) => {
         window.grecaptcha.ready(async () => {
