@@ -16,6 +16,8 @@ import { Bot, MessageCircle } from "lucide-react"
 import ChatbotSection from "@/components/chatbot-section"
 import RecommendationsSection from "@/components/recommendations-section"
 import ContactCard from "@/components/contact-card"
+import { useBackendUrl } from "@/hooks/useBackendUrl"
+import { useChatbotEnabled } from "@/hooks/useChatbotEnabled"
 
 interface Message {
   type: 'user' | 'bot';
@@ -34,19 +36,18 @@ export default function Home() {
   // Generar session_id una sola vez al montar el componente
   const sessionIdRef = useRef(`user-${Date.now()}-${Math.random().toString(36).slice(2)}`)
 
-  const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080/api/v1'
-  
-  // Variable de entorno para controlar la visibilidad del chatbot
-  const isChatbotEnabled = process.env.NEXT_PUBLIC_CHATBOT_ENABLED === 'true'
+  // Usar hooks para obtener configuración desde APIs
+  const { backendUrl: API_URL, loading: backendLoading } = useBackendUrl()
+  const { chatbotEnabled: isChatbotEnabled, loading: chatbotLoading } = useChatbotEnabled()
 
   useEffect(() => {
     // Set default language to Spanish
     i18n.changeLanguage("es")
   }, [i18n])
 
-  // Inicializar chatbot solo una vez
+  // Inicializar chatbot solo una vez cuando tengamos la configuración
   useEffect(() => {
-    if (chatMessages.length === 0) {
+    if (chatMessages.length === 0 && !backendLoading && !chatbotLoading && API_URL) {
       const initializeChatbot = async () => {
         try {
           
@@ -68,7 +69,7 @@ export default function Home() {
       }
       initializeChatbot()
     }
-  }, [t, chatMessages.length, API_URL])
+  }, [t, chatMessages.length, API_URL, backendLoading, chatbotLoading])
 
   // Actualizar textos del chatbot cuando cambia el idioma
   useEffect(() => {
