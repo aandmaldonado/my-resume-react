@@ -13,15 +13,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build args para variables de entorno
-ARG NEXT_PUBLIC_CHATBOT_ENABLED
-ARG NEXT_PUBLIC_BACKEND_URL
-ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-
-# Convertir build args a environment variables para el build
-ENV NEXT_PUBLIC_CHATBOT_ENABLED=$NEXT_PUBLIC_CHATBOT_ENABLED
-ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
-ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+# No necesitamos build args para variables de entorno
+# Las variables se configuran en runtime via Cloud Run
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
