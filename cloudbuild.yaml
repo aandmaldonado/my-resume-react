@@ -57,6 +57,5 @@ steps:
       - '--set-env-vars'
       - 'BACKEND_URL=$(cat /workspace/backend-url.txt),RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt)'
 
-
 images:
   - 'gcr.io/almapidev/my-resume-react:latest'
