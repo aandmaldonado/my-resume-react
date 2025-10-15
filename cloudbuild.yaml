@@ -41,7 +41,7 @@ steps:
       - '--min-instances'
       - '0'
       - '--set-env-vars'
-      - 'NEXT_PUBLIC_CHATBOT_ENABLED=true'
+      - 'NEXT_PUBLIC_CHATBOT_ENABLED=true,BACKEND_URL=https://chatbot-api-251107984645.europe-west1.run.app/api/v1,RECAPTCHA_SITE_KEY=6LdCEqorAAAAAOQ10fASNJZRnVzXSKwnOW_61'
 
 
 images:

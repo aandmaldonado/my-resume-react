@@ -45,6 +45,17 @@ export default function Home() {
   // Variable de entorno para controlar la visibilidad del chatbot
   const isChatbotEnabled = process.env.NEXT_PUBLIC_CHATBOT_ENABLED === 'true';
 
+  // Debug logs solo en runtime (cliente)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      console.log('🔍 DEBUG - BACKEND_URL:', process.env.BACKEND_URL);
+      console.log('🔍 DEBUG - NEXT_PUBLIC_BACKEND_URL:', process.env.NEXT_PUBLIC_BACKEND_URL);
+      console.log('🔍 DEBUG - API_URL final:', API_URL);
+      console.log('🔍 DEBUG - NEXT_PUBLIC_CHATBOT_ENABLED:', process.env.NEXT_PUBLIC_CHATBOT_ENABLED);
+      console.log('🔍 DEBUG - isChatbotEnabled:', isChatbotEnabled);
+    }
+  }, [API_URL, isChatbotEnabled]);
+
   useEffect(() => {
     // Set default language to Spanish
     i18n.changeLanguage("es")
