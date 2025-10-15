@@ -16,7 +16,6 @@ import { Bot, MessageCircle } from "lucide-react"
 import ChatbotSection from "@/components/chatbot-section"
 import RecommendationsSection from "@/components/recommendations-section"
 import ContactCard from "@/components/contact-card"
-import { useConfig } from "@/hooks/useConfig"
 
 interface Message {
   type: 'user' | 'bot';
@@ -26,7 +25,6 @@ interface Message {
 
 export default function Home() {
   const { i18n, t } = useTranslation()
-  const { config, loading: configLoading, error: configError } = useConfig()
   const [isChatbotVisible, setIsChatbotVisible] = useState(false)
   const [showNotification, setShowNotification] = useState(true)
   const [chatMessages, setChatMessages] = useState<Message[]>([])
@@ -36,10 +34,10 @@ export default function Home() {
   // Generar session_id una sola vez al montar el componente
   const sessionIdRef = useRef(`user-${Date.now()}-${Math.random().toString(36).slice(2)}`)
 
-  const API_URL = config?.backendUrl || 'http://localhost:8080/api/v1'
+  const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080/api/v1'
   
   // Variable de entorno para controlar la visibilidad del chatbot
-  const isChatbotEnabled = config?.chatbotEnabled || false
+  const isChatbotEnabled = process.env.NEXT_PUBLIC_CHATBOT_ENABLED === 'true'
 
   useEffect(() => {
     // Set default language to Spanish
@@ -48,7 +46,7 @@ export default function Home() {
 
   // Inicializar chatbot solo una vez
   useEffect(() => {
-    if (chatMessages.length === 0 && config && !configLoading) {
+    if (chatMessages.length === 0) {
       const initializeChatbot = async () => {
         try {
           
@@ -70,7 +68,7 @@ export default function Home() {
       }
       initializeChatbot()
     }
-  }, [t, chatMessages.length, config, configLoading, API_URL])
+  }, [t, chatMessages.length, API_URL])
 
   // Actualizar textos del chatbot cuando cambia el idioma
   useEffect(() => {
