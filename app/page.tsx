@@ -16,7 +16,6 @@ import { Bot, MessageCircle } from "lucide-react"
 import ChatbotSection from "@/components/chatbot-section"
 import RecommendationsSection from "@/components/recommendations-section"
 import ContactCard from "@/components/contact-card"
-import { useConfig } from "@/hooks/useConfig"
 
 interface Message {
   type: 'user' | 'bot';
@@ -26,7 +25,6 @@ interface Message {
 
 export default function Home() {
   const { i18n, t } = useTranslation()
-  const { config, loading: configLoading, error: configError } = useConfig()
   const [isChatbotVisible, setIsChatbotVisible] = useState(false)
   const [showNotification, setShowNotification] = useState(true)
   const [chatMessages, setChatMessages] = useState<Message[]>([])
@@ -48,7 +46,7 @@ export default function Home() {
 
   // Inicializar chatbot solo una vez
   useEffect(() => {
-    if (chatMessages.length === 0 && config && !configLoading) {
+    if (chatMessages.length === 0) {
       const initializeChatbot = async () => {
         try {
           
