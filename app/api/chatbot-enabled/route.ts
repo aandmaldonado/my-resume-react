@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 
 export async function GET() {
+  console.log('🚀 API /api/chatbot-enabled ejecutándose...')
+  
   try {
     // Debug: mostrar todas las variables de entorno relacionadas
     console.log('🔍 DEBUG - CHATBOT_ENABLED:', process.env.CHATBOT_ENABLED)
@@ -11,7 +13,10 @@ export async function GET() {
     
     console.log('🔍 DEBUG - chatbotEnabled final:', chatbotEnabled)
     
-    return NextResponse.json({ chatbotEnabled })
+    // Asegurar que siempre devolvemos un objeto con la propiedad chatbotEnabled
+    return NextResponse.json({ 
+      chatbotEnabled: chatbotEnabled === 'true' 
+    })
   } catch (error) {
     console.error('❌ Error en /api/chatbot-enabled:', error)
     return NextResponse.json(
