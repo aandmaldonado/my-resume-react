@@ -40,6 +40,9 @@ steps:
       - '10'
       - '--min-instances'
       - '0'
+      - '--set-env-vars'
+      - 'NEXT_PUBLIC_CHATBOT_ENABLED=true'
+
 
 images:
   - 'gcr.io/almapidev/my-resume-react:latest'
