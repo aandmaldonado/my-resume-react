@@ -16,6 +16,7 @@ import { Bot, MessageCircle } from "lucide-react"
 import ChatbotSection from "@/components/chatbot-section"
 import RecommendationsSection from "@/components/recommendations-section"
 import ContactCard from "@/components/contact-card"
+import { useConfig } from "@/hooks/useConfig"
 
 interface Message {
   type: 'user' | 'bot';
@@ -25,6 +26,7 @@ interface Message {
 
 export default function Home() {
   const { i18n, t } = useTranslation()
+  const { config, loading: configLoading, error: configError } = useConfig()
   const [isChatbotVisible, setIsChatbotVisible] = useState(false)
   const [showNotification, setShowNotification] = useState(true)
   const [chatMessages, setChatMessages] = useState<Message[]>([])
@@ -34,27 +36,10 @@ export default function Home() {
   // Generar session_id una sola vez al montar el componente
   const sessionIdRef = useRef(`user-${Date.now()}-${Math.random().toString(36).slice(2)}`)
 
-  const API_URL = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080/api/v1';
-
-  console.log('🔍 DEBUG - BACKEND_URL:', process.env.BACKEND_URL);
-  console.log('🔍 DEBUG - NEXT_PUBLIC_BACKEND_URL:', process.env.NEXT_PUBLIC_BACKEND_URL);
-  console.log('🔍 DEBUG - API_URL final:', API_URL);
-  console.log('🔍 DEBUG - NEXT_PUBLIC_CHATBOT_ENABLED:', process.env.NEXT_PUBLIC_CHATBOT_ENABLED);
-  console.log('🔍 DEBUG - isChatbotEnabled:', process.env.NEXT_PUBLIC_CHATBOT_ENABLED === 'true');
+  const API_URL = config?.backendUrl || 'http://localhost:8080/api/v1'
   
   // Variable de entorno para controlar la visibilidad del chatbot
-  const isChatbotEnabled = process.env.NEXT_PUBLIC_CHATBOT_ENABLED === 'true';
-
-  // Debug logs solo en runtime (cliente)
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      console.log('🔍 DEBUG - BACKEND_URL:', process.env.BACKEND_URL);
-      console.log('🔍 DEBUG - NEXT_PUBLIC_BACKEND_URL:', process.env.NEXT_PUBLIC_BACKEND_URL);
-      console.log('🔍 DEBUG - API_URL final:', API_URL);
-      console.log('🔍 DEBUG - NEXT_PUBLIC_CHATBOT_ENABLED:', process.env.NEXT_PUBLIC_CHATBOT_ENABLED);
-      console.log('🔍 DEBUG - isChatbotEnabled:', isChatbotEnabled);
-    }
-  }, [API_URL, isChatbotEnabled]);
+  const isChatbotEnabled = config?.chatbotEnabled || false
 
   useEffect(() => {
     // Set default language to Spanish
@@ -63,7 +48,7 @@ export default function Home() {
 
   // Inicializar chatbot solo una vez
   useEffect(() => {
-    if (chatMessages.length === 0) {
+    if (chatMessages.length === 0 && config && !configLoading) {
       const initializeChatbot = async () => {
         try {
           
@@ -85,7 +70,7 @@ export default function Home() {
       }
       initializeChatbot()
     }
-  }, [t, chatMessages.length])
+  }, [t, chatMessages.length, config, configLoading, API_URL])
 
   // Actualizar textos del chatbot cuando cambia el idioma
   useEffect(() => {
