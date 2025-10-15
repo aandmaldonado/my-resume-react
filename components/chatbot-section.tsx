@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import { Send, Minus } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -22,7 +22,7 @@ interface ChatbotSectionProps {
   sessionId: string;
 }
 
-const API_URL = process.env.BACKEND_URL || 'http://localhost:8080/api/v1';
+const API_URL = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080/api/v1';
 
 const ChatbotSection: React.FC<ChatbotSectionProps> = ({ 
   setIsChatbotVisible, 
@@ -51,6 +51,21 @@ const ChatbotSection: React.FC<ChatbotSectionProps> = ({
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages, isLoading]);
+
+  // Limpiar textarea cuando hay error
+  useEffect(() => {
+    if (status.isError) {
+      setMessageInput('');
+    }
+  }, [status.isError]);
+
+  // Asegurar que el textarea esté vacío cuando hay error
+  const textareaValue = useMemo(() => {
+    if (status.isError) {
+      return '';
+    }
+    return messageInput;
+  }, [status.isError, messageInput]);
 
   // Función para enviar mensaje
   const sendMessage = async () => {
@@ -104,7 +119,7 @@ const ChatbotSection: React.FC<ChatbotSectionProps> = ({
 
   // Función para obtener el color del contador de caracteres
   const getCharCountColor = () => {
-    const count = messageInput.length;
+    const count = textareaValue.length;
     const maxLength = 600;
     
     if (count === maxLength) {
@@ -171,18 +186,24 @@ const ChatbotSection: React.FC<ChatbotSectionProps> = ({
       <div className="p-4 border-t border-gray-200 dark:border-gray-700">
         <div className="flex items-center">
           <textarea
-            value={messageInput}
-            onChange={(e) => setMessageInput(e.target.value)}
+            value={textareaValue}
+            onChange={(e) => {
+              if (!status.isError) {
+                setMessageInput(e.target.value);
+              }
+            }}
             onKeyDown={handleKeyDown}
-            placeholder={t("chatbot.input_placeholder")}
+            placeholder={status.isError ? t("chatbot.input_error") : t("chatbot.input_placeholder")}
             maxLength={600}
-            className="flex-1 p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className={`flex-1 p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none ${
+              status.isError ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
             rows={1}
-            disabled={isLoading}
+            disabled={isLoading || status.isError}
           />
           <button
             onClick={sendMessage}
-            disabled={isLoading || !messageInput.trim()}
+            disabled={isLoading || !messageInput.trim() || status.isError}
             className="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
             <Send className="w-5 h-5" />
@@ -190,7 +211,7 @@ const ChatbotSection: React.FC<ChatbotSectionProps> = ({
         </div>
         {/* Contador de caracteres */}
         <div className={`text-xs mt-1 text-right ${getCharCountColor()}`}>
-          {messageInput.length}/600
+          {textareaValue.length}/600
         </div>
       </div>
     </div>
