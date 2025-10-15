@@ -1,12 +1,26 @@
 # cloudbuild.yaml
 
 steps:
-  # 1. Construye la imagen
+  # 1. Obtener secretos de Secret Manager
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud secrets versions access latest --secret="RECAPTCHA_SITE_KEY" > /workspace/recaptcha-key.txt
+        gcloud secrets versions access latest --secret="BACKEND_URL" > /workspace/backend-url.txt
+
+  # 2. Construye la imagen con variables de entorno desde secretos
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'docker build --tag="gcr.io/almapidev/my-resume-react:latest" .'
+      - |
+        docker build \
+          --build-arg NEXT_PUBLIC_CHATBOT_ENABLED=true \
+          --build-arg NEXT_PUBLIC_BACKEND_URL=$(cat /workspace/backend-url.txt) \
+          --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt) \
+          --tag="gcr.io/almapidev/my-resume-react:latest" .
 
   # 2. Sube la imagen a Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
@@ -41,8 +55,7 @@ steps:
       - '--min-instances'
       - '0'
       - '--set-env-vars'
-      - 'NEXT_PUBLIC_CHATBOT_ENABLED=true,BACKEND_URL=https://chatbot-api-251107984645.europe-west1.run.app/api/v1,RECAPTCHA_SITE_KEY=6LdCEqorAAAAAOQ10fASNJZRnVzXSKwnOW_61'
-
+      - 'BACKEND_URL=$(cat /workspace/backend-url.txt),RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt)'
 
 images:
   - 'gcr.io/almapidev/my-resume-react:latest'
