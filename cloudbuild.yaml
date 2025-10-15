@@ -17,6 +17,8 @@ steps:
       - '-c'
       - |
         docker build \
+          --build-arg BACKEND_URL=$(cat /workspace/backend-url.txt) \
+          --build-arg CHATBOT_ENABLED=true \
           --tag="gcr.io/almapidev/my-resume-react:latest" .
 
   # 2. Sube la imagen a Google Container Registry

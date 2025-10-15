@@ -13,8 +13,13 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# No necesitamos build args para variables de entorno
-# Las variables se configuran en runtime via Cloud Run
+# Build args para variables de entorno
+ARG BACKEND_URL
+ARG CHATBOT_ENABLED
+
+# Convertir build args a environment variables para el build
+ENV BACKEND_URL=$BACKEND_URL
+ENV CHATBOT_ENABLED=$CHATBOT_ENABLED
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
