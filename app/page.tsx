@@ -34,6 +34,8 @@ export default function Home() {
   
   // Generar session_id una sola vez al montar el componente
   const sessionIdRef = useRef(`user-${Date.now()}-${Math.random().toString(36).slice(2)}`)
+  // Referencia para evitar múltiples inicializaciones
+  const isInitializedRef = useRef(false)
 
   // Usar hooks para obtener configuración desde APIs
   const { backendUrl: API_URL, loading: backendLoading } = useBackendUrl()
@@ -45,20 +47,22 @@ export default function Home() {
 
   // Inicializar chatbot solo una vez cuando tengamos la configuración
   useEffect(() => {
-    if (chatMessages.length === 0 && !backendLoading && API_URL) {
+    if (!backendLoading && API_URL && !isInitializedRef.current) {
+      isInitializedRef.current = true
+      
       const initializeChatbot = async () => {
         try {
-          
           const response = await fetch(`${API_URL}/health`)
-
           const data = await response.json()
+          
           if (data.status === 'healthy') {
             setChatStatus({ text: `🟢 ${t("chatbot.online_status")}`, isError: false })
+            // Agregar mensaje de bienvenida inmediatamente cuando la conexión es exitosa
+            setChatMessages([{ type: 'bot', content: t("chatbot.welcome_message") }])
           } else {
             setChatStatus({ text: `🛜 ${t("chatbot.connecting_status")}`, isError: true })
+            setChatMessages([{ type: 'bot', content: t("chatbot.offline_message") }])
           }
-          // Agregar mensaje de bienvenida cuando la conexión es exitosa
-          setChatMessages([{ type: 'bot', content: t("chatbot.welcome_message") }])
         } catch {
           setChatStatus({ text: `🔴 ${t("chatbot.offline_status")}`, isError: true })
           // Agregar mensaje de offline cuando hay error
@@ -67,7 +71,7 @@ export default function Home() {
       }
       initializeChatbot()
     }
-  }, [t, chatMessages.length, API_URL, backendLoading])
+  }, [t, API_URL, backendLoading]) // Removido chatMessages.length de las dependencias
 
 
   // Actualizar textos del chatbot cuando cambia el idioma
