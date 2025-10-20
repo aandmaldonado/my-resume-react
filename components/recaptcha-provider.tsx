@@ -16,24 +16,21 @@ export function useReCaptcha() {
   const [siteKey, setSiteKey] = useState<string | null>(null)
 
   useEffect(() => {
-    // Get site key from API
-    /*const getSiteKey = async () => {
-      try {
-        const response = await fetch('/api/recaptcha-key')
-        const data = await response.json()
-        if (data.siteKey) {
-          setSiteKey(data.siteKey)
-          // Load reCAPTCHA with the correct site key
-          loadReCaptcha(data.siteKey)
-        }
-      } catch (error) {
-        console.error('Failed to get reCAPTCHA site key:', error)
-      }
-    }*/
-    console.log('NEXT_PUBLIC_RECAPTCHA_SITE_KEY', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY)
-    loadReCaptcha(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '')
-    //getSiteKey()
-  }, [])
+    // 1. Lee la variable de entorno
+    const key = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    console.log('NEXT_PUBLIC_RECAPTCHA_SITE_KEY', key);
+
+    if (key) {
+      // 2. ¡ESTA ES LA LÍNEA QUE FALTABA!
+      //    Guarda la clave en el estado para que 'verifyReCaptcha' pueda usarla.
+      setSiteKey(key); 
+      
+      // 3. Carga el script de Google
+      loadReCaptcha(key);
+    } else {
+      console.error('ERROR: NEXT_PUBLIC_RECAPTCHA_SITE_KEY no está definida.');
+    }
+  }, []);
 
   const loadReCaptcha = (siteKey: string) => {
     if (typeof window === 'undefined') return
