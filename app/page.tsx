@@ -73,7 +73,7 @@ export default function Home() {
       }
       initializeChatbot()
     }
-  }, [t, API_URL, backendLoading]) // Removido chatMessages.length de las dependencias
+  }, [t, API_URL/*, backendLoading*/]) // Removido chatMessages.length de las dependencias
 
 
   // Actualizar textos del chatbot cuando cambia el idioma
