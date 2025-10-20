@@ -36,8 +36,6 @@ const ChatbotSection: React.FC<ChatbotSectionProps> = ({
   const [messageInput, setMessageInput] = useState('');
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-
   // Función para agregar mensajes
   const addMessage = (type: 'user' | 'bot', content: string, isHTML = false) => {
     setMessages(prev => [...prev, { type, content, isHTML }]);
@@ -77,7 +75,7 @@ const ChatbotSection: React.FC<ChatbotSectionProps> = ({
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/chat`, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

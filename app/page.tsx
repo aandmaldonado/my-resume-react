@@ -35,8 +35,7 @@ export default function Home() {
   const sessionIdRef = useRef(`user-${Date.now()}-${Math.random().toString(36).slice(2)}`)
   // Referencia para evitar múltiples inicializaciones
   const isInitializedRef = useRef(false)
-
-  const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+  
   const isChatbotEnabled = process.env.NEXT_PUBLIC_CHATBOT_ENABLED === 'true';
 
   useEffect(() => {
@@ -46,12 +45,12 @@ export default function Home() {
 
   // Inicializar chatbot solo una vez cuando tengamos la configuración
   useEffect(() => {
-    if (isChatbotEnabled && API_URL && !isInitializedRef.current) {
+    if (isChatbotEnabled && !isInitializedRef.current) {
       isInitializedRef.current = true
       
       const initializeChatbot = async () => {
         try {
-          const response = await fetch(`${API_URL}/health`)
+          const response = await fetch('/api/health')
           const data = await response.json()
           
           if (data.status === 'healthy') {
@@ -70,7 +69,7 @@ export default function Home() {
       }
       initializeChatbot()
     }
-  }, [t, API_URL, isChatbotEnabled]) // Removido chatMessages.length de las dependencias
+  }, [t, isChatbotEnabled]) // Removido chatMessages.length de las dependencias
 
 
   // Actualizar textos del chatbot cuando cambia el idioma

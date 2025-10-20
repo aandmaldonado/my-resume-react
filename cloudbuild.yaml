@@ -7,14 +7,12 @@ steps:
       - |
         # Usamos echo -n "$(...)" para capturar el valor exacto SIN newline
         echo -n "$(gcloud secrets versions access latest --secret="RECAPTCHA_SITE_KEY")" > /workspace/recaptcha-key.txt
-        echo -n "$(gcloud secrets versions access latest --secret="BACKEND_URL")" > /workspace/backend-url.txt
         echo -n "$(gcloud secrets versions access latest --secret="CHATBOT_ENABLED")" > /workspace/chatbot-enabled.txt
         
         # Depuración segura (para verificar el build)
         echo "============================================="
         echo "DEPURACIÓN DE SECRETOS (VERIFICANDO LONGITUDES)"
         echo "  RECAPTCHA_SITE_KEY: $(cat /workspace/recaptcha-key.txt | wc -c) caracteres"
-        echo "  BACKEND_URL: $(cat /workspace/backend-url.txt | wc -c) caracteres"
         echo "  CHATBOT_ENABLED: $(cat /workspace/chatbot-enabled.txt | wc -c) caracteres"
         echo "============================================="
     id: Get Secrets
@@ -28,7 +26,6 @@ steps:
         docker build \
           --no-cache \
           --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt) \
-          --build-arg NEXT_PUBLIC_BACKEND_URL=$(cat /workspace/backend-url.txt) \
           --build-arg NEXT_PUBLIC_CHATBOT_ENABLED=$(cat /workspace/chatbot-enabled.txt) \
           --tag="$_AR_HOSTNAME/$_AR_PROJECT_ID/$_AR_REPOSITORY/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA" \
           .
