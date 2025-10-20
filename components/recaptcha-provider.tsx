@@ -17,7 +17,7 @@ export function useReCaptcha() {
 
   useEffect(() => {
     // Get site key from API
-    const getSiteKey = async () => {
+    /*const getSiteKey = async () => {
       try {
         const response = await fetch('/api/recaptcha-key')
         const data = await response.json()
@@ -29,9 +29,10 @@ export function useReCaptcha() {
       } catch (error) {
         console.error('Failed to get reCAPTCHA site key:', error)
       }
-    }
-
-    getSiteKey()
+    }*/
+    console.log('REACT_APP_RECAPTCHA_SITE_KEY', process.env.REACT_APP_RECAPTCHA_SITE_KEY)
+    loadReCaptcha(process.env.REACT_APP_RECAPTCHA_SITE_KEY || '')
+    //getSiteKey()
   }, [])
 
   const loadReCaptcha = (siteKey: string) => {

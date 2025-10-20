@@ -1,7 +1,6 @@
-# cloudbuild.yaml
-
 steps:
-  # 1. Obtener secretos de Secret Manager
+  # --- PASO 1: Obtener TODOS los secretos de Secret Manager ---
+  # Guarda cada secreto en un archivo temporal dentro del espacio de trabajo
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
@@ -9,23 +8,35 @@ steps:
       - |
         gcloud secrets versions access latest --secret="RECAPTCHA_SITE_KEY" > /workspace/recaptcha-key.txt
         gcloud secrets versions access latest --secret="BACKEND_URL" > /workspace/backend-url.txt
+        gcloud secrets versions access latest --secret="CHATBOT_ENABLED" > /workspace/chatbot-enabled.txt
+    id: Get Secrets
 
-  # 2. Construye la imagen con variables de entorno desde secretos
+  # --- PASO 2: Construir la imagen ---
+  # Lee los archivos temporales y los pasa como argumentos de compilación
+  # (build-args) al Dockerfile con los prefijos REACT_APP_ correctos
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
         docker build \
-          --build-arg BACKEND_URL=$(cat /workspace/backend-url.txt) \
-          --build-arg CHATBOT_ENABLED=true \
+          --build-arg REACT_APP_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt) \
+          --build-arg REACT_APP_BACKEND_URL=$(cat /workspace/backend-url.txt) \
+          --build-arg REACT_APP_CHATBOT_ENABLED=$(cat /workspace/chatbot-enabled.txt) \
           --tag="gcr.io/almapidev/my-resume-react:latest" .
+    id: Build
+    # Espera a que el paso anterior termine
+    waitFor:
+      - Get Secrets
 
-  # 2. Sube la imagen a Google Container Registry
+  # --- PASO 3: Subir la imagen a Container Registry ---
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/almapidev/my-resume-react:latest']
+    id: Push
+    waitFor:
+      - Build
 
-  # 3. Despliega la imagen final en Cloud Run
+  # --- PASO 4: Desplegar la nueva imagen en Cloud Run ---
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
@@ -53,8 +64,9 @@ steps:
       - '10'
       - '--min-instances'
       - '0'
-      - '--set-env-vars'
-      - 'BACKEND_URL=$(cat /workspace/backend-url.txt),RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt),CHATBOT_ENABLED=true'
+    id: Deploy
+    waitFor:
+      - Push
 
 images:
   - 'gcr.io/almapidev/my-resume-react:latest'

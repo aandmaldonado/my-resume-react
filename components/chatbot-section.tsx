@@ -38,7 +38,9 @@ const ChatbotSection: React.FC<ChatbotSectionProps> = ({
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Usar hook para obtener la URL del backend
-  const { backendUrl: API_URL } = useBackendUrl();
+  //const { backendUrl: API_URL } = useBackendUrl();
+  const API_URL = process.env.REACT_APP_BACKEND_URL;
+  console.log('REACT_APP_BACKEND_URL', API_URL)
 
   // Función para agregar mensajes
   const addMessage = (type: 'user' | 'bot', content: string, isHTML = false) => {
