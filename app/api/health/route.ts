@@ -3,6 +3,9 @@ import { NextResponse } from 'next/server';
 // Importa tu nuevo servicio de autenticación
 import { getAuthedClient } from '@/lib/gcpAuth'; // (Ajusta la ruta '../lib/...' si es necesario)
 
+// Le dice a Next.js que nunca ejecute esto en tiempo de build.
+export const dynamic = 'force-dynamic'
+
 // La URL COMPLETA de tu endpoint de health en el backend
 const BACKEND_HEALTH_URL = 'https://chatbot-api-251107984645.europe-west1.run.app/health';
 
