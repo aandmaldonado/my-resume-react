@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import { Send, Minus } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useBackendUrl } from "@/hooks/useBackendUrl";
 
 interface Message {
   type: 'user' | 'bot';
@@ -37,10 +36,7 @@ const ChatbotSection: React.FC<ChatbotSectionProps> = ({
   const [messageInput, setMessageInput] = useState('');
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  // Usar hook para obtener la URL del backend
-  //const { backendUrl: API_URL } = useBackendUrl();
   const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-  console.log('NEXT_PUBLIC_BACKEND_URL', API_URL)
 
   // Función para agregar mensajes
   const addMessage = (type: 'user' | 'bot', content: string, isHTML = false) => {

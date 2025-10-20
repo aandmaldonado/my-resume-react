@@ -18,17 +18,15 @@ export function useReCaptcha() {
   useEffect(() => {
     // 1. Lee la variable de entorno
     const key = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-    console.log('NEXT_PUBLIC_RECAPTCHA_SITE_KEY', key);
 
     if (key) {
-      // 2. ¡ESTA ES LA LÍNEA QUE FALTABA!
       //    Guarda la clave en el estado para que 'verifyReCaptcha' pueda usarla.
       setSiteKey(key); 
       
       // 3. Carga el script de Google
       loadReCaptcha(key);
     } else {
-      console.error('ERROR: NEXT_PUBLIC_RECAPTCHA_SITE_KEY no está definida.');
+      // reCAPTCHA no configurado - modo silencioso
     }
   }, []);
 

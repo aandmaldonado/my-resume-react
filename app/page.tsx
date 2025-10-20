@@ -16,7 +16,6 @@ import { Bot, MessageCircle } from "lucide-react"
 import ChatbotSection from "@/components/chatbot-section"
 import RecommendationsSection from "@/components/recommendations-section"
 import ContactCard from "@/components/contact-card"
-import { useBackendUrl } from "@/hooks/useBackendUrl"
 
 interface Message {
   type: 'user' | 'bot';
@@ -37,10 +36,8 @@ export default function Home() {
   // Referencia para evitar múltiples inicializaciones
   const isInitializedRef = useRef(false)
 
-  // Usar hooks para obtener configuración desde APIs
-  //const { backendUrl: API_URL, loading: backendLoading } = useBackendUrl()
   const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-  console.log('NEXT_PUBLIC_BACKEND_URL', API_URL)
+  const isChatbotEnabled = process.env.NEXT_PUBLIC_CHATBOT_ENABLED === 'true';
 
   useEffect(() => {
     // Set default language to Spanish
@@ -49,7 +46,7 @@ export default function Home() {
 
   // Inicializar chatbot solo una vez cuando tengamos la configuración
   useEffect(() => {
-    if (/*!backendLoading &&*/ API_URL && !isInitializedRef.current) {
+    if (isChatbotEnabled && API_URL && !isInitializedRef.current) {
       isInitializedRef.current = true
       
       const initializeChatbot = async () => {
@@ -73,7 +70,7 @@ export default function Home() {
       }
       initializeChatbot()
     }
-  }, [t, API_URL/*, backendLoading*/]) // Removido chatMessages.length de las dependencias
+  }, [t, API_URL, isChatbotEnabled]) // Removido chatMessages.length de las dependencias
 
 
   // Actualizar textos del chatbot cuando cambia el idioma
@@ -111,7 +108,7 @@ export default function Home() {
           <EducationSection />
           <RecommendationsSection />
           <ContactCard locale={i18n.language as 'en' | 'es'} />
-          {isChatbotVisible && (
+          {isChatbotEnabled && isChatbotVisible && (
             <ChatbotSection 
               setIsChatbotVisible={setIsChatbotVisible}
               messages={chatMessages}
@@ -126,32 +123,34 @@ export default function Home() {
         </main>
         <Footer />
         {/* Botón del chatbot con notificación */}
-        <div className="fixed bottom-4 right-4 z-50">
-            <button
-              onClick={() => {
-                setIsChatbotVisible(!isChatbotVisible)
-                setShowNotification(false)
-              }}
-              className="bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 transition-colors relative"
-            >
-              <Bot className="w-6 h-6" />
-              
-              {/* Notificación animada */}
-              {showNotification && !isChatbotVisible && (
-                <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center chatbot-notification shadow-lg">
-                  <span className="font-bold">1</span>
-                </div>
-              )}
-              
-              {/* Mensaje flotante */}
-              {showNotification && !isChatbotVisible && (
-                <div className="absolute bottom-full right-0 mb-2 bg-gray-800 text-white text-sm px-3 py-2 rounded-lg shadow-lg whitespace-nowrap chatbot-message">
-                  {t("chatbot.notification_message")}
-                  <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
-                </div>
-              )}
-            </button>
-          </div>
+        {isChatbotEnabled && (
+          <div className="fixed bottom-4 right-4 z-50">
+              <button
+                onClick={() => {
+                  setIsChatbotVisible(!isChatbotVisible)
+                  setShowNotification(false)
+                }}
+                className="bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 transition-colors relative"
+              >
+                <Bot className="w-6 h-6" />
+                
+                {/* Notificación animada */}
+                {showNotification && !isChatbotVisible && (
+                  <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center chatbot-notification shadow-lg">
+                    <span className="font-bold">1</span>
+                  </div>
+                )}
+                
+                {/* Mensaje flotante */}
+                {showNotification && !isChatbotVisible && (
+                  <div className="absolute bottom-full right-0 mb-2 bg-gray-800 text-white text-sm px-3 py-2 rounded-lg shadow-lg whitespace-nowrap chatbot-message">
+                    {t("chatbot.notification_message")}
+                    <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
+                  </div>
+                )}
+              </button>
+            </div>
+        )}
       </div>
     </ThemeProvider>
   );
