@@ -61,3 +61,7 @@ steps:
 
 images:
   - 'gcr.io/almapidev/my-resume-react:latest'
+
+# --- AÑADE ESTE BLOQUE AL FINAL ---
+options:
+  logging: CLOUD_LOGGING_ONLY
