@@ -1,5 +1,5 @@
 steps:
-  # --- PASO 1: Obtener TODOS los secretos (Corregido con COMILLAS y -n) ---
+  # --- PASO 1: Obtener TODOS los secretos ---
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
@@ -19,7 +19,7 @@ steps:
         echo "============================================="
     id: Get Secrets
 
-  # --- PASO 2: Construir la imagen (FORZANDO SIN CACHÉ) ---
+  # --- PASO 2: Construir la imagen (CON LA URL CORRECTA) ---
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args:
@@ -30,38 +30,55 @@ steps:
           --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt) \
           --build-arg NEXT_PUBLIC_BACKEND_URL=$(cat /workspace/backend-url.txt) \
           --build-arg NEXT_PUBLIC_CHATBOT_ENABLED=$(cat /workspace/chatbot-enabled.txt) \
-          --tag="gcr.io/almapidev/my-resume-react:latest" .
+          --tag="$_AR_HOSTNAME/$_AR_PROJECT_ID/$_AR_REPOSITORY/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA" \
+          .
     id: Build
     waitFor:
       - Get Secrets
 
-  # --- PASOS 3 y 4 (Push y Deploy) no cambian ---
+  # --- PASO 3: Subir la imagen (CON LA URL CORRECTA) ---
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/almapidev/my-resume-react:latest']
+    args: ['push', '$_AR_HOSTNAME/$_AR_PROJECT_ID/$_AR_REPOSITORY/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA']
     id: Push
     waitFor:
       - Build
 
+  # --- PASO 4: Desplegar la nueva imagen (CON LA URL CORRECTA) ---
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
       - 'run'
       - 'deploy'
-      - 'my-resume-react'
+      - '$_SERVICE_NAME' # <-- Usa la variable del servicio
       - '--image'
-      - 'gcr.io/almapidev/my-resume-react:latest'
+      - '$_AR_HOSTNAME/$_AR_PROJECT_ID/$_AR_REPOSITORY/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA' # <-- Usa la URL completa
       - '--region'
-      - 'europe-west1'
+      - '$_DEPLOY_REGION' # <-- Usa la variable de la región
       - '--platform'
       - 'managed'
-      # ... (resto de tus args de deploy)
+      - '--allow-unauthenticated'
+      - '--service-account'
+      - '251107984645-compute@developer.gserviceaccount.com'
+      - '--memory'
+      - '512Mi'
+      - '--cpu'
+      - '1'
+      - '--concurrency'
+      - '100'
+      - '--timeout'
+      - '300'
+      - '--max-instances'
+      - '10'
+      - '--min-instances'
+      - '0'
     id: Deploy
     waitFor:
       - Push
 
 images:
-  - 'gcr.io/almapidev/my-resume-react:latest'
+  # --- Lista la imagen (CON LA URL CORRECTA) ---
+  - '$_AR_HOSTNAME/$_AR_PROJECT_ID/$_AR_REPOSITORY/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
 
-# --- AÑADE ESTE BLOQUE AL FINAL ---
+# --- Esta opción de logging ya la tenías y es correcta ---
 options:
   logging: CLOUD_LOGGING_ONLY
