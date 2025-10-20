@@ -13,16 +13,16 @@ steps:
 
   # --- PASO 2: Construir la imagen ---
   # Lee los archivos temporales y los pasa como argumentos de compilación
-  # (build-args) al Dockerfile con los prefijos REACT_APP_ correctos
+  # (build-args) al Dockerfile con los prefijos NEXT_PUBLIC_ correctos
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
         docker build \
-          --build-arg REACT_APP_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt) \
-          --build-arg REACT_APP_BACKEND_URL=$(cat /workspace/backend-url.txt) \
-          --build-arg REACT_APP_CHATBOT_ENABLED=$(cat /workspace/chatbot-enabled.txt) \
+          --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$(cat /workspace/recaptcha-key.txt) \
+          --build-arg NEXT_PUBLIC_BACKEND_URL=$(cat /workspace/backend-url.txt) \
+          --build-arg NEXT_PUBLIC_CHATBOT_ENABLED=$(cat /workspace/chatbot-enabled.txt) \
           --tag="gcr.io/almapidev/my-resume-react:latest" .
     id: Build
     # Espera a que el paso anterior termine

@@ -38,7 +38,9 @@ export default function Home() {
   const isInitializedRef = useRef(false)
 
   // Usar hooks para obtener configuración desde APIs
-  const { backendUrl: API_URL, loading: backendLoading } = useBackendUrl()
+  //const { backendUrl: API_URL, loading: backendLoading } = useBackendUrl()
+  const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+  console.log('NEXT_PUBLIC_BACKEND_URL', API_URL)
 
   useEffect(() => {
     // Set default language to Spanish
@@ -47,7 +49,7 @@ export default function Home() {
 
   // Inicializar chatbot solo una vez cuando tengamos la configuración
   useEffect(() => {
-    if (!backendLoading && API_URL && !isInitializedRef.current) {
+    if (/*!backendLoading &&*/ API_URL && !isInitializedRef.current) {
       isInitializedRef.current = true
       
       const initializeChatbot = async () => {

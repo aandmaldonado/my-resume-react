@@ -30,8 +30,8 @@ export function useReCaptcha() {
         console.error('Failed to get reCAPTCHA site key:', error)
       }
     }*/
-    console.log('REACT_APP_RECAPTCHA_SITE_KEY', process.env.REACT_APP_RECAPTCHA_SITE_KEY)
-    loadReCaptcha(process.env.REACT_APP_RECAPTCHA_SITE_KEY || '')
+    console.log('NEXT_PUBLIC_RECAPTCHA_SITE_KEY', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY)
+    loadReCaptcha(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '')
     //getSiteKey()
   }, [])
 
