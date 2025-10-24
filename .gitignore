@@ -293,3 +293,4 @@ dist
 
 # Local development
 .qodo.env.local
+service-account-key.json
