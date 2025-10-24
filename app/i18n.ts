@@ -637,6 +637,67 @@ const resources = {
         suspicious_activity: "Suspicious activity detected. Too many attempts in one hour.",
         reset: "Reset"
       },
+      data_capture: {
+        title: "📝 Contact Information",
+        description: "To provide you with better service, we would like to know a little more about you.",
+        email_label: "Email *",
+        email_placeholder: "name@company.com",
+        linkedin_label: "LinkedIn",
+        linkedin_placeholder: "linkedin.com/in/your-profile or your-username",
+        user_type_label: "User Type *",
+        user_type_placeholder: "Select...",
+        user_type_options: {
+          hr: "HR Professional",
+          it: "IT Professional",
+          other: "Other"
+        },
+        cancel: "Cancel",
+        submit: "Submit",
+        submitting: "Submitting...",
+        errors: {
+          email_required: "Email required",
+          email_invalid: "Invalid email format",
+          linkedin_invalid: "Invalid LinkedIn format",
+          user_type_required: "Required"
+        },
+        success_message: "✅ Thank you for providing your information. I can now provide you with better service.",
+        error_message: "❌ Error processing information. Please try again."
+      },
+      gdpr: {
+        title: "🔒 GDPR Consent",
+        description: "To continue, we need your consent to process your data in accordance with GDPR.",
+        analytics_consent: "Analytics Consent",
+        analytics_description: "Allows analysis of interactions to improve service",
+        data_processing_consent: "Data Processing Consent",
+        data_processing_description: "Allows storage and processing of your contact data",
+        cancel: "Cancel",
+        accept: "Accept",
+        processing: "Processing...",
+        success_message: "✅ Consent registered. You can continue with the conversation.",
+        error_message: "❌ Error processing consent. Please try again."
+      },
+      banners: {
+        data_capture: {
+          message: "💡 Would you like Álvaro to send you additional information about specific projects?",
+          accept: "Share data",
+          reject: "No, thanks"
+        },
+        gdpr: {
+          message: "🔒 To send you personalized information, I need your consent to process data according to GDPR",
+          accept: "Give consent",
+          reject: "No, thanks"
+        },
+        data_capture_change_mind: {
+          message: "💭 Did you change your mind? You can share your data to receive personalized information",
+          accept: "Share data",
+          reject: "No, thanks"
+        },
+        gdpr_change_mind: {
+          message: "💭 Did you change your mind? You can give your GDPR consent to process data",
+          accept: "Give consent",
+          reject: "No, thanks"
+        }
+      },
     }
   },
   es: {
@@ -1271,6 +1332,67 @@ const resources = {
         rate_limit_exceeded: "Límite de descargas excedido. Puedes esperar o reiniciar ahora.",
         suspicious_activity: "Actividad sospechosa detectada. Demasiados intentos en una hora.",
         reset: "Reiniciar"
+      },
+      data_capture: {
+        title: "📝 Información de Contacto",
+        description: "Para brindarte un mejor servicio, nos gustaría conocer un poco más sobre ti.",
+        email_label: "Email *",
+        email_placeholder: "nombre@empresa.com",
+        linkedin_label: "LinkedIn",
+        linkedin_placeholder: "linkedin.com/in/tu-perfil o tu-username",
+        user_type_label: "Tipo de Usuario *",
+        user_type_placeholder: "Seleccionar...",
+        user_type_options: {
+          hr: "Profesional RRHH",
+          it: "Profesional TI",
+          other: "Otro"
+        },
+        cancel: "Cancelar",
+        submit: "Enviar",
+        submitting: "Enviando...",
+        errors: {
+          email_required: "Email obligatorio",
+          email_invalid: "Formato de email incorrecto",
+          linkedin_invalid: "Formato de LinkedIn incorrecto",
+          user_type_required: "Obligatorio"
+        },
+        success_message: "✅ Gracias por proporcionar tu información. Ahora puedo brindarte un mejor servicio.",
+        error_message: "❌ Error al procesar la información. Por favor, intenta de nuevo."
+      },
+      gdpr: {
+        title: "🔒 Consentimiento GDPR",
+        description: "Para continuar, necesitamos tu consentimiento para procesar tus datos de acuerdo con el GDPR.",
+        analytics_consent: "Consentimiento para Analytics",
+        analytics_description: "Permite el análisis de interacciones para mejorar el servicio",
+        data_processing_consent: "Consentimiento para Procesamiento de Datos",
+        data_processing_description: "Permite el almacenamiento y procesamiento de tus datos de contacto",
+        cancel: "Cancelar",
+        accept: "Aceptar",
+        processing: "Procesando...",
+        success_message: "✅ Consentimiento registrado. Puedes continuar con la conversación.",
+        error_message: "❌ Error al procesar el consentimiento. Por favor, intenta de nuevo."
+      },
+      banners: {
+        data_capture: {
+          message: "💡 ¿Te gustaría que Álvaro te envíe información adicional sobre proyectos específicos?",
+          accept: "Compartir datos",
+          reject: "No, gracias"
+        },
+        gdpr: {
+          message: "🔒 Para enviarte información personalizada, necesito tu consentimiento para procesar datos según GDPR",
+          accept: "Dar consentimiento",
+          reject: "No, gracias"
+        },
+        data_capture_change_mind: {
+          message: "💭 ¿Cambiaste de opinión? Puedes compartir tus datos para recibir información personalizada",
+          accept: "Compartir datos",
+          reject: "No, gracias"
+        },
+        gdpr_change_mind: {
+          message: "💭 ¿Cambiaste de opinión? Puedes dar tu consentimiento GDPR para procesar datos",
+          accept: "Dar consentimiento",
+          reject: "No, gracias"
+        }
       },
     },
   },
