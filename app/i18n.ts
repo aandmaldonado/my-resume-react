@@ -18,8 +18,8 @@ const resources = {
         lang_en: "English",
       },
       hero: {
-        title: "Hello World! I'm Álvaro Maldonado",
-        subtitle: "Computer Science Engineer | Software Engineer | AI-Powered Developer",
+        title: "AI-Powered Product Engineering",
+        subtitle: "Software Engineering | AI with Purpose | Human-in-the-Loop",
         download_cv: "Download CV",
         generating: "Generating...",
         contact_button: "Contact me",
@@ -205,7 +205,7 @@ const resources = {
         counter: "educations",
         educations: [
           {
-            institution: "LIDR.co | Training great Tech Leaders",
+            institution: "LIDR.co | AI-Powered Careers",
             degree: "AI4DEVS",
             period: "2025 - Present",
             location: "Online, Spain",
@@ -452,6 +452,16 @@ const resources = {
       recommendations: [
         {
           counter: "recommendations",
+          name: "Inés García",
+          position: "Full Stack Developer & Trainer | Green and Digital Transition · Applied AI",
+          company: "LIDR.co",
+          relation: "Directly supervised Álvaro",
+          text: "I had the opportunity to accompany Álvaro as a Teacher Assistant for the AI4Devs master's at Lidr, where I closely supervised his work, and I can say with total confidence that his performance was outstanding. He did an excellent job, tackling an ambitious challenge and integrating AI, backend, frontend, and cloud infrastructure. He demonstrated not only technical mastery but also a very clear product vision, making coherent decisions and providing well-thought-out solutions in every phase of the project. His code stood out for being clean, organized, and maintainable, always applying best practices. Personally, his attitude was impeccable: proactive, participatory, respectful, and very pleasant to deal with. I recommend Álvaro without any doubt. He is a profile that adds real value from the very first moment, and I am sure he will continue to excel in any challenge he decides to undertake.",
+          date: "November 25, 2025",
+          picture: "",
+          linkedin: "https://www.linkedin.com/in/ines-garzeta/",
+        },
+        {
           name: "Dayli Velasquez",
           position: "Agile Project Lead | Systems Engineer",
           company: "Falabella",
@@ -604,7 +614,7 @@ const resources = {
         writing_status: "Typing...",
         error_status: "Connection error",
         error_message: "Sorry, there was an error sending the message. Please try again.",
-        offline_message: "I'm currently unable to respond. Please try again later or send me an email at readme.md@almapi.dev.",
+        offline_message: "I'm currently unable to respond. Please try again later or send me an email at alvaro@almapi.dev.",
         notification_message: "Hello! 👋 How can I help you?",
         input_error: "Chatbot offline - Not available",
         welcome_message:
@@ -618,7 +628,7 @@ const resources = {
         ariaFront: "Business card: front",
         ariaBack: "Business card: back",
         back: {
-          email: "readme.md@almapi.dev",
+          email: "alvaro@almapi.dev",
           linkedin: "https://www.linkedin.com/in/almapidev/",
           github: "https://github.com/aandmaldonado",
           city: "Gandia, Spain"
@@ -716,8 +726,8 @@ const resources = {
         lang_en: "Inglés",
       },
       hero: {
-        title: "¡Hola Mundo! Soy Álvaro Maldonado",
-        subtitle: "Ingeniero en Informática | Ingeniero de Software | Desarrollador Impulsado por IA",
+        title: "Ingeniería de Producto Impulsada por IA",
+        subtitle: "Ingeniería de Software | IA con Propósito | Human-in-the-Loop",
         download_cv: "Descargar CV",
         generating: "Generando...",
         contact_button: "Contáctame",
@@ -903,7 +913,7 @@ const resources = {
         counter: "formaciones",
         educations: [
           {
-            institution: "LIDR.co | Entrenamos grandes líderes en tech",
+            institution: "LIDR.co | AI-Powered Careers",
             degree: "AI4DEVS",
             period: "2025 - Presente",
             location: "Online, España",
@@ -995,7 +1005,7 @@ const resources = {
         ]
       },
       projects: {
-        title: "Proyectos Destacos",
+        title: "Proyectos Destacados",
         counter: "proyectos",
         more_info: "Más Info",
         external_link: "Link Externo",
@@ -1092,7 +1102,7 @@ const resources = {
           skills: "Español Nativo, Inglés Competencia Profesional",
         },
         api_design: {
-          title: "API Design",
+          title: "Diseño de API",
           skills: "Swagger, OpenAPI",
         },
         code_review: {
@@ -1112,7 +1122,7 @@ const resources = {
           skills: "Java, Spring Boot, Python, Flask, FastAPI, API Rest",
         },
         database: {
-          title: "Database",
+          title: "Base de Datos",
           skills:
             "SQL, PL/SQL, Oracle, MySQL, PostgreSQL, NoSQL, MongoDB, JPA, Hibernate",
         },
@@ -1150,6 +1160,16 @@ const resources = {
       recommendations: [
         {
           counter: "recomendaciones",
+          name: "Inés García",
+          position: "Full Stack Developer & Formadora | Transición verde y digital · IA aplicada",
+          company: "LIDR.co",
+          relation: "Supervisaba directamente a Álvaro",
+          text: "Tuve la oportunidad de acompañar a Álvaro como Teacher Assistant del máster AI4Devs en Lidr, donde supervisé de cerca su trabajo, y puedo decir con total seguridad que su rendimiento fue sobresaliente. Realizó un trabajo excelente, abordando un reto ambicioso e integrando IA, backend, frontend e infraestructura en la nube. Demostró no solo dominio técnico, sino también una visión de producto muy clara, tomando decisiones coherentes y aportando soluciones bien pensadas en cada fase del proyecto. Su código destacaba por ser limpio, ordenado y mantenible, siempre aplicando las mejores prácticas. En lo personal, su actitud fue impecable: proactivo, participativo, respetuoso y muy agradable de tratar. Recomiendo sin ninguna duda a Álvaro. Es un perfil que aporta valor real desde el primer momento y estoy segura de que seguirá sobresaliendo en cualquier desafío que decida asumir.",
+          date: "25 de noviembre de 2025",
+          picture: "",
+          linkedin: "https://www.linkedin.com/in/ines-garzeta/",
+        },
+        {
           name: "Dayli Velasquez",
           position: "Agile Project Lead | Systems Engineer",
           company: "Falabella",
@@ -1255,7 +1275,7 @@ const resources = {
           name: "Pablo Puelma Hernández",
           position: "Senior Project & Service Leader",
           company: "NTT DATA Europe & LATAM",
-          relation: "Direct supervisor of Álvaro",
+          relation: "Supervisaba directamente a Álvaro",
           text: "Álvaro es una persona con un perfil técnico muy completo, capaz de resolver problemas complejos de forma rápida y con calidad, orientado al logro y con un gran compromiso por su trabajo y compañeros. En lo personal, es muy responsable, confiable y un gran compañero de equipo, siempre dispuesto a enseñar a los demás y a apoyarlos cuando lo necesitan y está siempre dispuesto a dar un poco más para lograr las metas.",
           date: "9 de agosto de 2023",
           picture:
@@ -1279,7 +1299,7 @@ const resources = {
           position:
             "Head of Security / PMI-ACP / Project Manager / Certified ISO IEC 27001 Lead Implementer / Certified ISO 27001:2022 Foundation / Diploma in Information Security / Financial Services / Business Processes",
           company: "Falabella",
-          relation: "Direct supervisor of Álvaro",
+          relation: "Supervisaba directamente a Álvaro",
           text: "Conocí a Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
           date: "4 de agosto de 2023",
           picture:
@@ -1300,7 +1320,7 @@ const resources = {
         writing_status: "Escribiendo...",
         error_status: "Error de conexión",
         error_message: "Lo siento, hubo un error al enviar el mensaje. Por favor, intenta de nuevo.",
-        offline_message: "En este momento no puedo responder. Por favor, intenta de nuevo más tarde o enviame un email a readme.md@almapi.dev.",
+        offline_message: "En este momento no puedo responder. Por favor, intenta de nuevo más tarde o enviame un email a alvaro@almapi.dev.",
         notification_message: "¡Hola! 👋 ¿En qué puedo ayudarte?",
         input_error: "Chatbot offline - No disponible",
         welcome_message:
@@ -1314,7 +1334,7 @@ const resources = {
         ariaFront: "Tarjeta de presentación: anverso",
         ariaBack: "Tarjeta de presentación: reverso",
         back: {
-          email: "readme.md@almapi.dev",
+          email: "alvaro@almapi.dev",
           linkedin: "https://www.linkedin.com/in/almapidev/",
           github: "https://github.com/aandmaldonado",
           city: "Gandía, España"

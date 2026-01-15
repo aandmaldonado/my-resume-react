@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
-import { Mail, BrainCircuit, Linkedin, MapPin, Sparkles, Github } from 'lucide-react';
+import { Mail, Linkedin, MapPin, Sparkles, Github } from 'lucide-react';
 
 interface ContactCardProps {
   locale: 'en' | 'es';
@@ -41,16 +42,22 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
               {/* Front */}
               <div className="absolute w-full h-full bg-transparent flex flex-col items-center justify-center [backface-visibility:hidden] p-3 xs:p-4">
                 <div className="flex items-center">
-                  <BrainCircuit className="w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 text-blue-600 dark:text-blue-400 mr-2 xs:mr-3" />
+                  <Image
+                    src="/logo.png"
+                    alt="almap[i] logo"
+                    width={48}
+                    height={48}
+                    className="w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 mr-2 xs:mr-3 object-contain rounded-full"
+                  />
                   <span className="text-2xl xs:text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
                     almap<span className="text-blue-600">[i]</span>
                   </span>
                 </div>
                 <p className="text-gray-900 text-center text-xs xs:text-sm sm:text-base md:text-lg flex items-center justify-center gap-2 dark:text-white">
-                <Sparkles className="w-4 h-4 xs:w-5 xs:h-5 text-blue-400" />
-                <span className="italic">{slogan}</span>
-                <Sparkles className="w-4 h-4 xs:w-5 xs:h-5 text-blue-400" />
-              </p>
+                  <Sparkles className="w-4 h-4 xs:w-5 xs:h-5 text-blue-400" />
+                  <span className="italic">{slogan}</span>
+                  <Sparkles className="w-4 h-4 xs:w-5 xs:h-5 text-blue-400" />
+                </p>
               </div>
               {/* Back */}
               <div
@@ -61,7 +68,13 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
               >
                 {/* Icono grande - Responsive */}
                 <div className="flex flex-col items-center justify-center h-full sm:h-full">
-                  <BrainCircuit className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 text-blue-300 drop-shadow-lg" />
+                  <Image
+                    src="/logo.png"
+                    alt="almap[i] logo"
+                    width={96}
+                    height={96}
+                    className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 drop-shadow-lg object-contain rounded-full"
+                  />
                 </div>
                 {/* Línea divisoria - Oculto en mobile */}
                 <div className="hidden sm:block h-32 w-px bg-blue-200 shadow-lg mx-4" />

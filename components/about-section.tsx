@@ -44,7 +44,7 @@ export default function AboutSection() {
                   className="object-cover"
                 />
               </div>
-              
+
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Álvaro Andrés Maldonado Pinto</h3>
                 <p className="text-gray-600 dark:text-gray-400 flex items-center justify-center gap-2">
@@ -52,7 +52,7 @@ export default function AboutSection() {
                   {t("about.location")}
                 </p>
               </div>
-              
+
               <div className="flex items-center space-x-4">
                 <a
                   href="https://www.linkedin.com/in/almapidev/"
@@ -69,7 +69,7 @@ export default function AboutSection() {
                   />
                 </a>
                 <a
-                  href="mailto:readme.md@almapi.dev"
+                  href="mailto:alvaro@almapi.dev"
                   className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-all duration-300 hover:scale-110"
                 >
                   <Image

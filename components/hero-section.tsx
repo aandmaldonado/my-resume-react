@@ -40,8 +40,8 @@ export default function HeroSection() {
             <source
               src={
                 resolvedTheme === "dark"
-                  ? "/hero/video_bg_dark.mp4"
-                  : "/hero/video_bg_light.mp4"
+                  ? "/hero/Digital_Wireframe_Brain_Animation.mp4"
+                  : "/hero/Digital_Wireframe_Brain_Animation.mp4"
               }
               type="video/mp4"
             />
@@ -54,20 +54,8 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 xs:px-6 sm:px-8 max-w-4xl mx-auto">
-        <div className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 xs:mb-6 animate-fade-in">
-          {(() => {
-            const title = t("hero.title");
-            const words = title.split(' ');
-            const firstPart = words.slice(0, -2).join(' '); // "¡Hola Mundo! Soy"
-            const secondPart = words.slice(-2).join(' ');   // "Álvaro Maldonado"
-            
-            return (
-              <>
-                <div className="mb-4">{firstPart}</div>
-                <div>{secondPart}</div>
-              </>
-            );
-          })()}
+        <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 xs:mb-6 animate-fade-in whitespace-nowrap">
+          {t("hero.title")}
         </div>
         <div className="text-lg xs:text-xl sm:text-xl md:text-2xl mb-6 xs:mb-8 text-gray-200 animate-fade-in-delay">
           <Typewriter
@@ -81,7 +69,7 @@ export default function HeroSection() {
             }}
           />
         </div>
-        
+
         {/* Download CV Button + Contact Button */}
         <div className="animate-fade-in-delay-2 flex flex-col sm:flex-row gap-3 xs:gap-4 justify-center items-center px-4 xs:px-0">
           <CVDownloadModal />
@@ -104,7 +92,7 @@ export default function HeroSection() {
           onClick={() => scrollToSection("about")}
         />
       </div>
-      
+
       {/* Negative margin bottom to allow next section overlap */}
       <div className="absolute bottom-0 left-0 right-0 h-32 -mb-32"></div>
     </section>

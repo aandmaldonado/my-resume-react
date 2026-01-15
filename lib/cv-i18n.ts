@@ -4,7 +4,7 @@ export const cvResources = {
       fullName: "Álvaro Andrés Maldonado Pinto",
       degree: "Computer Science Engineer | Software Engineer | AI-Powered Developer",
       contact: {
-        email: "readme.md@almapi.dev",
+        email: "alvaro@almapi.dev",
         portfolio: "almapi.dev",
         linkedin: "@almapidev",
         github: "@aandmaldonado"
@@ -152,7 +152,7 @@ export const cvResources = {
       fullName: "Álvaro Andrés Maldonado Pinto",
       degree: "Ingeniero en Informática | Ingeniero de Software | Desarrollador Impulsado por IA",
       contact: {
-        email: "readme.md@almapi.dev",
+        email: "alvaro@almapi.dev",
         portfolio: "almapi.dev",
         linkedin: "@almapidev",
         github: "@aandmaldonado"

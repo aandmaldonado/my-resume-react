@@ -68,9 +68,9 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon/code.svg', type: 'image/svg+xml' },
-      { url: 'icon/favicon.ico', sizes: 'any' },
-      { url: 'icon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/icon/logo.png', type: 'image/png' },
+      { url: '/icon/logo.png', sizes: 'any' },
+      { url: '/icon/logo.png', sizes: '180x180', type: 'image/png' },
     ],
     apple: [
       { url: 'icon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
@@ -87,9 +87,9 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/icon/code.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/icon/apple-touch-icon.png" />
-        <link rel="icon" href="/icon/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon/logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/icon/logo.png" />
+        <link rel="icon" href="/icon/logo.png" sizes="any" />
       </head>
       <body className={inter.className}>
         <Script
