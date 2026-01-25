@@ -36,7 +36,8 @@ export default function Home() {
   // Referencia para evitar múltiples inicializaciones
   const isInitializedRef = useRef(false)
 
-  const isChatbotEnabled = 'false'//process.env.NEXT_PUBLIC_CHATBOT_ENABLED === 'true';
+  // const isChatbotEnabled = process.env.NEXT_PUBLIC_CHATBOT_ENABLED === 'true';
+  const isChatbotEnabled = false;
 
   useEffect(() => {
     // Set default language to Spanish
@@ -107,7 +108,7 @@ export default function Home() {
           <EducationSection />
           <RecommendationsSection />
           <ContactCard locale={i18n.language as 'en' | 'es'} />
-          {isChatbotEnabled && isChatbotVisible && (
+          {/* {isChatbotEnabled && isChatbotVisible && (
             <ChatbotSection
               setIsChatbotVisible={setIsChatbotVisible}
               messages={chatMessages}
@@ -118,11 +119,11 @@ export default function Home() {
               setStatus={setChatStatus}
               sessionId={sessionIdRef.current}
             />
-          )}
+          )} */}
         </main>
         <Footer />
         {/* Botón del chatbot con notificación */}
-        {isChatbotEnabled && (
+        {/* {isChatbotEnabled && (
           <div className="fixed bottom-4 right-4 z-50">
             <button
               onClick={() => {
@@ -133,14 +134,12 @@ export default function Home() {
             >
               <Bot className="w-6 h-6" />
 
-              {/* Notificación animada */}
               {showNotification && !isChatbotVisible && (
                 <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center chatbot-notification shadow-lg">
                   <span className="font-bold">1</span>
                 </div>
               )}
 
-              {/* Mensaje flotante */}
               {showNotification && !isChatbotVisible && (
                 <div className="absolute bottom-full right-0 mb-2 bg-gray-800 text-white text-sm px-3 py-2 rounded-lg shadow-lg whitespace-nowrap chatbot-message">
                   {t("chatbot.notification_message")}
@@ -149,7 +148,7 @@ export default function Home() {
               )}
             </button>
           </div>
-        )}
+        )} */}
       </div>
     </ThemeProvider>
   );
