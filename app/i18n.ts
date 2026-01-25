@@ -18,8 +18,8 @@ const resources = {
         lang_en: "English",
       },
       hero: {
-        title: "AI-Powered Product Engineering",
-        subtitle: "Software Engineering | AI with Purpose | Human-in-the-Loop",
+        title: "Hello World! I'm Álvaro Maldonado",
+        subtitle: "Computer Science Engineer | Software Engineer | AI-Powered Developer",
         download_cv: "Download CV",
         generating: "Generating...",
         contact_button: "Contact me",
@@ -726,8 +726,8 @@ const resources = {
         lang_en: "Inglés",
       },
       hero: {
-        title: "Ingeniería de Producto Impulsada por IA",
-        subtitle: "Ingeniería de Software | IA con Propósito | Human-in-the-Loop",
+        title: "¡Hola Mundo! Soy Álvaro Maldonado",
+        subtitle: "Ingeniero en Informática | Ingeniero de Software | Desarrollador Impulsado por IA",
         download_cv: "Descargar CV",
         generating: "Generando...",
         contact_button: "Contáctame",
