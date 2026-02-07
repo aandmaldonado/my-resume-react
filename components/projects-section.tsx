@@ -1,6 +1,7 @@
 "use client"
 
 import { useTranslation } from "react-i18next"
+import { sendGAEvent } from "@next/third-parties/google"
 import {
   BrainCircuit,
   Bot,
@@ -199,6 +200,12 @@ export default function ProjectsSection() {
                               target="_blank"
                               rel="noopener noreferrer"
                               className="px-4 py-2 bg-blue-950/40 text-blue-400 border border-blue-500/30 rounded-lg hover:bg-blue-900/60 transition-all flex items-center gap-2 text-sm backdrop-blur-sm"
+                              onClick={() => {
+                                sendGAEvent('event', 'project_click', {
+                                  project_title: project.title,
+                                  link_type: 'demo'
+                                });
+                              }}
                             >
                               <Link className="w-4 h-4" />
                               {t("projects.external_link")}
@@ -210,6 +217,12 @@ export default function ProjectsSection() {
                               target="_blank"
                               rel="noopener noreferrer"
                               className="px-4 py-2 bg-slate-900/40 text-slate-300 border border-slate-700/30 rounded-lg hover:bg-slate-800/60 transition-all flex items-center gap-2 text-sm backdrop-blur-sm"
+                              onClick={() => {
+                                sendGAEvent('event', 'project_click', {
+                                  project_title: project.title,
+                                  link_type: 'repo'
+                                });
+                              }}
                             >
                               <Github className="w-4 h-4" />
                               {t("projects.github_repo")}

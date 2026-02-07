@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { Mail, Linkedin, Github, Globe } from 'lucide-react';
 import { motion } from "framer-motion";
+import { sendGAEvent } from "@next/third-parties/google";
 
 interface ContactCardProps {
   locale: 'en' | 'es';
@@ -156,8 +157,11 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
                         rel="noopener noreferrer"
                         className="flex items-start sm:items-center gap-3 sm:gap-4 text-gray-400 hover:text-white transition-all duration-300 group cursor-pointer relative z-50 pointer-events-auto"
                         onClick={(e) => {
-                          // Evitamos que el click del link llegue al contenedor del back side
                           e.stopPropagation();
+                          sendGAEvent('event', 'social_click', {
+                            platform: info.label.toLowerCase(),
+                            location: 'contact_card'
+                          });
                         }}
                       >
                         <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-500/10 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors shrink-0 mt-0.5 sm:mt-0">

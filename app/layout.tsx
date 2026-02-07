@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Script from 'next/script'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -95,11 +95,8 @@ export default function RootLayout({
         <link rel="icon" href="/icon/logo.png" sizes="any" />
       </head>
       <body className={inter.className}>
-        <Script
-          src="https://www.google.com/recaptcha/api.js"
-          strategy="afterInteractive"
-        />
         {children}
+        <GoogleAnalytics gaId="G-9Q4C2Q448H" />
       </body>
     </html>
   )

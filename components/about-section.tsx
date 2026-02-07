@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Haze } from "lucide-react"
 import { motion } from "framer-motion"
 import GlassCard from "./ui/glass-card"
+import { sendGAEvent } from "@next/third-parties/google"
 
 export default function AboutSection() {
   const { t, i18n } = useTranslation()
@@ -87,6 +88,12 @@ export default function AboutSection() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.2, y: -4 }}
                     className="text-gray-400 hover:text-blue-400 transition-colors"
+                    onClick={() => {
+                      sendGAEvent('event', 'social_click', {
+                        platform: social.name,
+                        location: 'about_section'
+                      });
+                    }}
                   >
                     <Image
                       src={`/about/${social.name}.svg`}
