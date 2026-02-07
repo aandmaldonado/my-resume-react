@@ -1,7 +1,9 @@
+"use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
-import { Mail, Linkedin, MapPin, Sparkles, Github } from 'lucide-react';
+import { Mail, Linkedin, Github, Globe } from 'lucide-react';
+import { motion } from "framer-motion";
 
 interface ContactCardProps {
   locale: 'en' | 'es';
@@ -10,108 +12,179 @@ interface ContactCardProps {
 export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
   const { t, i18n } = useTranslation();
   React.useEffect(() => { i18n.changeLanguage(locale); }, [locale, i18n]);
-  const [flipped, setFlipped] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
 
-  // Datos parametrizables vía i18n
   const back = t('contact.back', { returnObjects: true }) as any;
-  const title = t('contact.title');
-  const subtitle = t('contact.subtitle');
-  const slogan = t('contact.slogan')
+
+  const contactInfo = [
+    { icon: Mail, label: back.email, href: `mailto:${back.email}` },
+    { icon: Github, label: back.github, href: "https://github.com/aandmaldonado" },
+    { icon: Linkedin, label: back.linkedin, href: "https://linkedin.com/in/almapidev" },
+    { icon: Globe, label: back.city, href: "#" },
+  ];
 
   return (
-    <section id="contact" className="w-full py-16 bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center pt-8 sm:pt-14">
-      <h2 className="flex items-center justify-center gap-3 text-2xl xs:text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-2">
-        <Mail className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-        {title}
-      </h2>
-      <p className="text-lg text-center text-gray-600 dark:text-gray-300 mb-8 max-w-xl">{subtitle}</p>
-      <div className="[perspective:1200px] flex justify-center items-center">
-        <div className="border border-blue-200 dark:border-blue-800 rounded-2xl shadow-2xl">
-          <div
-            className={`relative w-[320px] xs:w-[360px] sm:w-[400px] md:w-[480px] h-[240px] xs:h-[280px] sm:h-[300px] md:h-[320px] bg-white dark:bg-neutral-900 rounded-2xl cursor-pointer`}
-            tabIndex={0}
-            aria-label={flipped ? t('contact.ariaBack') : t('contact.ariaFront')}
-            onClick={() => setFlipped(f => !f)}
-            onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setFlipped(f => !f)}
-            role="button"
-            style={{ outline: 'none' }}
+    <section id="contact" className="py-24 bg-dark-bg relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/10 blur-[120px] rounded-full" />
+
+      <div className="max-w-4xl mx-auto px-4 relative z-10">
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex items-center justify-center gap-3 mb-4"
           >
-            <div
-              className={`absolute w-full h-full transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? '[transform:rotateY(180deg)]' : ''}`}
-            >
-              {/* Front */}
-              <div className="absolute w-full h-full bg-transparent flex flex-col items-center justify-center [backface-visibility:hidden] p-3 xs:p-4">
-                <div className="flex items-center">
-                  <Image
-                    src="/logo.png"
-                    alt="almap[i] logo"
-                    width={48}
-                    height={48}
-                    className="w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 mr-2 xs:mr-3 object-contain rounded-full"
-                  />
-                  <span className="text-2xl xs:text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-                    almap<span className="text-blue-600">[i]</span>
+            <h2 className="text-4xl sm:text-5xl font-bold text-center text-white mb-4">
+              {t("contact.title").split(" ").length <= 1 ? (
+                t("contact.title")
+              ) : t("contact.title").split(" ").length === 2 ? (
+                <>
+                  {t("contact.title").split(" ")[0]}{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                    {t("contact.title").split(" ")[1]}
                   </span>
+                </>
+              ) : (
+                <>
+                  {t("contact.title").split(" ").slice(0, -2).join(" ")}{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                    {t("contact.title").split(" ").slice(-2).join(" ")}
+                  </span>
+                </>
+              )}
+            </h2>
+          </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-gray-400 text-lg sm:text-xl"
+          >
+            {t("contact.subtitle")}
+          </motion.p>
+        </div>
+
+        <div className="flex justify-center perspective-1000">
+          <motion.div
+            className="relative w-full max-w-[600px] aspect-[1.6/1] preserve-3d"
+            animate={{ rotateY: isFlipped ? 180 : 0 }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 260, damping: 20 }}
+          >
+            {/* Front Side */}
+            <div
+              className={`absolute inset-0 w-full h-full backface-hidden bg-[#0A0F1E] border border-blue-500/20 rounded-3xl px-4 sm:px-8 py-8 flex flex-col items-center justify-center gap-6 shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-blue-500/50 hover:shadow-glow-blue-strong ${!isFlipped ? "z-20 pointer-events-auto" : "z-0 pointer-events-none"}`}
+              style={{ transform: "translateZ(1px)" }}
+              onClick={() => setIsFlipped(true)}
+            >
+              <div className="relative z-10 flex flex-col items-center gap-6">
+                <div className="flex items-center gap-4 sm:gap-6">
+                  <div className="relative w-14 h-14 sm:w-20 sm:h-20 shrink-0 rounded-full overflow-hidden border border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.2)] bg-black/40 backdrop-blur-sm">
+                    <Image
+                      src="/logo.png"
+                      alt="almap[i] logo"
+                      fill
+                      className="object-cover scale-110"
+                    />
+                  </div>
+                  <h3 className="text-4xl sm:text-6xl font-bold text-white tracking-tight">
+                    almap<span className="text-blue-500">[i]</span>
+                  </h3>
                 </div>
-                <p className="text-gray-900 text-center text-xs xs:text-sm sm:text-base md:text-lg flex items-center justify-center gap-2 dark:text-white">
-                  <Sparkles className="w-4 h-4 xs:w-5 xs:h-5 text-blue-400" />
-                  <span className="italic">{slogan}</span>
-                  <Sparkles className="w-4 h-4 xs:w-5 xs:h-5 text-blue-400" />
+                <p className="text-gray-400 text-[10px] xs:text-base sm:text-lg italic font-light text-center tracking-tight w-full px-2 sm:whitespace-nowrap">
+                  {t("contact.slogan")}
                 </p>
               </div>
-              {/* Back */}
+
+              {/* Subtle Background Glow for Premium Feel */}
+              <div className="absolute top-0 left-0 w-32 h-32 bg-blue-600/5 blur-[60px] rounded-full" />
+              <div className="absolute bottom-0 right-0 w-32 h-32 bg-cyan-600/5 blur-[60px] rounded-full" />
+            </div>
+
+            {/* Back Side */}
+            <div
+              className={`absolute inset-0 w-full h-full backface-hidden bg-[#0A0F1E] border border-blue-500/20 rounded-3xl p-4 sm:p-10 flex items-center sm:justify-center shadow-2xl transition-all duration-300 hover:border-blue-500/50 hover:shadow-glow-blue-strong ${isFlipped ? "z-20 pointer-events-auto" : "z-0 pointer-events-none"}`}
+              style={{ transform: "rotateY(180deg) translateZ(1px)" }}
+            >
+              {/* Clickable Background to flip back */}
               <div
-                className="absolute w-full h-full text-white rounded-2xl shadow-2xl flex flex-col sm:flex-row items-center justify-center [transform:rotateY(180deg)] [backface-visibility:hidden] p-4 xs:p-6 sm:p-8 gap-4 xs:gap-6 sm:gap-8"
-                style={{
-                  background: 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #60a5fa 100%)',
-                }}
+                className="absolute inset-0 z-0 cursor-pointer"
+                onClick={() => setIsFlipped(false)}
+              />
+
+              <div
+                className="flex items-center gap-4 sm:gap-8 w-full max-w-xl relative z-10 pl-2 sm:pl-0 pointer-events-none"
               >
-                {/* Icono grande - Responsive */}
-                <div className="flex flex-col items-center justify-center h-full sm:h-full">
+                <div className="relative w-20 h-20 sm:w-36 sm:h-36 shrink-0 rounded-full overflow-hidden border border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.2)] bg-black/40 backdrop-blur-sm pointer-events-auto cursor-pointer" onClick={() => setIsFlipped(false)}>
                   <Image
                     src="/logo.png"
                     alt="almap[i] logo"
-                    width={96}
-                    height={96}
-                    className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 drop-shadow-lg object-contain rounded-full"
+                    fill
+                    className="object-cover scale-110"
                   />
                 </div>
-                {/* Línea divisoria - Oculto en mobile */}
-                <div className="hidden sm:block h-32 w-px bg-blue-200 shadow-lg mx-4" />
-                {/* Info de contacto - Responsive */}
-                <div className="flex flex-col gap-3 xs:gap-4 sm:gap-5 min-w-0 xs:min-w-0 sm:min-w-[160px] md:min-w-[180px]">
-                  {back.email && (
-                    <div className="flex items-center gap-2 xs:gap-3">
-                      <Mail className="w-5 h-5 xs:w-6 xs:h-6 text-blue-200" />
-                      <a href={`mailto:${back.email}`} className="underline text-white text-sm xs:text-base" onClick={e => e.stopPropagation()}>{back.email}</a>
-                    </div>
-                  )}
-                  {back.github && (
-                    <div className="flex items-center gap-2 xs:gap-3">
-                      <Github className="w-5 h-5 xs:w-6 xs:h-6 text-blue-200" />
-                      <a href={back.github} target="_blank" rel="noopener noreferrer" className="underline text-white text-sm xs:text-base" onClick={e => e.stopPropagation()}>@aandmaldonado</a>
-                    </div>
-                  )}
-                  {back.linkedin && (
-                    <div className="flex items-center gap-2 xs:gap-3">
-                      <Linkedin className="w-5 h-5 xs:w-6 xs:h-6 text-blue-200" />
-                      <a href={back.linkedin} target="_blank" rel="noopener noreferrer" className="underline text-white text-sm xs:text-base" onClick={e => e.stopPropagation()}>@almapidev</a>
-                    </div>
-                  )}
-                  {back.city && (
-                    <div className="flex items-center gap-2 xs:gap-3">
-                      <MapPin className="w-5 h-5 xs:w-6 xs:h-6 text-blue-200" />
-                      <span className="text-sm xs:text-base">{back.city}</span>
-                    </div>
-                  )}
+
+                <div className="h-28 sm:h-36 w-px bg-gradient-to-b from-transparent via-blue-500/40 to-transparent shrink-0" />
+
+                <div className="flex flex-col gap-3 sm:gap-4 lg:gap-5 min-w-0 flex-1 pointer-events-auto">
+                  {contactInfo.map((info, idx) => {
+                    const isLink = info.href !== "#";
+
+                    if (!isLink) {
+                      return (
+                        <div
+                          key={idx}
+                          className="flex items-start sm:items-center gap-3 sm:gap-4 text-gray-400 leading-tight"
+                        >
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
+                            <info.icon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
+                          </div>
+                          <span className="text-[11px] sm:text-sm lg:text-[15px] font-medium tracking-wide">
+                            {info.label}
+                          </span>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <a
+                        key={idx}
+                        href={info.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-start sm:items-center gap-3 sm:gap-4 text-gray-400 hover:text-white transition-all duration-300 group cursor-pointer relative z-50 pointer-events-auto"
+                        onClick={(e) => {
+                          // Evitamos que el click del link llegue al contenedor del back side
+                          e.stopPropagation();
+                        }}
+                      >
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-500/10 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors shrink-0 mt-0.5 sm:mt-0">
+                          <info.icon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
+                        </div>
+                        <span className="text-[11px] sm:text-sm lg:text-[15px] font-medium tracking-wide leading-tight border-b border-transparent group-hover:border-white/20">
+                          {info.label}
+                        </span>
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
+
+              {/* Subtle Background Glow for Premium Feel */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 blur-[60px] rounded-full" />
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-cyan-600/5 blur-[60px] rounded-full" />
             </div>
-          </div>
+          </motion.div>
         </div>
+
+        <p className="text-center mt-8 text-gray-500 text-sm animate-pulse">
+          {t("contact.flipHint")}
+        </p>
       </div>
     </section>
   );
 };
 
-export default ContactCard; 
+export default ContactCard;

@@ -7,25 +7,28 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Alvaro Maldonado | Product Engineer & AI',
+    default: 'Alvaro Maldonado | Tech Lead & AI Strategist',
     template: '%s | Alvaro Maldonado',
   },
-  description: 'Portfolio of Alvaro Maldonado, a Senior Software Engineer and Product Engineer. Explore AI projects focused on solving complex business problems across diverse industries.',
+  description: 'Tech Lead & AI Strategist. Transformo ideas de negocio en productos que escalan de verdad. Experto en conectar la visión estratégica con soluciones tecnológicas de alto impacto.',
   keywords: [
     'Alvaro Maldonado',
-    'Product Engineer',
-    'Senior Software Engineer',
-    'AI Specialist',
-    'Technical Leadership',
-    'Software Architecture',
-    'Artificial Intelligence',
-    'Machine Learning',
-    'Enterprise AI',
-    'Java',
+    'Tech Lead',
+    'AI Strategist',
+    'AI Solutions Architect',
+    'AI Agents',
+    'Autonomous Agents',
+    'LangGraph',
+    'RAG',
+    'LLMOps',
+    'LangChain',
+    'Solution Architecture',
+    'Scalable Systems',
+    'Generative AI',
     'Python',
-    'Spring Boot',
-    'AWS',
-    'Microservices'
+    'Enterprise AI',
+    'Technical Leadership',
+    'Cloud Architecture'
   ],
   authors: [
     {
@@ -45,16 +48,16 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Alvaro Maldonado | Product Engineer & AI',
-    description: 'Portfolio of a Senior Software Engineer and Product Engineer. Explore AI projects focused on solving complex business problems across diverse industries.',
+    title: 'Alvaro Maldonado | Tech Lead & AI Strategist',
+    description: 'Tech Lead & AI Strategist. Transformo ideas de negocio en productos que escalan de verdad. Experto en conectar la visión estratégica con soluciones tecnológicas de alto impacto.',
     url: 'https://almapi.dev',
     siteName: 'almap[i]',
     images: [
       {
-        url: 'https://almapi.dev/about/profile2.jpg',
+        url: 'https://almapi.dev/chatbot/profile.jpeg',
         width: 320,
         height: 320,
-        alt: 'Profile picture of Alvaro Maldonado, a Product Engineer and AI expert.',
+        alt: 'Profile picture of Alvaro Maldonado, a Tech Lead & AI Strategist.',
       },
       {
         url: 'https://almapi.dev/icon/logo.svg',

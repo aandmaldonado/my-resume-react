@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone', // Enable standalone output for Cloud Run
-  eslint: {
-    ignoreDuringBuilds: false, // Enable security checks
-  },
   typescript: {
     ignoreBuildErrors: false, // Enable type checking
   },

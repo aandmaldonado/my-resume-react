@@ -3,6 +3,8 @@
 import { useTranslation } from "react-i18next"
 import { Building2, Calendar, Briefcase, CheckCircle2, MapPin, ClipboardList, ListChecks, Award, ChevronDown, ChevronUp } from "lucide-react"
 import { useState } from "react"
+import GlassCard from "@/components/ui/glass-card"
+import { motion } from "framer-motion"
 
 export default function ExperienceSection() {
   const { t } = useTranslation()
@@ -28,12 +30,33 @@ export default function ExperienceSection() {
   }
 
   return (
-    <section id="experience" className="py-20 bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-4 pt-8 sm:pt-16">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-3">
-            <Briefcase className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400" />
-            {t("experience.title")}
+    <section id="experience" className="py-12 sm:py-16 bg-[#030712]">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto"
+        >
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 text-white">
+            {t("experience.title").split(" ").length <= 1 ? (
+              t("experience.title")
+            ) : t("experience.title").split(" ").length === 2 ? (
+              <>
+                {t("experience.title").split(" ")[0]}{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                  {t("experience.title").split(" ")[1]}
+                </span>
+              </>
+            ) : (
+              <>
+                {t("experience.title").split(" ").slice(0, -2).join(" ")}{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                  {t("experience.title").split(" ").slice(-2).join(" ")}
+                </span>
+              </>
+            )}
           </h2>
 
           <div className="relative">
@@ -44,13 +67,13 @@ export default function ExperienceSection() {
               {experiences.map((exp, idx) => (
                 <div key={idx} className="relative flex items-start">
                   {/* Timeline dot - Ajustado para mobile */}
-                  <div className="absolute left-2 sm:left-6 w-4 h-4 bg-blue-600 dark:bg-blue-400 rounded-full border-4 border-white dark:border-gray-900"></div>
+                  <div className="absolute left-2 sm:left-6 w-4 h-4 bg-blue-600 dark:bg-blue-400 rounded-full border-4 border-white dark:border-gray-900 z-20"></div>
 
                   {/* Company logo - Oculto en mobile */}
                   <div className="hidden sm:block ml-16 mr-6 flex-shrink-0">
                     <div className="border border-blue-200 dark:border-blue-800 w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
-                      <img 
-                        src={exp.logo} 
+                      <img
+                        src={exp.logo}
                         alt={`${exp.company} logo`}
                         className="w-full h-full object-cover"
                       />
@@ -58,7 +81,7 @@ export default function ExperienceSection() {
                   </div>
 
                   {/* Content */}
-                  <div className="border border-blue-200 dark:border-blue-800 flex-1 bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-sm sm:ml-0 ml-8">
+                  <GlassCard className="flex-1 sm:ml-0 ml-8">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                       <div className="flex items-start gap-3">
                         <Building2 className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
@@ -83,12 +106,12 @@ export default function ExperienceSection() {
                     {/* Descripción */}
                     <div className="flex items-start gap-3 mb-6">
                       <ClipboardList className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
-                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify font-bold flex items-center justify-between w-full">
+                      <div className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify font-bold flex items-center justify-between w-full">
                         {t("experience.description")}
                         <button onClick={() => toggleExpand(idx, 'description')} className="text-blue-600 dark:text-blue-400">
                           {expandedSections[idx]?.['description'] ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                         </button>
-                      </p>
+                      </div>
                     </div>
                     {expandedSections[idx]?.['description'] && (
                       <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify mb-6">
@@ -98,12 +121,12 @@ export default function ExperienceSection() {
                     {/* Responsabilidades */}
                     <div className="flex items-start gap-3 mb-6">
                       <ListChecks className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
-                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify font-bold flex items-center justify-between w-full">
+                      <div className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify font-bold flex items-center justify-between w-full">
                         {t("experience.responsibilities")}
                         <button onClick={() => toggleExpand(idx, 'responsibilities')} className="text-blue-600 dark:text-blue-400">
                           {expandedSections[idx]?.['responsibilities'] ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                         </button>
-                      </p>
+                      </div>
                     </div>
                     {expandedSections[idx]?.['responsibilities'] && (
                       <ul className="space-y-2">
@@ -119,12 +142,12 @@ export default function ExperienceSection() {
                     <div className="mt-8">
                       <div className="flex items-start gap-3 mb-6">
                         <Award className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
-                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify font-bold flex items-center justify-between w-full">
+                        <div className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify font-bold flex items-center justify-between w-full">
                           {t("experience.achievements")}
                           <button onClick={() => toggleExpand(idx, 'achievements')} className="text-blue-600 dark:text-blue-400">
                             {expandedSections[idx]?.['achievements'] ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                           </button>
-                        </p>
+                        </div>
                       </div>
                       {expandedSections[idx]?.['achievements'] && exp.achievements && (
                         <ul className="space-y-2">
@@ -137,12 +160,12 @@ export default function ExperienceSection() {
                         </ul>
                       )}
                     </div>
-                  </div>
+                  </GlassCard>
                 </div>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

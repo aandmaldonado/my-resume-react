@@ -3,15 +3,19 @@ import { useRef, useState, useEffect, useCallback } from "react";
 interface UseInfiniteCarouselProps<T> {
   items: T[];
   cardWidth: number;
+  gap?: number;
   speed?: number;
 }
 
-export function useInfiniteCarousel<T>({ items, cardWidth, speed = 1.0 }: UseInfiniteCarouselProps<T>) {
+export function useInfiniteCarousel<T>({ items, cardWidth, gap = 32, speed = 1.0 }: UseInfiniteCarouselProps<T>) {
   // Duplicamos el array para el efecto infinito
   const marqueeItems = [...items, ...items];
   const totalCards = marqueeItems.length;
   const trackRef = useRef<HTMLDivElement>(null);
-  const [trackWidth, setTrackWidth] = useState(cardWidth * totalCards);
+
+  // El ancho de una "vuelta" completa es (cardWidth + gap) * items.length
+  const singleLoopWidth = (cardWidth + gap) * items.length;
+  const [trackWidth, setTrackWidth] = useState(singleLoopWidth * 2);
   const [isPaused, setIsPaused] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState<number | null>(null);
@@ -19,8 +23,8 @@ export function useInfiniteCarousel<T>({ items, cardWidth, speed = 1.0 }: UseInf
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    setTrackWidth(cardWidth * totalCards);
-  }, [cardWidth, totalCards]);
+    setTrackWidth(singleLoopWidth * 2);
+  }, [singleLoopWidth]);
 
   // Animación manual con requestAnimationFrame
   useEffect(() => {
@@ -30,14 +34,14 @@ export function useInfiniteCarousel<T>({ items, cardWidth, speed = 1.0 }: UseInf
     function step() {
       setOffset(prev => {
         let next = prev - speed;
-        if (next <= -trackWidth / 2) return 0;
+        if (next <= -singleLoopWidth) return 0;
         return next;
       });
       frame = requestAnimationFrame(step);
     }
     frame = requestAnimationFrame(step);
     return () => cancelAnimationFrame(frame);
-  }, [dragging, isPaused, trackWidth, speed]);
+  }, [dragging, isPaused, singleLoopWidth, speed]);
 
   // Drag/swipe handlers
   const handlePointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
@@ -51,10 +55,10 @@ export function useInfiniteCarousel<T>({ items, cardWidth, speed = 1.0 }: UseInf
     if (!dragging || dragStartX === null) return;
     const delta = e.clientX - dragStartX;
     let next = dragStartOffset + delta;
-    if (next < -trackWidth / 2) next += trackWidth / 2;
-    if (next > 0) next -= trackWidth / 2;
+    if (next < -singleLoopWidth) next += singleLoopWidth;
+    if (next > 0) next -= singleLoopWidth;
     setOffset(next);
-  }, [dragging, dragStartX, dragStartOffset, trackWidth]);
+  }, [dragging, dragStartX, dragStartOffset, singleLoopWidth]);
 
   const handlePointerUp = useCallback(() => {
     setDragging(false);
@@ -74,10 +78,10 @@ export function useInfiniteCarousel<T>({ items, cardWidth, speed = 1.0 }: UseInf
     if (!dragging || dragStartX === null) return;
     const delta = e.touches[0].clientX - dragStartX;
     let next = dragStartOffset + delta;
-    if (next < -trackWidth / 2) next += trackWidth / 2;
-    if (next > 0) next -= trackWidth / 2;
+    if (next < -singleLoopWidth) next += singleLoopWidth;
+    if (next > 0) next -= singleLoopWidth;
     setOffset(next);
-  }, [dragging, dragStartX, dragStartOffset, trackWidth]);
+  }, [dragging, dragStartX, dragStartOffset, singleLoopWidth]);
 
   const handleTouchEnd = handlePointerUp;
 
