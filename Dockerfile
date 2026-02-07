@@ -6,20 +6,15 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm ci --only=production
+RUN npm ci --only=production --legacy-peer-deps
 
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build args para variables de entorno
-ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-ARG NEXT_PUBLIC_CHATBOT_ENABLED
+# Build args y Environment eliminados
 
-# Convertir build args a environment variables para el build
-ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-ENV NEXT_PUBLIC_CHATBOT_ENABLED=$NEXT_PUBLIC_CHATBOT_ENABLED
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
