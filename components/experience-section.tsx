@@ -103,53 +103,9 @@ export default function ExperienceSection() {
                         <span className="text-sm">{exp.period}</span>
                       </div>
                     </div>
-                    {/* Descripción */}
-                    <div className="flex items-start gap-3 mb-6">
-                      <ClipboardList className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
-                      <div className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify font-bold flex items-center justify-between w-full">
-                        {t("experience.description")}
-                        <button onClick={() => toggleExpand(idx, 'description')} className="text-blue-600 dark:text-blue-400">
-                          {expandedSections[idx]?.['description'] ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-                        </button>
-                      </div>
-                    </div>
-                    {expandedSections[idx]?.['description'] && (
-                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify mb-6">
-                        {exp.description}
-                      </p>
-                    )}
-                    {/* Responsabilidades */}
-                    <div className="flex items-start gap-3 mb-6">
-                      <ListChecks className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
-                      <div className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify font-bold flex items-center justify-between w-full">
-                        {t("experience.responsibilities")}
-                        <button onClick={() => toggleExpand(idx, 'responsibilities')} className="text-blue-600 dark:text-blue-400">
-                          {expandedSections[idx]?.['responsibilities'] ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-                        </button>
-                      </div>
-                    </div>
-                    {expandedSections[idx]?.['responsibilities'] && (
-                      <ul className="space-y-2">
-                        {exp.responsibilities.map((resp: string, respIndex: number) => (
-                          <li key={respIndex} className="flex items-start">
-                            <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-1 mr-3 flex-shrink-0" />
-                            <span className="text-gray-700 dark:text-gray-300">{resp}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
                     {/* Logros */}
                     <div className="mt-8">
-                      <div className="flex items-start gap-3 mb-6">
-                        <Award className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
-                        <div className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify font-bold flex items-center justify-between w-full">
-                          {t("experience.achievements")}
-                          <button onClick={() => toggleExpand(idx, 'achievements')} className="text-blue-600 dark:text-blue-400">
-                            {expandedSections[idx]?.['achievements'] ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-                          </button>
-                        </div>
-                      </div>
-                      {expandedSections[idx]?.['achievements'] && exp.achievements && (
+                      {exp.achievements && (
                         <ul className="space-y-2">
                           {exp.achievements.map((achiev: string, achievIndex: number) => (
                             <li key={achievIndex} className="flex items-start">

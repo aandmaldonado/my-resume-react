@@ -52,17 +52,10 @@ const resources = {
             period: "2024 - Present",
             location: "Chile",
             logo: "/exp/inadvance.jpeg",
-            description: "As an integration specialist on the strategic 'Andes Online' project, I led the backend modernization for a new credit card processing platform, focusing on the transition to a robust and scalable microservices architecture.",
-            responsibilities: [
-              "Analysis and translation of complex financial requirements into technical specifications.",
-              "Design and implementation of resilient and secure APIs for system interoperability.",
-              "Application of Clean Code principles and 'shift-left' testing strategies.",
-              "Active participation in the technical selection and evaluation of new engineering talent."
-            ],
             achievements: [
-              "Designed and implemented a resilient microservices solution, crafting APIs that ensured seamless and secure communication between legacy systems and the new platform.",
-              "Applied a 'shift-left testing' strategy within a DevOps culture, taking ownership of code quality (Clean Code) and security from the earliest stages of development.",
-              "Served as the primary liaison between business areas and development, translating complex financial system requirements into clear, actionable technical specifications for the team."
+              "Led the modernization of the card system, supporting 500K+ daily transactions through a resilient microservices architecture, ensuring 24/7 availability.",
+              "Reduced critical incidents by 45% by applying CI/CD, Trunk Based Development, and Shift-Left Testing.",
+              "Transformed financial requirements into scalable solutions that eliminated ambiguities and accelerated delivery."
             ]
           },
           {
@@ -71,17 +64,10 @@ const resources = {
             period: "2023 - 2024",
             location: "Chile",
             logo: "/exp/imagemaker.jpeg",
-            description: "Acted as a technical consultant and backend developer, designing and implementing custom solutions for clients in the legal and corporate sectors. My work focused on software quality, microservice performance, and system observability, leveraging cutting-edge technologies throughout the development cycle.",
-            responsibilities: [
-              "Provided external technical consulting to optimize projects and resolve complex service issues.",
-              "Developed microservices using modern Java versions and Spring Boot.",
-              "Conducted automated code reviews to ensure quality and security standards (Veracode, SonarQube).",
-              "Ensured system health through proactive service monitoring with Splunk and Dynatrace."
-            ],
             achievements: [
-              "Led a Proof of Concept (PoC) with AI to redefine service offerings for SME clients by automating the analysis of legal documents with NLP and Computer Vision.",
-              "Designed and implemented robust microservices, establishing cloud-native best practices and automated quality standards.",
-              "Acted as a key technical consultant for clients, implementing proactive monitoring solutions that significantly reduced system downtime."
+              "Reduced response time by 99.9% (from 48h to <3s) through an AI PoC that automated the analysis of 10,000 monthly legal documents.",
+              "Developed Cloud-Native microservices with CI/CD and automated reviews, reducing technical debt by 30% and ensuring scalability.",
+              "Decreased downtime in critical systems by 60% by implementing proactive observability with Splunk and Dynatrace for early detection."
             ]
           },
           {
@@ -90,17 +76,10 @@ const resources = {
             period: "2022 - 2023",
             location: "Chile",
             logo: "/exp/falabella.jpeg",
-            description: "I led the development of a corporate attendance management system implemented across various business units of the Falabella group in Latin America. The project involved decomposing legacy systems, designing distributed and resilient solutions, and applying Domain-Driven Design (DDD) principles and event-driven architecture.",
-            responsibilities: [
-              "Collaborated with Product Owners and business stakeholders to define requirements.",
-              "Managed the backlog and prioritized key project functionalities.",
-              "Provided technical leadership to the development team, ensuring compliance with architectural guidelines.",
-              "Coordinated with internal and external teams, including managing SaaS provider relationships."
-            ],
             achievements: [
-              "Led the delivery of a multi-country attendance management system, orchestrating the full product lifecycle and significantly optimizing the company's regional operational efficiency.",
-              "Spearheaded the modernization of legacy systems by applying Domain-Driven Design (DDD) and an event-driven architecture to decouple complex business domains.",
-              "Led the implementation and integration strategy with a SaaS provider, serving as the main liaison between technical teams, business stakeholders, and external vendors."
+              "Orchestrated the technical transformation of the regional attendance system for 50,000+ employees, reducing technical debt by 35% through domain decoupling with DDD.",
+              "Designed a transactional core with DDD and event-driven architecture to process 2M daily events with low latency.",
+              "Accelerated time-to-market by 30% and eliminated data inconsistencies through standardized SaaS API integration."
             ]
           },
           {
@@ -109,75 +88,23 @@ const resources = {
             period: "2021 - 2022",
             location: "Spain",
             logo: "/exp/neurogenesis.jpeg",
-            description: "I led the development of Artificial Intelligence solutions focused on social and environmental impact. I managed the cloud infrastructure and oversaw multidisciplinary projects, connecting academia with industry.",
-            responsibilities: [
-              "Defined the company's initial product vision and technology strategy.",
-              "Designed and implemented a scalable cloud architecture on AWS for AI projects.",
-              "Applied R&D in Deep Learning and Computer Vision.",
-              "Managed and mentored master's thesis projects in AI, DevOps, UX/UI, and Industry 4.0."
-            ],
             achievements: [
-              "As a Co-Founder, I participated in the company's conception, legal incorporation, and registration.",
-              "Led the 'AcuaMattic' project, an end-to-end AI system including a proprietary dataset (+10,000 images), a CNN model (92% accuracy), and integration with a robot prototype.",
-              "Orchestrated the complete infrastructure migration to AWS, laying the foundation for large-scale Machine Learning model training and deployment.",
-              "Expanded the company's AI solutions portfolio, developing NLP prototypes for document analysis and a production-ready chatbot using Amazon Lex.",
-              "Served as a bridge between industry and academia, mentoring multiple master's thesis projects for my alma mater."
+              "Co-founded and led the technology strategy and product roadmap from incorporation to launch.",
+              "Developed an end-to-end AI system with 92% accuracy (CNN), based on the creation of a proprietary dataset of +10k images.",
+              "Designed Cloud-Native infrastructure on AWS to deploy scalable ML models and facilitate production (MLOps).",
+              "Technically led 7 innovation projects (+50 students) in AI and DevOps, aligning academic research with real commercial applications."
             ]
           },
           {
-            company: "NTT DATA Europe & LATAM",
+            company: "NTT DATA",
             position: "Senior Backend Engineer & Tech Consultant",
             period: "2019 - 2021",
             location: "Chile",
             logo: "/exp/nttdata.jpeg",
-            description: "I played an active role in modernizing core systems of the financial ecosystem, addressing the migration of legacy platforms to modern architectures. My focus was on developing highly available and secure applications in a demanding, regulated environment.",
-            responsibilities: [
-              "Analyzed technical and functional requirements for financial sector clients.",
-              "Designed robust and secure IT solutions and strategies.",
-              "Developed RESTful Web Services with Java 8 and Spring Boot 2.",
-              "Implemented robust authentication and authorization with Spring Security and JWT."
-            ],
             achievements: [
-              "Led the modernization and migration of Transbank's back-office systems, dramatically enhancing the maintainability and performance of the core banking platform.",
-              "Designed and implemented high-availability solutions capable of handling over 1 million daily transactions, applying financial security standards (OWASP, PCI).",
-              "Acted as the team's technical reference, establishing quality standards that reduced technical debt through static code analysis tools."
-            ]
-          },
-          {
-            company: "Falabella",
-            position: "Senior IT Analyst",
-            period: "2015 - 2019",
-            location: "Chile",
-            logo: "/exp/falabella.jpeg",
-            description: "I was responsible for the development and integration of corporate solutions for various business units of the Falabella Group. I led key projects aimed at improving operational efficiency and the internal user experience through custom Java platforms.",
-            responsibilities: [
-              "Managed and developed requirements for internal business units.",
-              "Built Java web solutions to integrate legacy systems.",
-              "Supervised technical team assignments and external providers.",
-              "Collaborated directly with different areas to implement custom solutions."
-            ],
-            achievements: [
-              "Led the development of the 'Personnel and Payroll System' (SPR), a key corporate platform that unified HR management for over 50,000 employees.",
-              "Designed and implemented a platform for declaring conflicts of interest, strengthening corporate transparency and ethics.",
-              "Served as the main point of contact for non-technical business stakeholders, leading requirements gathering to translate their needs into user-oriented software solutions."
-            ]
-          },
-          {
-            company: "NTT DATA Europe & LATAM",
-            position: "Backend Engineer & Tech Consultant",
-            period: "2010 - 2014",
-            location: "Chile",
-            logo: "/exp/nttdata.jpeg",
-            description: "I was responsible for migrating the private customer portal for Movistar Chile, developing front-end and back-end components on the IBM WebSphere platform, with the goal of improving customer experience and adding new functionalities.",
-            responsibilities: [
-              "Developed front-end portlets (HTML, CSS, JavaScript, JSP) with WebSphere Portlet Factory.",
-              "Developed backend SOAP Web Services with Java.",
-              "Applied the DAO design pattern for data abstraction.",
-              "Authored technical documentation and user guides."
-            ],
-            achievements: [
-              "Played a key role in the successful migration of the Movistar Chile customer portal on IBM WebSphere, incorporating new functionalities.",
-              "Contributed to a significant improvement in user experience and increased customer autonomy through intuitive interfaces and integrated services."
+              "Designed high-availability architecture processing +1M daily transactions and reduced critical vulnerabilities by 50% by implementing OWASP and PCI standards.",
+              "Refactored critical modules with high technical debt, migrating monolithic logic to decoupled microservices to improve maintainability and deployment speed.",
+              "Established the test automation and static analysis framework (Shift-Left), drastically reducing the error rate detected in pre-production environments."
             ]
           }
         ]
@@ -543,17 +470,10 @@ const resources = {
             period: "2024 - Presente",
             location: "Chile",
             logo: "/exp/inadvance.jpeg",
-            description: "Como especialista en integración en el proyecto estratégico 'Andes Online', lideré la modernización del backend para una nueva plataforma de procesamiento de tarjetas de crédito, enfocándome en la transición hacia una arquitectura de microservicios robusta y escalable.",
-            responsibilities: [
-              "Análisis y traducción de complejos requerimientos financieros a especificaciones técnicas.",
-              "Diseño e implementación de APIs resilientes y seguras para la interoperabilidad de sistemas.",
-              "Aplicación de principios de Clean Code y estrategias de 'shift-left testing'.",
-              "Participación activa en la selección y evaluación técnica de nuevos ingenieros."
-            ],
             achievements: [
-              "Diseñé e implementé una solución de microservicios resiliente, creando APIs que aseguraron la comunicación fluida y segura entre sistemas legados y la nueva plataforma.",
-              "Apliqué una estrategia de 'shift-left testing' dentro de la cultura DevOps, responsabilizándome de la calidad del código y la seguridad desde las fases iniciales del desarrollo.",
-              "Actué como puente entre las áreas de negocio y desarrollo, traduciendo los complejos requerimientos del sistema financiero en especificaciones técnicas claras y viables para el equipo."
+              "Lideré la modernización del sistema de tarjetas, soportando +500K transacciones diarias mediante una arquitectura de resiliencia en microservicios, garantizando disponibilidad total (24/7).",
+              "Reduje un 45% los incidentes críticos aplicando CI/CD, Trunk Based Development y Shift-Left Testing.",
+              "Transformé requerimientos financieros en soluciones escalables que eliminaron ambigüedades y aceleraron entregas."
             ]
           },
           {
@@ -562,17 +482,10 @@ const resources = {
             period: "2023 - 2024",
             location: "Chile",
             logo: "/exp/imagemaker.jpeg",
-            description: "Actué como consultor técnico y desarrollador backend, diseñando e implementando soluciones a medida para clientes del sector legal y corporativo. Mi trabajo se centró en la calidad del software, el rendimiento de los microservicios y la observabilidad del sistema.",
-            responsibilities: [
-              "Consultoría técnica externa para optimizar proyectos y resolver problemas complejos.",
-              "Desarrollo de microservicios con versiones modernas de Java y Spring Boot.",
-              "Revisiones de código automatizadas para asegurar estándares de calidad (Veracode, SonarQube).",
-              "Garantía de la salud del sistema mediante monitoreo proactivo de servicios con Splunk y Dynatrace."
-            ],
             achievements: [
-              "Lideré una Prueba de Concepto (PoC) con IA para redefinir la oferta de servicios a clientes PYME, automatizando el análisis de documentos legales con NLP y Visión por Computador.",
-              "Diseñé e implementé microservicios robustos, estableciendo mejores prácticas cloud-native y estándares de calidad automatizados.",
-              "Actué como consultor técnico clave para clientes, implementando soluciones de monitoreo proactivo que redujeron significativamente el tiempo de inactividad del sistema."
+              "Reduje el tiempo de respuesta en un 99.9% (de 48h a <3s) mediante una PoC de IA que automatizó el análisis de 10,000 documentos legales mensuales.",
+              "Desarrollé microservicios Cloud-Native con CI/CD y revisiones automáticas, reduciendo deuda técnica en 30% y garantizando escalabilidad.",
+              "Disminuí en 60% el downtime en sistemas críticos implementando observabilidad proactiva con Splunk y Dynatrace para detección temprana."
             ]
           },
           {
@@ -581,17 +494,10 @@ const resources = {
             period: "2022 - 2023",
             location: "Chile",
             logo: "/exp/falabella.jpeg",
-            description: "Lideré el desarrollo de un sistema corporativo de gestión de asistencia implementado en diversas unidades de negocio del grupo Falabella en América Latina. El proyecto involucró la descomposición de sistemas legados, el diseño de soluciones distribuidas y la aplicación de principios de Domain-Driven Design (DDD) y arquitectura basada en eventos.",
-            responsibilities: [
-              "Colaboración con Product Owners y stakeholders para la definición de requerimientos.",
-              "Gestión del backlog y priorización de funcionalidades clave del proyecto.",
-              "Liderazgo técnico del equipo de desarrollo, asegurando el cumplimiento de las guías de arquitectura.",
-              "Coordinación con equipos internos y externos, incluyendo la gestión de proveedores de SaaS."
-            ],
             achievements: [
-              "Lideré la entrega de un sistema de gestión de asistencia multi-país, orquestando el ciclo de vida completo del producto y optimizando la eficiencia operacional de la compañía a nivel regional.",
-              "Impulsé la modernización de sistemas legados mediante la aplicación de Domain-Driven Design (DDD) y una arquitectura basada en eventos para desacoplar dominios de negocio complejos.",
-              "Dirigí la estrategia de implementación e integración con un proveedor de SaaS, sirviendo como el nexo principal entre equipos técnicos, stakeholders y proveedores externos."
+              "Orquesté la transformación técnica del sistema de asistencia regional para +50,000 colaboradores, reduciendo la deuda técnica en un 35% mediante el desacoplamiento de dominios con DDD.",
+              "Diseñé un núcleo transaccional con DDD y arquitectura event-driven para procesar 2M eventos diarios con baja latencia.",
+              "Aceleré en 30% el time-to-market y eliminé inconsistencias de datos mediante integración de APIs SaaS estandarizadas."
             ]
           },
           {
@@ -600,75 +506,23 @@ const resources = {
             period: "2021 - 2022",
             location: "España",
             logo: "/exp/neurogenesis.jpeg",
-            description: "Lideré el desarrollo de soluciones de Inteligencia Artificial orientadas al impacto social y medioambiental. Gestioné la infraestructura en la nube y supervisé proyectos multidisciplinarios, conectando la academia con la industria.",
-            responsibilities: [
-              "Definición de la visión de producto inicial y la estrategia tecnológica de la compañía.",
-              "Diseño e implementación de una arquitectura cloud escalable en AWS para proyectos de IA.",
-              "Investigación y Desarrollo aplicado en Deep Learning y Visión por Computador.",
-              "Gestión y mentoría de proyectos de fin de máster en IA, DevOps, UX/UI e Industria 4.0."
-            ],
             achievements: [
-              "Como Co-Fundador, participé en la concepción, constitución y registro legal de la empresa.",
-              "Lideré el proyecto 'AcuaMattic', un sistema de IA de extremo a extremo que incluyó un dataset propio (+10.000 imágenes), un modelo CNN (92% de precisión) y su integración con un prototipo de robot.",
-              "Orquesté la migración completa de la infraestructura a AWS, sentando las bases para el entrenamiento y despliegue de modelos de Machine Learning a gran escala.",
-              "Amplié el portafolio de soluciones de IA, desarrollando prototipos para el análisis de documentos con NLP y un chatbot productivo con Amazon Lex.",
-              "Actué como puente entre la industria y la academia, mentorizando múltiples proyectos de fin de máster para mi alma máter."
+              "Co-fundé y dirigí la estrategia tecnológica y el roadmap productivo desde la constitución hasta el lanzamiento.",
+              "Desarrollé un sistema IA end-to-end con 92% de precisión (CNN), fundamentado en la creación de un dataset propio de +10k imágenes.",
+              "Diseñé infraestructura Cloud-Native en AWS para desplegar modelos ML escalables y facilitar la producción (MLOps).",
+              "Lideré técnicamente 7 proyectos de innovación (+50 estudiantes) en IA y DevOps, alineando la investigación académica con aplicaciones comerciales reales."
             ]
           },
           {
-            company: "NTT DATA Europe & LATAM",
+            company: "NTT DATA",
             position: "Senior Backend Engineer & Tech Consultant",
             period: "2019 - 2021",
             location: "Chile",
             logo: "/exp/nttdata.jpeg",
-            description: "Participé activamente en la modernización de sistemas core del ecosistema financiero, abordando la migración de plataformas legacy a arquitecturas modernas. Mi enfoque fue el desarrollo de aplicaciones de alta disponibilidad y seguras en un entorno regulado y de alta exigencia.",
-            responsibilities: [
-              "Análisis de requerimientos técnicos y funcionales para clientes del sector financiero.",
-              "Diseño de soluciones y estrategias de TI robustas y seguras.",
-              "Desarrollo de Web Services RESTful con Java 8 y Spring Boot 2.",
-              "Implementación de autenticación y autorización robusta con Spring Security y JWT."
-            ],
             achievements: [
-              "Lideré la modernización y migración de los sistemas de backoffice de Transbank, mejorando drásticamente la mantenibilidad y el rendimiento de la plataforma core bancaria.",
-              "Diseñé e implementé soluciones de alta disponibilidad capaces de gestionar más de 1 millón de transacciones diarias, aplicando estándares de seguridad financiera (OWASP, PCI).",
-              "Actué como referente técnico del equipo, estableciendo estándares de calidad que redujeron la deuda técnica mediante herramientas de análisis estático de código."
-            ]
-          },
-          {
-            company: "Falabella",
-            position: "Senior IT Analyst",
-            period: "2015 - 2019",
-            location: "Chile",
-            logo: "/exp/falabella.jpeg",
-            description: "Fui responsable del desarrollo e integración de soluciones corporativas para diversas unidades de negocio del Grupo Falabella. Lideré proyectos clave orientados a mejorar la eficiencia operativa y la experiencia del usuario interno a través de plataformas personalizadas en Java.",
-            responsibilities: [
-              "Gestión y desarrollo de requerimientos para unidades de negocio internas.",
-              "Construcción de soluciones web Java para integrar sistemas legados.",
-              "Supervisión de asignaciones del equipo técnico y proveedores externos.",
-              "Colaboración directa con diferentes áreas para implementar soluciones a medida."
-            ],
-            achievements: [
-              "Lideré el desarrollo del 'Sistema de Personal y Remuneraciones' (SPR), una plataforma corporativa clave que unificó la gestión de RRHH para más de 50.000 empleados.",
-              "Diseñé e implementé una plataforma para la declaración de conflictos de interés, fortaleciendo la transparencia y la ética corporativa.",
-              "Actué como el principal punto de contacto con stakeholders no técnicos, liderando la toma de requerimientos y traduciendo sus necesidades en soluciones de software orientadas al usuario."
-            ]
-          },
-          {
-            company: "NTT DATA Europe & LATAM",
-            position: "Backend Engineer & Tech Consultant",
-            period: "2010 - 2014",
-            location: "Chile",
-            logo: "/exp/nttdata.jpeg",
-            description: "Fui responsable de la migración del portal privado de clientes de Movistar Chile, desarrollando componentes front-end y back-end sobre la plataforma IBM WebSphere, con el objetivo de mejorar la experiencia del cliente y añadir nuevas funcionalidades.",
-            responsibilities: [
-              "Desarrollo de portlets front-end (HTML, CSS, JavaScript, JSP) con WebSphere Portlet Factory.",
-              "Desarrollo de servicios web SOAP con Java para el backend.",
-              "Aplicación del patrón de diseño DAO para la abstracción de datos.",
-              "Redacción de documentación técnica y guías de usuario."
-            ],
-            achievements: [
-              "Jugué un rol decisivo en la exitosa migración del portal de clientes de Movistar Chile sobre IBM WebSphere, incorporando nuevas funcionalidades.",
-              "Contribuí a una mejora significativa en la experiencia de usuario e incrementé la autonomía del cliente a través de interfaces intuitivas y servicios integrados."
+              "Diseñé arquitectura de alta disponibilidad procesando +1M transacciones diarias y reduje un 50% vulnerabilidades críticas implementando estándares OWASP y PCI.",
+              "Refactoricé módulos críticos con deuda técnica elevada, migrando lógica monolítica a microservicios desacoplados para mejorar la mantenibilidad y la velocidad de despliegue.",
+              "Establecí el framework de automatización de pruebas y análisis estático (Shift-Left), reduciendo drásticamente la tasa de errores detectados en entornos de pre-producción."
             ]
           }
         ]
