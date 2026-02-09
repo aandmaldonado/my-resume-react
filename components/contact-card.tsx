@@ -183,7 +183,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
           </motion.div>
         </div>
 
-        <p className="text-center mt-8 text-gray-500 text-sm animate-pulse">
+        <p className="text-center mt-8 text-gray-400 text-sm animate-pulse">
           {t("contact.flipHint")}
         </p>
       </div>

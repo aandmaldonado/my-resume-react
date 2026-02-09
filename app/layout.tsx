@@ -93,6 +93,8 @@ export default function RootLayout({
         <link rel="icon" href="/icon/logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/icon/logo.png" />
         <link rel="icon" href="/icon/logo.png" sizes="any" />
+        <link rel="preconnect" href="https://region1.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
       <body className={inter.className}>
         {children}

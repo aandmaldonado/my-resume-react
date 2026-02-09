@@ -75,17 +75,18 @@ export default function AboutSection() {
 
               <div className="flex items-center space-x-4">
                 {[
-                  { name: "linkedin", url: "https://www.linkedin.com/in/almapidev/" },
-                  { name: "email", url: "mailto:readme.md@almapi.dev" },
-                  { name: "credly", url: "https://www.credly.com/users/almapi.dev" },
-                  { name: "google-cloud", url: "https://www.cloudskillsboost.google/public_profiles/333c0c54-8af4-48ae-8353-531e97f03c7d" },
-                  { name: "github", url: "https://github.com/aandmaldonado" }
+                  { name: "linkedin", url: "https://www.linkedin.com/in/almapidev/", label: "LinkedIn" },
+                  { name: "email", url: "mailto:readme.md@almapi.dev", label: "Email" },
+                  { name: "credly", url: "https://www.credly.com/users/almapi.dev", label: "Credly" },
+                  { name: "google-cloud", url: "https://www.cloudskillsboost.google/public_profiles/333c0c54-8af4-48ae-8353-531e97f03c7d", label: "Google Cloud" },
+                  { name: "github", url: "https://github.com/aandmaldonado", label: "GitHub" }
                 ].map((social) => (
                   <motion.a
                     key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={social.label}
                     whileHover={{ scale: 1.2, y: -4 }}
                     className="text-gray-400 hover:text-blue-400 transition-colors"
                     onClick={() => {
@@ -97,7 +98,7 @@ export default function AboutSection() {
                   >
                     <Image
                       src={`/about/${social.name}.svg`}
-                      alt={social.name}
+                      alt=""
                       width={24}
                       height={24}
                       className="w-6 h-6 invert dark:invert-0 opacity-70 hover:opacity-100"

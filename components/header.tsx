@@ -120,7 +120,7 @@ export default function Header() {
           <button
             onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en')}
             className="inline-flex items-center justify-center rounded-md text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8 sm:h-9 sm:w-9 p-0"
-            aria-label="Toggle language"
+            aria-label={i18n.language === 'en' ? 'Switch to Spanish (currently EN)' : 'Cambiar a inglés (actualmente ES)'}
           >
             {i18n.language === 'en' ? 'ES' : 'EN'}
           </button>

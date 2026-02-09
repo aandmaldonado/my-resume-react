@@ -35,6 +35,7 @@ export default function HeroSection() {
             loop
             muted
             playsInline
+            aria-hidden="true"
           >
             <source
               src={
