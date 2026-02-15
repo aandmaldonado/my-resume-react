@@ -5,6 +5,7 @@ import { Building2, Calendar, Briefcase, CheckCircle2, MapPin, ClipboardList, Li
 import { useState } from "react"
 import GlassCard from "@/components/ui/glass-card"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 export default function ExperienceSection() {
   const { t } = useTranslation()
@@ -71,13 +72,13 @@ export default function ExperienceSection() {
 
                   {/* Company logo - Oculto en mobile */}
                   <div className="hidden sm:block ml-16 mr-6 flex-shrink-0">
-                    <div className="border border-blue-200 dark:border-blue-800 w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
-                      <img
+                    <div className="relative border border-blue-200 dark:border-blue-800 w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+                      <Image
                         src={exp.logo}
                         alt={`Logotipo de ${exp.company}`}
-                        width={64}
-                        height={64}
-                        className="w-full h-full object-cover"
+                        fill
+                        sizes="64px"
+                        className="object-cover"
                       />
                     </div>
                   </div>

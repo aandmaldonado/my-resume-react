@@ -72,9 +72,6 @@ export default function Header() {
   }
 
 
-
-  if (!mounted) return null
-
   // Estilos idénticos para header y menú desplegable
   const headerStyle = "bg-dark-bg/60 border border-white/10 backdrop-blur-xl shadow-2xl"
   const menuStyle = "bg-transparent"
@@ -148,11 +145,11 @@ export default function Header() {
       </div>
 
       {/* Mobile Navigation - Completamente transparente para integración perfecta */}
-      <div className={`lg:hidden mt-0 pb-2 xs:pb-3 pt-0 bg-transparent rounded-b-xl xs:rounded-b-2xl transition-all duration-700 ease-in-out ${isMenuOpen
+      <div className={`lg:hidden mt-0 pb-2 xs:pb-3 pt-0 bg-transparent rounded-b-xl xs:rounded-b-2xl transition-all duration-700 ease-in-out ${mounted && isMenuOpen
         ? 'opacity-100 max-h-[80vh] translate-y-0'
         : 'opacity-0 max-h-0 translate-y-[-20px] pointer-events-none'
         }`} style={{
-          marginTop: isMenuOpen ? '-1px' : '0px' // Conectar perfectamente con el header
+          marginTop: mounted && isMenuOpen ? '-1px' : '0px' // Conectar perfectamente con el header
         }}>
         <div className="flex flex-col space-y-1 xs:space-y-2">
           {/* Navegación principal - Estilo Devin.ai con punto a la izquierda */}
