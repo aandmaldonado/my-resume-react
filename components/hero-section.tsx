@@ -26,23 +26,21 @@ export default function HeroSection() {
   return (
     <section id="hero" className="relative h-screen [min-height:100dvh] flex items-center justify-center overflow-hidden">
       {/* Video Background Container - Forced full expansion */}
-      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none flex items-center justify-center bg-dark-bg">
-        {mounted && (
-          <video
-            key={resolvedTheme}
-            className="min-w-full min-h-full absolute inset-0 w-full h-full object-cover opacity-30 transition-opacity duration-1000"
-            autoPlay
-            loop
-            muted
-            playsInline
-            aria-hidden="true"
-          >
-            <source
-              src="/hero/Digital_Wireframe_Brain_Animation.mp4"
-              type="video/mp4"
-            />
-          </video>
-        )}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none flex items-center justify-center bg-[#030712]">
+        <video
+          className="min-w-full min-h-full absolute inset-0 w-full h-full object-cover opacity-20 transition-opacity duration-1000"
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden="true"
+          preload="auto"
+        >
+          <source
+            src="/hero/Digital_Wireframe_Brain_Animation.mp4"
+            type="video/mp4"
+          />
+        </video>
         {/* Overlay Double */}
         <div className="absolute inset-0 z-1 bg-dark-bg/60"></div>
         <div className="absolute inset-0 z-2 bg-gradient-to-b from-dark-bg via-transparent to-dark-bg"></div>
@@ -50,13 +48,11 @@ export default function HeroSection() {
 
       {/* Content */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="relative z-10 text-center text-white px-4 xs:px-6 sm:px-8 max-w-4xl mx-auto"
       >
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-xl xs:text-2xl sm:text-3xl md:text-5xl lg:text-5xl font-bold mb-4 xs:mb-6 leading-tight"
@@ -67,7 +63,6 @@ export default function HeroSection() {
           </span>
         </motion.h1>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-lg xs:text-xl sm:text-xl md:text-2xl mb-6 xs:mb-8 text-gray-200"

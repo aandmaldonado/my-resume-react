@@ -112,7 +112,7 @@ export default function ExperienceSection() {
                           {exp.achievements.map((achiev: string, achievIndex: number) => (
                             <li key={achievIndex} className="flex items-start">
                               <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-1 mr-3 flex-shrink-0" />
-                              <span className="text-gray-800 dark:text-gray-200">{achiev}</span>
+                              <span className="text-gray-300">{achiev}</span>
                             </li>
                           ))}
                         </ul>

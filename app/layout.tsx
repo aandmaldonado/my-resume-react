@@ -101,6 +101,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/logo.png" />
         <link rel="icon" href="/logo.png" sizes="any" />
         <link rel="preload" href="/logo.png" as="image" type="image/png" />
+        <link rel="preload" href="/hero/Digital_Wireframe_Brain_Animation.mp4" as="video" type="video/mp4" />
         <link rel="preconnect" href="https://region1.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
