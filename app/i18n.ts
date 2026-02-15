@@ -306,7 +306,7 @@ const resources = {
         },
         languages: {
           title: "Languages",
-          skills: "Spanish Native, English Professional Working Proficiency",
+          skills: "Spanish Native, English B2",
         },
       },
       recommendations: {
@@ -724,7 +724,7 @@ const resources = {
         },
         languages: {
           title: "Idiomas",
-          skills: "Español Nativo, Inglés Competencia Profesional",
+          skills: "Español Nativo, Inglés B2",
         },
       },
       recommendations: {

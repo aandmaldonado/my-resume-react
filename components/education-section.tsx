@@ -57,7 +57,9 @@ export default function EducationSection() {
                       <div className="border border-blue-500/30 w-16 h-16 rounded-full bg-black/50 flex items-center justify-center overflow-hidden backdrop-blur-sm">
                         <img
                           src={edu.logo}
-                          alt={`${edu.institution} logo`}
+                          alt={`Logotipo de ${edu.institution}`}
+                          width={64}
+                          height={64}
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -76,14 +78,14 @@ export default function EducationSection() {
                               <School className="w-4 h-4" />
                               {edu.institution}
                             </p>
-                            <p className="text-gray-400 text-sm flex items-center gap-2 mt-1">
+                            <p className="text-gray-300 text-sm flex items-center gap-2 mt-1">
                               <MapPin className="w-4 h-4" />
                               {edu.location}
                             </p>
                           </div>
                         </div>
 
-                        <div className="flex items-center text-gray-500 mt-2 sm:mt-0">
+                        <div className="flex items-center text-gray-400 mt-2 sm:mt-0">
                           <Calendar className="w-4 h-4 mr-2" />
                           <span className="text-sm">{edu.period}</span>
                         </div>
@@ -94,7 +96,7 @@ export default function EducationSection() {
                         <div className="mt-4 border-t border-white/10 pt-4">
                           <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                             {concepts.map((concept: string, idx: number) => (
-                              <li key={idx} className="flex items-start gap-2 text-gray-400 text-sm">
+                              <li key={idx} className="flex items-start gap-2 text-gray-300 text-sm">
                                 <CheckCircle2 className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
                                 <span>{concept}</span>
                               </li>

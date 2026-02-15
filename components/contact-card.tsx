@@ -62,7 +62,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-gray-400 text-lg sm:text-xl"
+            className="text-gray-300 text-lg sm:text-xl"
           >
             {t("contact.subtitle")}
           </motion.p>
@@ -85,8 +85,9 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
                   <div className="relative w-14 h-14 sm:w-20 sm:h-20 shrink-0 rounded-full overflow-hidden border border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.2)] bg-black/40 backdrop-blur-sm">
                     <Image
                       src="/logo.png"
-                      alt="almap[i] logo"
+                      alt="Logo de almap[i]"
                       fill
+                      sizes="(max-width: 640px) 56px, 80px"
                       className="object-cover scale-110"
                     />
                   </div>
@@ -94,7 +95,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
                     almap<span className="text-blue-500">[i]</span>
                   </h3>
                 </div>
-                <p className="text-gray-400 text-[10px] xs:text-base sm:text-lg italic font-light text-center tracking-tight w-full px-2 sm:whitespace-nowrap">
+                <p className="text-gray-300 text-[10px] xs:text-base sm:text-lg italic font-light text-center tracking-tight w-full px-2 sm:whitespace-nowrap">
                   {t("contact.slogan")}
                 </p>
               </div>
@@ -121,8 +122,9 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
                 <div className="relative w-20 h-20 sm:w-36 sm:h-36 shrink-0 rounded-full overflow-hidden border border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.2)] bg-black/40 backdrop-blur-sm pointer-events-auto cursor-pointer" onClick={() => setIsFlipped(false)}>
                   <Image
                     src="/logo.png"
-                    alt="almap[i] logo"
+                    alt="Logo de almap[i]"
                     fill
+                    sizes="(max-width: 640px) 80px, 144px"
                     className="object-cover scale-110"
                   />
                 </div>
@@ -137,7 +139,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
                       return (
                         <div
                           key={idx}
-                          className="flex items-start sm:items-center gap-3 sm:gap-4 text-gray-400 leading-tight"
+                          className="flex items-start sm:items-center gap-3 sm:gap-4 text-gray-300 leading-tight"
                         >
                           <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                             <info.icon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
@@ -155,7 +157,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
                         href={info.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-start sm:items-center gap-3 sm:gap-4 text-gray-400 hover:text-white transition-all duration-300 group cursor-pointer relative z-50 pointer-events-auto"
+                        className="flex items-start sm:items-center gap-3 sm:gap-4 text-gray-300 hover:text-white transition-all duration-300 group cursor-pointer relative z-50 pointer-events-auto"
                         onClick={(e) => {
                           e.stopPropagation();
                           sendGAEvent('event', 'social_click', {
@@ -183,7 +185,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
           </motion.div>
         </div>
 
-        <p className="text-center mt-8 text-gray-400 text-sm animate-pulse">
+        <p className="text-center mt-8 text-gray-300 text-sm animate-pulse">
           {t("contact.flipHint")}
         </p>
       </div>

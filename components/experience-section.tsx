@@ -74,7 +74,9 @@ export default function ExperienceSection() {
                     <div className="border border-blue-200 dark:border-blue-800 w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
                       <img
                         src={exp.logo}
-                        alt={`${exp.company} logo`}
+                        alt={`Logotipo de ${exp.company}`}
+                        width={64}
+                        height={64}
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -92,13 +94,13 @@ export default function ExperienceSection() {
                           <p className="text-blue-600 dark:text-blue-400 font-medium">
                             {exp.company}
                           </p>
-                          <p className="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-2 mt-1">
+                          <p className="text-gray-500 dark:text-gray-300 text-sm flex items-center gap-2 mt-1">
                             <MapPin className="w-4 h-4" />
                             {exp.location}
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center text-gray-500 dark:text-gray-400 mt-2 sm:mt-0">
+                      <div className="flex items-center text-gray-400 dark:text-gray-300 mt-2 sm:mt-0">
                         <Calendar className="w-4 h-4 mr-2" />
                         <span className="text-sm">{exp.period}</span>
                       </div>
@@ -110,7 +112,7 @@ export default function ExperienceSection() {
                           {exp.achievements.map((achiev: string, achievIndex: number) => (
                             <li key={achievIndex} className="flex items-start">
                               <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-1 mr-3 flex-shrink-0" />
-                              <span className="text-gray-700 dark:text-gray-300">{achiev}</span>
+                              <span className="text-gray-800 dark:text-gray-200">{achiev}</span>
                             </li>
                           ))}
                         </ul>

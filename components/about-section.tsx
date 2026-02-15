@@ -58,8 +58,9 @@ export default function AboutSection() {
                 <div className="relative w-full h-full rounded-full overflow-hidden bg-dark-card p-1">
                   <Image
                     src="/about/profile.jpeg"
-                    alt="Álvaro Maldonado"
+                    alt="Fotografía de perfil de Álvaro Maldonado"
                     fill
+                    sizes="(max-width: 640px) 320px, 400px"
                     className="object-cover rounded-full"
                   />
                 </div>
@@ -67,7 +68,7 @@ export default function AboutSection() {
 
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-white mb-2">Álvaro Maldonado</h3>
-                <p className="text-gray-400 flex items-center justify-center gap-2">
+                <p className="text-gray-300 flex items-center justify-center gap-2">
                   <Haze className="w-4 h-4" />
                   {t("about.location")}
                 </p>
@@ -98,9 +99,10 @@ export default function AboutSection() {
                   >
                     <Image
                       src={`/about/${social.name}.svg`}
-                      alt=""
+                      alt={social.label}
                       width={24}
                       height={24}
+                      sizes="24px"
                       className="w-6 h-6 invert dark:invert-0 opacity-70 hover:opacity-100"
                     />
                   </motion.a>
@@ -123,7 +125,7 @@ export default function AboutSection() {
                       <h3 className="text-xl font-bold text-white mb-3">
                         {card.title}
                       </h3>
-                      <p className="text-gray-400 leading-relaxed text-justify">
+                      <p className="text-gray-300 leading-relaxed text-justify">
                         {card.description}
                       </p>
                     </div>

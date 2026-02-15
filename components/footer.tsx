@@ -33,8 +33,9 @@ export default function Footer() {
             <div className="relative w-8 h-8 shrink-0 rounded-full overflow-hidden border border-blue-500/30 bg-black/40 backdrop-blur-sm">
               <Image
                 src="/logo.png"
-                alt="almap[i] logo"
+                alt="Logo de almap[i]"
                 fill
+                sizes="32px"
                 className="object-cover scale-110"
               />
             </div>
@@ -42,7 +43,7 @@ export default function Footer() {
               <h3 className="text-xl font-bold text-white tracking-tight">
                 almap<span className="text-blue-500">[i]</span>
               </h3>
-              <span className="text-gray-800 hidden sm:block">|</span>
+              <span className="text-gray-600 hidden sm:block">|</span>
               <p className="text-white text-sm sm:text-base font-medium tracking-tight">
                 {slogan}
               </p>
@@ -65,7 +66,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.label}
-                  className="text-gray-500 hover:text-blue-400 transition-colors duration-300"
+                  className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
                   onClick={() => {
                     sendGAEvent('event', 'social_click', {
                       platform: link.label.toLowerCase(),
@@ -82,7 +83,7 @@ export default function Footer() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-[10px] text-gray-600 tracking-wider uppercase hidden sm:block"
+              className="text-[10px] text-gray-400 tracking-wider uppercase hidden sm:block"
             >
               {copyright}
             </motion.div>

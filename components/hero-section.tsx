@@ -26,11 +26,11 @@ export default function HeroSection() {
   return (
     <section id="hero" className="relative h-screen [min-height:100dvh] flex items-center justify-center overflow-hidden">
       {/* Video Background Container - Forced full expansion */}
-      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none flex items-center justify-center">
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none flex items-center justify-center bg-dark-bg">
         {mounted && (
           <video
             key={resolvedTheme}
-            className="min-w-full min-h-full absolute inset-0 w-full h-full object-cover opacity-30"
+            className="min-w-full min-h-full absolute inset-0 w-full h-full object-cover opacity-30 transition-opacity duration-1000"
             autoPlay
             loop
             muted
@@ -38,14 +38,9 @@ export default function HeroSection() {
             aria-hidden="true"
           >
             <source
-              src={
-                resolvedTheme === "dark"
-                  ? "/hero/Digital_Wireframe_Brain_Animation.mp4"
-                  : "/hero/Digital_Wireframe_Brain_Animation.mp4"
-              }
+              src="/hero/Digital_Wireframe_Brain_Animation.mp4"
               type="video/mp4"
             />
-            Your browser does not support the video tag.
           </video>
         )}
         {/* Overlay Double */}
@@ -60,7 +55,7 @@ export default function HeroSection() {
         transition={{ duration: 0.8 }}
         className="relative z-10 text-center text-white px-4 xs:px-6 sm:px-8 max-w-4xl mx-auto"
       >
-        <motion.div
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -70,7 +65,7 @@ export default function HeroSection() {
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
             Álvaro
           </span>
-        </motion.div>
+        </motion.h1>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

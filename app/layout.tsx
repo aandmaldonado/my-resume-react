@@ -5,12 +5,16 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const baseUrl = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:3000'
+  : 'https://almapi.dev'
+
 export const metadata: Metadata = {
   title: {
     default: 'Alvaro Maldonado | Tech Lead & AI Strategist',
     template: '%s | Alvaro Maldonado',
   },
-  description: 'Tech Lead & AI Strategist. Transformo ideas de negocio en productos que escalan de verdad. Experto en conectar la visión estratégica con soluciones tecnológicas de alto impacto.',
+  description: 'Tech Lead & AI Strategist. Transformo ideas de negocio en productos que escalan. Experto en conectar visión estratégica con soluciones de alto impacto.',
   keywords: [
     'Alvaro Maldonado',
     'Tech Lead',
@@ -36,6 +40,9 @@ export const metadata: Metadata = {
       url: 'https://almapi.dev',
     },
   ],
+  alternates: {
+    canonical: 'https://almapi.dev',
+  },
   robots: {
     index: true,
     follow: true,
@@ -49,18 +56,18 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Alvaro Maldonado | Tech Lead & AI Strategist',
-    description: 'Tech Lead & AI Strategist. Transformo ideas de negocio en productos que escalan de verdad. Experto en conectar la visión estratégica con soluciones tecnológicas de alto impacto.',
+    description: 'Tech Lead & AI Strategist. Transformo ideas de negocio en productos que escalan. Experto en conectar visión estratégica con soluciones de alto impacto.',
     url: 'https://almapi.dev',
     siteName: 'almap[i]',
     images: [
       {
-        url: 'https://almapi.dev/chatbot/profile.jpeg',
-        width: 320,
-        height: 320,
-        alt: 'Profile picture of Alvaro Maldonado, a Tech Lead & AI Strategist.',
+        url: '/banner.png',
+        width: 1024,
+        height: 1024,
+        alt: 'Banner of almap[i] - Portfolio of Alvaro Maldonado.',
       },
       {
-        url: 'https://almapi.dev/icon/logo.svg',
+        url: '/logo.png',
         width: 1200,
         height: 630,
         alt: 'Logo of almap[i] - Portfolio of Alvaro Maldonado.',
@@ -71,15 +78,15 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon/logo.png', type: 'image/png' },
-      { url: '/icon/logo.png', sizes: 'any' },
-      { url: '/icon/logo.png', sizes: '180x180', type: 'image/png' },
+      { url: '/logo.png', type: 'image/png' },
+      { url: '/logo.png', sizes: 'any' },
+      { url: '/logo.png', sizes: '180x180', type: 'image/png' },
     ],
     apple: [
-      { url: 'icon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/logo.png', sizes: '180x180', type: 'image/png' },
     ],
   },
-  metadataBase: new URL('https://almapi.dev'),
+  metadataBase: new URL(baseUrl),
 }
 
 export default function RootLayout({
@@ -90,9 +97,10 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/icon/logo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/icon/logo.png" />
-        <link rel="icon" href="/icon/logo.png" sizes="any" />
+        <link rel="icon" href="/logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
+        <link rel="icon" href="/logo.png" sizes="any" />
+        <link rel="preload" href="/logo.png" as="image" type="image/png" />
         <link rel="preconnect" href="https://region1.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>

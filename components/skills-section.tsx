@@ -211,7 +211,7 @@ export default function SkillsSection() {
                     {category.skills.map((skill: string, index: number) => (
                       <span
                         key={index}
-                        className="flex items-center px-4 py-2 rounded-full shadow-sm cursor-pointer transition-all duration-200 transform hover:scale-105 hover:bg-white/5 bg-[#0A0F1E]/60 border border-white/5 text-gray-400 text-xs sm:text-sm hover:text-white"
+                        className="flex items-center px-4 py-2 rounded-full shadow-sm cursor-pointer transition-all duration-200 transform hover:scale-105 hover:bg-white/5 bg-[#0A0F1E]/60 border border-white/5 text-gray-300 text-xs sm:text-sm hover:text-white"
                       >
                         {skill}
                       </span>

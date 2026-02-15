@@ -87,12 +87,15 @@ export default function Header() {
         <button
           onClick={() => scrollToSection("hero")}
           className="flex items-center gap-2 sm:gap-3 mr-4 sm:mr-8 shrink-0 group transition-all duration-300 border-none bg-transparent p-0 cursor-pointer"
+          aria-label="Ir al inicio"
         >
           <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-blue-500/30 bg-black/40 backdrop-blur-sm shadow-[0_0_15px_rgba(59,130,246,0.2)] group-hover:border-blue-400 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all">
             <Image
               src="/logo.png"
-              alt="almap[i] logo"
+              alt="Logo de almap[i]"
               fill
+              priority
+              sizes="(max-width: 640px) 32px, 40px"
               className="object-cover scale-110 group-hover:scale-125 transition-transform duration-500"
             />
           </div>

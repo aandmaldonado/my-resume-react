@@ -189,7 +189,7 @@ export default function ProjectsSection() {
                             {project.title}
                           </h3>
                         </div>
-                        <p className="text-gray-400 mb-4 leading-relaxed text-justify h-full text-sm">
+                        <p className="text-gray-300 mb-4 leading-relaxed text-justify h-full text-sm">
                           {project.description}
                         </p>
 
@@ -264,7 +264,7 @@ export default function ProjectsSection() {
                             {project.title}
                           </h3>
                         </div>
-                        <div className="text-gray-400 leading-relaxed text-justify space-y-4 max-h-[220px] overflow-y-auto pr-2 mb-4 scrollbar-thin scrollbar-thumb-gray-700">
+                        <div className="text-gray-300 leading-relaxed text-justify space-y-4 max-h-[220px] overflow-y-auto pr-2 mb-4 scrollbar-thin scrollbar-thumb-gray-700">
                           {renderContent(project).map((description: string, index: number) => (
                             <p key={index} className="mb-0">
                               {description}
