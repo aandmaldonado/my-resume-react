@@ -413,7 +413,7 @@ const resources = {
         flipHint: "Tap the card to flip it",
         back: {
           email: "readme.md@almapi.dev",
-          linkedin: "@almapidev",
+          linkedin: "@alvaro-maldonado-ai",
           github: "@aandmaldonado",
           city: "Gandía, Spain | Global Remote"
         }
@@ -831,7 +831,7 @@ const resources = {
         flipHint: "Toca la tarjeta para voltearla",
         back: {
           email: "readme.md@almapi.dev",
-          linkedin: "@almapidev",
+          linkedin: "@alvaro-maldonado-ai",
           github: "@aandmaldonado",
           city: "Gandía, España | Remoto Global"
         }

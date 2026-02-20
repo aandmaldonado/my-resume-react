@@ -14,7 +14,7 @@ export default function Footer() {
 
   const socialLinks = [
     { icon: Mail, href: "mailto:readme.md@almapi.dev", label: "Email" },
-    { icon: Linkedin, href: "https://linkedin.com/in/almapidev", label: "LinkedIn" },
+    { icon: Linkedin, href: "https://linkedin.com/in/alvaro-maldonado-ai", label: "LinkedIn" },
     { icon: Github, href: "https://github.com/aandmaldonado", label: "GitHub" },
   ]
 

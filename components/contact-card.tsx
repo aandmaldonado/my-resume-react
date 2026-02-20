@@ -20,7 +20,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ locale }) => {
   const contactInfo = [
     { icon: Mail, label: back.email, href: `mailto:${back.email}` },
     { icon: Github, label: back.github, href: "https://github.com/aandmaldonado" },
-    { icon: Linkedin, label: back.linkedin, href: "https://linkedin.com/in/almapidev" },
+    { icon: Linkedin, label: back.linkedin, href: "https://linkedin.com/in/alvaro-maldonado-ai" },
     { icon: Globe, label: back.city, href: "#" },
   ];
 

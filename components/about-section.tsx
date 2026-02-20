@@ -76,7 +76,7 @@ export default function AboutSection() {
 
               <div className="flex items-center space-x-4">
                 {[
-                  { name: "linkedin", url: "https://www.linkedin.com/in/almapidev/", label: "LinkedIn" },
+                  { name: "linkedin", url: "https://www.linkedin.com/in/alvaro-maldonado-ai/", label: "LinkedIn" },
                   { name: "email", url: "mailto:readme.md@almapi.dev", label: "Email" },
                   { name: "credly", url: "https://www.credly.com/users/almapi.dev", label: "Credly" },
                   { name: "google-cloud", url: "https://www.cloudskillsboost.google/public_profiles/333c0c54-8af4-48ae-8353-531e97f03c7d", label: "Google Cloud" },

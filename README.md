@@ -366,7 +366,7 @@ Este proyecto está bajo la **Licencia MIT**.
 
 **Álvaro Maldonado**
 - 🐙 [@aandmaldonado](https://github.com/aandmaldonado) - GitHub
-- 💼 [/in/almapidev](https://linkedin.com/in/almapidev) - LinkedIn
+- 💼 [/in/alvaro-maldonado-ai](https://linkedin.com/in/alvaro-maldonado-ai) - LinkedIn
 - 🌐 [almapi.dev](https://almapi.dev) - Portfolio
 
 ---
