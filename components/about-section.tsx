@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Haze } from "lucide-react"
 import { motion } from "framer-motion"
 import GlassCard from "./ui/glass-card"
-import { sendGAEvent } from "@next/third-parties/google"
+import { trackSocialClick } from "@/lib/analytics"
 
 export default function AboutSection() {
   const { t, i18n } = useTranslation()
@@ -91,10 +91,11 @@ export default function AboutSection() {
                     whileHover={{ scale: 1.2, y: -4 }}
                     className="text-gray-400 hover:text-blue-400 transition-colors"
                     onClick={() => {
-                      sendGAEvent('event', 'social_click', {
-                        platform: social.name,
-                        location: 'about_section'
-                      });
+                      trackSocialClick(
+                        social.name,
+                        'about_section',
+                        social.url
+                      );
                     }}
                   >
                     <Image

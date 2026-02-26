@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import Header from "@/components/header"
 import HeroSection from "@/components/hero-section"
@@ -14,23 +14,14 @@ import { ThemeProvider } from "@/components/theme-provider"
 import "./i18n"
 import RecommendationsSection from "@/components/recommendations-section"
 import ContactCard from "@/components/contact-card"
+import { useScrollTracking } from "@/hooks/use-scroll-tracking"
 
-interface Message {
-  type: 'user' | 'bot';
-  content: string;
-  isHTML?: boolean;
-}
 
 export default function Home() {
-  const { i18n, t } = useTranslation()
+  const { i18n } = useTranslation()
 
-  // Generar session_id una sola vez al montar el componente
-  const sessionIdRef = useRef(`user-${Date.now()}-${Math.random().toString(36).slice(2)}`)
-  // Referencia para evitar múltiples inicializaciones
-  const isInitializedRef = useRef(false)
-
-  // const isChatbotEnabled = process.env.NEXT_PUBLIC_CHATBOT_ENABLED === 'true';
-  const isChatbotEnabled = false;
+  // Wire up GA4 section-view, section-engagement and scroll-depth tracking
+  useScrollTracking()
 
   useEffect(() => {
     // Set default language to Spanish

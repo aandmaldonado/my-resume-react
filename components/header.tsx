@@ -1,9 +1,11 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
+import { trackNavClick, trackLanguageSwitch } from "@/lib/analytics"
+import type { SiteSection } from "@/lib/analytics"
 
 
 const SECTION_IDS = [
@@ -106,7 +108,10 @@ export default function Header() {
           {SECTION_IDS.filter(id => id !== "hero").map((id) => (
             <button
               key={id}
-              onClick={() => scrollToSection(id)}
+              onClick={() => {
+                scrollToSection(id);
+                trackNavClick(id as SiteSection, "header_desktop");
+              }}
               className={`text-gray-400 hover:text-blue-400 transition-all whitespace-nowrap px-1.5 xl:px-3 py-1.5 rounded-full ${activeSection === id ? 'font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20' : ''}`}
             >
               {t(`nav.${id === "hero" ? "home" : id}`)}
@@ -118,7 +123,11 @@ export default function Header() {
         <div className="flex items-center gap-1 xs:gap-2 flex-shrink-0">
           {/* Idioma - Toggle Button */}
           <button
-            onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en')}
+            onClick={() => {
+              const nextLang = i18n.language === 'en' ? 'es' : 'en';
+              i18n.changeLanguage(nextLang);
+              trackLanguageSwitch(nextLang as 'en' | 'es');
+            }}
             className="inline-flex items-center justify-center rounded-md text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8 sm:h-9 sm:w-9 p-0"
             aria-label={i18n.language === 'en' ? 'Switch to Spanish (currently EN)' : 'Cambiar a inglés (actualmente ES)'}
           >
@@ -156,7 +165,10 @@ export default function Header() {
           {SECTION_IDS.filter(id => id !== "hero").map((id) => (
             <button
               key={id}
-              onClick={() => scrollToSection(id)}
+              onClick={() => {
+                scrollToSection(id);
+                trackNavClick(id as SiteSection, "header_mobile");
+              }}
               className={`text-left p-3 xs:p-4 rounded-lg transition-all duration-200 min-h-[44px] flex items-center w-full ${activeSection === id
                 ? "text-blue-600 dark:text-blue-400 font-semibold"
                 : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"

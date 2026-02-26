@@ -1,7 +1,7 @@
 "use client"
 
 import { useTranslation } from "react-i18next"
-import { sendGAEvent } from "@next/third-parties/google"
+import { trackProjectClick, trackProjectFilter } from "@/lib/analytics"
 import {
   BrainCircuit,
   Bot,
@@ -135,7 +135,10 @@ export default function ProjectsSection() {
                   key={filter.id}
                   variant="ghost"
                   size="sm"
-                  onClick={() => setActiveFilter(filter.id)}
+                  onClick={() => {
+                    setActiveFilter(filter.id);
+                    trackProjectFilter(filter.id);
+                  }}
                   className={cn(
                     "flex items-center gap-2 transition-all rounded-lg h-9 px-4",
                     isActive
@@ -201,10 +204,7 @@ export default function ProjectsSection() {
                               rel="noopener noreferrer"
                               className="px-4 py-2 bg-blue-950/40 text-blue-400 border border-blue-500/30 rounded-lg hover:bg-blue-900/60 transition-all flex items-center gap-2 text-sm backdrop-blur-sm"
                               onClick={() => {
-                                sendGAEvent('event', 'project_click', {
-                                  project_title: project.title,
-                                  link_type: 'demo'
-                                });
+                                trackProjectClick(project.title, 'demo');
                               }}
                             >
                               <Link className="w-4 h-4" />
@@ -218,10 +218,7 @@ export default function ProjectsSection() {
                               rel="noopener noreferrer"
                               className="px-4 py-2 bg-slate-900/40 text-slate-300 border border-slate-700/30 rounded-lg hover:bg-slate-800/60 transition-all flex items-center gap-2 text-sm backdrop-blur-sm"
                               onClick={() => {
-                                sendGAEvent('event', 'project_click', {
-                                  project_title: project.title,
-                                  link_type: 'repo'
-                                });
+                                trackProjectClick(project.title, 'repo');
                               }}
                             >
                               <Github className="w-4 h-4" />
@@ -232,6 +229,7 @@ export default function ProjectsSection() {
                             onClick={(e) => {
                               e.stopPropagation();
                               setFlipped(f => ({ ...f, [globalIdx]: true }));
+                              trackProjectClick(project.title, 'flip_info');
                             }}
                             className="px-4 py-2 bg-slate-900/40 text-slate-300 border border-slate-700/30 rounded-lg hover:bg-slate-800/60 transition-all flex items-center gap-2 text-sm backdrop-blur-sm"
                           >
@@ -276,6 +274,7 @@ export default function ProjectsSection() {
                             onClick={(e) => {
                               e.stopPropagation();
                               setFlipped(f => ({ ...f, [globalIdx]: false }));
+                              trackProjectClick(project.title, 'flip_back');
                             }}
                             className="flex items-center justify-center px-6 py-2 bg-blue-950/40 text-blue-400 border border-blue-500/30 rounded-lg hover:bg-blue-900/60 transition-all gap-2 text-sm font-medium backdrop-blur-sm"
                           >

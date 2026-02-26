@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
+import { trackCTAClick } from "@/lib/analytics"
 
 export default function HeroSection() {
   const { t } = useTranslation()
@@ -88,7 +89,10 @@ export default function HeroSection() {
         >
           <Button
             type="button"
-            onClick={() => scrollToSection("contact")}
+            onClick={() => {
+              scrollToSection("contact");
+              trackCTAClick(t("hero.contact_button"), "contact");
+            }}
             className="inline-flex items-center gap-3 px-8 xs:px-12 py-6 xs:py-8 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-lg xs:text-xl font-bold rounded-2xl transition-all duration-300 hover:scale-105 shadow-glow-blue border-none"
             aria-label={t("hero.contact_button")}
           >

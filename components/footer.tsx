@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { Mail, Linkedin, Github } from "lucide-react"
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { sendGAEvent } from "@next/third-parties/google"
+import { trackSocialClick } from "@/lib/analytics"
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -68,10 +68,11 @@ export default function Footer() {
                   aria-label={link.label}
                   className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
                   onClick={() => {
-                    sendGAEvent('event', 'social_click', {
-                      platform: link.label.toLowerCase(),
-                      location: 'footer'
-                    });
+                    trackSocialClick(
+                      link.label.toLowerCase(),
+                      'footer',
+                      link.href
+                    );
                   }}
                 >
                   <link.icon size={18} />
