@@ -14,6 +14,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import "./i18n"
 import RecommendationsSection from "@/components/recommendations-section"
 import ContactCard from "@/components/contact-card"
+import { ChatWidget } from "@/components/chatbot/chat-widget";
 import { useScrollTracking } from "@/hooks/use-scroll-tracking"
 
 
@@ -43,6 +44,7 @@ export default function Home() {
           <ContactCard locale={i18n.language as 'en' | 'es'} />
         </main>
         <Footer />
+        <ChatWidget />
       </div>
     </ThemeProvider>
   );

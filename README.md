@@ -14,6 +14,7 @@ Una aplicación web moderna y completamente responsiva construida con Next.js 14
 - ⚡ **Performance**: Optimizado con Next.js 14, App Router y optimización de imágenes avanzada
 - 🎬 **Videos de Fondo**: Contenido multimedia dinámico en alta resolución
 - 🎯 **Header Inteligente**: Navegación adaptativa con detección de sección activa
+- 🤖 **AskMyCV Integration**: Agente de IA (Gemelo Digital) con investigación de empresas en tiempo real y agendamiento automático
 - 🔍 **SEO Optimizado**: Meta tags dinámicos y estructura semántica HTML5
 - 🔒 **Protección de Datos**: Headers de seguridad básicos y configuración privada de recursos
 
@@ -37,10 +38,10 @@ Una aplicación web moderna y completamente responsiva construida con Next.js 14
 - ⌨️ **Typewriter Effect 2.22.0** - Efectos de escritura en Hero section
 - 🎯 **React Intersection Observer 9.16.0** - Animaciones on-scroll para secciones
 
-### **Herramientas de Desarrollo**
-- 🚀 **ESLint 8.57.0** - Linting y calidad de código
-- 🎨 **PostCSS + Autoprefixer** - Procesamiento de CSS
-- 🔧 **Tailwind CSS Animate** - Animaciones CSS predefinidas
+### **Funcionalidades de IA (AskMyCV)**
+- 🧠 **Groq SDK** - Motor de inferencia para LLM (Llama 3 70B)
+- 🔍 **Tavily AI** - Motor de búsqueda para Deep Research de empresas
+- � **Resend API** - Notificaciones inteligentes y agendamiento
 
 ### **🛡️ Seguridad**
 - **SOP & CORS Policies** - Configuración de orígenes cruzados segura
@@ -83,6 +84,7 @@ npm start
 │   ├── page.tsx          # Página principal
 │   └── error.tsx         # Página de error personalizada
 ├── components/            # Componentes React organizados
+│   ├── chatbot/          # AskMyCV: Módulo de IA modular (Cerebro + UI)
 │   ├── ui/               # Componentes base (shadcn/ui + Radix)
 │   ├── about-section.tsx # Perfil profesional con foto alineada y biografía
 │   ├── contact-card.tsx  # Tarjeta de contacto interactiva con GlassCard DNA
@@ -130,6 +132,7 @@ npm start
 - [x] **Internacionalización**: Traducciones completas ES/EN
 - [x] **Responsividad Total**: Verificada en Mobile, Tablet y Desktop
 - [x] **Header Inteligente**: Navbar translúcida con detección de sección activa
+- [x] **AskMyCV Digital Twin**: Agente IA modular con investigación real-time y booking
 
 ### 🚧 **En Desarrollo/Mejoras**
 - [ ] Tests unitarios y de integración
@@ -159,6 +162,7 @@ El proyecto utiliza **shadcn/ui** + **Radix UI** como base para componentes acce
 - **Header** - Navegación adaptativa con menú móvil
 - **Hero Section** - Sección principal con video de fondo
 - **About Section** - Información personal con foto de perfil
+- **AskMyCV** - Chatbot interactivo con LLM e investigación profunda
 - **Skills Section** - Habilidades con tags nube interactivos
 - **Experience Section** - Timeline laboral responsivo
 - **Projects Section** - Carrusel de proyectos con flip cards

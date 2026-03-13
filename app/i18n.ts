@@ -1,5 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { chatbotTranslations } from "@/components/chatbot/i18n";
 
 const resources = {
   en: {
@@ -314,7 +315,7 @@ const resources = {
         list: [
           {
             name: "Jesus Garcia",
-            text: "Alvaro Maldonado is synonymous with efficiency and quality. A 'top tier' backend developer who combines impressive technical depth with proactivity that makes life easier for the entire team. If there's a fire to put out or an architecture to design, he is the person I trust.",
+            text: "Álvaro Maldonado is synonymous with efficiency and quality. A 'top tier' backend developer who combines impressive technical depth with proactivity that makes life easier for the entire team. If there's a fire to put out or an architecture to design, he is the person I trust.",
             picture: "/recommendations/jesus_garcia.jpeg",
             linkedin: "https://www.linkedin.com/in/jesus-garcia-b44209104/",
           },
@@ -418,6 +419,7 @@ const resources = {
           city: "Gandía, Spain | Global Remote"
         }
       },
+      chatbot: chatbotTranslations.en
     }
   },
   es: {
@@ -732,7 +734,7 @@ const resources = {
         list: [
           {
             name: "Jesus Garcia",
-            text: "Alvaro Maldonado es sinónimo de eficiencia y calidad. Un desarrollador backend \"top tier\" que combina una profundidad técnica impresionante con una proactividad que facilita la vida de todo el equipo. Si hay un fuego que apagar o una arquitectura que diseñar, es la persona en quien confío.",
+            text: "Álvaro Maldonado es sinónimo de eficiencia y calidad. Un desarrollador backend \"top tier\" que combina una profundidad técnica impresionante con una proactividad que facilita la vida de todo el equipo. Si hay un fuego que apagar o una arquitectura que diseñar, es la persona en quien confío.",
             picture: "/recommendations/jesus_garcia.jpeg",
             linkedin: "https://www.linkedin.com/in/jesus-garcia-b44209104/",
           },
@@ -836,6 +838,7 @@ const resources = {
           city: "Gandía, España | Remoto Global"
         }
       },
+      chatbot: chatbotTranslations.es
     }
   }
 };

@@ -1,0 +1,65 @@
+# Guías de redacción de CV y LinkedIn (Basadas en "Método XYZ" y Guía de @andpilan)
+
+writing_method:
+  - name: "Método XYZ (Google Style)"
+    formula: "Logré [X] resultado, medido por [Y] (métrica), al realizar [Z] (acción/contexto)."
+    purpose: "Ideal para la redacción de viñetas (bullets) en el CV y descripción de proyectos."
+    examples:
+      - "Aumenté las ventas en un 25% al implementar una nueva estrategia de marketing digital."
+      - "Lideré un equipo de 10 personas para reducir el tiempo de entrega en un 40%, optimizando procesos internos."
+      - "Implementé un sistema de automatización que ahorró 200 horas de trabajo manual por trimestre."
+  - name: "Método STAR (Amazon Style)"
+    formula: "S (Situación) + T (Tarea) + A (Acción) + R (Resultado)."
+    components:
+      S: "Situación - Contexto breve: ¿Qué estaba pasando? ¿Dónde estabas?"
+      T: "Tarea - ¿Cuál era tu objetivo o reto específico?"
+      A: "Acción - ¿Qué hiciste tú específicamente? (Usa 'Yo' en lugar de 'Nosotros')."
+      R: "Resultado - ¿Cómo terminó? ¿Qué lograste y qué aprendiste? (Cuantifica siempre)."
+    purpose: "Ideal para responder preguntas en entrevistas y explicar historias de éxito detalladas."
+
+action_verbs:
+  high_impact:
+    - "Lideré"
+    - "Orquesté"
+    - "Optimicé"
+    - "Escalé"
+    - "Ahorré"
+    - "Reduje"
+    - "Incrementé"
+    - "Transformé"
+    - "Diseñé"
+    - "Ejecuté"
+    - "Negocié"
+    - "Desarrollé"
+    - "Implementé"
+    - "Gestioné"
+  avoid_adjectives: ["Apasionado", "Proactivo", "Motivado", "Hard-working"]
+
+kpi_focus:
+  metrics: ["%", "€ / $ (dinero)", "Tiempo (horas/días)", "Usuarios / Clientes", "Downtime (reducción)", "Tiempos de respuesta (reducción)"]
+  key_areas:
+    - "Optimización de costos (Cost Reduction)"
+    - "Incremento de eficiencia (Efficiency)"
+    - "Escalabilidad de sistemas (Scalability)"
+    - "Satisfacción del cliente (NPS/CSAT)"
+    - "Velocidad de entrega (Time-to-market)"
+
+about_section_rules:
+  - "Enfoque en solución de problemas complejos: ¿Qué problemas resuelves?"
+  - "Menos 'yo hice' y más 'X ocurrió gracias a Y'."
+  - "Conexión directa entre experiencia técnica e impacto de negocio."
+
+response_guidelines:
+  - "Prioriza viñetas (bullet points) sobre párrafos densos."
+  - "Sé conciso e impactante: elimina palabras de relleno."
+  - "Usa el combo STAR + XYZ: La Situación/Tarea da el contexto, la Acción/Resultado usa la métrica XYZ."
+  - "Balance entre detalle y claridad: Da suficiente contexto para entender el reto, pero ve al grano."
+  - "Muestra rango: No todos los resultados deben ser éxitos; lo que aprendiste de un fallo también es valioso."
+  - "Enfoque en 'Yo': Describe tu contribución individual incluso en proyectos de equipo."
+
+amazon_leadership_principles:
+  - "Customer Obsession: Empieza por el cliente y trabaja hacia atrás."
+  - "Ownership: No digas 'esa no es mi tarea'. Piensa a largo plazo."
+  - "Deliver Results: Céntrate en los inputs clave y entrégalos con calidad a tiempo."
+  - "Learn and Be Curious: Busca siempre mejorar y aprender cosas nuevas."
+  - "Bias for Action: La velocidad importa en los negocios. Muchas decisiones son reversibles."
