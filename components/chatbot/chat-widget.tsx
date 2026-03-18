@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Loader2, Minimize2, User, Building2, Linkedin, Briefcase, Search, AlertCircle, Bot, RotateCcw } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, Minimize2, User, Building2, Linkedin, Briefcase, Contrast, AlertCircle, Bot, RotateCcw, Plus, Minus, Mic, BotMessageSquare, Sun, Moon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChatMessage } from "./chat-message";
+import { StarRating } from "./star-rating";
 import { cn } from "@/lib/utils";
 import { sendGAEvent } from "@next/third-parties/google";
 
@@ -18,14 +19,15 @@ interface LeadData {
     email: string;
     company: string;
     linkedin: string;
-    role: string;
 }
 
 export function ChatWidget() {
     const { t, i18n } = useTranslation();
+    const [botTheme, setBotTheme] = useState<'light' | 'dark'>('dark');
+    const isDark = botTheme === 'dark';
     const [isOpen, setIsOpen] = useState(false);
     const [showTooltip, setShowTooltip] = useState(true);
-    const [step, setStep] = useState<"lead" | "chat">("lead");
+    const [step, setStep] = useState<"lead" | "chat">("chat");
     const [isResearching, setIsResearching] = useState(false);
     const [isOffline, setIsOffline] = useState(false);
     const [companyEnrichment, setCompanyEnrichment] = useState("");
@@ -34,8 +36,10 @@ export function ChatWidget() {
         email: "",
         company: "",
         linkedin: "",
-        role: "",
     });
+    const [showLeadCapture, setShowLeadCapture] = useState(false);
+    const [showFeedback, setShowFeedback] = useState(false);
+    const [userRating, setUserRating] = useState(0);
     const [emailError, setEmailError] = useState(false);
 
     const [chatSettings, setChatSettings] = useState({
@@ -43,6 +47,8 @@ export function ChatWidget() {
         ownerName: "Álvaro Maldonado",
         ownerShortName: "Álvaro"
     });
+    const [fontSize, setFontSize] = useState<"sm" | "md" | "lg">("md");
+    const [highContrast, setHighContrast] = useState(false);
 
     const [messages, setMessages] = useState<Message[]>([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -85,6 +91,29 @@ export function ChatWidget() {
         }
     }, [messages, step, isResearching]);
 
+    // Enviar saludo inicial al abrir el chat si está vacío (Paso 2.1)
+    useEffect(() => {
+        if (isOpen) {
+            if (messages.length === 0) {
+                setMessages([
+                    {
+                        role: "assistant",
+                        content: tp('chatbot.welcome_simple'),
+                    },
+                ]);
+                setShowSuggestions(true);
+            } else if (messages.length === 1 && messages[0].role === "assistant") {
+                // Si solo existe el mensaje inicial, lo actualizamos al nuevo idioma si este cambia
+                setMessages([
+                    {
+                        role: "assistant",
+                        content: tp('chatbot.welcome_simple'),
+                    },
+                ]);
+            }
+        }
+    }, [isOpen, i18n.language, messages.length]);
+
     const toggleChat = () => {
         setIsOpen(!isOpen);
         setShowTooltip(false);
@@ -99,8 +128,11 @@ export function ChatWidget() {
         setMessages([]);
         setShowSuggestions(false);
         setInput("");
-        setStep("lead");
-        setLeadInfo({ name: "", email: "", company: "", linkedin: "", role: "" });
+        setStep("chat");
+        setLeadInfo({ name: "", email: "", company: "", linkedin: "" });
+        setShowLeadCapture(false);
+        setShowFeedback(false);
+        setUserRating(0);
         setCompanyEnrichment("");
         setIsOffline(false);
         safeTrack("chat_session_reset", {});
@@ -208,7 +240,6 @@ export function ChatWidget() {
                 lead_name: leadInfo.name,
                 lead_email: leadInfo.email,
                 lead_company: leadInfo.company,
-                lead_role: leadInfo.role,
                 lead_linkedin: finalLinkedin,
                 has_enrichment: !!enrichment,
                 research_failed: researchFailed
@@ -294,6 +325,12 @@ export function ChatWidget() {
                 setShowDatePicker(true);
             }
 
+            // 1.7 Detector de Feedback
+            if (botContent.includes("[ACTION_FEEDBACK]")) {
+                botContent = botContent.replace("[ACTION_FEEDBACK]", "").trim();
+                setShowFeedback(true);
+            }
+
             // 2. Mostrar el mensaje del bot (ya limpio)
             if (botContent.trim()) {
                 setMessages((prev) => [...prev, { role: "assistant", content: botContent }]);
@@ -354,6 +391,13 @@ export function ChatWidget() {
         e.preventDefault();
         if (!bookingDate || !bookingTime) return;
 
+        // Si no tenemos los datos mínimos, pedimos el lead antes de continuar (Paso 2.2)
+        if (!leadInfo.email || !leadInfo.name) {
+            setShowLeadCapture(true);
+            setShowDatePicker(false);
+            return;
+        }
+
         const selectionText = i18n.language === 'en'
             ? `I'd like to schedule the call for ${bookingDate} at ${bookingTime} (CET).`
             : `Me gustaría agendar la llamada para el ${bookingDate} a las ${bookingTime} (CET).`;
@@ -384,6 +428,11 @@ export function ChatWidget() {
                         bookingJson = match[1];
                         botContent = botContent.replace(match[0], "").trim();
                     }
+                }
+
+                if (botContent.includes("[ACTION_FEEDBACK]")) {
+                    botContent = botContent.replace("[ACTION_FEEDBACK]", "").trim();
+                    setShowFeedback(true);
                 }
 
                 if (botContent.trim()) {
@@ -419,42 +468,57 @@ export function ChatWidget() {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="mb-4 flex h-[550px] w-[350px] flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-950 sm:w-[400px]"
+                        className={cn(
+                            "mb-4 flex h-[550px] w-[350px] flex-col overflow-hidden rounded-2xl border shadow-2xl sm:w-[400px]",
+                            botTheme === 'dark' ? "bg-zinc-950 border-zinc-800" : "bg-white border-zinc-200"
+                        )}
                     >
                         <div className="flex items-center justify-between bg-blue-600 p-4 text-white">
                             <div className="flex items-center gap-3">
-                                <div className="relative h-9 w-9 overflow-hidden rounded-full bg-white/20 flex items-center justify-center border border-white/10 shadow-inner">
-                                    <Bot size={20} className="text-white" />
+                                <div className="relative h-9 w-9 overflow-hidden rounded-full bg-white flex items-center justify-center border border-white/10 shadow-inner">
+                                    <img 
+                                        src="/logo.png" 
+                                        alt="Bot Avatar" 
+                                        className="h-full w-full object-cover"
+                                    />
                                 </div>
                                 <div className="flex flex-col">
-                                    <div className="flex items-center gap-2">
-                                        <h3 className="text-sm font-semibold">{tp('chatbot.header')}</h3>
-                                        <span className="rounded-full bg-white/20 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white backdrop-blur-sm border border-white/10">
+                                    <h3 className="text-sm font-semibold">{tp('chatbot.header')}</h3>
+                                    <div className="flex items-center gap-2 mt-0.5">
+                                        <p className="text-[10px] opacity-80">
+                                            {isOffline ? tp('chatbot.status_offline') : tp('chatbot.status_online')}
+                                        </p>
+                                        <span className="rounded-full bg-white/20 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white backdrop-blur-sm border border-white/10 leading-none">
                                             Beta
                                         </span>
                                     </div>
-                                    <p className="text-[10px] opacity-80">
-                                        {isOffline ? tp('chatbot.status_offline') : tp('chatbot.status_online')}
-                                    </p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-1">
                                 {step === "chat" && (
-                                    <button
-                                        onClick={resetSession}
-                                        aria-label={tp('chatbot.reset_session')}
-                                        title={tp('chatbot.reset_session')}
-                                        className="rounded-full p-1.5 hover:bg-white/10 transition-colors"
-                                    >
-                                        <RotateCcw size={15} />
-                                    </button>
+                                    <>
+                                        <button
+                                            onClick={() => setBotTheme(botTheme === 'light' ? 'dark' : 'light')}
+                                            className="rounded-full p-1.5 hover:bg-white/10 transition-colors"
+                                            title={botTheme === 'light' ? 'Modo oscuro' : 'Modo claro'}
+                                        >
+                                            {botTheme === 'light' ? <Moon size={15} /> : <Sun size={15} />}
+                                        </button>
+                                        <button
+                                            onClick={resetSession}
+                                            aria-label={tp('chatbot.reset_session')}
+                                            title={tp('chatbot.reset_session')}
+                                            className="rounded-full p-1.5 hover:bg-white/10 transition-colors"
+                                        >
+                                            <RotateCcw size={15} />
+                                        </button>
+                                    </>
                                 )}
                                 <button onClick={toggleChat} aria-label="Minimizar chat" className="rounded-full p-1 hover:bg-white/10 transition-colors">
                                     <Minimize2 size={18} />
                                 </button>
                             </div>
                         </div>
-
                         {isOffline ? (
                             <div className="flex flex-1 flex-col items-center justify-center p-8 text-center space-y-4">
                                 <AlertCircle className="text-red-500" size={48} />
@@ -489,239 +553,302 @@ export function ChatWidget() {
                                     <p className="text-xs text-zinc-500 dark:text-zinc-400">{tp('chatbot.loading_desc')}</p>
                                 </div>
                             </div>
-                        ) : step === "lead" ? (
-                            <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
-                                <div className="mb-6 text-center">
-                                    <h4 className="text-lg font-bold text-zinc-900 dark:text-white">{tp('chatbot.form_title')}</h4>
-                                    <p className="text-sm text-zinc-500 dark:text-zinc-400">{tp('chatbot.form_subtitle')}</p>
-                                </div>
-
-                                <form onSubmit={startChat} className="space-y-4">
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{tp('chatbot.label_name')}</label>
-                                        <div className="relative">
-                                            <User className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={16} />
-                                            <input
-                                                required
-                                                autoFocus
-                                                type="text"
-                                                autoComplete="name"
-                                                data-testid="chat-lead-name"
-                                                placeholder={tp('chatbot.placeholder_name')}
-                                                className="w-full rounded-xl border border-zinc-200 bg-zinc-50 py-2 pl-10 pr-4 text-sm outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white"
-                                                value={leadInfo.name}
-                                                onChange={(e) => setLeadInfo({ ...leadInfo, name: e.target.value })}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{tp('chatbot.label_linkedin')}</label>
-                                        <div className="relative">
-                                            <Linkedin className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500" size={16} />
-                                            <input
-                                                required
-                                                type="text"
-                                                placeholder={tp('chatbot.placeholder_linkedin')}
-                                                className="w-full rounded-xl border border-zinc-200 bg-zinc-50 py-2 pl-10 pr-4 text-sm outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white"
-                                                value={leadInfo.linkedin}
-                                                onChange={(e) => setLeadInfo({ ...leadInfo, linkedin: e.target.value })}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{tp('chatbot.label_email')}</label>
-                                        <div className="relative">
-                                            <Send className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={16} />
-                                            <input
-                                                required
-                                                type="email"
-                                                autoComplete="email"
-                                                data-testid="chat-lead-email"
-                                                placeholder={tp('chatbot.placeholder_email')}
-                                                className={cn(
-                                                    "w-full rounded-xl border bg-zinc-50 py-2 pl-10 pr-4 text-sm outline-none focus:border-blue-500 dark:bg-zinc-900 dark:text-white",
-                                                    emailError ? "border-red-500" : "border-zinc-200 dark:border-zinc-800"
-                                                )}
-                                                value={leadInfo.email}
-                                                onChange={(e) => {
-                                                    setLeadInfo({ ...leadInfo, email: e.target.value });
-                                                    if (emailError) setEmailError(false);
-                                                }}
-                                            />
-                                        </div>
-                                        {emailError && (
-                                            <p className="mt-1 text-xs text-red-500">{tp('chatbot.error_email')}</p>
-                                        )}
-                                    </div>
-
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="space-y-1">
-                                            <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{tp('chatbot.label_company')}</label>
-                                            <div className="relative">
-                                                <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={16} />
-                                                <input
-                                                    required
-                                                    type="text"
-                                                    data-testid="chat-lead-company"
-                                                    placeholder={tp('chatbot.placeholder_company')}
-                                                    className="w-full rounded-xl border border-zinc-200 bg-zinc-50 py-2 pl-10 pr-4 text-sm outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white"
-                                                    value={leadInfo.company}
-                                                    onChange={(e) => setLeadInfo({ ...leadInfo, company: e.target.value })}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="space-y-1">
-                                            <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{tp('chatbot.label_role')}</label>
-                                            <div className="relative">
-                                                <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={16} />
-                                                <select
-                                                    required
-                                                    className="w-full appearance-none rounded-xl border border-zinc-200 bg-zinc-50 py-2 pl-10 pr-4 text-sm outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white"
-                                                    value={leadInfo.role}
-                                                    onChange={(e) => setLeadInfo({ ...leadInfo, role: e.target.value })}
-                                                >
-                                                    <option value="" disabled hidden>{tp('chatbot.placeholder_role')}</option>
-                                                    <option value="recruiter">{tp('chatbot.role_recruiter')}</option>
-                                                    <option value="it_person">{tp('chatbot.role_it_person')}</option>
-                                                    <option value="other">{tp('chatbot.role_other')}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-3 pt-2">
-                                        <input
-                                            required
-                                            id="privacy"
-                                            type="checkbox"
-                                            className="mt-1 h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500"
-                                        />
-                                        <label htmlFor="privacy" className="text-[11px] leading-tight text-zinc-500 dark:text-zinc-400">
-                                            {tp('chatbot.privacy_text')}
-                                        </label>
-                                    </div>
-
-                                    <button
-                                        type="submit"
-                                        data-testid="chat-lead-submit"
-                                        className="mt-4 w-full rounded-xl bg-blue-600 py-3 text-sm font-bold text-white shadow-lg transition-transform active:scale-[0.98] hover:bg-blue-700 disabled:opacity-50"
-                                    >
-                                        {tp('chatbot.button_start')}
-                                    </button>
-                                </form>
-                            </div>
                         ) : (
                             <>
-                                <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-2">
-                                    {messages.map((m, i) => (
-                                        <ChatMessage key={i} role={m.role} content={m.content} />
-                                    ))}
-                                    {isLoading && (
-                                        <div className="flex justify-start">
-                                            <div className="rounded-2xl bg-zinc-100 px-4 py-2 dark:bg-zinc-800">
-                                                <Loader2 className="h-4 w-4 animate-spin text-zinc-500" />
+                                <div className="flex-1 flex flex-col overflow-hidden relative min-h-0">
+                                    <div ref={scrollRef} className={cn(
+                                        "flex-1 overflow-y-auto p-4 space-y-2 transition-colors duration-300",
+                                        highContrast 
+                                            ? (isDark ? "bg-black" : "bg-white") 
+                                            : (isDark ? "bg-zinc-900/50" : "bg-zinc-50")
+                                    )}>
+                                        {messages.map((m, i) => (
+                                            <ChatMessage
+                                                key={i}
+                                                role={m.role}
+                                                content={m.content}
+                                                fontSize={fontSize}
+                                                isAlternate={i % 2 === 0}
+                                                highContrast={highContrast}
+                                                botTheme={botTheme}
+                                            />
+                                        ))}
+                                        {isLoading && (
+                                            <div className="flex justify-start">
+                                                 <div className={cn(
+                                                     "rounded-2xl px-4 py-2 transition-colors",
+                                                     isDark ? "bg-zinc-800" : "bg-zinc-100"
+                                                 )}>
+                                                     <Loader2 className={cn("h-4 w-4 animate-spin", isDark ? "text-zinc-400" : "text-zinc-500")} />
+                                                 </div>
                                             </div>
-                                        </div>
-                                    )}
-                                    {/* Chips de sugerencias (aparecen post-bienvenida y desaparecen tras el primer uso) */}
-                                    <AnimatePresence>
-                                        {showSuggestions && !isLoading && !showDatePicker && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 8 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: 4 }}
-                                                className="flex flex-wrap gap-2 pt-1 pb-2"
-                                            >
-                                                {[
-                                                    tp('chatbot.suggestion_experience'),
-                                                    tp('chatbot.suggestion_tech'),
-                                                    tp('chatbot.suggestion_education'),
-                                                    tp('chatbot.suggestion_schedule'),
-                                                ].map((suggestion) => (
-                                                    <button
-                                                        key={suggestion}
-                                                        onClick={() => handleSuggestionClick(suggestion)}
-                                                        className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs text-blue-700 transition-colors hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-950/40 dark:text-blue-300 dark:hover:bg-blue-900/50"
-                                                    >
-                                                        {suggestion}
-                                                    </button>
-                                                ))}
-                                            </motion.div>
                                         )}
-                                    </AnimatePresence>
 
-                                    {/* DatePicker Interactivo */}
-                                    <AnimatePresence>
-                                        {showDatePicker && (
-                                            <motion.div
-                                                initial={{ opacity: 0, scale: 0.95 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                className="mt-2 rounded-2xl border border-zinc-200 bg-white p-4 shadow-xl dark:border-zinc-800 dark:bg-zinc-900"
-                                            >
-                                                <div className="mb-3 flex items-center gap-2 text-sm font-bold text-zinc-800 dark:text-zinc-100">
-                                                    <Bot size={18} className="text-blue-600" />
-                                                    {tp('chatbot.select_date')}
-                                                </div>
-                                                <form onSubmit={handleBookingSubmit} className="space-y-3">
-                                                    <div className="grid grid-cols-2 gap-3">
-                                                        <div className="space-y-1">
-                                                            <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.date_label')}</label>
-                                                            <input
-                                                                required
-                                                                type="date"
-                                                                min={new Date().toISOString().split('T')[0]}
-                                                                className="w-full rounded-lg border border-zinc-200 bg-zinc-50 p-2 text-xs outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-800 dark:text-white"
-                                                                value={bookingDate}
-                                                                onChange={(e) => setBookingDate(e.target.value)}
-                                                            />
-                                                        </div>
-                                                        <div className="space-y-1">
-                                                            <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.time_label')}</label>
-                                                            <input
-                                                                required
-                                                                type="time"
-                                                                step="900"
-                                                                className="w-full rounded-lg border border-zinc-200 bg-zinc-50 p-2 text-xs outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-800 dark:text-white"
-                                                                value={bookingTime}
-                                                                onChange={(e) => setBookingTime(e.target.value)}
-                                                            />
-                                                        </div>
+                                        {/* Captura integrada */}
+                                        <AnimatePresence>
+                                            {showLeadCapture && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: 5 }}
+                                                    className={cn(
+                                                        "rounded-2xl border p-4 transition-colors duration-300",
+                                                        isDark ? "border-blue-900/30 bg-blue-900/10" : "border-blue-100 bg-blue-50/50"
+                                                    )}
+                                                >
+                                                    <div className={cn("mb-3 flex items-center gap-2", isDark ? "text-blue-400" : "text-blue-600")}>
+                                                        <AlertCircle size={16} />
+                                                        <span className="text-xs font-bold uppercase tracking-tight">{tp('chatbot.form_subtitle')}</span>
                                                     </div>
-                                                    <button
-                                                        type="submit"
-                                                        className="w-full rounded-xl bg-blue-600 py-2.5 text-xs font-bold text-white shadow-lg transition-transform hover:bg-blue-700 active:scale-95"
-                                                    >
-                                                        {tp('chatbot.confirm_booking')}
-                                                    </button>
-                                                </form>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
-                                <div className="border-t border-zinc-100 p-4 dark:border-zinc-800 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-sm">
-                                    <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex gap-2">
-                                        <input
-                                            type="text"
-                                            maxLength={2000}
-                                            data-testid="chat-input"
-                                            placeholder={tp('chatbot.input_placeholder')}
-                                            className="flex-1 bg-transparent text-sm outline-none dark:text-white"
-                                            value={input}
-                                            onChange={(e) => setInput(e.target.value)}
-                                            disabled={isLoading}
-                                        />
+                                                    <div className="space-y-3">
+                                                        <div className="relative">
+                                                            <User className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={14} />
+                                                            <input
+                                                                type="text"
+                                                                placeholder={tp('chatbot.placeholder_name')}
+                                                                className={cn(
+                                                                    "w-full rounded-xl border py-2 pl-9 pr-3 text-xs outline-none focus:border-blue-500 transition-colors",
+                                                                    isDark ? "border-zinc-800 bg-zinc-900 text-white" : "border-zinc-200 bg-white text-zinc-900"
+                                                                )}
+                                                                value={leadInfo.name}
+                                                                onChange={(e) => setLeadInfo({ ...leadInfo, name: e.target.value })}
+                                                            />
+                                                        </div>
+                                                        <div className="relative">
+                                                            <Send className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={14} />
+                                                            <input
+                                                                type="email"
+                                                                placeholder={tp('chatbot.placeholder_email')}
+                                                                className={cn(
+                                                                    "w-full rounded-xl border py-2 pl-9 pr-3 text-xs outline-none focus:border-blue-500 transition-colors",
+                                                                    isDark ? "bg-zinc-900 text-white" : "bg-white text-zinc-900",
+                                                                    emailError ? "border-red-500" : (isDark ? "border-zinc-800" : "border-zinc-200")
+                                                                )}
+                                                                value={leadInfo.email}
+                                                                onChange={(e) => {
+                                                                    setLeadInfo({ ...leadInfo, email: e.target.value });
+                                                                    if (emailError) setEmailError(false);
+                                                                }}
+                                                            />
+                                                        </div>
+                                                        <div className="relative">
+                                                            <Linkedin className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={14} />
+                                                            <input
+                                                                type="text"
+                                                                placeholder={tp('chatbot.placeholder_linkedin')}
+                                                                className="w-full rounded-xl border border-zinc-200 bg-white py-2 pl-9 pr-3 text-xs outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-900"
+                                                                value={leadInfo.linkedin}
+                                                                onChange={(e) => setLeadInfo({ ...leadInfo, linkedin: e.target.value })}
+                                                            />
+                                                        </div>
+                                                        <button
+                                                            onClick={(e) => {
+                                                                setShowLeadCapture(false);
+                                                                handleBookingSubmit(e);
+                                                            }}
+                                                            className="w-full rounded-xl bg-blue-600 py-2.5 text-xs font-bold text-white shadow-md hover:bg-blue-700"
+                                                        >
+                                                            {tp('chatbot.confirm_booking')}
+                                                        </button>
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+
+                                        {/* Sistema de Feedback */}
+                                        <AnimatePresence>
+                                            {showFeedback && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, scale: 0.9 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    className="py-2"
+                                                >
+                                                    <StarRating
+                                                        currentRating={userRating}
+                                                        onRate={(rating) => {
+                                                            setUserRating(rating);
+                                                            safeTrack("chat_feedback_received", { rating });
+                                                            setTimeout(() => setShowFeedback(false), 3000);
+                                                        }}
+                                                        botTheme={botTheme}
+                                                    />
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+
+                                        {/* Chips de sugerencias */}
+                                        <AnimatePresence>
+                                            {showSuggestions && !isLoading && !showDatePicker && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 8 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: 4 }}
+                                                    className="flex flex-wrap gap-2 pt-1 pb-2"
+                                                >
+                                                    {[
+                                                        tp('chatbot.suggestion_experience'),
+                                                        tp('chatbot.suggestion_tech'),
+                                                        tp('chatbot.suggestion_education'),
+                                                        tp('chatbot.suggestion_schedule'),
+                                                    ].map((suggestion) => (
+                                                        <button
+                                                            key={suggestion}
+                                                            onClick={() => handleSuggestionClick(suggestion)}
+                                                            className={cn(
+                                                                "rounded-full border px-3 py-1 text-xs transition-colors duration-200",
+                                                                isDark 
+                                                                    ? "border-blue-800 bg-blue-950/40 text-blue-300 hover:bg-blue-900/50" 
+                                                                    : "border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100"
+                                                            )}
+                                                        >
+                                                            {suggestion}
+                                                        </button>
+                                                    ))}
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+
+                                        {/* DatePicker Interactivo */}
+                                        <AnimatePresence>
+                                            {showDatePicker && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, scale: 0.95 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    className={cn(
+                                                        "mt-2 rounded-2xl border p-4 shadow-xl",
+                                                        isDark ? "border-zinc-800 bg-zinc-900" : "border-zinc-200 bg-white"
+                                                    )}
+                                                >
+                                                    <div className={cn("mb-3 flex items-center gap-2 text-sm font-bold", isDark ? "text-zinc-100" : "text-zinc-800")}>
+                                                        <Bot size={18} className="text-blue-600" />
+                                                        {tp('chatbot.select_date')}
+                                                    </div>
+                                                    <form onSubmit={handleBookingSubmit} className="space-y-3">
+                                                        <div className="grid grid-cols-2 gap-3">
+                                                            <div className="space-y-1">
+                                                                <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.date_label')}</label>
+                                                                <input
+                                                                    required
+                                                                    type="date"
+                                                                    min={new Date().toISOString().split('T')[0]}
+                                                                    className={cn(
+                                                                        "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500",
+                                                                        isDark ? "border-zinc-800 bg-zinc-800 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-900"
+                                                                    )}
+                                                                    value={bookingDate}
+                                                                    onChange={(e) => setBookingDate(e.target.value)}
+                                                                />
+                                                            </div>
+                                                            <div className="space-y-1">
+                                                                <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.time_label')}</label>
+                                                                <input
+                                                                    required
+                                                                    type="time"
+                                                                    step="900"
+                                                                    className="w-full rounded-lg border border-zinc-200 bg-zinc-50 p-2 text-xs outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-800 dark:text-white"
+                                                                    value={bookingTime}
+                                                                    onChange={(e) => setBookingTime(e.target.value)}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <button
+                                                            type="submit"
+                                                            className="w-full rounded-xl bg-blue-600 py-2.5 text-xs font-bold text-white shadow-lg transition-transform hover:bg-blue-700 active:scale-95"
+                                                        >
+                                                            {tp('chatbot.confirm_booking')}
+                                                        </button>
+                                                    </form>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
+
+                                    {/* Controles de fuente flotantes */}
+                                    <div className={cn(
+                                        "absolute bottom-2 right-4 z-20 flex flex-col gap-1 backdrop-blur-sm p-1 rounded-lg border shadow-lg group transition-all duration-300",
+                                        isDark 
+                                            ? "bg-zinc-900/50 border-zinc-800/50 hover:bg-zinc-900" 
+                                            : "bg-white/50 border-zinc-200/50 hover:bg-white"
+                                    )}>
                                         <button
-                                            type="submit"
+                                            type="button"
+                                            onClick={() => setFontSize(fontSize === "sm" ? "md" : "lg")}
+                                            className="rounded-md p-1.5 text-zinc-500 hover:bg-blue-50 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-blue-900/30 dark:hover:text-blue-400 transition-colors"
+                                            title="Zoom In"
+                                        >
+                                            <Plus size={14} />
+                                        </button>
+                                        <div className={cn("h-px w-full", isDark ? "bg-zinc-800/50" : "bg-zinc-200/50")} />
+                                        <button
+                                            type="button"
+                                            onClick={() => setFontSize(fontSize === "lg" ? "md" : "sm")}
+                                            className="rounded-md p-1.5 text-zinc-500 hover:bg-blue-50 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-blue-900/30 dark:hover:text-blue-400 transition-colors"
+                                            title="Zoom Out"
+                                        >
+                                            <Minus size={14} />
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Barra de entrada */}
+                                <div className={cn(
+                                    "border-t p-4 backdrop-blur-sm transition-colors duration-300",
+                                    isDark ? "border-zinc-800 bg-zinc-950/50" : "border-zinc-100 bg-white/50"
+                                )}>
+                                    <div className="flex items-center gap-2 max-w-4xl mx-auto">
+                                        {/* Botón de Micrófono (Futura funcionalidad) */}
+                                        <button
+                                            type="button"
+                                            className="p-2 text-zinc-400 hover:text-blue-600 transition-colors shrink-0"
+                                            title="Voice Input (Coming Soon)"
+                                        >
+                                            <Mic size={20} />
+                                        </button>
+
+                                        {/* Chip de Input */}
+                                        <form
+                                            onSubmit={(e) => { e.preventDefault(); handleSend(); }}
+                                            className={cn(
+                                                "flex-1 flex items-center rounded-2xl px-4 py-2 group focus-within:ring-1 focus-within:ring-blue-500/30 transition-all border border-transparent",
+                                                isDark ? "bg-zinc-800/70 focus-within:border-blue-500/20" : "bg-zinc-100/70 focus-within:border-blue-500/20"
+                                            )}
+                                        >
+                                            <input
+                                                type="text"
+                                                maxLength={500}
+                                                data-testid="chat-input"
+                                                placeholder={tp('chatbot.input_placeholder')}
+                                                className={cn(
+                                                    "flex-1 bg-transparent text-sm outline-none py-1",
+                                                    isDark ? "text-white" : "text-zinc-900"
+                                                )}
+                                                value={input}
+                                                onChange={(e) => setInput(e.target.value)}
+                                                disabled={isLoading}
+                                            />
+
+                                            {/* Contador de caracteres */}
+                                            <span className={cn(
+                                                "text-[10px] ml-2 shrink-0 transition-colors",
+                                                input.length >= 450 ? "text-orange-500 font-medium" : (isDark ? "text-zinc-500" : "text-zinc-400"),
+                                                input.length >= 500 ? "text-red-500 font-bold" : ""
+                                            )}>
+                                                {input.length}/500
+                                            </span>
+                                        </form>
+
+                                        {/* Botón de Enviar */}
+                                        <button
+                                            type="button"
+                                            onClick={() => handleSend()}
                                             aria-label="Enviar mensaje"
                                             disabled={isLoading || !input.trim()}
-                                            className="rounded-full bg-blue-600 p-2 text-white transition-opacity hover:bg-blue-700 disabled:opacity-50"
+                                            className="shrink-0 rounded-full bg-blue-600 p-2.5 text-white transition-all hover:bg-blue-700 disabled:opacity-30 disabled:hover:bg-blue-600 shadow-md hover:shadow-lg active:scale-95"
                                         >
                                             <Send size={18} />
                                         </button>
-                                    </form>
-                                    <p className="mt-2 text-[10px] text-center text-zinc-400 dark:text-zinc-500">
+                                    </div>
+                                    <p className={cn("mt-2 text-[10px] text-center transition-colors", isDark ? "text-zinc-500" : "text-zinc-400")}>
                                         {tp('chatbot.ai_disclaimer')}
                                     </p>
                                 </div>
@@ -756,12 +883,14 @@ export function ChatWidget() {
                 data-testid="chat-toggle"
                 className={cn(
                     "relative flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-colors focus:outline-none",
-                    isOpen ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-white" : "bg-blue-600 text-white"
+                    isOpen 
+                        ? (isDark ? "bg-zinc-800 text-white" : "bg-zinc-100 text-zinc-900") 
+                        : "bg-blue-600 text-white"
                 )}
             >
                 {isOpen ? <X size={24} /> : (
                     <>
-                        <MessageCircle size={24} />
+                        <BotMessageSquare size={24} />
                         {!isOpen && showTooltip && (
                             <div className="absolute -top-1 -right-1">
                                 <motion.div

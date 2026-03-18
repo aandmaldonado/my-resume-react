@@ -5,9 +5,27 @@ import { cn } from "@/lib/utils";
 interface ChatMessageProps {
     role: "user" | "assistant";
     content: string;
+    fontSize?: "sm" | "md" | "lg";
+    isAlternate?: boolean;
+    highContrast?: boolean;
+    botTheme?: "light" | "dark";
 }
 
-export function ChatMessage({ role, content }: ChatMessageProps) {
+export function ChatMessage({ 
+    role, 
+    content, 
+    fontSize = "md", 
+    isAlternate = false, 
+    highContrast = false,
+    botTheme = "dark" 
+}: ChatMessageProps) {
+    const isDark = botTheme === "dark";
+    const fontSizeClasses = {
+        sm: "text-xs px-3 py-1.5",
+        md: "text-sm px-4 py-2",
+        lg: "text-base px-5 py-3"
+    };
+
     return (
         <div
             className={cn(
@@ -17,16 +35,34 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
         >
             <div
                 className={cn(
-                    "max-w-[90%] rounded-2xl px-4 py-2 text-sm shadow-sm",
+                    "max-w-[90%] rounded-2xl shadow-sm transition-all duration-200",
+                    fontSizeClasses[fontSize],
                     role === "user"
-                        ? "bg-blue-600 text-white rounded-tr-none"
-                        : "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-tl-none border border-zinc-200 dark:border-zinc-700"
+                        ? cn(
+                            "bg-blue-600 text-white rounded-tr-none",
+                            highContrast && cn(
+                                "border-2",
+                                isDark ? "bg-white text-black border-zinc-100" : "bg-black text-white border-zinc-900"
+                            )
+                        )
+                        : cn(
+                            "rounded-tl-none border",
+                            highContrast 
+                                ? cn("border-2", isDark ? "bg-black text-white border-zinc-100" : "bg-white text-black border-zinc-900")
+                                : isAlternate 
+                                    ? (isDark ? "bg-zinc-900 border-zinc-800 text-zinc-100" : "bg-white border-zinc-200 text-zinc-900") 
+                                    : (isDark ? "bg-zinc-800 border-zinc-700 text-zinc-100" : "bg-zinc-100 border-zinc-200 text-zinc-900")
+                          )
                 )}
             >
                 {role === "user" ? (
                     content
                 ) : (
-                    <div className="prose prose-sm dark:prose-invert max-w-none break-words">
+                    <div className={cn(
+                        "prose max-w-none break-words",
+                        isDark ? "prose-invert" : "",
+                        fontSize === "sm" ? "prose-sm" : fontSize === "lg" ? "prose-lg" : "prose-base"
+                    )}>
                         <ReactMarkdown
                             remarkPlugins={[remarkGfm]}
                             components={{
@@ -40,14 +76,17 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
                                         href={href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-blue-600 dark:text-blue-400 hover:underline"
+                                        className={cn(
+                                            "hover:underline",
+                                            isDark ? "text-blue-400" : "text-blue-600"
+                                        )}
                                     >
                                         {children}
                                     </a>
                                 ),
-                                h1: ({ children }) => <h1 className="text-base font-bold mb-2">{children}</h1>,
-                                h2: ({ children }) => <h2 className="text-base font-semibold mb-1">{children}</h2>,
-                                code: ({ children }) => <code className="bg-zinc-200 dark:bg-zinc-700 rounded px-1 py-0.5 text-xs font-mono">{children}</code>,
+                                h1: ({ children }) => <h1 className={cn("text-base font-bold mb-2", isDark ? "text-white" : "text-zinc-900")}>{children}</h1>,
+                                h2: ({ children }) => <h2 className={cn("text-base font-semibold mb-1", isDark ? "text-white" : "text-zinc-900")}>{children}</h2>,
+                                code: ({ children }) => <code className={cn("rounded px-1 py-0.5 text-xs font-mono", isDark ? "bg-zinc-700" : "bg-zinc-200")}>{children}</code>,
                             }}
                         >
                             {content}
