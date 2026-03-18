@@ -1,6 +1,5 @@
 import { tavily } from "@tavily/core";
 import Groq from "groq-sdk";
-import { getSystemPrompt, getPortfolioData } from "@/lib/chatbot-prompt";
 import { NextResponse } from "next/server";
 
 const tvly = tavily({ apiKey: process.env.TAVILY_API_KEY });
@@ -8,7 +7,7 @@ const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export async function POST(req: Request) {
     try {
-        const { company, name } = await req.json();
+        const { company } = await req.json();
 
         if (!company || company.toLowerCase() === "other") {
             return NextResponse.json({ enrichment: "" });
@@ -23,30 +22,19 @@ export async function POST(req: Request) {
         const searchContext = searchResult.results.map(r => r.content).join("\n\n").slice(0, 4000); // Truncar para no saturar modelos locales
         console.log(`Tavily search context length for ${company}:`, searchContext.length);
 
-        // 2. Analizar el fit usando un PROMPT RESUMIDO (Evita saturar el contexto)
-        const portfolioData = getPortfolioData();
-        const ownerName = portfolioData.personal_info.name;
-        const ownerShortName = portfolioData.chat_settings.owner_short_name;
-        const ownerTitle = portfolioData.personal_info.title;
-        const ownerSummary = portfolioData.professional_summary;
-        const targetRoles = portfolioData.career_target?.target_roles.join(", ");
-
         const provider = process.env.AI_PROVIDER || 'groq';
-        const systemMsg = `Eres un analista técnico objetivo. Tu tarea es analizar qué hace una empresa y determinar si el perfil de ${ownerName} (${ownerTitle}) tiene sinergia con sus necesidades técnicas actuales o futuras.`;
+        const systemMsg = `Eres un Analista de Inteligencia Corporativa. Tu único objetivo es destilar información factual sobre una empresa a partir de resultados de búsqueda. NO inventes información, no uses tono comercial y bajo ninguna circunstancia intentes evaluar cómo un candidato encajaría en la empresa. Tu respuesta debe ser una radiografía fría y directa de la compañía. PROHIBIDO USAR FORMATO MARKDOWN (cero asteriscos).`;
         const userMsg = `
-DATO DE BÚSQUEDA SOBRE LA EMPRESA:
+DATO DE BÚSQUEDA TAVILY SOBRE LA EMPRESA ("${company}"):
 ${searchContext}
 
-PORTFOLIO DE ${ownerName.toUpperCase()}:
-Título: ${ownerTitle}
-Resumen: ${ownerSummary}
-Roles objetivo: ${targetRoles}
+TAREA OBLIGATORIA:
+Redacta un briefing súper conciso y directo de la empresa reportada en la búsqueda y devuélvelo en el siguiente formato. NO incluyas introducciones, despedidas ni asteriscos (markdown):
 
-TAREA:
-1. Basándote en la información encontrada, resume en 1 frase qué hace ${company}.
-2. Explica el "Fit Estratégico" técnico con ${ownerShortName} (máximo 2 frases).
-3. NO pidas disculpas. Sé resolutivo.
-Responde de forma sobria y profesional en Español.
+1. 🎯 Core Business: [1-2 frases exactas sobre a qué se dedica la empresa].
+2. 🌍 Escala y Ubicación: [Indica si es multinacional, regional, startup, etc. y su zona si se menciona. REGLA ESTRICTA: NO INVENTES CIUDADES. Si el texto no menciona la sede, escribe "Ubicación no especificada"].
+3. 🚀 Proyectos/Tech Stack Relevante: [Menciona proyectos emblemáticos o tecnologías reportadas. Si no hay, pon "No se extrajo info técnica"].
+4. ⚠️ Nivel de Certeza: [Indica si hay varías coincidencias o si es sólida].
 `;
 
         let enrichment = "";
@@ -57,13 +45,16 @@ Responde de forma sobria y profesional en Español.
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        model: "gemma3:1b", // FORZAMOS modelo ligero para research (velocidad pura)
+                        model: process.env.OLLAMA_MODEL || "gemma3:1b", // Usa el mismo modelo que el chat para evitar swap en VRAM
                         messages: [
                             { role: "system", content: systemMsg },
                             { role: "user", content: userMsg }
                         ],
                         stream: false,
                         keep_alive: "60m",
+                        options: {
+                            num_gpu: 99, // Fuerza cargar todas las capas en la GPU
+                        }
                     }),
                 });
 

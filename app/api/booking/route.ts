@@ -34,7 +34,9 @@ export async function POST(req: Request) {
         <p><strong>Hora:</strong> ${time}</p>
         <br/>
         <h3>🔍 Deep Research Empresa:</h3>
-        <p>${enrichment || "No hay investigación disponible."}</p>
+        <div style="white-space: pre-wrap; font-family: monospace; line-height: 1.6; background-color: #f4f4f5; padding: 15px; border-radius: 8px;">
+${enrichment || "No hay investigación disponible."}
+        </div>
         <br/>
         <p><i>Este correo fue generado automáticamente por tu Agente IA.</i></p>
       `,

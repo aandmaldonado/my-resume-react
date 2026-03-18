@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Loader2, Minimize2, User, Building2, Linkedin, Briefcase, Search, AlertCircle, Bot } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, Minimize2, User, Building2, Linkedin, Briefcase, Search, AlertCircle, Bot, RotateCcw } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChatMessage } from "./chat-message";
@@ -45,6 +45,10 @@ export function ChatWidget() {
     });
 
     const [messages, setMessages] = useState<Message[]>([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const [showDatePicker, setShowDatePicker] = useState(false);
+    const [bookingDate, setBookingDate] = useState("");
+    const [bookingTime, setBookingTime] = useState("");
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -91,6 +95,30 @@ export function ChatWidget() {
         });
     };
 
+    const resetSession = () => {
+        setMessages([]);
+        setShowSuggestions(false);
+        setInput("");
+        setStep("lead");
+        setLeadInfo({ name: "", email: "", company: "", linkedin: "", role: "" });
+        setCompanyEnrichment("");
+        setIsOffline(false);
+        safeTrack("chat_session_reset", {});
+    };
+
+    const handleSuggestionClick = (suggestion: string) => {
+        // Mapeamos el chip a una pregunta natural para que el LLM reciba contexto real
+        const questionMap: Record<string, string> = {
+            [tp('chatbot.suggestion_experience')]: tp('chatbot.q_experience'),
+            [tp('chatbot.suggestion_tech')]: tp('chatbot.q_tech'),
+            [tp('chatbot.suggestion_education')]: tp('chatbot.q_education'),
+            [tp('chatbot.suggestion_schedule')]: tp('chatbot.q_schedule'),
+        };
+        const question = questionMap[suggestion] || suggestion;
+        setShowSuggestions(false);
+        setInput(question);
+    };
+
     // Helper para traducciones parametrizadas
     const tp = (key: string, options?: any): string => {
         return t(key, {
@@ -119,13 +147,19 @@ export function ChatWidget() {
             let enrichment = "";
             let researchFailed = false;
 
-            // 1. Intentar Deep Research de la empresa (pero no bloquear si falla)
+            // 1. Intentar Deep Research de la empresa (pero no bloquear si falla o tarda mucho)
             try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 8000); // Max 8 seg de espera para Ollama/Tavily
+
                 const researchRes = await fetch("/api/research", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ company: leadInfo.company, name: leadInfo.name }),
+                    signal: controller.signal
                 });
+
+                clearTimeout(timeoutId);
 
                 if (researchRes.ok) {
                     const researchData = await researchRes.json();
@@ -135,7 +169,7 @@ export function ChatWidget() {
                     researchFailed = true; // Solo para log interno, no bloqueamos
                 }
             } catch (e) {
-                console.error("Non-blocking research error:", e);
+                console.error("Non-blocking research error or timeout:", e);
             }
 
             // Normalizar URL de LinkedIn antes de enviar (si falta el dominio)
@@ -149,6 +183,10 @@ export function ChatWidget() {
 
             // 2. Enviar correo de Lead inicial (usando la URL normalizada)
             try {
+                // Limitamos la espera de Resend a 3s para que el usuario no sienta lag excesivo
+                const leadController = new AbortController();
+                const leadTimeoutId = setTimeout(() => leadController.abort(), 3000);
+
                 await fetch("/api/lead", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -157,9 +195,12 @@ export function ChatWidget() {
                         linkedin: finalLinkedin, // Enviamos corregido
                         enrichment: enrichment
                     }),
+                    signal: leadController.signal
                 });
+
+                clearTimeout(leadTimeoutId);
             } catch (e) {
-                console.error("Silent error sending lead email:", e);
+                console.error("Silent error sending lead email or timeout:", e);
             }
 
             // 3. Track lead capture in GA
@@ -175,13 +216,14 @@ export function ChatWidget() {
 
             setStep("chat");
 
-            // 4. Bienvenida (Siempre simple para no condicionar)
+            // 4. Bienvenida + chips de sugerencias
             setMessages([
                 {
                     role: "assistant",
                     content: tp('chatbot.welcome_simple', { name: leadInfo.name }),
                 },
             ]);
+            setShowSuggestions(true);
         } catch (error) {
             console.error("Error starting chat:", error);
             setIsOffline(true);
@@ -246,6 +288,12 @@ export function ChatWidget() {
                 }
             }
 
+            // 1.5. Detectar tag de DatePicker
+            if (botContent.includes("[ACTION_DATEPICKER]")) {
+                botContent = botContent.replace("[ACTION_DATEPICKER]", "").trim();
+                setShowDatePicker(true);
+            }
+
             // 2. Mostrar el mensaje del bot (ya limpio)
             if (botContent.trim()) {
                 setMessages((prev) => [...prev, { role: "assistant", content: botContent }]);
@@ -260,6 +308,7 @@ export function ChatWidget() {
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                             ...bookingData,
+                            company: leadInfo.company,
                             linkedin: leadInfo.linkedin,
                             enrichment: companyEnrichment
                         }),
@@ -301,6 +350,67 @@ export function ChatWidget() {
         }
     };
 
+    const handleBookingSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!bookingDate || !bookingTime) return;
+
+        const selectionText = i18n.language === 'en'
+            ? `I'd like to schedule the call for ${bookingDate} at ${bookingTime} (CET).`
+            : `Me gustaría agendar la llamada para el ${bookingDate} a las ${bookingTime} (CET).`;
+
+        setShowDatePicker(false);
+        const userMessage: Message = { role: "user", content: selectionText };
+        setMessages((prev) => [...prev, userMessage]);
+
+        setIsLoading(true);
+        try {
+            const response = await fetch("/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    messages: [...messages, userMessage],
+                    leadInfo,
+                }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                let botContent = data.content;
+                let bookingJson: string | null = null;
+
+                if (botContent.includes("[TRIGGER_BOOKING:")) {
+                    const match = botContent.match(/\[TRIGGER_BOOKING:\s*(\{.*?\})\]/);
+                    if (match) {
+                        bookingJson = match[1];
+                        botContent = botContent.replace(match[0], "").trim();
+                    }
+                }
+
+                if (botContent.trim()) {
+                    setMessages((prev) => [...prev, { role: "assistant", content: botContent }]);
+                }
+
+                if (bookingJson) {
+                    const bookingData = JSON.parse(bookingJson);
+                    await fetch("/api/booking", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            ...bookingData,
+                            company: leadInfo.company,
+                            linkedin: leadInfo.linkedin,
+                            enrichment: companyEnrichment
+                        }),
+                    });
+                }
+            }
+        } catch (error) {
+            console.error("Error during booking confirmation:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
             <AnimatePresence>
@@ -328,9 +438,21 @@ export function ChatWidget() {
                                     </p>
                                 </div>
                             </div>
-                            <button onClick={toggleChat} className="rounded-full p-1 hover:bg-white/10 transition-colors">
-                                <Minimize2 size={18} />
-                            </button>
+                            <div className="flex items-center gap-1">
+                                {step === "chat" && (
+                                    <button
+                                        onClick={resetSession}
+                                        aria-label={tp('chatbot.reset_session')}
+                                        title={tp('chatbot.reset_session')}
+                                        className="rounded-full p-1.5 hover:bg-white/10 transition-colors"
+                                    >
+                                        <RotateCcw size={15} />
+                                    </button>
+                                )}
+                                <button onClick={toggleChat} aria-label="Minimizar chat" className="rounded-full p-1 hover:bg-white/10 transition-colors">
+                                    <Minimize2 size={18} />
+                                </button>
+                            </div>
                         </div>
 
                         {isOffline ? (
@@ -381,7 +503,9 @@ export function ChatWidget() {
                                             <User className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={16} />
                                             <input
                                                 required
+                                                autoFocus
                                                 type="text"
+                                                autoComplete="name"
                                                 data-testid="chat-lead-name"
                                                 placeholder={tp('chatbot.placeholder_name')}
                                                 className="w-full rounded-xl border border-zinc-200 bg-zinc-50 py-2 pl-10 pr-4 text-sm outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white"
@@ -413,6 +537,7 @@ export function ChatWidget() {
                                             <input
                                                 required
                                                 type="email"
+                                                autoComplete="email"
                                                 data-testid="chat-lead-email"
                                                 placeholder={tp('chatbot.placeholder_email')}
                                                 className={cn(
@@ -500,6 +625,80 @@ export function ChatWidget() {
                                             </div>
                                         </div>
                                     )}
+                                    {/* Chips de sugerencias (aparecen post-bienvenida y desaparecen tras el primer uso) */}
+                                    <AnimatePresence>
+                                        {showSuggestions && !isLoading && !showDatePicker && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 8 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: 4 }}
+                                                className="flex flex-wrap gap-2 pt-1 pb-2"
+                                            >
+                                                {[
+                                                    tp('chatbot.suggestion_experience'),
+                                                    tp('chatbot.suggestion_tech'),
+                                                    tp('chatbot.suggestion_education'),
+                                                    tp('chatbot.suggestion_schedule'),
+                                                ].map((suggestion) => (
+                                                    <button
+                                                        key={suggestion}
+                                                        onClick={() => handleSuggestionClick(suggestion)}
+                                                        className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs text-blue-700 transition-colors hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-950/40 dark:text-blue-300 dark:hover:bg-blue-900/50"
+                                                    >
+                                                        {suggestion}
+                                                    </button>
+                                                ))}
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+
+                                    {/* DatePicker Interactivo */}
+                                    <AnimatePresence>
+                                        {showDatePicker && (
+                                            <motion.div
+                                                initial={{ opacity: 0, scale: 0.95 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                className="mt-2 rounded-2xl border border-zinc-200 bg-white p-4 shadow-xl dark:border-zinc-800 dark:bg-zinc-900"
+                                            >
+                                                <div className="mb-3 flex items-center gap-2 text-sm font-bold text-zinc-800 dark:text-zinc-100">
+                                                    <Bot size={18} className="text-blue-600" />
+                                                    {tp('chatbot.select_date')}
+                                                </div>
+                                                <form onSubmit={handleBookingSubmit} className="space-y-3">
+                                                    <div className="grid grid-cols-2 gap-3">
+                                                        <div className="space-y-1">
+                                                            <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.date_label')}</label>
+                                                            <input
+                                                                required
+                                                                type="date"
+                                                                min={new Date().toISOString().split('T')[0]}
+                                                                className="w-full rounded-lg border border-zinc-200 bg-zinc-50 p-2 text-xs outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-800 dark:text-white"
+                                                                value={bookingDate}
+                                                                onChange={(e) => setBookingDate(e.target.value)}
+                                                            />
+                                                        </div>
+                                                        <div className="space-y-1">
+                                                            <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.time_label')}</label>
+                                                            <input
+                                                                required
+                                                                type="time"
+                                                                step="900"
+                                                                className="w-full rounded-lg border border-zinc-200 bg-zinc-50 p-2 text-xs outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-800 dark:text-white"
+                                                                value={bookingTime}
+                                                                onChange={(e) => setBookingTime(e.target.value)}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <button
+                                                        type="submit"
+                                                        className="w-full rounded-xl bg-blue-600 py-2.5 text-xs font-bold text-white shadow-lg transition-transform hover:bg-blue-700 active:scale-95"
+                                                    >
+                                                        {tp('chatbot.confirm_booking')}
+                                                    </button>
+                                                </form>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </div>
                                 <div className="border-t border-zinc-100 p-4 dark:border-zinc-800 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-sm">
                                     <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex gap-2">
@@ -513,7 +712,12 @@ export function ChatWidget() {
                                             onChange={(e) => setInput(e.target.value)}
                                             disabled={isLoading}
                                         />
-                                        <button type="submit" disabled={isLoading || !input.trim()} className="rounded-full bg-blue-600 p-2 text-white transition-opacity hover:bg-blue-700 disabled:opacity-50">
+                                        <button
+                                            type="submit"
+                                            aria-label="Enviar mensaje"
+                                            disabled={isLoading || !input.trim()}
+                                            className="rounded-full bg-blue-600 p-2 text-white transition-opacity hover:bg-blue-700 disabled:opacity-50"
+                                        >
                                             <Send size={18} />
                                         </button>
                                     </form>

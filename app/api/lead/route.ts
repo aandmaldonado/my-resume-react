@@ -32,7 +32,9 @@ export async function POST(req: Request) {
                 <p><strong>Rol:</strong> ${role || 'No especificado'}</p>
                 <br/>
                 <h3>🔍 Deep Research Empresa:</h3>
-                <p>${enrichment || "No hay investigación disponible o no se especificó empresa."}</p>
+                <div style="white-space: pre-wrap; font-family: monospace; line-height: 1.6; background-color: #f4f4f5; padding: 15px; border-radius: 8px;">
+${enrichment || "No hay investigación disponible o no se especificó empresa."}
+                </div>
                 <br/>
                 <p><i>Este correo fue generado tras completar el formulario inicial (Lead de interés). No es una cita agendada todavía.</i></p>
             `,

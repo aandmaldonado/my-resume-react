@@ -36,34 +36,30 @@ export async function POST(req: Request) {
             });
         }
 
-        // 3. Filtro de Ámbito Profesional (Rechazo por defecto de ruido personal/general)
-        // Usamos límites de palabra (\b) para evitar que "hi" coincida en "sushi" o "ia" en "experiencia"
-        const professionalDomain = [
-            "alvaro", "maldonado", "experiencia", "proyecto", "trabajo", "curriculum", "cv", "perfil", "trayectoria", "estudio",
-            "tecnologia", "arquitectura", "backend", "software", "ingenier", "desarroll", "program", "ia", "ai", "inteligencia",
-            "llm", "rag", "agente", "python", "java", "spring", "aws", "cloud", "devops", "kubernetes", "docker", "testing",
-            "entrevista", "contrat", "vacante", "puesto", "rol", "linkedin", "github", "agendar", "cita", "reunion", "llamada",
-            "hola", "hi", "quien eres", "que haces", "ayuda", "contacto", "saludo", "tal", "como"
-        ];
+        // Normalizamos el mensaje: limpiamos puntuación Y diacríticos para que el filtro sea robusto
+        const normalizedMessage = lastMessageLower
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9\s]/g, "");
 
-        const privateDomain = ["hija", "hijo", "esposa", "marido", "novia", "novio", "casa", "vives", "familia", "hijos", "hijas", "pareja", "sueldo", "salario", "dinero", "gana", "ganas", "politica", "religion"];
+        // 3. Filtros Estratégicos (Solo bloqueamos lo que NO queremos que el LLM decida libremente)
+        const privateDomain = ["hija", "hijo", "esposa", "marido", "novia", "novio", "religion", "politica", "futbol", "sushi", "comida", "sexo", "odio"];
+        const moneyDomain = ["sueldo", "salario", "dinero", "gana", "ganas", "expectativas", "cobras", "remuneracion", "precio", "tarifa", "cobra"];
 
-        // Validación precisa por palabra completa
-        const isProfessional = professionalDomain.some(kw => {
-            const regex = new RegExp(`\\b${kw}\\b`, "i");
-            return regex.test(lastMessageLower);
-        });
+        const isPrivate = privateDomain.some(kw => new RegExp(`\\b${kw}\\b`, "i").test(normalizedMessage));
+        const isMoney = moneyDomain.some(kw => new RegExp(`\\b${kw}\\b`, "i").test(normalizedMessage));
 
-        const isPrivate = privateDomain.some(kw => {
-            const regex = new RegExp(`\\b${kw}\\b`, "i");
-            return regex.test(lastMessageLower);
-        });
-
-        // Si es un tema privado explícito O si no detectamos contexto profesional en un mensaje corto
-        // Aumentamos la sensibilidad de "mensaje corto" a 100 caracteres para filtrar temas generales.
-        if (isPrivate || (!isProfessional && lastMessageLower.length < 100)) {
+        // Filtro específico para temas económicos/salario
+        if (isMoney) {
             return NextResponse.json({
-                content: "Como asistente profesional de Álvaro, mi propósito es conversar sobre su carrera técnica, proyectos de ingeniería y trayectoria profesional. No dispongo de información sobre temas personales o generales fuera de este ámbito. ¿Te gustaría saber sobre su experiencia en IA o arquitectura de software?"
+                content: "Para temas de salario, expectativas económicas o tarifas, Álvaro prefiere hablarlo directamente en una llamada, ya que depende mucho del impacto y la responsabilidad del rol. ¿Te gustaría que agendemos una reunión para conversarlo en detalle?"
+            });
+        }
+
+        // Filtro de temas personales ofensivos o muy alejados del ámbito
+        if (isPrivate) {
+            return NextResponse.json({
+                content: "Como asistente profesional de Álvaro, mi propósito es conversar sobre su carrera técnica, proyectos o logística profesional. No dispongo de información sobre temas personales o sociales ajenos a este ámbito. ¿Te gustaría saber sobre su experiencia en IA, arquitectura o cómo agendar una reunión?"
             });
         }
 
@@ -101,7 +97,16 @@ export async function POST(req: Request) {
                         model: process.env.OLLAMA_MODEL || "gemma3:1b",
                         messages: formattedMessages,
                         stream: false,
-                        keep_alive: "60m", // Mantiene el modelo en GPU 60 min
+                        keep_alive: "60m",
+                        options: {
+                            num_gpu: 99,
+                            num_thread: 8,       // Ajusta según los cores de tu Mac
+                            temperature: 0.1,    // Menos aleatoriedad = más rápido
+                            top_p: 0.9,
+                            top_k: 40,
+                            num_ctx: 4096,       // Contexto optimizado (suficiente para tu CV)
+                            repeat_penalty: 1.1
+                        }
                     }),
                 });
 
