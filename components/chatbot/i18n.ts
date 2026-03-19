@@ -46,6 +46,9 @@ export const chatbotTranslations = {
         confirm_booking: "Confirm meeting",
         date_label: "Date",
         time_label: "Time (CET)",
+        voice_error_permission: "Permission denied. Please check your browser settings.",
+        voice_error_not_supported: "Voice input is not supported in this browser.",
+        voice_limit_reached: "Character limit reached. Microphone stopped.",
     },
     es: {
         header: "{{botName}}",
@@ -94,5 +97,8 @@ export const chatbotTranslations = {
         confirm_booking: "Confirmar reunión",
         date_label: "Fecha",
         time_label: "Hora (CET)",
+        voice_error_permission: "Permiso denegado. Por favor, revisa la configuración de tu navegador.",
+        voice_error_not_supported: "La entrada de voz no es compatible con este navegador.",
+        voice_limit_reached: "Límite de caracteres alcanzado. Micrófono detenido.",
     }
 };

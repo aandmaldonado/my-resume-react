@@ -57,6 +57,9 @@ export function ChatWidget() {
     const [bookingTime, setBookingTime] = useState("");
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [isRecording, setIsRecording] = useState(false);
+    const [recordingError, setRecordingError] = useState<string | null>(null);
+    const recognitionRef = useRef<any>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
 
     // --- HELPER PARA RASTREO SEGURO (GA) ---
@@ -90,6 +93,104 @@ export function ChatWidget() {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
     }, [messages, step, isResearching]);
+    
+    // --- LÓGICA DE VOZ ---
+    const toggleVoiceInput = async () => {
+        if (isRecording) {
+            recognitionRef.current?.stop();
+            setIsRecording(false);
+            return;
+        }
+
+        // Intento de forzar el permiso de hardware real
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            stream.getTracks().forEach(track => track.stop());
+        } catch (err) {
+            console.error("Microphone hardware access denied:", err);
+            setRecordingError(tp('chatbot.voice_error_permission'));
+            return;
+        }
+
+        const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+        
+        if (!SpeechRecognition) {
+            setRecordingError(tp('chatbot.voice_error_not_supported'));
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.continuous = false; // Cambiado a false para auto-stop por silencio
+        recognition.interimResults = true;
+        recognition.lang = i18n.language === 'en' ? 'en-US' : 'es-ES';
+
+        recognition.onstart = () => {
+            setIsRecording(true);
+            setRecordingError(null);
+            safeTrack("voice_input_start");
+        };
+
+        recognition.onresult = (event: any) => {
+            let interimTranscript = "";
+            let finalTranscript = "";
+
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript;
+                } else {
+                    interimTranscript += event.results[i][0].transcript;
+                }
+            }
+
+            const newText = (input + finalTranscript + interimTranscript).slice(0, 500);
+            setInput(newText);
+            
+            if (newText.length >= 500) {
+                recognition.stop();
+            }
+        };
+
+        recognition.onerror = (event: any) => {
+            console.error("Speech recognition error:", event.error);
+            if (event.error === 'not-allowed') {
+                setRecordingError(tp('chatbot.voice_error_permission'));
+            } else if (event.error === 'no-speech') {
+                setIsRecording(false);
+            } else {
+                setRecordingError(`Error: ${event.error}`);
+            }
+            setIsRecording(false);
+        };
+
+        recognition.onend = () => {
+            setIsRecording(false);
+            recognitionRef.current = null;
+        };
+
+        recognitionRef.current = recognition;
+
+        try {
+            recognition.start();
+        } catch (e) {
+            console.error("Critical start error:", e);
+            setIsRecording(false);
+        }
+    };
+
+    useEffect(() => {
+        if (recordingError) {
+            const timer = setTimeout(() => setRecordingError(null), 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [recordingError]);
+
+    useEffect(() => {
+        return () => {
+            if (recognitionRef.current) {
+                recognitionRef.current.stop();
+            }
+        };
+    }, []);
 
     // Enviar saludo inicial al abrir el chat si está vacío (Paso 2.1)
     useEffect(() => {
@@ -263,10 +364,17 @@ export function ChatWidget() {
         }
     };
 
-    const handleSend = async () => {
-        if (!input.trim() || isLoading) return;
+    const handleSend = async (textOverride?: string) => {
+        const textToSend = textOverride || input || "";
+        if (!textToSend.trim() || isLoading) return;
 
-        const userMessage: Message = { role: "user", content: input };
+        // Detener grabación de voz al enviar
+        if (isRecording) {
+            recognitionRef.current?.stop();
+            setIsRecording(false);
+        }
+
+        const userMessage: Message = { role: "user", content: textToSend };
         setMessages((prev) => [...prev, userMessage]);
         setInput("");
         setIsLoading(true);
@@ -797,10 +905,17 @@ export function ChatWidget() {
                                 )}>
                                     <div className="flex items-center gap-2 max-w-4xl mx-auto">
                                         {/* Botón de Micrófono (Futura funcionalidad) */}
+                                        {/* Botón de Micrófono */}
                                         <button
                                             type="button"
-                                            className="p-2 text-zinc-400 hover:text-blue-600 transition-colors shrink-0"
-                                            title="Voice Input (Coming Soon)"
+                                            onClick={toggleVoiceInput}
+                                            className={cn(
+                                                "p-2 transition-all shrink-0 rounded-full",
+                                                isRecording 
+                                                    ? "text-red-500 bg-red-500/10 animate-pulse scale-110" 
+                                                    : "text-zinc-400 hover:text-blue-600 hover:bg-blue-500/5"
+                                            )}
+                                            title={isRecording ? "Detener grabación" : "Dictar mensaje"}
                                         >
                                             <Mic size={20} />
                                         </button>
@@ -848,8 +963,10 @@ export function ChatWidget() {
                                             <Send size={18} />
                                         </button>
                                     </div>
-                                    <p className={cn("mt-2 text-[10px] text-center transition-colors", isDark ? "text-zinc-500" : "text-zinc-400")}>
-                                        {tp('chatbot.ai_disclaimer')}
+                                    <p className={cn("mt-2 text-[10px] text-center transition-colors", 
+                                        recordingError ? "text-red-500 font-medium" : (isDark ? "text-zinc-500" : "text-zinc-400")
+                                    )}>
+                                        {recordingError || tp('chatbot.ai_disclaimer')}
                                     </p>
                                 </div>
                             </>
