@@ -15,7 +15,7 @@ personal_info:
 # ─── CONFIGURACIÓN DEL CHATBOT ───────────────────────────────────────────────
 # Nombre del bot y del propietario. Usados en el prompt y en las traducciones.
 chat_settings:
-  bot_name: "Alvi"
+  bot_name: "InterviewMyCV"
   owner_short_name: "Álvaro"
 
 # ─── PERFIL PROFESIONAL ──────────────────────────────────────────────────────

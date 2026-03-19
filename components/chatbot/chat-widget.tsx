@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Loader2, Minimize2, User, Building2, Linkedin, Briefcase, Contrast, AlertCircle, Bot, RotateCcw, Plus, Minus, Mic, BotMessageSquare, Sun, Moon } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, ChevronDown, User, Building2, Linkedin, Briefcase, Contrast, AlertCircle, Bot, RotateCcw, Plus, Minus, Mic, BotMessageSquare, Sun, Moon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChatMessage } from "./chat-message";
@@ -515,7 +515,7 @@ export function ChatWidget() {
                                     </>
                                 )}
                                 <button onClick={toggleChat} aria-label="Minimizar chat" className="rounded-full p-1 hover:bg-white/10 transition-colors">
-                                    <Minimize2 size={18} />
+                                    <ChevronDown size={20} />
                                 </button>
                             </div>
                         </div>
@@ -868,7 +868,11 @@ export function ChatWidget() {
                         className="mb-4 mr-2 cursor-pointer relative group"
                     >
                         <div className="bg-zinc-900 dark:bg-zinc-800 text-white text-[13px] py-3 px-5 rounded-2xl shadow-xl border border-zinc-700/50 whitespace-nowrap relative">
-                            {tp('chatbot.tooltip')}
+                            {tp('chatbot.tooltip').split(/(\*\*.*?\*\*)/g).map((part, index) => 
+                                part.startsWith('**') && part.endsWith('**') 
+                                    ? <strong key={index} className="font-bold">{part.slice(2, -2)}</strong> 
+                                    : part
+                            )}
                             {/* Flecha del tooltip */}
                             <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-zinc-900 dark:bg-zinc-800 border-r border-b border-zinc-700/50 rotate-45" />
                         </div>
