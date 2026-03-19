@@ -55,6 +55,7 @@ export function ChatWidget() {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [bookingDate, setBookingDate] = useState("");
     const [bookingTime, setBookingTime] = useState("");
+    const [bookingError, setBookingError] = useState<string | null>(null);
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
@@ -497,18 +498,22 @@ export function ChatWidget() {
 
     const handleBookingSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!bookingDate || !bookingTime) return;
+        
+        // Validaciones internas
+        if (!bookingDate || !bookingTime || !leadInfo.name || !leadInfo.email || !leadInfo.linkedin) {
+            setBookingError("Todos los campos són obligatorios / All fields are required");
+            return;
+        }
 
-        // Si no tenemos los datos mínimos, pedimos el lead antes de continuar (Paso 2.2)
-        if (!leadInfo.email || !leadInfo.name) {
-            setShowLeadCapture(true);
-            setShowDatePicker(false);
+        // Validar formato email básico
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(leadInfo.email)) {
+            setBookingError("Email inválido / Invalid email");
             return;
         }
 
         const selectionText = i18n.language === 'en'
-            ? `I'd like to schedule the call for ${bookingDate} at ${bookingTime} (CET).`
-            : `Me gustaría agendar la llamada para el ${bookingDate} a las ${bookingTime} (CET).`;
+            ? `I'd like to schedule the call for ${bookingDate} at ${bookingTime} (CET). My details: ${leadInfo.name}, ${leadInfo.email}, ${leadInfo.linkedin}`
+            : `Me gustaría agendar la llamada para el ${bookingDate} a las ${bookingTime} (CET). Mis datos: ${leadInfo.name}, ${leadInfo.email}, ${leadInfo.linkedin}`;
 
         setShowDatePicker(false);
         const userMessage: Message = { role: "user", content: selectionText };
@@ -829,39 +834,115 @@ export function ChatWidget() {
                                                 >
                                                     <div className={cn("mb-3 flex items-center gap-2 text-sm font-bold", isDark ? "text-zinc-100" : "text-zinc-800")}>
                                                         <Bot size={18} className="text-blue-600" />
-                                                        {tp('chatbot.select_date')}
+                                                        {tp('chatbot.contact_form_title')}
                                                     </div>
-                                                    <form onSubmit={handleBookingSubmit} className="space-y-3">
-                                                        <div className="grid grid-cols-2 gap-3">
+                                                    <form onSubmit={handleBookingSubmit} className="space-y-4">
+                                                        <div className="space-y-3">
+                                                            {/* Datos de Contacto Unificados */}
                                                             <div className="space-y-1">
-                                                                <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.date_label')}</label>
+                                                                <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.label_name')}</label>
                                                                 <input
                                                                     required
-                                                                    type="date"
-                                                                    min={new Date().toISOString().split('T')[0]}
+                                                                    type="text"
+                                                                    placeholder={tp('chatbot.placeholder_name')}
                                                                     className={cn(
                                                                         "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500",
                                                                         isDark ? "border-zinc-800 bg-zinc-800 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-900"
                                                                     )}
-                                                                    value={bookingDate}
-                                                                    onChange={(e) => setBookingDate(e.target.value)}
+                                                                    value={leadInfo.name}
+                                                                    onChange={(e) => setLeadInfo(prev => ({ ...prev, name: e.target.value }))}
                                                                 />
                                                             </div>
                                                             <div className="space-y-1">
-                                                                <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.time_label')}</label>
+                                                                <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.label_email')}</label>
                                                                 <input
                                                                     required
-                                                                    type="time"
-                                                                    step="900"
-                                                                    className="w-full rounded-lg border border-zinc-200 bg-zinc-50 p-2 text-xs outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-800 dark:text-white"
-                                                                    value={bookingTime}
-                                                                    onChange={(e) => setBookingTime(e.target.value)}
+                                                                    type="email"
+                                                                    placeholder={tp('chatbot.placeholder_email')}
+                                                                    className={cn(
+                                                                        "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500",
+                                                                        isDark ? "border-zinc-800 bg-zinc-800 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-900"
+                                                                    )}
+                                                                    value={leadInfo.email}
+                                                                    onChange={(e) => setLeadInfo(prev => ({ ...prev, email: e.target.value }))}
                                                                 />
                                                             </div>
+                                                            <div className="space-y-1">
+                                                                <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.label_linkedin')}</label>
+                                                                <input
+                                                                    required
+                                                                    type="url"
+                                                                    placeholder={tp('chatbot.placeholder_linkedin')}
+                                                                    className={cn(
+                                                                        "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500",
+                                                                        isDark ? "border-zinc-800 bg-zinc-800 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-900"
+                                                                    )}
+                                                                    value={leadInfo.linkedin}
+                                                                    onChange={(e) => setLeadInfo(prev => ({ ...prev, linkedin: e.target.value }))}
+                                                                />
+                                                            </div>
+
+                                                            <div className="grid grid-cols-2 gap-3 pt-1">
+                                                                <div className="space-y-1">
+                                                                    <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.date_label')}</label>
+                                                                    <input
+                                                                        required
+                                                                        type="date"
+                                                                        min={(() => {
+                                                                            const d = new Date();
+                                                                            d.setDate(d.getDate() + 7);
+                                                                            return d.toISOString().split('T')[0];
+                                                                        })()}
+                                                                        className={cn(
+                                                                            "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500",
+                                                                            isDark ? "border-zinc-800 bg-zinc-800 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-900"
+                                                                        )}
+                                                                        value={bookingDate}
+                                                                        onChange={(e) => {
+                                                                            const selectedDate = new Date(e.target.value);
+                                                                            const day = selectedDate.getUTCDay();
+                                                                            if (day === 0 || day === 6) {
+                                                                                setBookingError(tp('chatbot.weekend_error'));
+                                                                                setBookingDate("");
+                                                                            } else {
+                                                                                setBookingError(null);
+                                                                                setBookingDate(e.target.value);
+                                                                            }
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                                <div className="space-y-1">
+                                                                    <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.time_label')}</label>
+                                                                    <select
+                                                                        required
+                                                                        className={cn(
+                                                                            "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500 appearance-none",
+                                                                            isDark ? "border-zinc-800 bg-zinc-800 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-900"
+                                                                        )}
+                                                                        value={bookingTime}
+                                                                        onChange={(e) => setBookingTime(e.target.value)}
+                                                                    >
+                                                                        <option value="">--:--</option>
+                                                                        <option value="09:00">09:00 AM</option>
+                                                                        <option value="09:30">09:30 AM</option>
+                                                                        <option value="10:00">10:00 AM</option>
+                                                                        <option value="10:30">10:30 AM</option>
+                                                                        <option value="11:00">11:00 AM</option>
+                                                                        <option value="11:30">11:30 AM</option>
+                                                                        <option value="12:00">12:00 PM</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                         </div>
+                                                        {bookingError && (
+                                                            <p className="text-[10px] text-red-500 font-medium animate-pulse">
+                                                                {bookingError}
+                                                            </p>
+                                                        )}
                                                         <button
                                                             type="submit"
-                                                            className="w-full rounded-xl bg-blue-600 py-2.5 text-xs font-bold text-white shadow-lg transition-transform hover:bg-blue-700 active:scale-95"
+                                                            disabled={!!bookingError || !bookingDate || !bookingTime || !leadInfo.email}
+                                                            className="w-full rounded-xl bg-blue-600 py-2.5 text-xs font-bold text-white shadow-lg transition-transform hover:bg-blue-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                                                         >
                                                             {tp('chatbot.confirm_booking')}
                                                         </button>
