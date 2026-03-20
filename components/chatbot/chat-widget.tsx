@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Loader2, ChevronDown, User, Building2, Linkedin, Briefcase, Contrast, AlertCircle, Bot, RotateCcw, Plus, Minus, Mic, BotMessageSquare, Sun, Moon } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, ChevronDown, User, Building2, Linkedin, Briefcase, Contrast, AlertCircle, Bot, RotateCcw, Plus, Minus, Mic, BotMessageSquare, Sun, Moon, Mail, Clock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChatMessage } from "./chat-message";
@@ -455,7 +455,9 @@ export function ChatWidget() {
                         body: JSON.stringify({
                             ...bookingData,
                             company: leadInfo.company,
-                            linkedin: leadInfo.linkedin,
+                            linkedin: leadInfo.linkedin.startsWith('/in/') 
+                                ? `https://www.linkedin.com${leadInfo.linkedin}` 
+                                : leadInfo.linkedin,
                             enrichment: companyEnrichment
                         }),
                     });
@@ -536,7 +538,7 @@ export function ChatWidget() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     messages: [...messages, userMessage],
-                    leadInfo,
+                    leadInfo: { ...leadInfo, linkedin: fullLinkedin },
                 }),
             });
 
@@ -570,7 +572,7 @@ export function ChatWidget() {
                         body: JSON.stringify({
                             ...bookingData,
                             company: leadInfo.company,
-                            linkedin: leadInfo.linkedin,
+                            linkedin: fullLinkedin,
                             enrichment: companyEnrichment
                         }),
                     });
@@ -842,49 +844,53 @@ export function ChatWidget() {
                                                         isDark ? "border-zinc-800 bg-zinc-900" : "border-zinc-200 bg-white"
                                                     )}
                                                 >
-                                                    <div className={cn("mb-3 flex items-center gap-2 text-sm font-bold", isDark ? "text-zinc-100" : "text-zinc-800")}>
-                                                        <Bot size={18} className="text-blue-600" />
+                                                    <div className={cn("mb-2 flex items-center gap-2 text-xs font-bold", isDark ? "text-zinc-100" : "text-zinc-800")}>
+                                                        <Bot size={16} className="text-blue-600" />
                                                         {tp('chatbot.contact_form_title')}
                                                     </div>
-                                                    <form onSubmit={handleBookingSubmit} className="space-y-4">
-                                                        <div className="space-y-3">
-                                                            {/* Datos de Contacto Unificados */}
-                                                            <div className="space-y-1">
-                                                                <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.label_name')}</label>
+                                                    <form onSubmit={handleBookingSubmit} className="space-y-2">
+                                                        <div className="space-y-2">
+                                                            {/* Nombre */}
+                                                            <div className="relative">
+                                                                <User size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
                                                                 <input
                                                                     required
                                                                     type="text"
                                                                     placeholder={tp('chatbot.placeholder_name')}
                                                                     className={cn(
-                                                                        "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500",
+                                                                        "w-full rounded-lg border py-2 pl-9 pr-3 text-xs outline-none focus:border-blue-500",
                                                                         isDark ? "border-zinc-800 bg-zinc-800 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-900"
                                                                     )}
                                                                     value={leadInfo.name}
                                                                     onChange={(e) => setLeadInfo(prev => ({ ...prev, name: e.target.value }))}
                                                                 />
                                                             </div>
-                                                            <div className="space-y-1">
-                                                                <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.label_email')}</label>
+
+                                                            {/* Email */}
+                                                            <div className="relative">
+                                                                <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
                                                                 <input
                                                                     required
                                                                     type="email"
                                                                     placeholder={tp('chatbot.placeholder_email')}
                                                                     className={cn(
-                                                                        "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500",
+                                                                        "w-full rounded-lg border py-2 pl-9 pr-3 text-xs outline-none focus:border-blue-500",
                                                                         isDark ? "border-zinc-800 bg-zinc-800 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-900"
                                                                     )}
                                                                     value={leadInfo.email}
                                                                     onChange={(e) => setLeadInfo(prev => ({ ...prev, email: e.target.value }))}
                                                                 />
                                                             </div>
-                                                            <div className="space-y-1">
-                                                                <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.label_linkedin')}</label>
+
+                                                            {/* LinkedIn */}
+                                                            <div className="relative">
+                                                                <Linkedin size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
                                                                 <input
                                                                     required
                                                                     type="text"
                                                                     placeholder={tp('chatbot.placeholder_linkedin')}
                                                                     className={cn(
-                                                                        "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500",
+                                                                        "w-full rounded-lg border py-2 pl-9 pr-3 text-xs outline-none focus:border-blue-500",
                                                                         isDark ? "border-zinc-800 bg-zinc-800 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-900"
                                                                     )}
                                                                     value={leadInfo.linkedin}
@@ -892,9 +898,9 @@ export function ChatWidget() {
                                                                 />
                                                             </div>
 
-                                                            <div className="grid grid-cols-2 gap-3 pt-1">
-                                                                <div className="space-y-1">
-                                                                    <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.date_label')}</label>
+                                                            <div className="grid grid-cols-2 gap-2">
+                                                                {/* Fecha */}
+                                                                <div className="relative">
                                                                     <input
                                                                         required
                                                                         type="date"
@@ -904,7 +910,7 @@ export function ChatWidget() {
                                                                             return d.toISOString().split('T')[0];
                                                                         })()}
                                                                         className={cn(
-                                                                            "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500",
+                                                                            "w-full rounded-lg border p-2 pr-1 text-[11px] outline-none focus:border-blue-500",
                                                                             isDark ? "border-zinc-800 bg-zinc-800 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-900"
                                                                         )}
                                                                         value={bookingDate}
@@ -921,25 +927,23 @@ export function ChatWidget() {
                                                                         }}
                                                                     />
                                                                 </div>
-                                                                <div className="space-y-1">
-                                                                    <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.time_label')}</label>
+
+                                                                {/* Hora */}
+                                                                <div className="relative">
+                                                                    <Clock size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none" />
                                                                     <select
                                                                         required
                                                                         className={cn(
-                                                                            "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500 appearance-none",
+                                                                            "w-full appearance-none rounded-lg border p-2 pr-8 text-[11px] outline-none focus:border-blue-500",
                                                                             isDark ? "border-zinc-800 bg-zinc-800 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-900"
                                                                         )}
                                                                         value={bookingTime}
                                                                         onChange={(e) => setBookingTime(e.target.value)}
                                                                     >
                                                                         <option value="">--:--</option>
-                                                                        <option value="09:00">09:00 AM</option>
-                                                                        <option value="09:30">09:30 AM</option>
-                                                                        <option value="10:00">10:00 AM</option>
-                                                                        <option value="10:30">10:30 AM</option>
-                                                                        <option value="11:00">11:00 AM</option>
-                                                                        <option value="11:30">11:30 AM</option>
-                                                                        <option value="12:00">12:00 PM</option>
+                                                                        {["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00"].map(t => (
+                                                                            <option key={t} value={t}>{t}</option>
+                                                                        ))}
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -964,27 +968,27 @@ export function ChatWidget() {
 
                                     {/* Controles de fuente flotantes */}
                                     <div className={cn(
-                                        "absolute bottom-2 right-4 z-20 flex flex-col gap-1 backdrop-blur-sm p-1 rounded-lg border shadow-lg group transition-all duration-300",
+                                        "absolute bottom-2 right-2 z-20 flex flex-col gap-0.5 backdrop-blur-md p-0.5 rounded-md border shadow-md group transition-all duration-300",
                                         isDark 
-                                            ? "bg-zinc-900/50 border-zinc-800/50 hover:bg-zinc-900" 
-                                            : "bg-white/50 border-zinc-200/50 hover:bg-white"
+                                            ? "bg-zinc-900/80 border-blue-500/20 hover:bg-zinc-900" 
+                                            : "bg-white/80 border-blue-200/50 hover:bg-white"
                                     )}>
                                         <button
                                             type="button"
                                             onClick={() => setFontSize(fontSize === "sm" ? "md" : "lg")}
-                                            className="rounded-md p-1.5 text-zinc-500 hover:bg-blue-50 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-blue-900/30 dark:hover:text-blue-400 transition-colors"
+                                            className="rounded-sm p-1 text-zinc-500 hover:bg-blue-50 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-blue-900/30 dark:hover:text-blue-400 transition-colors"
                                             title="Zoom In"
                                         >
-                                            <Plus size={14} />
+                                            <Plus size={10} />
                                         </button>
-                                        <div className={cn("h-px w-full", isDark ? "bg-zinc-800/50" : "bg-zinc-200/50")} />
+                                        <div className={cn("h-[0.5px] w-full", isDark ? "bg-zinc-800/50" : "bg-zinc-200/50")} />
                                         <button
                                             type="button"
                                             onClick={() => setFontSize(fontSize === "lg" ? "md" : "sm")}
-                                            className="rounded-md p-1.5 text-zinc-500 hover:bg-blue-50 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-blue-900/30 dark:hover:text-blue-400 transition-colors"
+                                            className="rounded-sm p-1 text-zinc-500 hover:bg-blue-50 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-blue-900/30 dark:hover:text-blue-400 transition-colors"
                                             title="Zoom Out"
                                         >
-                                            <Minus size={14} />
+                                            <Minus size={10} />
                                         </button>
                                     </div>
                                 </div>
