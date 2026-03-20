@@ -22,21 +22,15 @@ export async function POST(req: Request) {
         const { data, error } = await resend.emails.send({
             from: 'onboarding@resend.dev',
             to: [notificationEmail],
-            subject: `🤝 ${name} quiere agendar una reunión con ${portfolioData.personal_info.name} (${company})`,
-            text: `Nueva solicitud de reunión: ${name} de ${company}. Fecha: ${date} ${time}.`,
+            subject: `🤝 Nueva solicitud de reunión: ${name}`,
+            text: `Nueva solicitud de reunión de ${name}. Fecha: ${date} a las ${time}. Email: ${email}`,
             html: `
         <h2>Nueva solicitud de reunión</h2>
         <p><strong>Nombre:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Empresa:</strong> ${company || 'No especificada'}</p>
         <p><strong>LinkedIn:</strong> ${linkedin || 'No especificado'}</p>
         <p><strong>Fecha:</strong> ${date}</p>
         <p><strong>Hora:</strong> ${time}</p>
-        <br/>
-        <h3>🔍 Deep Research Empresa:</h3>
-        <div style="white-space: pre-wrap; font-family: monospace; line-height: 1.6; background-color: #f4f4f5; padding: 15px; border-radius: 8px;">
-${enrichment || "No hay investigación disponible."}
-        </div>
         <br/>
         <p><i>Este correo fue generado automáticamente por tu Agente IA.</i></p>
       `,

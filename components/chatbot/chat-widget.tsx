@@ -499,21 +499,31 @@ export function ChatWidget() {
     const handleBookingSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         
-        // Validaciones internas
+        // 1. Validaciones básicas de campos vacíos
         if (!bookingDate || !bookingTime || !leadInfo.name || !leadInfo.email || !leadInfo.linkedin) {
-            setBookingError("Todos los campos són obligatorios / All fields are required");
+            setBookingError("Todos los campos son obligatorios / All fields are required");
             return;
         }
 
-        // Validar formato email básico
+        // 2. Validar formato email
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(leadInfo.email)) {
             setBookingError("Email inválido / Invalid email");
             return;
         }
 
+        // 3. Validar formato LinkedIn slug (/in/...)
+        if (!leadInfo.linkedin.startsWith('/in/')) {
+            setBookingError("LinkedIn debe empezar por /in/ (ej: /in/pepe)");
+            return;
+        }
+
+        const fullLinkedin = leadInfo.linkedin.startsWith('http') 
+            ? leadInfo.linkedin 
+            : `https://www.linkedin.com${leadInfo.linkedin}`;
+
         const selectionText = i18n.language === 'en'
-            ? `I'd like to schedule the call for ${bookingDate} at ${bookingTime} (CET). My details: ${leadInfo.name}, ${leadInfo.email}, ${leadInfo.linkedin}`
-            : `Me gustaría agendar la llamada para el ${bookingDate} a las ${bookingTime} (CET). Mis datos: ${leadInfo.name}, ${leadInfo.email}, ${leadInfo.linkedin}`;
+            ? `I'd like to schedule the call for ${bookingDate} at ${bookingTime} (CET). My details: ${leadInfo.name}, ${leadInfo.email}, LinkedIn: ${fullLinkedin}`
+            : `Me gustaría agendar la llamada para el ${bookingDate} a las ${bookingTime} (CET). Mis datos: ${leadInfo.name}, ${leadInfo.email}, LinkedIn: ${fullLinkedin}`;
 
         setShowDatePicker(false);
         const userMessage: Message = { role: "user", content: selectionText };
@@ -871,7 +881,7 @@ export function ChatWidget() {
                                                                 <label className="text-[10px] font-bold uppercase text-zinc-400">{tp('chatbot.label_linkedin')}</label>
                                                                 <input
                                                                     required
-                                                                    type="url"
+                                                                    type="text"
                                                                     placeholder={tp('chatbot.placeholder_linkedin')}
                                                                     className={cn(
                                                                         "w-full rounded-lg border p-2 text-xs outline-none focus:border-blue-500",
