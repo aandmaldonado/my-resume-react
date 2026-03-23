@@ -56,13 +56,6 @@ export async function POST(req: Request) {
             });
         }
 
-        // Filtro de temas personales ofensivos o muy alejados del ámbito
-        if (isPrivate) {
-            return NextResponse.json({
-                content: "Como asistente profesional de Álvaro, mi propósito es conversar sobre su carrera técnica, proyectos o logística profesional. No dispongo de información sobre temas personales o sociales ajenos a este ámbito. ¿Te gustaría saber sobre su experiencia en IA, arquitectura o cómo agendar una reunión?"
-            });
-        }
-
         const leadContext = leadInfo
             ? `### DATOS DEL INTERLOCUTOR (ÚSALOS PARA AGENDAR)
 - Nombre: ${leadInfo.name}
