@@ -55,44 +55,46 @@ export function ChatMessage({
                           )
                 )}
             >
-                {role === "user" ? (
-                    content
-                ) : (
-                    <div className={cn(
-                        "prose max-w-none break-words",
+                <div className={cn(
+                    "break-words",
+                    role === "assistant" && cn(
+                        "prose max-w-none",
                         isDark ? "prose-invert" : "",
                         fontSize === "sm" ? "prose-xs text-xs" : fontSize === "lg" ? "prose-base text-base" : "prose-sm text-sm"
-                    )}>
-                        <ReactMarkdown
-                            remarkPlugins={[remarkGfm]}
-                            components={{
-                                p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
-                                ul: ({ children }) => <ul className="list-disc pl-4 mb-2 last:mb-0 space-y-1">{children}</ul>,
-                                ol: ({ children }) => <ol className="list-decimal pl-4 mb-2 last:mb-0 space-y-1">{children}</ol>,
-                                li: ({ children }) => <li className="marker:text-zinc-400">{children}</li>,
-                                strong: ({ children }) => <strong className="font-bold text-blue-600 dark:text-blue-400">{children}</strong>,
-                                a: ({ href, children }) => (
-                                    <a
-                                        href={href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={cn(
-                                            "hover:underline",
-                                            isDark ? "text-blue-400" : "text-blue-600"
-                                        )}
-                                    >
-                                        {children}
-                                    </a>
-                                ),
-                                h1: ({ children }) => <h1 className={cn("text-base font-bold mb-2", isDark ? "text-white" : "text-zinc-900")}>{children}</h1>,
-                                h2: ({ children }) => <h2 className={cn("text-base font-semibold mb-1", isDark ? "text-white" : "text-zinc-900")}>{children}</h2>,
-                                code: ({ children }) => <code className={cn("rounded px-1 py-0.5 text-xs font-mono", isDark ? "bg-zinc-700" : "bg-zinc-200")}>{children}</code>,
-                            }}
-                        >
-                            {content}
-                        </ReactMarkdown>
-                    </div>
-                )}
+                    ),
+                    role === "user" && "whitespace-pre-wrap"
+                )}>
+                    <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                            p: ({ children }) => <p className={cn("mb-2 last:mb-0 leading-relaxed", role === "user" && "mb-0")}>{children}</p>,
+                            ul: ({ children }) => <ul className={cn("list-disc pl-4 mb-2 last:mb-0 space-y-1", role === "user" && "mb-1")}>{children}</ul>,
+                            ol: ({ children }) => <ol className={cn("list-decimal pl-4 mb-2 last:mb-0 space-y-1", role === "user" && "mb-1")}>{children}</ol>,
+                            li: ({ children }) => <li className="marker:text-zinc-400">{children}</li>,
+                            strong: ({ children }) => <strong className={cn("font-bold", role === "assistant" ? "text-blue-600 dark:text-blue-400" : "text-white")}>{children}</strong>,
+                            a: ({ href, children }) => (
+                                <a
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={cn(
+                                        "hover:underline font-medium",
+                                        role === "assistant" 
+                                            ? (isDark ? "text-blue-400" : "text-blue-600")
+                                            : "text-white underline"
+                                    )}
+                                >
+                                    {children}
+                                </a>
+                            ),
+                            h1: ({ children }) => <h1 className={cn("text-base font-bold mb-2", isDark ? "text-white" : "text-zinc-900")}>{children}</h1>,
+                            h2: ({ children }) => <h2 className={cn("text-base font-semibold mb-1", isDark ? "text-white" : "text-zinc-900")}>{children}</h2>,
+                            code: ({ children }) => <code className={cn("rounded px-1 py-0.5 text-xs font-mono", isDark ? "bg-zinc-700" : "bg-zinc-200")}>{children}</code>,
+                        }}
+                    >
+                        {content}
+                    </ReactMarkdown>
+                </div>
             </div>
         </div>
     );

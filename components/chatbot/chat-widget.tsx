@@ -17,7 +17,6 @@ interface Message {
 interface LeadData {
     name: string;
     email: string;
-    company: string;
     linkedin: string;
 }
 
@@ -28,13 +27,10 @@ export function ChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
     const [showTooltip, setShowTooltip] = useState(true);
     const [step, setStep] = useState<"lead" | "chat">("chat");
-    const [isResearching, setIsResearching] = useState(false);
     const [isOffline, setIsOffline] = useState(false);
-    const [companyEnrichment, setCompanyEnrichment] = useState("");
     const [leadInfo, setLeadInfo] = useState<LeadData>({
         name: "",
         email: "",
-        company: "",
         linkedin: "",
     });
     const [showLeadCapture, setShowLeadCapture] = useState(false);
@@ -93,7 +89,7 @@ export function ChatWidget() {
         if (scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
-    }, [messages, step, isResearching]);
+    }, [messages, step]);
     
     // --- LÓGICA DE VOZ ---
     const toggleVoiceInput = async () => {
@@ -231,12 +227,15 @@ export function ChatWidget() {
         setShowSuggestions(false);
         setInput("");
         setStep("chat");
-        setLeadInfo({ name: "", email: "", company: "", linkedin: "" });
+        setLeadInfo({ name: "", email: "", linkedin: "" });
         setShowLeadCapture(false);
         setShowFeedback(false);
         setUserRating(0);
-        setCompanyEnrichment("");
         setIsOffline(false);
+        setShowDatePicker(false);
+        setBookingDate("");
+        setBookingTime("");
+        setBookingError(null);
         safeTrack("chat_session_reset", {});
     };
 
@@ -273,51 +272,19 @@ export function ChatWidget() {
             return;
         }
         setEmailError(false);
-        if (!leadInfo.linkedin || !leadInfo.name || !leadInfo.company) return;
-
-        setIsResearching(true);
+        if (!leadInfo.linkedin || !leadInfo.name) return;
 
         try {
-            let enrichment = "";
-            let researchFailed = false;
-
-            // 1. Intentar Deep Research de la empresa (pero no bloquear si falla o tarda mucho)
-            try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 8000); // Max 8 seg de espera para Ollama/Tavily
-
-                const researchRes = await fetch("/api/research", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ company: leadInfo.company, name: leadInfo.name }),
-                    signal: controller.signal
-                });
-
-                clearTimeout(timeoutId);
-
-                if (researchRes.ok) {
-                    const researchData = await researchRes.json();
-                    enrichment = researchData.enrichment || "";
-                    setCompanyEnrichment(enrichment);
-                } else if (researchRes.status === 429) {
-                    researchFailed = true; // Solo para log interno, no bloqueamos
-                }
-            } catch (e) {
-                console.error("Non-blocking research error or timeout:", e);
-            }
-
-            // Normalizar URL de LinkedIn antes de enviar (si falta el dominio)
+            // Normalizar URL de LinkedIn antes de enviar
             let finalLinkedin = leadInfo.linkedin.trim();
             if (finalLinkedin && !finalLinkedin.startsWith("http")) {
-                // Si empieza por /in/, lo pegamos, si no, asumimos que es el slug
                 const path = finalLinkedin.startsWith("/") ? finalLinkedin : `/${finalLinkedin}`;
                 const fullPath = path.startsWith("/in/") ? path : `/in${path}`;
                 finalLinkedin = `https://www.linkedin.com${fullPath}`;
             }
 
-            // 2. Enviar correo de Lead inicial (usando la URL normalizada)
+            // 2. Enviar correo de Lead inicial
             try {
-                // Limitamos la espera de Resend a 3s para que el usuario no sienta lag excesivo
                 const leadController = new AbortController();
                 const leadTimeoutId = setTimeout(() => leadController.abort(), 3000);
 
@@ -326,25 +293,21 @@ export function ChatWidget() {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         ...leadInfo,
-                        linkedin: finalLinkedin, // Enviamos corregido
-                        enrichment: enrichment
+                        linkedin: finalLinkedin, 
                     }),
                     signal: leadController.signal
                 });
 
                 clearTimeout(leadTimeoutId);
             } catch (e) {
-                console.error("Silent error sending lead email or timeout:", e);
+                console.error("Silent error sending lead email:", e);
             }
 
             // 3. Track lead capture in GA
             safeTrack("chat_lead_captured", {
                 lead_name: leadInfo.name,
                 lead_email: leadInfo.email,
-                lead_company: leadInfo.company,
-                lead_linkedin: finalLinkedin,
-                has_enrichment: !!enrichment,
-                research_failed: researchFailed
+                lead_linkedin: finalLinkedin
             });
 
             setStep("chat");
@@ -360,8 +323,6 @@ export function ChatWidget() {
         } catch (error) {
             console.error("Error starting chat:", error);
             setIsOffline(true);
-        } finally {
-            setIsResearching(false);
         }
     };
 
@@ -454,11 +415,9 @@ export function ChatWidget() {
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                             ...bookingData,
-                            company: leadInfo.company,
                             linkedin: leadInfo.linkedin.startsWith('/in/') 
                                 ? `https://www.linkedin.com${leadInfo.linkedin}` 
                                 : leadInfo.linkedin,
-                            enrichment: companyEnrichment
                         }),
                     });
 
@@ -523,9 +482,12 @@ export function ChatWidget() {
             ? leadInfo.linkedin 
             : `https://www.linkedin.com${leadInfo.linkedin}`;
 
+        const [y, m, d] = bookingDate.split('-');
+        const formattedDate = `${d}-${m}-${y}`;
+
         const selectionText = i18n.language === 'en'
-            ? `I'd like to schedule the call for ${bookingDate} at ${bookingTime} (CET). My details: ${leadInfo.name}, ${leadInfo.email}, LinkedIn: ${fullLinkedin}`
-            : `Me gustaría agendar la llamada para el ${bookingDate} a las ${bookingTime} (CET). Mis datos: ${leadInfo.name}, ${leadInfo.email}, LinkedIn: ${fullLinkedin}`;
+            ? `I'd like to schedule the call for **${formattedDate}** at **${bookingTime} (CET)**. 🗓️\n\n**My details:**\n- **Name:** ${leadInfo.name}\n- **Email:** ${leadInfo.email}\n- **LinkedIn:** ${fullLinkedin}`
+            : `Me gustaría agendar la llamada para el **${formattedDate}** a las **${bookingTime} (CET)**. 🗓️\n\n**Mis datos:**\n- **Nombre:** ${leadInfo.name}\n- **Email:** ${leadInfo.email}\n- **LinkedIn:** ${fullLinkedin}`;
 
         setShowDatePicker(false);
         const userMessage: Message = { role: "user", content: selectionText };
@@ -571,9 +533,7 @@ export function ChatWidget() {
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                             ...bookingData,
-                            company: leadInfo.company,
                             linkedin: fullLinkedin,
-                            enrichment: companyEnrichment
                         }),
                     });
                 }
@@ -652,32 +612,6 @@ export function ChatWidget() {
                                     <p className="text-sm text-zinc-500 dark:text-zinc-400">{tp('chatbot.error_offline')}</p>
                                 </div>
                             </div>
-                        ) : isResearching ? (
-                            <div className="flex flex-1 flex-col items-center justify-center p-8 text-center space-y-8">
-                                <div className="relative flex h-20 w-20 items-center justify-center">
-                                    <motion.div
-                                        animate={{ scale: [1, 1.2, 1] }}
-                                        transition={{ repeat: Infinity, duration: 2 }}
-                                        className="absolute inset-0 rounded-full bg-blue-100 blur-xl dark:bg-blue-900/30"
-                                    />
-                                    <motion.div
-                                        animate={{ rotate: 360 }}
-                                        transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
-                                        className="absolute inset-0 rounded-full border-2 border-dashed border-blue-600 dark:border-blue-500"
-                                    />
-                                    <motion.div
-                                        animate={{ opacity: [0.5, 1, 0.5] }}
-                                        transition={{ repeat: Infinity, duration: 1.5 }}
-                                        className="relative z-10"
-                                    >
-                                        <MessageCircle className="text-blue-600" size={32} />
-                                    </motion.div>
-                                </div>
-                                <div className="space-y-2">
-                                    <h4 className="font-bold text-zinc-900 dark:text-white">{tp('chatbot.loading_syncing')}</h4>
-                                    <p className="text-xs text-zinc-500 dark:text-zinc-400">{tp('chatbot.loading_desc')}</p>
-                                </div>
-                            </div>
                         ) : (
                             <>
                                 <div className="flex-1 flex flex-col overflow-hidden relative min-h-0">
@@ -699,14 +633,24 @@ export function ChatWidget() {
                                             />
                                         ))}
                                         {isLoading && (
-                                            <div className="flex justify-start">
+                                            <motion.div 
+                                                initial={{ opacity: 0, x: -10 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                className="flex justify-start items-center gap-3 mb-4"
+                                            >
                                                  <div className={cn(
-                                                     "rounded-2xl px-4 py-2 transition-colors",
-                                                     isDark ? "bg-zinc-800" : "bg-zinc-100"
+                                                     "h-8 w-8 rounded-full flex items-center justify-center shadow-sm border",
+                                                     isDark ? "bg-zinc-900 border-zinc-800" : "bg-white border-zinc-200"
                                                  )}>
-                                                     <Loader2 className={cn("h-4 w-4 animate-spin", isDark ? "text-zinc-400" : "text-zinc-500")} />
+                                                     <Bot size={16} className="text-blue-600 animate-bounce" style={{ animationDuration: '3s' }} />
                                                  </div>
-                                            </div>
+                                                 <span className={cn(
+                                                    "text-xs italic font-medium",
+                                                    isDark ? "text-zinc-400" : "text-zinc-500"
+                                                 )}>
+                                                    {tp('chatbot.thinking')}
+                                                 </span>
+                                            </motion.div>
                                         )}
 
                                         {/* Captura integrada */}
@@ -792,8 +736,12 @@ export function ChatWidget() {
                                                         currentRating={userRating}
                                                         onRate={(rating) => {
                                                             setUserRating(rating);
-                                                            safeTrack("chat_feedback_received", { rating });
-                                                            setTimeout(() => setShowFeedback(false), 3000);
+                                                            safeTrack("chat_feedback_rated", { rating });
+                                                            setShowFeedback(false);
+                                                            const feedbackMsg = i18n.language === 'en'
+                                                                ? "Thank you for your feedback! ⭐️ It was a pleasure to help you."
+                                                                : "¡Muchas gracias por tu feedback! ⭐️ Ha sido un gusto ayudarte.";
+                                                            setMessages(prev => [...prev, { role: "assistant", content: feedbackMsg }]);
                                                         }}
                                                         botTheme={botTheme}
                                                     />

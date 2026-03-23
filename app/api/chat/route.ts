@@ -67,15 +67,13 @@ export async function POST(req: Request) {
             ? `### DATOS DEL INTERLOCUTOR (ÚSALOS PARA AGENDAR)
 - Nombre: ${leadInfo.name}
 - Email: ${leadInfo.email}
-- Empresa: ${leadInfo.company}
 - LinkedIn: ${leadInfo.linkedin}`
             : "No hay datos del usuario todavía.";
 
         const rawSystemPrompt = getSystemPrompt();
         const systemPrompt = rawSystemPrompt
             .replace(/USER_NAME/g, leadInfo?.name || "invitado")
-            .replace(/USER_EMAIL/g, leadInfo?.email || "no proporcionado")
-            .replace(/USER_COMPANY/g, leadInfo?.company || "no especificada");
+            .replace(/USER_EMAIL/g, leadInfo?.email || "no proporcionado");
 
         const finalSystemPrompt = `${leadContext}\n\n${systemPrompt}`;
         const formattedMessages = [
