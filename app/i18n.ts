@@ -400,6 +400,12 @@ const resources = {
             picture: "/recommendations/nelly_manterola.jpeg",
             linkedin: "https://www.linkedin.com/in/nellymanterola",
           },
+          {
+            name: "Almudena Álvarez Sánchez",
+            text: "As a Talent Manager, I have had the opportunity to work with Álvaro on his career development in Spain. It has been a great discovery both at a professional and personal level. Álvaro has a hybrid profile that stands out for bridging entrepreneurship and development, with deep knowledge of the latest market technologies such as AI. He comes across as a dedicated and passionate professional who demonstrates his commitment from the very first conversation. Having Álvaro on your project is a safe bet for his knowledge, his involvement, and all the value he brings to the team!",
+            picture: "/recommendations/almudena_alvarez.jpeg",
+            linkedin: "https://www.linkedin.com/in/almudena-alvarez-sanchez/",
+          },
         ]
       },
       footer: {
@@ -818,6 +824,12 @@ const resources = {
             text: "Conocí a Álvaro de manera accidental y hoy me atrevo a decir que es uno de los mejores líderes técnicos con los que he trabajado. Su orientación a resultados destaca por sobre todo y al contar con conocimientos de inteligencia artificial su mirada fomenta valores éticos, responsables y el trabajo en equipo es notable. Excelente experiencia fue trabajar junto a ti.",
             picture: "/recommendations/nelly_manterola.jpeg",
             linkedin: "https://www.linkedin.com/in/nellymanterola",
+          },
+          {
+            name: "Almudena Álvarez Sánchez",
+            text: "Como Talent Manager he tenido la oportunidad de trabajar con Álvaro en su desarrollo de carrera en España. Ha sido gran descubrimiento tanto a nivel profesional como personal. Álvaro es perfil que destaca por tener un perfil híbrido entre emprendimiento y desarrollo con grandes conocimientos de las últimas tecnologías del mercado como es la IA. Se muestra como un profesional entregado y apasionado de su trabajo que lo demuestra desde el primer momento que hablas con él. Contar con Álvaro en tu proyecto es una apuesta segura por su conocimiento, su implicación y por todo el valor que añade en el equipo!",
+            picture: "/recommendations/almudena_alvarez.jpeg",
+            linkedin: "https://www.linkedin.com/in/almudena-alvarez-sanchez/",
           },
         ]
       },
