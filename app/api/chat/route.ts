@@ -43,11 +43,18 @@ export async function POST(req: Request) {
             .replace(/[^a-z0-9\s]/g, "");
 
         // 3. Filtros Estratégicos (Solo bloqueamos lo que NO queremos que el LLM decida libremente)
-        const privateDomain = ["hija", "hijo", "esposa", "marido", "novia", "novio", "religion", "politica", "futbol", "sushi", "comida", "sexo", "odio"];
+        const privateDomain = ["hija", "hijo", "esposa", "marido", "novia", "novio", "religion", "politica", "futbol", "sushi", "comida", "sexo", "odio", "edad", "anos", "cumpleanos", "nacimiento", "personal", "privado"];
         const moneyDomain = ["sueldo", "salario", "dinero", "gana", "ganas", "expectativas", "cobras", "remuneracion", "precio", "tarifa", "cobra"];
 
         const isPrivate = privateDomain.some(kw => new RegExp(`\\b${kw}\\b`, "i").test(normalizedMessage));
         const isMoney = moneyDomain.some(kw => new RegExp(`\\b${kw}\\b`, "i").test(normalizedMessage));
+
+        // Filtro específico para temas personales/privados — respuesta instantánea, sin llamar al LLM
+        if (isPrivate) {
+            return NextResponse.json({
+                content: "Esa es información que Álvaro prefiere mantener en el ámbito personal. Como su asistente oficial, estoy aquí para ayudarte con cualquier detalle sobre su perfil profesional, retos y trayectoria. ¿Te gustaría saber algo más sobre su experiencia?"
+            });
+        }
 
         // Filtro específico para temas económicos/salario
         if (isMoney) {

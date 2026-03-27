@@ -58,6 +58,7 @@ export function ChatWidget() {
     const [recordingError, setRecordingError] = useState<string | null>(null);
     const recognitionRef = useRef<any>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     // --- HELPER PARA RASTREO SEGURO (GA) ---
     const safeTrack = (eventName: string, params: Record<string, any> = {}) => {
@@ -90,6 +91,16 @@ export function ChatWidget() {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
     }, [messages, step]);
+
+    // --- AUTO-FOCUS UX ---
+    useEffect(() => {
+        if (isOpen && !isLoading && step === "chat") {
+            const timeout = setTimeout(() => {
+                inputRef.current?.focus();
+            }, 100); // Pequeño delay para asegurar que el DOM está listo
+            return () => clearTimeout(timeout);
+        }
+    }, [isOpen, isLoading, step]);
     
     // --- LÓGICA DE VOZ ---
     const toggleVoiceInput = async () => {
@@ -972,6 +983,7 @@ export function ChatWidget() {
                                             )}
                                         >
                                             <input
+                                                ref={inputRef}
                                                 type="text"
                                                 maxLength={500}
                                                 data-testid="chat-input"
