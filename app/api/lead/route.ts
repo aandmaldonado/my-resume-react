@@ -1,7 +1,5 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 import { getPortfolioData } from "@/lib/chatbot-prompt";
 
 export async function POST(req: Request) {
@@ -15,6 +13,9 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Resend API Key not configured" }, { status: 500 });
         }
 
+        // Lazy instantiation: solo se crea cuando se llama a la API en Runtime
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        
         const portfolioData = getPortfolioData();
         const notificationEmail = process.env.NOTIFICATION_EMAIL || portfolioData.personal_info.email;
 
