@@ -34,6 +34,8 @@ steps:
       - '--allow-unauthenticated'
       - '--service-account'
       - 'resume-frontend-sa@almapidev.iam.gserviceaccount.com'
+      - '--update-secrets=GROQ_API_KEY=groq-api-key:latest,GOOGLE_GENERATIVE_AI_API_KEY=gemini-api-key:latest,RESEND_API_KEY=resend-api-key:latest'
+      - '--set-env-vars=AI_PROVIDER=groq'
       - '--memory'
       - '512Mi'
       - '--cpu'

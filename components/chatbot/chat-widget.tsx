@@ -58,7 +58,7 @@ export function ChatWidget() {
     const [isLoading, setIsLoading] = useState(false);
     const [currentSuggestions, setCurrentSuggestions] = useState<{label: string, question: string}[]>([]);
     const [isRecording, setIsRecording] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 640 : false);
     const [recordingError, setRecordingError] = useState<string | null>(null);
     const recognitionRef = useRef<any>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -627,11 +627,9 @@ export function ChatWidget() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 15 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
-                        style={{
-                            width: isMobile ? 'calc(100vw - 1.5rem)' : '420px'
-                        }}
                         className={cn(
-                            "mb-3 flex flex-col overflow-hidden rounded-2xl border shadow-2xl chatbot-window-fixed",
+                            "mb-3 flex flex-col overflow-hidden rounded-2xl border shadow-2xl",
+                            "h-[600px] min-h-[600px] max-h-[85vh] w-[350px] sm:w-[380px] max-w-[calc(100vw-1.5rem)]",
                             botTheme === 'dark' ? "bg-zinc-950 border-zinc-800" : "bg-white border-zinc-200"
                         )}
                     >

@@ -1,4 +1,5 @@
 import Groq from "groq-sdk";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getSystemPrompt } from "@/lib/chatbot-prompt";
 import { NextResponse } from "next/server";
 import fs from 'fs';
@@ -8,13 +9,25 @@ const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY,
 });
 
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY || "");
+
 export async function POST(req: Request) {
     try {
         const { messages, leadInfo } = await req.json();
 
-        const provider = process.env.AI_PROVIDER || 'groq';
-
-        // --- DEFENSA PROACTIVA Y FILTROS RÁPIDOS (PROFESSIONAL SCOPE) ---
+        // --- SMART PROVIDER SELECTION ---
+        let provider = process.env.AI_PROVIDER;
+        
+        if (!provider) {
+            if (process.env.GROQ_API_KEY) {
+                provider = 'groq';
+            } else if (process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
+                provider = 'google';
+            } else {
+                provider = 'ollama'; // Fallback por defecto si no hay keys
+                console.log("No cloud keys found. Standing by with Ollama...");
+            }
+        }
         const lastUserMessage = messages[messages.length - 1]?.content || "";
         const lastMessageLower = lastUserMessage.toLowerCase();
 
@@ -51,7 +64,7 @@ export async function POST(req: Request) {
         const isPrivate = privateDomain.some(kw => new RegExp(`\\b${kw}\\b`, "i").test(normalizedMessage));
         const isMoney = moneyDomain.some(kw => new RegExp(`\\b${kw}\\b`, "i").test(normalizedMessage));
 
-        // Filtro específico para temas personales/privados — respuesta instantánea, sin llamar al LLM
+        // Filtro específico para temas personales/privados 
         if (isPrivate) {
             return NextResponse.json({
                 content: "Esa es información que Álvaro prefiere mantener en el ámbito personal. Como su asistente oficial, estoy aquí para ayudarte con cualquier detalle sobre su perfil profesional, retos y trayectoria. ¿Te gustaría saber algo más sobre su experiencia?"
@@ -78,7 +91,6 @@ export async function POST(req: Request) {
             const i18nPath = path.join(process.cwd(), 'app/i18n.ts');
             const i18nContent = fs.readFileSync(i18nPath, 'utf8');
 
-            // Extraer Philosophy (ES)
             const philosophyMatches = i18nContent.match(/title:\s*"(ADN|Puente|IA)[^"]*",\s*description:\s*"([^"]+)"/g);
             if (philosophyMatches) {
                 extraContext.philosophy = philosophyMatches.map((m: string) => {
@@ -87,7 +99,6 @@ export async function POST(req: Request) {
                 }).filter(Boolean);
             }
 
-            // Extraer Testimonios Clave (ES)
             const testimonialMatches = i18nContent.match(/name:\s*"(Jesus Garcia|Ines Garcia|Almudena Alvarez)[^"]*",\s*text:\s*"([^"]+)"/g);
             if (testimonialMatches) {
                 extraContext.testimonials = testimonialMatches.map((m: string) => {
@@ -107,6 +118,7 @@ export async function POST(req: Request) {
 
         const hardReminder = "\n\n### 🚨 RECORDATORIO FINAL (CRÍTICO):\n- RESPONDE EN 3ra PERSONA (Álvaro...).\n- MÁXIMO 20 PALABRAS (EJECUTIVO).\n- PROHIBIDO LISTAR MÁS DE 3 PROYECTOS/EMPRESAS.\n- SÉ DIRECTO: SIN SALUDOS, SIN PREÁMBULOS, SIN RELLENO.";
         const finalSystemPrompt = `${leadContext}\n\n${systemPrompt}${hardReminder}`;
+        
         const formattedMessages = [
             { role: "system", content: finalSystemPrompt },
             ...messages.map((m: any) => ({
@@ -115,10 +127,11 @@ export async function POST(req: Request) {
             })),
         ];
 
+        // --- LÓGICA DE PROVEEDORES CON FALLBACK ---
         let text = "";
 
-        if (provider === 'ollama') {
-            try {
+        const callModel = async (currentProvider: string): Promise<string> => {
+            if (currentProvider === 'ollama') {
                 const ollamaRes = await fetch("http://localhost:11434/api/chat", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -126,50 +139,61 @@ export async function POST(req: Request) {
                         model: process.env.OLLAMA_MODEL || "gemma3:1b",
                         messages: formattedMessages,
                         stream: false,
-                        keep_alive: "60m",
-                        options: {
-                            num_gpu: 99,
-                            num_thread: 8,       // Ajusta según los cores de tu Mac
-                            temperature: 0.1,    // Menos aleatoriedad = más rápido
-                            top_p: 0.9,
-                            top_k: 40,
-                            num_ctx: 4096,       // Contexto optimizado (suficiente para tu CV)
-                            repeat_penalty: 1.1
-                        }
+                        options: { temperature: 0.1, num_ctx: 4096 }
                     }),
                 });
-
-                if (!ollamaRes.ok) {
-                    const errorText = await ollamaRes.text();
-                    if (ollamaRes.status === 404) {
-                        throw new Error(`Ollama model '${process.env.OLLAMA_MODEL}' not found. Run 'ollama pull ${process.env.OLLAMA_MODEL}'`);
-                    }
-                    throw new Error(`Ollama error (${ollamaRes.status}): ${errorText}`);
-                }
-
                 const data = await ollamaRes.json();
-                text = data.message?.content || "";
-            } catch (e: any) {
-                throw new Error(`Ollama connection failed: ${e.message}`);
-            }
-        } else {
-            if (!process.env.GROQ_API_KEY) {
-                return NextResponse.json(
-                    { error: "Groq API Key not configured" },
-                    { status: 500 }
-                );
+                return data.message?.content || "";
+            } 
+            
+            if (currentProvider === 'google') {
+                if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) throw new Error("Google API Key missing");
+                const model = genAI.getGenerativeModel({ 
+                  model: "gemini-2.0-flash",
+                  systemInstruction: finalSystemPrompt 
+                });
+                
+                // Google usa un formato de historial diferente
+                const chat = model.startChat({
+                  history: messages.slice(0, -1).map((m: any) => ({
+                    role: m.role === 'assistant' ? 'model' : 'user',
+                    parts: [{ text: m.content }]
+                  }))
+                });
+                
+                const result = await chat.sendMessage(lastUserMessage);
+                const response = await result.response;
+                return response.text();
             }
 
+            // DEFAULT: Groq
+            if (!process.env.GROQ_API_KEY) throw new Error("Groq API Key missing");
             const completion = await groq.chat.completions.create({
                 messages: formattedMessages,
                 model: "llama-3.3-70b-versatile",
                 temperature: 0.1,
                 max_tokens: 1024,
-                top_p: 1,
-                stream: false,
             });
+            return completion.choices[0]?.message?.content || "";
+        };
 
-            text = completion.choices[0]?.message?.content || "";
+        try {
+            text = await callModel(provider);
+        } catch (err: any) {
+            console.error(`Primary provider (${provider}) failed:`, err);
+            
+            // TRANSICIÓN LIMPIA: Failover automático a Gemini
+            if (provider !== 'google' && process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
+                console.log("⚠️ Groq/Ollama falló. Activando Failover a Gemini...");
+                try {
+                    text = await callModel('google');
+                } catch (geminiErr) {
+                    console.error("Critical: Gemini failover also failed:", geminiErr);
+                    throw err;
+                }
+            } else {
+                throw err;
+            }
         }
 
         return NextResponse.json({ content: text });

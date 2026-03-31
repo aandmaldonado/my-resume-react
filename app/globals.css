@@ -148,11 +148,6 @@ video {
   @apply bg-gray-500 dark:bg-gray-500;
 }
 
-.chatbot-window-fixed {
-  height: 600px !important;
-  max-height: 600px !important;
-}
-
 /* Animaciones personalizadas para el chatbot */
 @keyframes notification-pulse {
 
