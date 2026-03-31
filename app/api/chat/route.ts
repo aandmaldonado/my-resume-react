@@ -5,16 +5,10 @@ import { NextResponse } from "next/server";
 import fs from 'fs';
 import path from 'path';
 
-const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY,
-});
-
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY || "");
-
 export async function POST(req: Request) {
     try {
         const { messages, leadInfo } = await req.json();
-
+        
         // --- SMART PROVIDER SELECTION ---
         let provider = process.env.AI_PROVIDER;
         
@@ -28,6 +22,11 @@ export async function POST(req: Request) {
                 console.log("No cloud keys found. Standing by with Ollama...");
             }
         }
+
+        // Lazy instantiation: solo se necesitan cuando se llama a la API en Runtime
+        const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+        const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY || "");
+
         const lastUserMessage = messages[messages.length - 1]?.content || "";
         const lastMessageLower = lastUserMessage.toLowerCase();
 
@@ -117,86 +116,91 @@ export async function POST(req: Request) {
             .replace(/USER_EMAIL/g, leadInfo?.email || "no proporcionado");
 
         const hardReminder = "\n\n### 🚨 RECORDATORIO FINAL (CRÍTICO):\n- RESPONDE EN 3ra PERSONA (Álvaro...).\n- MÁXIMO 20 PALABRAS (EJECUTIVO).\n- PROHIBIDO LISTAR MÁS DE 3 PROYECTOS/EMPRESAS.\n- SÉ DIRECTO: SIN SALUDOS, SIN PREÁMBULOS, SIN RELLENO.";
-        const finalSystemPrompt = `${leadContext}\n\n${systemPrompt}${hardReminder}`;
-        
-        const formattedMessages = [
-            { role: "system", content: finalSystemPrompt },
-            ...messages.map((m: any) => ({
-                role: m.role,
-                content: m.content,
-            })),
-        ];
+    const finalSystemPrompt = `${leadContext}\n\n${systemPrompt}${hardReminder}`;
+    
+    const formattedMessages = [
+        { role: "system", content: finalSystemPrompt },
+        ...messages.map((m: any) => ({
+            role: m.role,
+            content: m.content,
+        })),
+    ];
 
-        // --- LÓGICA DE PROVEEDORES CON FALLBACK ---
-        let text = "";
+    // --- LÓGICA DE PROVEEDORES CON FALLBACK ---
+    let text = "";
 
-        const callModel = async (currentProvider: string): Promise<string> => {
-            if (currentProvider === 'ollama') {
-                const ollamaRes = await fetch("http://localhost:11434/api/chat", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        model: process.env.OLLAMA_MODEL || "gemma3:1b",
-                        messages: formattedMessages,
-                        stream: false,
-                        options: { temperature: 0.1, num_ctx: 4096 }
-                    }),
-                });
-                const data = await ollamaRes.json();
-                return data.message?.content || "";
-            } 
-            
-            if (currentProvider === 'google') {
-                if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) throw new Error("Google API Key missing");
-                const model = genAI.getGenerativeModel({ 
-                  model: "gemini-2.0-flash",
-                  systemInstruction: finalSystemPrompt 
-                });
-                
-                // Google usa un formato de historial diferente
-                const chat = model.startChat({
-                  history: messages.slice(0, -1).map((m: any) => ({
-                    role: m.role === 'assistant' ? 'model' : 'user',
-                    parts: [{ text: m.content }]
-                  }))
-                });
-                
-                const result = await chat.sendMessage(lastUserMessage);
-                const response = await result.response;
-                return response.text();
-            }
-
-            // DEFAULT: Groq
-            if (!process.env.GROQ_API_KEY) throw new Error("Groq API Key missing");
-            const completion = await groq.chat.completions.create({
-                messages: formattedMessages,
-                model: "llama-3.3-70b-versatile",
-                temperature: 0.1,
-                max_tokens: 1024,
+    const callModel = async (currentProvider: string): Promise<string> => {
+        if (currentProvider === 'ollama') {
+            const ollamaRes = await fetch("http://localhost:11434/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    model: process.env.OLLAMA_MODEL || "gemma3:1b",
+                    messages: formattedMessages,
+                    stream: false,
+                    options: { temperature: 0.1, num_ctx: 4096 }
+                }),
             });
-            return completion.choices[0]?.message?.content || "";
-        };
-
-        try {
-            text = await callModel(provider);
-        } catch (err: any) {
-            console.error(`Primary provider (${provider}) failed:`, err);
+            const data = await ollamaRes.json();
+            return data.message?.content || "";
+        } 
+        
+        if (currentProvider === 'google') {
+            if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) throw new Error("Google API Key missing");
+            const model = genAI.getGenerativeModel({ 
+              model: "gemini-2.0-flash",
+              systemInstruction: finalSystemPrompt 
+            });
             
-            // TRANSICIÓN LIMPIA: Failover automático a Gemini
-            if (provider !== 'google' && process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
-                console.log("⚠️ Groq/Ollama falló. Activando Failover a Gemini...");
-                try {
-                    text = await callModel('google');
-                } catch (geminiErr) {
-                    console.error("Critical: Gemini failover also failed:", geminiErr);
-                    throw err;
-                }
-            } else {
-                throw err;
-            }
+            // Google usa un formato de historial diferente
+            const chat = model.startChat({
+              history: messages.slice(0, -1).map((m: any) => ({
+                role: m.role === 'assistant' ? 'model' : 'user',
+                parts: [{ text: m.content }]
+              }))
+            });
+            
+            const result = await chat.sendMessage(lastUserMessage);
+            const response = await result.response;
+            return response.text();
         }
 
-        return NextResponse.json({ content: text });
+        // DEFAULT: Groq
+        if (!process.env.GROQ_API_KEY) throw new Error("Groq API Key missing");
+        const completion = await groq.chat.completions.create({
+            messages: formattedMessages,
+            model: "llama-3.3-70b-versatile",
+            temperature: 0.1,
+            max_tokens: 1024,
+        });
+        return completion.choices[0]?.message?.content || "";
+    };
+
+    try {
+        text = await callModel(provider);
+    } catch (err: any) {
+        console.error(`Primary provider (${provider}) failed:`, err);
+        
+        // TRANSICIÓN LIMPIA: Failover automático a Gemini
+        if (provider !== 'google' && process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
+            console.log("⚠️ Groq/Ollama falló. Activando Failover a Gemini...");
+            try {
+                text = await callModel('google');
+            } catch (geminiErr) {
+                console.error("Critical: Gemini failover also failed:", geminiErr);
+                throw err;
+            }
+        } else {
+            throw err;
+        }
+    }
+
+    // Detectar y añadir tags si son necesarios
+    if (text.toLowerCase().includes("reunión") || text.toLowerCase().includes("agendar") || text.toLowerCase().includes("cita") || text.toLowerCase().includes("llamada")) {
+        if (!text.includes("[ACTION_DATEPICKER]")) text += " [ACTION_DATEPICKER]";
+    }
+
+    return NextResponse.json({ content: text });
     } catch (error: any) {
         console.error("Chat API Error:", error);
 
