@@ -1,0 +1,485 @@
+# ─── INFORMACIÓN PERSONAL ────────────────────────────────────────────────────
+# Datos básicos de identidad, contacto y ubicación del candidato.
+personal_info:
+  name: "Álvaro Andrés Maldonado Pinto"
+  nationality: "Chilena"
+  marital_status: "Información disponible bajo petición en fases avanzadas del proceso."
+  children: "Información disponible bajo petición en fases avanzadas del proceso."
+  title: "Tech Lead & AI Strategist | Senior Software Engineer"
+  email: "readme.md@almapi.dev"
+  location: "Gandía, Valencia, España"
+  website: "https://almapi.dev"
+  linkedin: "https://linkedin.com/in/almapidev"
+  github: "https://github.com/aandmaldonado"
+
+# ─── CONFIGURACIÓN DEL CHATBOT ───────────────────────────────────────────────
+# Nombre del bot y del propietario. Usados en el prompt y en las traducciones.
+chat_settings:
+  bot_name: "InterviewMyCV"
+  owner_short_name: "Álvaro"
+  suggested_queries:
+    - label: "💼 Experiencia laboral"
+      question: "¿Cuál es la experiencia laboral de Álvaro?"
+    - label: "🛠️ Stack tecnológico"
+      question: "¿Cuál es el stack tecnológico de Álvaro?"
+    - label: "📅 Agendar llamada"
+      question: "Me gustaría agendar una llamada con Álvaro."
+    - label: "🤖 Proyecto AcuaMattic"
+      question: "Cuéntame sobre el proyecto AcuaMattic e IA."
+    - label: "🏦 Banca y FinTech"
+      question: "Hablemos de tu experiencia en sistemas bancarios y FinTech."
+    - label: "🎓 Máster IA UPC"
+      question: "¿Qué estudiaste en tu Máster de IA en la UPC?"
+    - label: "🏠 Trabajo Remoto"
+      question: "¿Buscas oportunidades 100% remotas? ¿Cuál es tu disponibilidad?"
+    - label: "👁️ Visión Artificial"
+      question: "Cuéntame sobre tu experiencia con Visión por Computador y OpenCV."
+    - label: "🚀 Programa AI4DEVS"
+      question: "¿Qué aprendiste en el programa AI4DEVS de LIDR.co?"
+
+# ─── PERFIL PROFESIONAL ──────────────────────────────────────────────────────
+# Resumen único e impactante (estilo LinkedIn About). Alimenta la identidad del chatbot.
+professional_summary: |
+  Tech Lead, AI Strategist & Product Engineer (Ex-CTO) con +15 años de trayectoria transformando desafíos de negocio en arquitecturas de alto impacto. Especialista en cerrar la brecha estratégica entre la visión de producto y la ejecución técnica, asegurando que la tecnología sea un motor de escala y no un freno operativo.
+
+  Bajo una filosofía de 'Product Engineer', priorizo entender el 'porqué' estructural antes de diseñar el 'cómo' técnico. He escalado sistemas críticos de alta disponibilidad (+1M tx/día en banca) y liderado arquitecturas de Inteligencia Artificial (LLMs, RAG, Computer Vision) bajo el enfoque 'Human-in-the-loop', optimizando el delivery y generando resultados de negocio medibles.
+
+  Mi liderazgo técnico se centra en la excelencia operativa (Clean Code, Shift-Left Testing) y en resolver problemas complejos mediante soluciones robustas y escalables. Busco roles estratégicos donde pueda alinear la visión tecnológica con los objetivos de negocio y potenciar la autonomía de los equipos de ingeniería.
+
+# ─── OBJETIVO DE CARRERA ─────────────────────────────────────────────────────
+# Filtro activo del chatbot: qué roles acepta y cuáles descarta profesionalmente.
+career_target:
+  target_roles:
+    - "Tech Lead / Team Lead"
+    - "AI Strategist / AI Solution Architect / AI Engineer / GenAI Engineer"
+    - "Engineering Manager / CTO (Startups/Mid-size)"
+    - "Senior Software Engineer (Product-Focused)"
+  discarded_roles:
+    - "Puestos 100% Frontend (React/CSS pure)"
+    - "Roles Junior o Mid-level"
+    - "Posiciones sin componente de liderazgo o arquitectura"
+    - "Empresas sin cultura remota (No 100% remote)"
+  ideal_company_profile:
+    - "Startups en fase de crecimiento (Scale-ups)"
+    - "Empresas Tech-First con foco en IA o FinTech"
+    - "Organizaciones que valoren la mentalidad de Product Engineer y no solo 'picar código'"
+
+# ─── PROYECTOS ───────────────────────────────────────────────────────────────
+# Cada proyecto tiene un id único, empresa referenciada (company_ref),
+# responsabilidades, logros cuantificados (Método XYZ) y stack tecnológico.
+# Añade aquí nuevos proyectos siguiendo la misma estructura de keys.
+projects:
+  proj_andes:
+    id: "proj_andes"
+    name: "Andes Online (Banco BCI)"
+    company_ref: "comp_inadvance"
+    role: "Senior Backend Engineer & Integration Lead"
+    duration: "2024 - Presente"
+    description: |
+      Modernización estratégica de la plataforma core transaccional de tarjetas de crédito del Banco BCI, alineando la arquitectura de microservicios con los OKRs estratégicos de negocio.
+    key_responsibilities:
+      - "Desarrollo de lógica transaccional y diseño de APIs."
+      - "Implementación de CI/CD con Shift-Left Testing."
+      - "Traducción de requisitos financieros complejos en arquitecturas técnicas."
+    key_challenges:
+      - "Gestión de la modernización del core sin afectar la disponibilidad."
+    technologies: ["Microservicios", "CI/CD", "Shift-Left Testing", "Java", "Spring Boot", "Arquitectura Hexagonal"]
+    achievements:
+      - "Lideré la modernización del core de pagos (+500K tx/día sin downtime)."
+      - "Reduje los incidentes críticos un 45% estandarizando playbooks de calidad e implementando CI/CD con Shift-Left Testing."
+      - "Aceleré los ciclos de entrega apoyando a stakeholders, traduciendo requisitos financieros complejos en arquitecturas escalables."
+    business_impact: "Aseguramiento de la disponibilidad y reducción de incidentes en el sistema transaccional core del banco."
+    tags: ["industria_bancaria", "tipo_modernizacion", "arquitectura_microservicios", "rol_integracion"]
+
+  proj_facultades:
+    id: "proj_facultades"
+    name: "Motor de Facultades (Banco de Chile)"
+    company_ref: "comp_imagemaker"
+    role: "Senior Backend Engineer & Tech Consultant"
+    duration: "2023 - 2024"
+    description: |
+      Liderazgo técnico en innovación aplicada y delivery de microservicios Cloud-Native para el sector bancario, incluyendo integraciones clave de IA.
+    key_responsibilities:
+      - "Liderazgo de PoC de IA para análisis legal documental."
+      - "Estandarización de pipelines CI/CD y revisiones automatizadas."
+      - "Implementación de estrategias de observabilidad proactiva."
+    key_challenges:
+      - "Optimizar tiempos de procesamiento de alto volumen documental legal."
+    technologies: ["IA/ML", "Microservicios Cloud-Native", "CI/CD", "Splunk", "Dynatrace", "Java"]
+    achievements:
+      - "Impulsé la innovación aplicada liderando una PoC de IA para análisis legal, procesando 10.000 documentos/mes y reduciendo tiempos de respuesta un 99% (de 48h a <3s)."
+      - "Lideré el delivery de microservicios Cloud-Native, reduciendo la deuda técnica un 30% mediante la estandarización de pipelines CI/CD."
+      - "Aseguré la fiabilidad operativa en sistemas críticos disminuyendo el downtime un 60%, mediante observabilidad proactiva (Splunk/Dynatrace)."
+    business_impact: "Reducción radical de tiempos operativos en análisis legal (99%) y estabilización de sistemas core mediante reducción de downtime."
+    tags: ["industria_bancaria", "tipo_poc", "tipo_innovacion", "cloud_native"]
+
+  proj_taa:
+    id: "proj_taa"
+    name: "Time & Attendance (T&A)"
+    company_ref: "comp_falabella"
+    role: "Technical Lead"
+    duration: "2022 - 2023"
+    description: |
+      Dirección de la modernización tecnológica del sistema de asistencia corporativo para LATAM y delivery de núcleo transaccional de alta disponibilidad.
+    key_responsibilities:
+      - "Liderazgo técnico para plataforma corporativa de RRHH."
+      - "Implementación de arquitectura orientada a eventos (DDD)."
+      - "Integración corporativa de ecosistemas SaaS."
+    key_challenges:
+      - "Gestión de alto volumen de transacciones diarias (2M eventos)."
+      - "Reducción estructural de deuda técnica heredada."
+    technologies: ["DDD", "Event-Driven", "SaaS Integration", "Java", "Spring Boot", "Microservicios"]
+    achievements:
+      - "Dirigí la modernización tecnológica del sistema de asistencia corporativo (50.000 empleados en LATAM), reduciendo la deuda técnica un 35%."
+      - "Aseguré el delivery técnico de un núcleo transaccional de alta disponibilidad (DDD, Event-Driven), procesando 2M de eventos diarios."
+      - "Estandaricé la integración de ecosistemas SaaS a nivel corporativo, acelerando el time-to-market un 30% y eliminando inconsistencias de datos."
+    business_impact: "Optimización operativa para 50.000 empleados y estabilización de alto volumen transaccional diario."
+    tags: ["industria_retail", "industria_hr", "tipo_modernizacion", "tipo_integracion", "arquitectura_event_driven", "ddd", "rol_liderazgo"]
+
+  proj_acuamattic:
+    id: "proj_acuamattic"
+    name: "AcuaMattic IA & Neurogenesis Core"
+    company_ref: "comp_neurogenesis"
+    role: "CTO & Co-Founder | ML Engineer"
+    duration: "2021 - 2022"
+    description: |
+      Dirección estratégica y tecnológica desde la fundación (Startup Pre-seed), liderando equipos multidisciplinares y transformando investigación en productos viables de IA.
+    key_responsibilities:
+      - "Definición del roadmap tecnológico y transformación comercial."
+      - "Desarrollo integral de sistemas de IA/Computer Vision."
+      - "Diseño de arquitecturas MLOps en AWS."
+      - "Liderazgo de portfolio de proyectos y gestión de talento (+50 personas)."
+    key_challenges:
+      - "Creación de modelos de alta precisión sin datos públicos disponibles."
+      - "Escalar productos desde investigación hasta cloud-native MLOps."
+    technologies: ["MLOps", "AWS", "Visión por Computador", "Python", "Deep Learning", "Cloud-Native", "DevOps"] 
+    achievements:
+      - "Dirigí la estrategia tecnológica y el roadmap, transformando investigación académica en productos comerciales viables."
+      - "Lideré el delivery de un sistema IA (92% precisión) basado en la creación de un dataset propio de +10k imágenes."
+      - "Aseguré la escalabilidad del producto mediante el diseño de arquitecturas MLOps cloud-native en AWS para producción."
+      - "Impulsé un portfolio de 7 proyectos de IA y DevOps, liderando a un equipo multidisciplinar de +50 personas."
+    business_impact: "Viabilidad tecnológica comprobada de la startup, establecimiento de bases MLOps e impulso de +7 proyectos paralelos bajo mi liderazgo."
+    tags: ["industria_ia", "tipo_startup", "rol_liderazgo", "rol_cto", "mlops", "engineering_manager"]
+
+  proj_migracion_tbk:
+    id: "proj_migracion_tbk"
+    name: "Migración Transbank"
+    company_ref: "comp_ntt_data"
+    role: "Senior Backend Engineer & Tech Consultant"
+    duration: "2019 - 2021"
+    description: |
+      Aseguramiento y modernización de sistemas críticos transaccionales para el principal adquirente de pagos de Chile, focalizado en escalabilidad y seguridad de alto nivel.
+    key_responsibilities:
+      - "Optimización de arquitectura transaccional de alta disponibilidad."
+      - "Auditoría e implementación de medidas de seguridad (OWASP, PCI)."
+    key_challenges:
+      - "Soportar y asegurar ecosistemas legacy bajo estrictas normativas bancarias."
+    technologies: ["Java", "OWASP", "PCI", "Seguridad", "Microservicios", "Alta Disponibilidad"]
+    achievements:
+      - "Aseguré la escalabilidad de una arquitectura transaccional de alta disponibilidad, soportando con éxito el procesamiento de +1M tx/día."
+      - "Lideré la seguridad del delivery, reduciendo las vulnerabilidades críticas en un 50% mediante la aplicación de estándares OWASP y PCI."
+    business_impact: "Certificación de seguridad estructural y soporte continuo sin caídas para más de un millón de transacciones diarias."
+    tags: ["industria_bancaria", "tipo_modernizacion", "rol_senior", "security", "high_availability"]
+
+  proj_anulaciones:
+    id: "proj_anulaciones"
+    name: "Anulaciones 2.0 (Transbank)"
+    company_ref: "comp_ntt_data"
+    role: "Senior Backend Engineer"
+    duration: "2019 - 2021" 
+    description: "Desarrollo de un nuevo sistema de backoffice para la gestión de anulaciones en el core bancario."
+    technologies: ["Java", "Spring Boot", "Oracle Database", "API REST"]
+    achievements: ["Desarrollo de funcionalidades backend clave y exposición de servicios REST para automatización interna."]
+    tags: ["industria_bancaria", "backoffice"]
+
+  proj_spr:
+    id: "proj_spr"
+    name: "SPR (Sistema de Personal & Remuneraciones)"
+    company_ref: "comp_falabella"
+    role: "Analista TI Senior"
+    duration: "2015 - 2019"
+    description: "Desarrollo y gestión de la plataforma corporativa de recursos humanos."
+    technologies: ["Java", "MVC", "Oracle", "Integración"]
+    achievements: ["Consolidación técnica de módulos de integración para el ecosistema legacy de RRHH."]
+    tags: ["industria_retail", "industria_hr"]
+
+  proj_supervisor:
+    id: "proj_supervisor"
+    name: "Electronic Supervisor (Walmart)"
+    company_ref: "comp_freelance"
+    role: "Consultor TI Senior"
+    duration: "2017"
+    description: "Desarrollo de middleware de autorizaciones POS para tiendas físicas."
+    technologies: ["Java", "Web Services", "PostgreSQL"]
+    achievements: ["Implementación de sistema de latencia optimizada para procesos en caja."]
+    tags: ["industria_retail", "pos"]
+
+  proj_movistar:
+    id: "proj_movistar"
+    name: "Movistar Canal Online"
+    company_ref: "comp_ntt_data"
+    role: "Analista de Soluciones"
+    duration: "2010 - 2014"
+    description: "Desarrollo Full-stack para portal masivo de autogestión de clientes."
+    technologies: ["Java", "IBM WebSphere", "SOAP"]
+    achievements: ["Implementación de portlets para digitalizar flujos de atención."]
+    tags: ["industria_telecom"]
+
+  proj_sbox:
+    id: "proj_sbox"
+    name: "S-Box"
+    company_ref: "comp_usach"
+    role: "Estudiante Investigador"
+    duration: "2017" 
+    description: "Tesis pionera en computación afectiva y detección de micro-expresiones con Visión Artificial."
+    technologies: ["Java", "OpenCV", "Visión por Computador"]
+    achievements: ["Desarrollo de algoritmo de detección facial en tiempo real."]
+    tags: ["tipo_academico"]
+
+  proj_airesumeagent:
+    id: "proj_airesumeagent"
+    name: "AI Resume Agent"
+    company_ref: "comp_lidr"
+    role: "Estudiante | AI-Powered Engineer"
+    duration: "2025"
+    description: "Agente conversacional especializado utilizando arquitecturas avanzadas RAG."
+    technologies: ["Python", "RAG", "LLMs", "Vector DBs", "LangChain"]
+    achievements: ["Implementación de bases vectoriales y mitigación de alucinaciones en recuperación semántica."]
+    tags: ["chatbot", "genai"]
+
+# ─── EMPRESAS ────────────────────────────────────────────────────────────────
+# Historial de empleadores ordenados del más reciente al más antiguo.
+# El campo 'projects_worked_on' enlaza con los IDs de la sección 'projects'.
+companies:
+  comp_inadvance:
+    id: "comp_inadvance"
+    name: "InAdvance Consulting Group"
+    positions:
+      - role: "Senior Backend Engineer & Integration Lead" 
+        duration: "2024 - Presente"
+        location: "Santiago, Chile"
+        projects_worked_on: ["proj_andes"]
+
+  comp_imagemaker:
+    id: "comp_imagemaker"
+    name: "Imagemaker"
+    positions:
+      - role: "Senior Backend Engineer & Tech Consultant" 
+        duration: "2023 - 2024"
+        location: "Santiago, Chile"
+        projects_worked_on: ["proj_facultades"]
+
+  comp_falabella:
+    id: "comp_falabella"
+    name: "Falabella"
+    positions:
+      - role: "Technical Lead"
+        duration: "2022 - 2023"
+        location: "Santiago, Chile"
+        projects_worked_on: ["proj_taa"]
+      - role: "Analista TI Senior"
+        duration: "2015 - 2019"
+        location: "Santiago, Chile"
+        projects_worked_on: ["proj_spr"]
+
+  comp_neurogenesis:
+    id: "comp_neurogenesis"
+    name: "Neurogenesis IA Technologies"
+    positions:
+      - role: "CTO & Co-Founder | ML Engineer"
+        duration: "2021 - 2022"
+        location: "Barcelona, España"
+        projects_worked_on: ["proj_acuamattic"]
+
+  comp_ntt_data:
+    id: "comp_ntt_data"
+    name: "NTT DATA"
+    positions:
+      - role: "Senior Backend Engineer & Tech Consultant" 
+        duration: "2019 - 2021"
+        location: "Santiago, Chile"
+        projects_worked_on: ["proj_migracion_tbk", "proj_anulaciones"] 
+      - role: "Analista de Soluciones" 
+        duration: "2010 - 2014"
+        location: "Santiago, Chile"
+        projects_worked_on: ["proj_movistar"]
+
+  comp_usach:
+      id: "comp_usach"
+      name: "Universidad de Santiago de Chile"
+      positions:
+        - role: "Estudiante Investigador"
+          duration: "2017" 
+          location: "Santiago, Chile"
+          projects_worked_on: ["proj_sbox"]
+
+  comp_lidr:
+    id: "comp_lidr"
+    name: "LIDR.co"
+    positions:
+      - role: "Estudiante (AI4DEVS)"
+        duration: "2025"
+        location: "Remoto"
+        projects_worked_on: ["proj_airesumeagent"]
+
+  comp_freelance:
+    id: "comp_freelance"
+    name: "Freelance"
+    positions:
+      - role: "Consultor TI Senior" 
+        duration: "2017"
+        location: "Santiago, Chile"
+        projects_worked_on: ["proj_supervisor"]
+
+# ─── SKILLS SHOWCASE ──────────────────────────────────────────────────────────
+# Agrupaciones temáticas de habilidades con proyectos de respaldo.
+# El chatbot usa esto para responder preguntas sobre competencias técnicas.
+skills_showcase:
+  ai_ml:
+    description: "Dominio técnico en GenAI, Sistemas Agénticos y ciclo de vida de modelos. Creación de pipelines desde cero (dataset de +10k imágenes) y despliegue de arquitecturas en la nube garantizando ROI."
+    projects: ["proj_acuamattic", "proj_facultades", "proj_airesumeagent"]
+    key_technologies: ["GenAI", "Sistemas Agénticos", "LLMs", "RAG", "Vector DBs", "Python", "PyTorch", "Tensorflow"]
+
+  microservices_backend:
+    description: "Arquitectura y liderazgo en backend de alta disponibilidad, operando núcleos transaccionales críticos de +2M eventos y +1M tx/día aplicando Clean Code."
+    projects: ["proj_andes", "proj_taa", "proj_migracion_tbk"]
+    key_technologies: ["DDD", "Event-Driven", "Java/Spring", "REST APIs", "Swagger/OpenAPI", "SQL/NoSQL"] 
+
+  cloud_devops:
+    description: "Industrialización de soluciones tecnológicas, estandarizando flujos CI/CD y arquitecturas Cloud-Native para reducir deuda técnica y mitigar downtimes."
+    projects: ["proj_acuamattic", "proj_facultades", "proj_andes"]
+    key_technologies: ["AWS", "MLOps", "CI/CD", "Kubernetes", "Dynatrace", "Docker"]
+
+  technical_leadership:
+    description: "Rol híbrido entre Engineering Manager y estratega técnico (Ex-CTO). Liderazgo de equipos multidisciplinares (+50 personas) y alineación de la arquitectura de software con los OKRs de negocio."
+    projects: ["proj_taa", "proj_acuamattic"]
+    key_skills: ["Engineering Management", "CTO", "Tech Lead", "Estrategia Tecnológica"] 
+
+  standards_security:
+    description: "Aseguramiento proactivo de la calidad del delivery a nivel bancario, reduciendo vulnerabilidades e incidentes críticos drásticamente."
+    projects: ["proj_migracion_tbk", "proj_andes"]
+    key_technologies: ["OWASP", "PCI", "JWT", "Clean Code", "Unit/Integration Testing", "Shift-Left"]
+
+# ─── RESUMEN EDUCATIVO ────────────────────────────────────────────────────────
+# Versión corta del perfil académico. Usada en el hero/about del chatbot.
+education_summary:
+  short: "Ingeniería en Ciencias de la Computación (Top #4) y Maestría en IA, apoyado en programas de vanguardia en GenAI."
+  detailed: |
+    Formación sólida en Ciencias de la Computación (GPA 9.05/10), especializada en Inteligencia Artificial a través de un máster formal y complementada recientemente con bootcamps enfocados en la era de los Sistemas Agénticos y la productividad impulsada por LLMs.
+
+# ─── EDUCACIÓN FORMAL ─────────────────────────────────────────────────────────
+# Lista de títulos, masters y bootcamps en orden cronológico inverso (más reciente primero).
+education:
+  - degree: "AI-Powered Engineering Program (AI4DEVS)"
+    institution: "LIDR.co"
+    period: "2025" 
+    knowledge_acquired:
+      - "Especialización en GenAI y Sistemas Agénticos."
+    tools_technologies: ["GenAI", "LLMs", "Sistemas Agénticos"]
+    tags: ["ai_ml", "genai"]
+
+  - degree: "Maestría en Inteligencia Artificial"
+    institution: "Universitat Politècnica de Catalunya"
+    period: "2020 - 2021"
+    details: "Barcelona, España"
+    knowledge_acquired:
+      - "Desarrollo profundo de modelos predictivos y arquitecturas de IA."
+    tools_technologies: ["Python", "Computer Vision", "Deep Learning"]
+    tags: ["ai_ml", "computer_vision", "deep_learning"] 
+
+  - degree: "Ingeniería en Ciencias de la Computación"
+    institution: "Universidad de Santiago de Chile (Top #4)"
+    period: "2012 - 2017"
+    details: "Santiago, Chile. GPA: 9.05/10"
+    knowledge_acquired:
+      - "Excelencia algorítmica y fundamentos de Arquitectura de Software empresarial."
+    tools_technologies: ["Java", "Estructuras de Datos", "Arquitectura"]
+    tags: ["java_backend", "architecture", "computer_science"]
+
+# ─── SKILLS (RENDERIZADO EN UI) ───────────────────────────────────────────────
+# Este bloque alimenta directamente el componente visual de habilidades.
+# Niveles disponibles: 'Experto', 'Avanzado', 'Intermedio'.
+skills:
+  - category: "IA & Data Science"
+    items:
+      - name: "GenAI & LLMs"
+        level: "Avanzado"
+        note: "Sistemas Agénticos, RAG, Vector DBs."
+      - name: "Machine Learning / Visión por Computador"
+        level: "Avanzado"
+        note: "Python, PyTorch, Tensorflow."
+
+  - category: "Cloud & DevOps"
+    items:
+      - name: "Infraestructura Cloud"
+        level: "Avanzado"
+        note: "AWS, Kubernetes, Docker."
+      - name: "Operaciones y Telemetría"
+        level: "Avanzado"
+        note: "MLOps, CI/CD, Dynatrace."
+
+  - category: "Arquitectura & Backend"
+    items:
+      - name: "Patrones y Diseño"
+        level: "Experto"
+        note: "DDD, Event-Driven, Microservicios."
+      - name: "Desarrollo Core"
+        level: "Experto"
+        note: "Java/Spring, REST APIs, Swagger/OpenAPI, SQL/NoSQL."
+
+  - category: "Estándares & Seguridad"
+    items: 
+      - name: "Seguridad y Calidad"
+        level: "Experto"
+        note: "OWASP, PCI, JWT, Clean Code, Unit/Integration Testing, Shift-Left."
+
+# ─── IDIOMAS ─────────────────────────────────────────────────────────────────
+# Idiomas con nivel de competencia y contexto de uso profesional.
+languages:
+  - name: "Español"
+    level: "Nativo"
+    context_of_use: ["Lengua materna, utilizada en todos los ámbitos profesionales y personales."]
+  - name: "Inglés"
+    level: "Competencia Profesional (B2)" 
+    details: | 
+      Poseo un nivel que me permite desenvolverme con confianza en entornos de ingeniería:
+      - Interacción directa con bibliografía técnica y documentación arquitectónica.
+      - Participación en foros, reviews de código y discusiones de diseño de sistemas.
+      - Comunicación asíncrona fluida y concisa.
+      Actualmente refuerzo mi pronunciación conversacional mediante tutorías recurrentes (3 sesiones/semana).
+    context_of_use: ["Documentación técnica", "Reuniones de equipo", "Comunicación escrita", "Formación autodidacta (cursos, artículos)"]
+
+# ─── CONDICIONES PROFESIONALES ───────────────────────────────────────────────
+# Disponibilidad, permisos de trabajo, expectativas salariales y motivación de cambio.
+professional_conditions:
+  availability:
+    status: "Buscando activamente una oportunidad a largo plazo en España"
+    notice_period: "15 días (negociable si el proyecto requiere urgencia)."
+    remote_work: "Busco posiciones de arquitectura/liderazgo remoto. Considero modelos híbridos ocasionales si el impacto lo justifica."
+    interview_scheduling: "Gran disponibilidad de agenda para procesos ágiles. Preferencia por coordinación vía email." 
+
+  work_permit:
+    status: "Requiere gestión de Visado PAC (Profesionales Altamente Cualificados) por cuenta de la entidad contratante."
+    target_country: "España"
+
+  salary_expectations:
+    notes: "Rango flexible enfocado en el potencial del desafío tecnológico, la solidez cultural de la empresa y el paquete total (incluyendo soporte de relocation/visa)."
+
+  motivation_for_change: |
+    Busco asumir un rol técnico decisivo (Senior Engineer, Tech Lead, Architect) 100% remoto radicado en España. Me impulsa la resolución de fricciones sistémicas aplicando una filosofía 'Product Engineer', donde la Inteligencia Artificial y la arquitectura sólida generan ventajas competitivas reales. Mi objetivo es echar raíces profesionales a largo plazo (visado PAC) en un equipo donde la autonomía técnica conviva con la excelencia operativa.
+
+# ─── FILOSOFÍA E INTERESES ────────────────────────────────────────────────────
+# Sección de 'soft side'. El chatbot la usa para humanizar el perfil y mostrar
+# la mentalidad de Product Engineer más allá de las métricas técnicas.
+philosophy_and_interests:
+  - title: "Filosofía de Trabajo ('Product Engineer')"
+    description: "Mi concepción del software no termina en el despliegue; mi prioridad es que el código solucione eficientemente un dolor de negocio. Un buen diseño arquitectónico debe reflejar siempre una comprensión profunda del 'porqué' comercial detrás del 'cómo' técnico."
+
+  - title: "Pasión por el Aprendizaje Continuo"
+    description: "La disrupción constante requiere una formación activa. Experimento continuamente con modelos generativos en local, pruebo nuevos enfoques de integración y absorbo conocimiento técnico para asegurar que mis soluciones sigan los estándares más altos de la industria."
+
+  - title: "Resolución de Problemas Complejos"
+    description: "La ingeniería cobra sentido ante escenarios de alta incertidumbre. Encuentro una profunda satisfacción en destilar problemas monolíticos densos en arquitecturas limpias, distribuidas y lógicamente impecables, colaborando en equipos de alto rendimiento."
+
+  - title: "Intereses Personales"
+    description: "Disfruto del equilibrio que otorga la vida familiar en un entorno tranquilo (Gandía, playa/naturaleza). El deporte y los espacios al aire libre me proporcionan la perspectiva y recarga energética necesarias para liderar decisiones de arquitectura críticas con total claridad mental."

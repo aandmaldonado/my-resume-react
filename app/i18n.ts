@@ -1,5 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { chatbotTranslations } from "@/components/chatbot/i18n";
 
 const resources = {
   en: {
@@ -314,7 +315,7 @@ const resources = {
         list: [
           {
             name: "Jesus Garcia",
-            text: "Alvaro Maldonado is synonymous with efficiency and quality. A 'top tier' backend developer who combines impressive technical depth with proactivity that makes life easier for the entire team. If there's a fire to put out or an architecture to design, he is the person I trust.",
+            text: "Álvaro Maldonado is synonymous with efficiency and quality. A 'top tier' backend developer who combines impressive technical depth with proactivity that makes life easier for the entire team. If there's a fire to put out or an architecture to design, he is the person I trust.",
             picture: "/recommendations/jesus_garcia.jpeg",
             linkedin: "https://www.linkedin.com/in/jesus-garcia-b44209104/",
           },
@@ -399,6 +400,12 @@ const resources = {
             picture: "/recommendations/nelly_manterola.jpeg",
             linkedin: "https://www.linkedin.com/in/nellymanterola",
           },
+          {
+            name: "Almudena Álvarez Sánchez",
+            text: "As a Talent Manager, I have had the opportunity to work with Álvaro on his career development in Spain. It has been a great discovery both at a professional and personal level. Álvaro has a hybrid profile that stands out for bridging entrepreneurship and development, with deep knowledge of the latest market technologies such as AI. He comes across as a dedicated and passionate professional who demonstrates his commitment from the very first conversation. Having Álvaro on your project is a safe bet for his knowledge, his involvement, and all the value he brings to the team!",
+            picture: "/recommendations/almudena_alvarez.jpeg",
+            linkedin: "https://www.linkedin.com/in/almudena-alvarez-sanchez/",
+          },
         ]
       },
       footer: {
@@ -418,6 +425,7 @@ const resources = {
           city: "Gandía, Spain | Global Remote"
         }
       },
+      chatbot: chatbotTranslations.en
     }
   },
   es: {
@@ -732,7 +740,7 @@ const resources = {
         list: [
           {
             name: "Jesus Garcia",
-            text: "Alvaro Maldonado es sinónimo de eficiencia y calidad. Un desarrollador backend \"top tier\" que combina una profundidad técnica impresionante con una proactividad que facilita la vida de todo el equipo. Si hay un fuego que apagar o una arquitectura que diseñar, es la persona en quien confío.",
+            text: "Álvaro Maldonado es sinónimo de eficiencia y calidad. Un desarrollador backend \"top tier\" que combina una profundidad técnica impresionante con una proactividad que facilita la vida de todo el equipo. Si hay un fuego que apagar o una arquitectura que diseñar, es la persona en quien confío.",
             picture: "/recommendations/jesus_garcia.jpeg",
             linkedin: "https://www.linkedin.com/in/jesus-garcia-b44209104/",
           },
@@ -817,6 +825,12 @@ const resources = {
             picture: "/recommendations/nelly_manterola.jpeg",
             linkedin: "https://www.linkedin.com/in/nellymanterola",
           },
+          {
+            name: "Almudena Álvarez Sánchez",
+            text: "Como Talent Manager he tenido la oportunidad de trabajar con Álvaro en su desarrollo de carrera en España. Ha sido gran descubrimiento tanto a nivel profesional como personal. Álvaro es perfil que destaca por tener un perfil híbrido entre emprendimiento y desarrollo con grandes conocimientos de las últimas tecnologías del mercado como es la IA. Se muestra como un profesional entregado y apasionado de su trabajo que lo demuestra desde el primer momento que hablas con él. Contar con Álvaro en tu proyecto es una apuesta segura por su conocimiento, su implicación y por todo el valor que añade en el equipo!",
+            picture: "/recommendations/almudena_alvarez.jpeg",
+            linkedin: "https://www.linkedin.com/in/almudena-alvarez-sanchez/",
+          },
         ]
       },
       footer: {
@@ -836,6 +850,7 @@ const resources = {
           city: "Gandía, España | Remoto Global"
         }
       },
+      chatbot: chatbotTranslations.es
     }
   }
 };
