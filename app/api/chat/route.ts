@@ -1,6 +1,8 @@
 import Groq from "groq-sdk";
 import { getSystemPrompt } from "@/lib/chatbot-prompt";
 import { NextResponse } from "next/server";
+import fs from 'fs';
+import path from 'path';
 
 const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY,
@@ -70,12 +72,40 @@ export async function POST(req: Request) {
 - LinkedIn: ${leadInfo.linkedin}`
             : "No hay datos del usuario todavía.";
 
-        const rawSystemPrompt = getSystemPrompt();
+        // --- EXTRACCIÓN DINÁMICA DE CONTEXTO (i18n) ---
+        let extraContext = { philosophy: [] as string[], testimonials: [] as string[] };
+        try {
+            const i18nPath = path.join(process.cwd(), 'app/i18n.ts');
+            const i18nContent = fs.readFileSync(i18nPath, 'utf8');
+
+            // Extraer Philosophy (ES)
+            const philosophyMatches = i18nContent.match(/title:\s*"(ADN|Puente|IA)[^"]*",\s*description:\s*"([^"]+)"/g);
+            if (philosophyMatches) {
+                extraContext.philosophy = philosophyMatches.map((m: string) => {
+                    const desc = m.match(/description:\s*"([^"]+)"/);
+                    return desc ? desc[1] : "";
+                }).filter(Boolean);
+            }
+
+            // Extraer Testimonios Clave (ES)
+            const testimonialMatches = i18nContent.match(/name:\s*"(Jesus Garcia|Ines Garcia|Almudena Alvarez)[^"]*",\s*text:\s*"([^"]+)"/g);
+            if (testimonialMatches) {
+                extraContext.testimonials = testimonialMatches.map((m: string) => {
+                    const name = m.match(/name:\s*"([^"]+)"/);
+                    const text = m.match(/text:\s*"([^"]+)"/);
+                    return name && text ? `${name[1]}: ${text[1].substring(0, 150)}...` : "";
+                }).filter(Boolean);
+            }
+        } catch (e) {
+            console.error("Error leyendo i18n para el bot:", e);
+        }
+
+        const rawSystemPrompt = getSystemPrompt(extraContext);
         const systemPrompt = rawSystemPrompt
             .replace(/USER_NAME/g, leadInfo?.name || "invitado")
             .replace(/USER_EMAIL/g, leadInfo?.email || "no proporcionado");
 
-        const hardReminder = "\n\n### 🚨 RECORDATORIO FINAL (CRÍTICO):\n- RESPONDE EN 3ra PERSONA (Álvaro...).\n- MÁXIMO 40 PALABRAS (2 LÍNEAS).\n- SÉ DIRECTO: SIN SALUDOS, SIN PREÁMBULOS, SIN DESPEDIDAS REPETITIVAS.";
+        const hardReminder = "\n\n### 🚨 RECORDATORIO FINAL (CRÍTICO):\n- RESPONDE EN 3ra PERSONA (Álvaro...).\n- MÁXIMO 20 PALABRAS (EJECUTIVO).\n- PROHIBIDO LISTAR MÁS DE 3 PROYECTOS/EMPRESAS.\n- SÉ DIRECTO: SIN SALUDOS, SIN PREÁMBULOS, SIN RELLENO.";
         const finalSystemPrompt = `${leadContext}\n\n${systemPrompt}${hardReminder}`;
         const formattedMessages = [
             { role: "system", content: finalSystemPrompt },

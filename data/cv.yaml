@@ -17,6 +17,25 @@ personal_info:
 chat_settings:
   bot_name: "InterviewMyCV"
   owner_short_name: "Álvaro"
+  suggested_queries:
+    - label: "💼 Experiencia laboral"
+      question: "¿Cuál es la experiencia laboral de Álvaro?"
+    - label: "🛠️ Stack tecnológico"
+      question: "¿Cuál es el stack tecnológico de Álvaro?"
+    - label: "📅 Agendar llamada"
+      question: "Me gustaría agendar una llamada con Álvaro."
+    - label: "🤖 Proyecto AcuaMattic"
+      question: "Cuéntame sobre el proyecto AcuaMattic e IA."
+    - label: "🏦 Banca y FinTech"
+      question: "Hablemos de tu experiencia en sistemas bancarios y FinTech."
+    - label: "🎓 Máster IA UPC"
+      question: "¿Qué estudiaste en tu Máster de IA en la UPC?"
+    - label: "🏠 Trabajo Remoto"
+      question: "¿Buscas oportunidades 100% remotas? ¿Cuál es tu disponibilidad?"
+    - label: "👁️ Visión Artificial"
+      question: "Cuéntame sobre tu experiencia con Visión por Computador y OpenCV."
+    - label: "🚀 Programa AI4DEVS"
+      question: "¿Qué aprendiste en el programa AI4DEVS de LIDR.co?"
 
 # ─── PERFIL PROFESIONAL ──────────────────────────────────────────────────────
 # Resumen único e impactante (estilo LinkedIn About). Alimenta la identidad del chatbot.

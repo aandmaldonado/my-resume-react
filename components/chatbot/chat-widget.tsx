@@ -40,9 +40,10 @@ export function ChatWidget() {
     const [emailError, setEmailError] = useState(false);
 
     const [chatSettings, setChatSettings] = useState({
-        botName: "Alvi",
+        botName: "InterviewMyCV",
         ownerName: "Álvaro Maldonado",
-        ownerShortName: "Álvaro"
+        ownerShortName: "Álvaro",
+        suggestedQueries: [] as Array<{ label: string; question: string }>
     });
     const [fontSize, setFontSize] = useState<"sm" | "md" | "lg">("md");
     const [highContrast, setHighContrast] = useState(false);
@@ -88,6 +89,13 @@ export function ChatWidget() {
             })
             .catch(console.error);
     }, []);
+
+    // Asegurar que las sugerencias se actualizan cuando cargan los datos del YAML
+    useEffect(() => {
+        if (isOpen && messages.length <= 1 && chatSettings.suggestedQueries.length > 0) {
+            refreshSuggestions();
+        }
+    }, [chatSettings.suggestedQueries, isOpen]);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -214,6 +222,12 @@ export function ChatWidget() {
 
     // --- GESTIÓN DE SUGERENCIAS DINÁMICAS ---
     const getAllSuggestions = () => {
+        // PRIORIDAD 1: Sugerencias dinámicas desde el YAML (vía API)
+        if (chatSettings.suggestedQueries && chatSettings.suggestedQueries.length > 0) {
+            return chatSettings.suggestedQueries;
+        }
+
+        // PRIORIDAD 2: Fallback a traducciones estáticas
         const queries = (chatbotTranslations[i18n.language as 'en' | 'es'] as any)?.suggested_queries || {};
         const suggestions = [
             { label: tp('chatbot.suggestion_experience'), question: tp('chatbot.q_experience') },
@@ -302,7 +316,7 @@ export function ChatWidget() {
         };
         const question = questionMap[suggestion] || suggestion;
         setShowSuggestions(false);
-        setInput(question);
+        handleSend(question);
     };
 
     // Helper para traducciones parametrizadas
