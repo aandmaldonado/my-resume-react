@@ -68,10 +68,8 @@ export function ChatWidget() {
     const safeTrack = (eventName: string, params: Record<string, any> = {}) => {
         try {
             if (typeof window !== "undefined" && (window as any).gtag) {
-                sendGAEvent({
-                    event: eventName,
-                    ...params
-                });
+                // Formato estándar recomendado por Google para evitar errores de comando inválido
+                (window as any).gtag('event', eventName, params);
             } else if (process.env.NODE_ENV === "development") {
                 console.log(`[GA Simulado] Evento: ${eventName}`, params);
             }
@@ -1025,7 +1023,7 @@ export function ChatWidget() {
                                             type="button"
                                             onClick={toggleVoiceInput}
                                             className={cn(
-                                                "p-2 transition-all shrink-0 rounded-full",
+                                                "flex h-10 w-10 shrink-0 items-center justify-center transition-all rounded-full",
                                                 isRecording 
                                                     ? "text-red-500 bg-red-500/10 animate-pulse scale-110" 
                                                     : "text-zinc-400 hover:text-blue-600 hover:bg-blue-500/5"
@@ -1039,7 +1037,7 @@ export function ChatWidget() {
                                         <form
                                             onSubmit={(e) => { e.preventDefault(); handleSend(); }}
                                             className={cn(
-                                                "flex-1 flex items-center rounded-2xl px-2.5 sm:px-4 py-1.5 sm:py-2 group focus-within:ring-1 focus-within:ring-blue-500/30 transition-all border border-transparent",
+                                                "flex-1 flex min-w-0 items-center rounded-2xl pl-3 pr-2 sm:pl-4 sm:pr-3 py-2 group focus-within:ring-1 focus-within:ring-blue-500/30 transition-all border border-transparent",
                                                 isDark ? "bg-zinc-800/70 focus-within:border-blue-500/20" : "bg-zinc-100/70 focus-within:border-blue-500/20"
                                             )}
                                         >
@@ -1050,7 +1048,7 @@ export function ChatWidget() {
                                                 data-testid="chat-input"
                                                 placeholder={tp('chatbot.input_placeholder')}
                                                 className={cn(
-                                                    "flex-1 bg-transparent text-sm outline-none py-1",
+                                                    "flex-1 bg-transparent text-sm outline-none py-1 min-w-0",
                                                     isDark ? "text-white" : "text-zinc-900"
                                                 )}
                                                 value={input}
@@ -1060,7 +1058,7 @@ export function ChatWidget() {
 
                                             {/* Contador de caracteres */}
                                             <span className={cn(
-                                                "text-[10px] ml-2 shrink-0 transition-colors",
+                                                "text-[9px] sm:text-[10px] ml-1.5 sm:ml-2 shrink-0 tabular-nums transition-colors",
                                                 input.length >= 450 ? "text-orange-500 font-medium" : (isDark ? "text-zinc-500" : "text-zinc-400"),
                                                 input.length >= 500 ? "text-red-500 font-bold" : ""
                                             )}>
@@ -1074,9 +1072,9 @@ export function ChatWidget() {
                                             onClick={() => handleSend()}
                                             aria-label="Enviar mensaje"
                                             disabled={isLoading || !input.trim()}
-                                            className="shrink-0 rounded-full bg-blue-600 p-2.5 text-white transition-all hover:bg-blue-700 disabled:opacity-30 disabled:hover:bg-blue-600 shadow-md hover:shadow-lg active:scale-95"
+                                            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white transition-all hover:bg-blue-700 disabled:opacity-30 disabled:hover:bg-blue-600 shadow-md hover:shadow-lg active:scale-95"
                                         >
-                                            <Send size={18} />
+                                            <Send size={18} className="-translate-x-0.5 translate-y-0.5" />
                                         </button>
                                     </div>
                                     <p className={cn("mt-2 text-[10px] text-center transition-colors", 

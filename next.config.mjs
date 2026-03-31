@@ -27,7 +27,7 @@ const nextConfig = {
           // Control referrer info sent to external sites
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           // Disable unnecessary browser features
-          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(self), geolocation=(), browsing-topics=()' },
           { key: 'X-DNS-Prefetch-Control', value: 'on' },
           // noarchive → Google/Bing no guardan copia de la página
           // nosnippet → no muestra tus textos en resultados de búsqueda (protege contenido)
