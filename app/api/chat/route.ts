@@ -75,7 +75,8 @@ export async function POST(req: Request) {
             .replace(/USER_NAME/g, leadInfo?.name || "invitado")
             .replace(/USER_EMAIL/g, leadInfo?.email || "no proporcionado");
 
-        const finalSystemPrompt = `${leadContext}\n\n${systemPrompt}`;
+        const hardReminder = "\n\n### 🚨 RECORDATORIO FINAL (CRÍTICO):\n- RESPONDE EN 3ra PERSONA (Álvaro...).\n- MÁXIMO 40 PALABRAS (2 LÍNEAS).\n- SÉ DIRECTO: SIN SALUDOS, SIN PREÁMBULOS, SIN DESPEDIDAS REPETITIVAS.";
+        const finalSystemPrompt = `${leadContext}\n\n${systemPrompt}${hardReminder}`;
         const formattedMessages = [
             { role: "system", content: finalSystemPrompt },
             ...messages.map((m: any) => ({

@@ -19,7 +19,7 @@ export const chatbotTranslations = {
         rate_limit: "{{botName}} is taking a short breath due to too many requests. Please try again in a few minutes.",
         welcome_simple: "Hi! I'm {{ownerShortName}}'s AI Agent. Would you like to schedule a call or learn more about his experience?",
         booking_success: "✅ **Request sent:** I've successfully notified {{ownerShortName}}. He'll contact you soon.",
-        tooltip: "Explore my career through **InterviewMyCV** 🚀",
+        tooltip: "Chat with my AI! 🤖👇",
         error_email: "Please enter a valid email address.",
         ai_disclaimer: "AI-generated responses. Please verify important information.",
         reset_session: "New conversation",
@@ -42,6 +42,24 @@ export const chatbotTranslations = {
         voice_error_not_supported: "Voice input is not supported in this browser.",
         voice_limit_reached: "Character limit reached. Microphone stopped.",
         thinking: "I'm thinking...",
+        suggested_queries: {
+            acuamattic: "🤖 Project AcuaMattic (AI)",
+            acuamattic_q: "Tell me about the AcuaMattic project and the AI models you developed for it.",
+            product_engineer: "💡 What is a Product Engineer?",
+            product_engineer_q: "What is your philosophy as a 'Product Engineer'?",
+            banking: "🏦 Banking/FinTech (+1M tx)",
+            banking_q: "Tell me about your experience in high-availability banking systems like Transbank and BCI.",
+            upc_master: "🎓 AI Master (UPC)",
+            upc_master_q: "What did you study in your Master's in AI at UPC?",
+            soft_skills: "🧠 Soft Skills & Team Lead",
+            soft_skills_q: "What are your soft skills and how do you lead technical teams?",
+            availability: "🏠 Remote work?",
+            availability_q: "Are you looking for 100% remote opportunities? What is your notice period?",
+            vision: "👁️ Computer Vision stuff",
+            vision_q: "Tell me about your experience with Computer Vision and OpenCV.",
+            lidr: "🚀 AI4DEVS Program",
+            lidr_q: "What did you learn in the AI4DEVS program at LIDR.co?"
+        }
     },
     es: {
         header: "{{botName}}",
@@ -63,7 +81,7 @@ export const chatbotTranslations = {
         rate_limit: "{{botName}} se está tomando un breve respiro debido a muchas peticiones. Por favor, inténtalo de nuevo en unos minutos.",
         welcome_simple: "¡Hola! Soy el agente IA de {{ownerShortName}}. ¿Te gustaría agendar una llamada o saber más sobre su experiencia?",
         booking_success: "✅ **Solicitud enviada:** He notificado a {{ownerShortName}} con éxito. Te contactará pronto.",
-        tooltip: "Explora mi trayectoria a través de **InterviewMyCV** 🚀",
+        tooltip: "¡Chatea con mi IA! 🤖👇",
         error_email: "Por favor, introduce un email válido.",
         ai_disclaimer: "Respuestas generadas por IA. Por favor, verifica información crítica.",
         reset_session: "Nueva conversación",
@@ -86,5 +104,23 @@ export const chatbotTranslations = {
         voice_error_not_supported: "La entrada de voz no es compatible con este navegador.",
         voice_limit_reached: "Límite de caracteres alcanzado. Micrófono detenido.",
         thinking: "Estoy pensando...",
+        suggested_queries: {
+            acuamattic: "🤖 Proyecto AcuaMattic (IA)",
+            acuamattic_q: "Cuéntame sobre el proyecto AcuaMattic y la IA que desarrollaste allí para acuarios.",
+            product_engineer: "💡 ¿Qué es un Product Engineer?",
+            product_engineer_q: "¿Cuál es tu filosofía como 'Product Engineer'?",
+            banking: "🏦 Banca/FinTech (+1M tx)",
+            banking_q: "Hablemos de tu experiencia en sistemas bancarios críticos como Transbank o BCI.",
+            upc_master: "🎓 Máster en IA (UPC)",
+            upc_master_q: "¿Qué estudiaste en tu Máster de IA en la UPC?",
+            soft_skills: "🧠 Soft Skills y Liderazgo",
+            soft_skills_q: "¿Cuáles son tus habilidades blandas y cómo lideras equipos técnicos?",
+            availability: "🏠 ¿Buscas remoto?",
+            availability_q: "¿Buscas oportunidades 100% remotas? ¿Cuál es tu disponibilidad?",
+            vision: "👁️ Visión Artificial",
+            vision_q: "Cuéntame sobre tu experiencia con Visión por Computador y OpenCV.",
+            lidr: "🚀 Programa AI4DEVS",
+            lidr_q: "¿Qué aprendiste en el programa AI4DEVS de LIDR.co?"
+        }
     }
 };

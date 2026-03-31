@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChatMessage } from "./chat-message";
 import { StarRating } from "./star-rating";
 import { cn } from "@/lib/utils";
+import { chatbotTranslations } from "./i18n";
 import { sendGAEvent } from "@next/third-parties/google";
 
 interface Message {
@@ -54,7 +55,9 @@ export function ChatWidget() {
     const [bookingError, setBookingError] = useState<string | null>(null);
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [currentSuggestions, setCurrentSuggestions] = useState<{label: string, question: string}[]>([]);
     const [isRecording, setIsRecording] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const [recordingError, setRecordingError] = useState<string | null>(null);
     const recognitionRef = useRef<any>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -91,6 +94,15 @@ export function ChatWidget() {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
     }, [messages, step]);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 640);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // --- AUTO-FOCUS UX ---
     useEffect(() => {
@@ -200,6 +212,35 @@ export function ChatWidget() {
         };
     }, []);
 
+    // --- GESTIÓN DE SUGERENCIAS DINÁMICAS ---
+    const getAllSuggestions = () => {
+        const queries = (chatbotTranslations[i18n.language as 'en' | 'es'] as any)?.suggested_queries || {};
+        const suggestions = [
+            { label: tp('chatbot.suggestion_experience'), question: tp('chatbot.q_experience') },
+            { label: tp('chatbot.suggestion_tech'), question: tp('chatbot.q_tech') },
+            { label: tp('chatbot.suggestion_education'), question: tp('chatbot.q_education') },
+            { label: tp('chatbot.suggestion_schedule'), question: tp('chatbot.q_schedule') },
+            { label: queries.acuamattic, question: queries.acuamattic_q },
+            { label: queries.product_engineer, question: queries.product_engineer_q },
+            { label: queries.banking, question: queries.banking_q },
+            { label: queries.upc_master, question: queries.upc_master_q },
+            { label: queries.soft_skills, question: queries.soft_skills_q },
+            { label: queries.availability, question: queries.availability_q },
+            { label: queries.vision, question: queries.vision_q },
+            { label: queries.lidr, question: queries.lidr_q },
+        ].filter(s => s.label && s.question);
+
+        return suggestions;
+    };
+
+    const refreshSuggestions = () => {
+        const allSuggestions = getAllSuggestions();
+        const shuffled = [...allSuggestions].sort(() => 0.5 - Math.random());
+        // Show 4 random suggestions from the global pool:
+        setCurrentSuggestions(shuffled.slice(0, 4));
+        setShowSuggestions(true);
+    };
+
     // Enviar saludo inicial al abrir el chat si está vacío (Paso 2.1)
     useEffect(() => {
         if (isOpen) {
@@ -210,15 +251,15 @@ export function ChatWidget() {
                         content: tp('chatbot.welcome_simple'),
                     },
                 ]);
-                setShowSuggestions(true);
+                refreshSuggestions();
             } else if (messages.length === 1 && messages[0].role === "assistant") {
-                // Si solo existe el mensaje inicial, lo actualizamos al nuevo idioma si este cambia
                 setMessages([
                     {
                         role: "assistant",
                         content: tp('chatbot.welcome_simple'),
                     },
                 ]);
+                refreshSuggestions();
             }
         }
     }, [isOpen, i18n.language, messages.length]);
@@ -247,6 +288,7 @@ export function ChatWidget() {
         setBookingDate("");
         setBookingTime("");
         setBookingError(null);
+        refreshSuggestions();
         safeTrack("chat_session_reset", {});
     };
 
@@ -356,6 +398,8 @@ export function ChatWidget() {
             message_length: input.length
         });
 
+        let botContent = "";
+        let hasTriggeredBooking = false;
         try {
             const response = await fetch("/api/chat", {
                 method: "POST",
@@ -388,23 +432,17 @@ export function ChatWidget() {
             const data = await response.json();
             if (data.error) throw new Error(data.error);
 
-            let botContent = data.content;
+            botContent = data.content;
             let bookingJson: string | null = null;
 
-            // 1. Detectar y limpiar el tag de agendamiento
-            if (botContent.includes("[TRIGGER_BOOKING:")) {
-                const match = botContent.match(/\[TRIGGER_BOOKING:\s*(\{.*?\})\]/);
-                if (match) {
-                    bookingJson = match[1];
-                    botContent = botContent.replace(match[0], "").trim();
-                }
-            }
-
-            // 1.5. Detectar tag de DatePicker
+            // 1. Detectar y limpiar los tags de agendamiento
             if (botContent.includes("[ACTION_DATEPICKER]")) {
                 botContent = botContent.replace("[ACTION_DATEPICKER]", "").trim();
                 setShowDatePicker(true);
+                setShowSuggestions(false);
+                hasTriggeredBooking = true;
             }
+
 
             // 1.7 Detector de Feedback
             if (botContent.includes("[ACTION_FEEDBACK]")) {
@@ -465,6 +503,22 @@ export function ChatWidget() {
             ]);
         } finally {
             setIsLoading(false);
+            
+            // Verificamos si la respuesta activó formularios para evitar chips
+            const isFeedback = botContent.includes("[ACTION_FEEDBACK]");
+
+            // Si hay un formulario activo o se acaba de activar (hasTriggeredBooking), NO mostrar chips
+            if (!showDatePicker && !showFeedback && !hasTriggeredBooking && !isFeedback) {
+                refreshSuggestions();
+                
+                // Solo enfocamos si no hay formulario
+                if (inputRef.current) {
+                    setTimeout(() => inputRef.current?.focus(), 100);
+                }
+            } else {
+                // Aseguramos que no queden chips flotando si se activó algo
+                setShowSuggestions(false);
+            }
         }
     };
 
@@ -501,71 +555,69 @@ export function ChatWidget() {
             : `Me gustaría agendar la llamada para el **${formattedDate}** a las **${bookingTime} (CET)**. 🗓️\n\n**Mis datos:**\n- **Nombre:** ${leadInfo.name}\n- **Email:** ${leadInfo.email}\n- **LinkedIn:** ${fullLinkedin}`;
 
         setShowDatePicker(false);
+        setShowSuggestions(false);
         const userMessage: Message = { role: "user", content: selectionText };
         setMessages((prev) => [...prev, userMessage]);
 
         setIsLoading(true);
         try {
-            const response = await fetch("/api/chat", {
+            // 1. Enviar el agendamiento directo a la API de Booking (sin pasar por el chat de IA)
+            const bookingRes = await fetch("/api/booking", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    messages: [...messages, userMessage],
-                    leadInfo: { ...leadInfo, linkedin: fullLinkedin },
+                    name: leadInfo.name,
+                    email: leadInfo.email,
+                    linkedin: fullLinkedin,
+                    date: formattedDate,
+                    time: bookingTime,
                 }),
             });
 
-            if (response.ok) {
-                const data = await response.json();
-                let botContent = data.content;
-                let bookingJson: string | null = null;
-
-                if (botContent.includes("[TRIGGER_BOOKING:")) {
-                    const match = botContent.match(/\[TRIGGER_BOOKING:\s*(\{.*?\})\]/);
-                    if (match) {
-                        bookingJson = match[1];
-                        botContent = botContent.replace(match[0], "").trim();
-                    }
-                }
-
-                if (botContent.includes("[ACTION_FEEDBACK]")) {
-                    botContent = botContent.replace("[ACTION_FEEDBACK]", "").trim();
-                    setShowFeedback(true);
-                }
-
-                if (botContent.trim()) {
-                    setMessages((prev) => [...prev, { role: "assistant", content: botContent }]);
-                }
-
-                if (bookingJson) {
-                    const bookingData = JSON.parse(bookingJson);
-                    await fetch("/api/booking", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            ...bookingData,
-                            linkedin: fullLinkedin,
-                        }),
-                    });
-                }
+            if (bookingRes.ok) {
+                // 2. Notificación estratégica de éxito (el mensaje que el usuario recordaba)
+                const successMsg = i18n.language === 'en'
+                    ? "Excellent! Álvaro has been notified of your request for **" + formattedDate + "** at **" + bookingTime + "**. He will contact you shortly to confirm the appointment personally."
+                    : "¡Excelente! Álvaro ha sido notificado de tu solicitud para el **" + formattedDate + "** a las **" + bookingTime + "**. Se pondrá en contacto contigo a la brevedad para confirmar la cita personalmente.";
+                
+                setMessages((prev) => [...prev, { role: "assistant", content: successMsg }]);
+                
+                // 3. Activar Feedback (Estrellas) de forma inmediata
+                setShowFeedback(true);
+                setShowSuggestions(false);
+                
+                safeTrack("chat_booking_success", {
+                    date: formattedDate,
+                    time: bookingTime
+                });
+            } else {
+                throw new Error("Booking API failed");
             }
         } catch (error) {
             console.error("Error during booking confirmation:", error);
+            setMessages((prev) => [...prev, { 
+                role: "assistant", 
+                content: i18n.language === 'en' ? "Something went wrong. Please try again." : "Algo salió mal. Por favor intenta nuevamente." 
+            }]);
         } finally {
             setIsLoading(false);
         }
     };
 
     return (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <div className="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 20, scale: 0.95 }}
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 15 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        style={{
+                            width: isMobile ? 'calc(100vw - 1.5rem)' : '420px'
+                        }}
                         className={cn(
-                            "mb-4 flex h-[550px] w-[350px] flex-col overflow-hidden rounded-2xl border shadow-2xl sm:w-[400px]",
+                            "mb-3 flex flex-col overflow-hidden rounded-2xl border shadow-2xl chatbot-window-fixed",
                             botTheme === 'dark' ? "bg-zinc-950 border-zinc-800" : "bg-white border-zinc-200"
                         )}
                     >
@@ -762,30 +814,28 @@ export function ChatWidget() {
 
                                         {/* Chips de sugerencias */}
                                         <AnimatePresence>
-                                            {showSuggestions && !isLoading && !showDatePicker && (
+                                            {showSuggestions && !isLoading && !isOffline && !showDatePicker && !showFeedback && (
                                                 <motion.div
                                                     initial={{ opacity: 0, y: 8 }}
                                                     animate={{ opacity: 1, y: 0 }}
                                                     exit={{ opacity: 0, y: 4 }}
-                                                    className="flex flex-wrap gap-2 pt-1 pb-2"
+                                                    className="flex flex-wrap gap-1.5 sm:gap-2 pt-1 pb-2"
                                                 >
-                                                    {[
-                                                        tp('chatbot.suggestion_experience'),
-                                                        tp('chatbot.suggestion_tech'),
-                                                        tp('chatbot.suggestion_education'),
-                                                        tp('chatbot.suggestion_schedule'),
-                                                    ].map((suggestion) => (
+                                                    {currentSuggestions.map((suggestion, idx) => (
                                                         <button
-                                                            key={suggestion}
-                                                            onClick={() => handleSuggestionClick(suggestion)}
+                                                            key={`${suggestion.label}-${idx}`}
+                                                            onClick={() => handleSuggestionClick(suggestion.question)}
                                                             className={cn(
-                                                                "rounded-full border px-3 py-1 text-xs transition-colors duration-200",
+                                                                "rounded-full border px-2.5 py-1 sm:px-3 sm:py-1.5 transition-all duration-200 transform active:scale-95 shadow-sm whitespace-nowrap",
+                                                                fontSize === "sm" && "text-[9px] sm:text-[10px]",
+                                                                fontSize === "md" && "text-[10px] sm:text-xs",
+                                                                fontSize === "lg" && "text-xs sm:text-sm",
                                                                 isDark 
-                                                                    ? "border-blue-800 bg-blue-950/40 text-blue-300 hover:bg-blue-900/50" 
-                                                                    : "border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100"
+                                                                    ? "border-blue-800 bg-blue-950/40 text-blue-300 hover:bg-blue-900/50 hover:border-blue-600" 
+                                                                    : "border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100 hover:border-blue-400"
                                                             )}
                                                         >
-                                                            {suggestion}
+                                                            {suggestion.label}
                                                         </button>
                                                     ))}
                                                 </motion.div>
@@ -952,12 +1002,11 @@ export function ChatWidget() {
                                     </div>
                                 </div>
 
-                                {/* Barra de entrada */}
                                 <div className={cn(
-                                    "border-t p-4 backdrop-blur-sm transition-colors duration-300",
+                                    "border-t p-2 sm:p-4 backdrop-blur-sm transition-colors duration-300",
                                     isDark ? "border-zinc-800 bg-zinc-950/50" : "border-zinc-100 bg-white/50"
                                 )}>
-                                    <div className="flex items-center gap-2 max-w-4xl mx-auto">
+                                    <div className="flex items-center gap-1.5 sm:gap-2 max-w-4xl mx-auto">
                                         {/* Botón de Micrófono (Futura funcionalidad) */}
                                         {/* Botón de Micrófono */}
                                         <button
@@ -978,7 +1027,7 @@ export function ChatWidget() {
                                         <form
                                             onSubmit={(e) => { e.preventDefault(); handleSend(); }}
                                             className={cn(
-                                                "flex-1 flex items-center rounded-2xl px-4 py-2 group focus-within:ring-1 focus-within:ring-blue-500/30 transition-all border border-transparent",
+                                                "flex-1 flex items-center rounded-2xl px-2.5 sm:px-4 py-1.5 sm:py-2 group focus-within:ring-1 focus-within:ring-blue-500/30 transition-all border border-transparent",
                                                 isDark ? "bg-zinc-800/70 focus-within:border-blue-500/20" : "bg-zinc-100/70 focus-within:border-blue-500/20"
                                             )}
                                         >
