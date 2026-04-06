@@ -23,9 +23,9 @@ export async function POST(req: Request) {
             }
         }
 
-        // Lazy instantiation: solo se necesitan cuando se llama a la API en Runtime
-        const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-        const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY || "");
+        // Lazy instantiation controlada: evitamos crashes si la clave está vacía o comentada
+        const groq = process.env.GROQ_API_KEY ? new Groq({ apiKey: process.env.GROQ_API_KEY }) : null;
+        const genAI = process.env.GOOGLE_GENERATIVE_AI_API_KEY ? new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY) : null;
 
         const lastUserMessage = messages[messages.length - 1]?.content || "";
         const lastMessageLower = lastUserMessage.toLowerCase();
@@ -84,39 +84,60 @@ export async function POST(req: Request) {
 - LinkedIn: ${leadInfo.linkedin}`
             : "No hay datos del usuario todavía.";
 
-        // --- EXTRACCIÓN DINÁMICA DE CONTEXTO (i18n) ---
-        let extraContext = { philosophy: [] as string[], testimonials: [] as string[] };
+        // --- EXTRACCIÓN DINÁMICA DE NARRATIVA (app/i18n.ts) ---
+        let portfolioNarrative = "";
         try {
             const i18nPath = path.join(process.cwd(), 'app/i18n.ts');
             const i18nContent = fs.readFileSync(i18nPath, 'utf8');
 
-            const philosophyMatches = i18nContent.match(/title:\s*"(ADN|Puente|IA)[^"]*",\s*description:\s*"([^"]+)"/g);
-            if (philosophyMatches) {
-                extraContext.philosophy = philosophyMatches.map((m: string) => {
-                    const desc = m.match(/description:\s*"([^"]+)"/);
-                    return desc ? desc[1] : "";
-                }).filter(Boolean);
-            }
+            // Extraemos solo la parte de español (es) para evitar duplicados
+            const esSection = i18nContent.split('es: {')[1]?.split('chatbot:')[0] || "";
 
-            const testimonialMatches = i18nContent.match(/name:\s*"(Jesus Garcia|Ines Garcia|Almudena Alvarez)[^"]*",\s*text:\s*"([^"]+)"/g);
-            if (testimonialMatches) {
-                extraContext.testimonials = testimonialMatches.map((m: string) => {
-                    const name = m.match(/name:\s*"([^"]+)"/);
-                    const text = m.match(/text:\s*"([^"]+)"/);
-                    return name && text ? `${name[1]}: ${text[1].substring(0, 150)}...` : "";
-                }).filter(Boolean);
-            }
+            // 1. Extraer Filosofía/Cards de About
+            const aboutMatches = esSection.match(/title:\s*"([^"]+)",\s*description:\s*"([^"]+)"/g);
+            const aboutText = aboutMatches ? aboutMatches.map(m => {
+                const parts = m.match(/"([^"]+)"/g);
+                return parts ? `- ${parts[0].replace(/"/g, '')}: ${parts[1].replace(/"/g, '')}` : "";
+            }).filter(Boolean).join('\n') : "";
+
+            // 2. Extraer Descripciones ricas de Proyectos
+            const projectMatches = esSection.match(/title:\s*"([^"]+)",\s*description:\s*"([^"]+)"/g);
+            // Evitamos duplicar lo de 'about' filtrando por palabras clave
+            const projectText = projectMatches ? projectMatches
+                .filter(m => !m.includes("ADN") && !m.includes("Puente") && !m.includes("Propósito"))
+                .map(m => {
+                    const parts = m.match(/"([^"]+)"/g);
+                    return parts ? `* ${parts[0].replace(/"/g, '')}: ${parts[1].replace(/"/g, '')}` : "";
+                }).filter(Boolean).join('\n') : "";
+
+            // 3. Extraer Testimonios
+            const testimonialMatches = esSection.match(/name:\s*"([^"]+)",\s*text:\s*"([^"]+)"/g);
+            const testimonialText = testimonialMatches ? testimonialMatches.map(m => {
+                const parts = m.match(/"([^"]+)"/g);
+                return parts ? `* ${parts[0].replace(/"/g, '')} dice: "${parts[1].replace(/"/g, '').substring(0, 200)}..."` : "";
+            }).filter(Boolean).join('\n') : "";
+
+            portfolioNarrative = `
+### 🌟 NARRATIVA ESTRATÉGICA (TONO Y POSICIONAMIENTO)
+${aboutText}
+
+### 🚀 DETALLES DE PROYECTOS Y SOLUCIONES
+${projectText}
+
+### ⭐ RECOMENDACIONES PROFESIONALES
+${testimonialText}
+            `;
         } catch (e) {
-            console.error("Error leyendo i18n para el bot:", e);
+            console.error("Error leyendo narrativa i18n:", e);
         }
 
-        const rawSystemPrompt = getSystemPrompt(extraContext);
+        const rawSystemPrompt = getSystemPrompt(portfolioNarrative);
         const systemPrompt = rawSystemPrompt
             .replace(/USER_NAME/g, leadInfo?.name || "invitado")
             .replace(/USER_EMAIL/g, leadInfo?.email || "no proporcionado");
 
-        const hardReminder = "\n\n### 🚨 RECORDATORIO FINAL (CRÍTICO):\n- RESPONDE EN 3ra PERSONA (Álvaro...).\n- MÁXIMO 20 PALABRAS (EJECUTIVO).\n- PROHIBIDO LISTAR MÁS DE 3 PROYECTOS/EMPRESAS.\n- SÉ DIRECTO: SIN SALUDOS, SIN PREÁMBULOS, SIN RELLENO.";
-    const finalSystemPrompt = `${leadContext}\n\n${systemPrompt}${hardReminder}`;
+        const hardReminder = "\n\n### 🚨 RECORDATORIO FINAL (CRÍTICO):\n- RESPONDE EN 3ra PERSONA (Álvaro...).\n- ESTILO: CONCISO PERO COMPLETO (MÁXIMO 60 PALABRAS).\n- SI NO TIENES UN DATO ESPECÍFICO (como el Máster), di que Álvaro puede dar más detalles en una entrevista.\n- PROHIBIDO LISTAR MÁS DE 3 PROYECTOS/EMPRESAS.\n- SÉ DIRECTO: SIN SALUDOS, SIN PREÁMBULOS, SIN RELLENO.";
+        const finalSystemPrompt = `${leadContext}\n\n${systemPrompt}${hardReminder}`;
     
     const formattedMessages = [
         { role: "system", content: finalSystemPrompt },
@@ -146,13 +167,12 @@ export async function POST(req: Request) {
         } 
         
         if (currentProvider === 'google') {
-            if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) throw new Error("Google API Key missing");
+            if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY || !genAI) throw new Error("Google API Key missing or not initialized");
             const model = genAI.getGenerativeModel({ 
               model: "gemini-2.0-flash",
               systemInstruction: finalSystemPrompt 
             });
             
-            // Google usa un formato de historial diferente
             const chat = model.startChat({
               history: messages.slice(0, -1).map((m: any) => ({
                 role: m.role === 'assistant' ? 'model' : 'user',
@@ -166,11 +186,11 @@ export async function POST(req: Request) {
         }
 
         // DEFAULT: Groq
-        if (!process.env.GROQ_API_KEY) throw new Error("Groq API Key missing");
+        if (!process.env.GROQ_API_KEY || !groq) throw new Error("Groq API Key missing or not initialized");
         const completion = await groq.chat.completions.create({
             messages: formattedMessages,
             model: "llama-3.3-70b-versatile",
-            temperature: 0.1,
+            temperature: 0.4,
             max_tokens: 1024,
         });
         return completion.choices[0]?.message?.content || "";
