@@ -137,7 +137,6 @@ export default function ExperienceSection() {
                                       className="h-full w-full"
                                       aria-label={tech.alt}
                                     >
-                                      <title>{tech.alt}</title>
                                       <path d={tech.path} fill={tech.hex} />
                                     </svg>
                                   )}

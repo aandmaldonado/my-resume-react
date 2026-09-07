@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: 'Alvaro Maldonado | Software Architect, Tech Lead & AI Engineer',
     template: '%s | Alvaro Maldonado',
   },
-  description: 'Software Architect & Tech Lead Hands-On. Conecto la visión de negocio con la ingeniería distribuida de alta escala mediante Java, Spring Boot, Kafka y soluciones de IA con propósito.',
+  description: 'Software Architect & Tech Lead Hands-On. Conecto visión de negocio y sistemas distribuidos de alta escala con Java, Kafka e IA con propósito.',
   keywords: [
     'Alvaro Maldonado',
     'Software Architect',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Alvaro Maldonado | Software Architect, Tech Lead & AI Engineer',
-    description: 'Software Architect & Tech Lead Hands-On. Conecto la visión de negocio con la ingeniería distribuida de alta escala mediante Java, Spring Boot, Kafka y soluciones de IA con propósito.',
+    description: 'Software Architect & Tech Lead Hands-On. Conecto visión de negocio y sistemas distribuidos de alta escala con Java, Kafka e IA con propósito.',
     url: 'https://almapi.dev',
     siteName: 'almap[i]',
     images: [
