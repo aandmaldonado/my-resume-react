@@ -2,7 +2,7 @@
 
 import { useTranslation } from "react-i18next"
 import Image from "next/image"
-import { Haze } from "lucide-react"
+import { MapPin } from "lucide-react"
 import { motion } from "framer-motion"
 import GlassCard from "./ui/glass-card"
 import { trackSocialClick } from "@/lib/analytics"
@@ -57,7 +57,7 @@ export default function AboutSection() {
               >
                 <div className="relative w-full h-full rounded-full overflow-hidden bg-dark-card p-1">
                   <Image
-                    src="/about/profile.jpeg"
+                    src="/about/selfie.png"
                     alt="Fotografía de perfil de Álvaro Maldonado"
                     fill
                     sizes="(max-width: 640px) 320px, 400px"
@@ -69,17 +69,15 @@ export default function AboutSection() {
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-white mb-2">Álvaro Maldonado</h3>
                 <p className="text-gray-300 flex items-center justify-center gap-2">
-                  <Haze className="w-4 h-4" />
+                  <MapPin className="w-4 h-4" />
                   {t("about.location")}
                 </p>
               </div>
 
               <div className="flex items-center space-x-4">
                 {[
-                  { name: "linkedin", url: "https://www.linkedin.com/in/alvaro-maldonado-ai/", label: "LinkedIn" },
+                  { name: "linkedin", url: "https://www.linkedin.com/in/alvaro-maldonado-pinto-ai/", label: "LinkedIn" },
                   { name: "email", url: "mailto:readme.md@almapi.dev", label: "Email" },
-                  { name: "credly", url: "https://www.credly.com/users/almapi.dev", label: "Credly" },
-                  { name: "google-cloud", url: "https://www.cloudskillsboost.google/public_profiles/333c0c54-8af4-48ae-8353-531e97f03c7d", label: "Google Cloud" },
                   { name: "github", url: "https://github.com/aandmaldonado", label: "GitHub" }
                 ].map((social) => (
                   <motion.a

@@ -11,28 +11,29 @@ const baseUrl = process.env.NODE_ENV === 'development'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Alvaro Maldonado | Tech Lead & AI Strategist',
+    default: 'Alvaro Maldonado | Software Architect, Tech Lead & AI Engineer',
     template: '%s | Alvaro Maldonado',
   },
-  description: 'Tech Lead & AI Strategist. Transformo ideas de negocio en productos que escalan. Experto en conectar visión estratégica con soluciones de alto impacto.',
+  description: 'Software Architect & Tech Lead Hands-On. Conecto la visión de negocio con la ingeniería distribuida de alta escala mediante Java, Spring Boot, Kafka y soluciones de IA con propósito.',
   keywords: [
     'Alvaro Maldonado',
-    'Tech Lead',
-    'AI Strategist',
-    'AI Solutions Architect',
-    'AI Agents',
-    'Autonomous Agents',
-    'LangGraph',
-    'RAG',
-    'LLMOps',
-    'LangChain',
-    'Solution Architecture',
-    'Scalable Systems',
+    'Software Architect',
+    'Senior Tech Lead',
+    'AI Engineer',
+    'Solutions Architect',
+    'Domain-Driven Design (DDD)',
+    'Event-Driven Architecture (EDA)',
+    'TDD',
+    'API-First',
+    'Apache Kafka',
+    'Java Spring Boot',
+    'MLOps',
     'Generative AI',
-    'Python',
-    'Enterprise AI',
-    'Technical Leadership',
-    'Cloud Architecture'
+    'RAG Systems',
+    'Agentic Workflows',
+    'DevSecOps',
+    'Spec-Driven Development (SDD)',
+    'Enterprise Software Architecture'
   ],
   authors: [
     {
@@ -55,8 +56,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Alvaro Maldonado | Tech Lead & AI Strategist',
-    description: 'Tech Lead & AI Strategist. Transformo ideas de negocio en productos que escalan. Experto en conectar visión estratégica con soluciones de alto impacto.',
+    title: 'Alvaro Maldonado | Software Architect, Tech Lead & AI Engineer',
+    description: 'Software Architect & Tech Lead Hands-On. Conecto la visión de negocio con la ingeniería distribuida de alta escala mediante Java, Spring Boot, Kafka y soluciones de IA con propósito.',
     url: 'https://almapi.dev',
     siteName: 'almap[i]',
     images: [

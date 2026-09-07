@@ -58,9 +58,9 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-xl xs:text-2xl sm:text-3xl md:text-5xl lg:text-5xl font-bold mb-4 xs:mb-6 leading-tight"
         >
-          {t("hero.title")}
+          Álvaro{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-            Álvaro
+            Maldonado
           </span>
         </motion.h1>
         <motion.div

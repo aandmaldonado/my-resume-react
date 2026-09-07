@@ -16,11 +16,11 @@ const resources = {
       },
       hero: {
         title: "Hello World! I'm ",
-        subtitle: "Technical Leadership | Software Architecture | Human-in-the-loop",
-        contact_button: "Contact me",
+        subtitle: "Software Architect | Senior Tech Lead | AI Engineer",
+        contact_button: "Let's talk",
       },
       about: {
-        location: "Gandia, Spain",
+        location: "Spain",
         title: "Career & Strategic Vision",
         cards: [
           {
@@ -36,7 +36,7 @@ const resources = {
           {
             number: "03",
             title: "AI with Purpose",
-            description: "I don't see AI as a trend, but as the definitive tool for solving complex problems. I design Intelligent Systems architectures under the Human-in-the-loop philosophy, always prioritizing real and measurable impact."
+            description: "I don't see AI as a trend, but as the definitive tool for solving complex problems. I design Intelligent Systems architectures under the 'Human-in-the-loop' philosophy, always prioritizing real and measurable impact."
           }
         ],
       },
@@ -46,6 +46,7 @@ const resources = {
         description: "Description",
         achievements: "Key Achievements",
         responsibilities: "Core Responsibilities",
+        stack: "Stack",
         experiences: [
           {
             company: "InAdvance Consulting Group",
@@ -54,9 +55,24 @@ const resources = {
             location: "Chile",
             logo: "/exp/inadvance.jpeg",
             achievements: [
-              "Led the modernization of the card system, supporting 500K+ daily transactions through a resilient microservices architecture, ensuring 24/7 availability.",
-              "Reduced critical incidents by 45% by applying CI/CD, Trunk Based Development, and Shift-Left Testing.",
-              "Transformed financial requirements into scalable solutions that eliminated ambiguities and accelerated delivery."
+              "Led the modernization of the payment core, managing distributed microservices architectures with Java and Spring Boot to support 500,000 daily transactions with zero downtime.",
+              "Reduced critical incidents by 45% by defining and enforcing quality standards, CI/CD pipelines, and Shift-Left testing, bolstering software reliability and security.",
+              "Aligned business objectives with technical execution, translating complex financial requirements into scalable, secure, and fully monitored architectures under robust design principles.",
+              "Decreased cycle time by 30% and guaranteed cloud service interoperability by adopting Spec-Driven Development (SDD) alongside AI-assisted backend engineering practices."
+            ],
+            stack: [
+              "Java 17/21",
+              "Spring Boot",
+              "PostgreSQL/MongoDB",
+              "AI-Assisted Dev (GitHub Copilot, Cursor, Gemini, Antigravity)",
+              "Shift-Left Testing & Security (SonarQube, Veracode, Spock, Karate Framework, ArchUnit)",
+              "CI/CD (GitHub Actions, Jenkins, Azure DevOps)",
+              "Docker",
+              "Kubernetes",
+              "Splunk",
+              "Dynatrace",
+              "Swagger/OpenAPI",
+              "API Security (OAuth2, JWT)"
             ]
           },
           {
@@ -66,9 +82,27 @@ const resources = {
             location: "Chile",
             logo: "/exp/imagemaker.jpeg",
             achievements: [
-              "Reduced response time by 99.9% (from 48h to <3s) through an AI PoC that automated the analysis of 10,000 monthly legal documents.",
-              "Developed Cloud-Native microservices with CI/CD and automated reviews, reducing technical debt by 30% and ensuring scalability.",
-              "Decreased downtime in critical systems by 60% by implementing proactive observability with Splunk and Dynatrace for early detection."
+              "Architected an AI-driven Legal Engine processing 10,000 monthly documents, slashing operational response times from 48 hours to 3 seconds through a cloud-native architecture.",
+              "Accelerated product delivery and reduced technical debt by 30% by orchestrating the transition to scalable microservices with fully automated CI/CD pipelines.",
+              "Safeguarded business continuity across critical systems, decreasing downtime by 60% through the implementation of advanced observability and proactive monitoring strategies.",
+              "Led the strategic alignment between engineering and business stakeholders, translating complex requirements into technical roadmaps that ensured the successful adoption of the new cloud architecture."
+            ],
+            stack: [
+              "Java 11/17/21",
+              "Spring Boot",
+              "Oracle DB",
+              "Python",
+              "FastAPI",
+              "GenAI (LLMs/RAG, OpenAI API)",
+              "AI-Assisted Dev (GitHub Copilot)",
+              "Shift-Left Testing & Security (SonarQube, Veracode, JUnit, Mockito)",
+              "CI/CD (Bamboo)",
+              "Amazon Web Services (AWS)",
+              "Docker",
+              "Kubernetes",
+              "Observabilidad (Splunk, Dynatrace, Elasticsearch)",
+              "Swagger/OpenAPI",
+              "API Security (OAuth2, JWT)"
             ]
           },
           {
@@ -78,9 +112,24 @@ const resources = {
             location: "Chile",
             logo: "/exp/falabella.jpeg",
             achievements: [
-              "Orchestrated the technical transformation of the regional attendance system for 50,000+ employees, reducing technical debt by 35% through domain decoupling with DDD.",
-              "Designed a transactional core with DDD and event-driven architecture to process 2M daily events with low latency.",
-              "Accelerated time-to-market by 30% and eliminated data inconsistencies through standardized SaaS API integration."
+              "Led the technical modernization of the corporate attendance system for 50,000+ employees across LATAM, cutting technical debt by 35% with Java, Spring Boot, and microservices.",
+              "Delivered high availability with zero operational outages for 50,000+ active users through a decoupled transactional core built on Domain-Driven Design (DDD).",
+              "Eliminated all data inconsistencies between the core system and external SaaS ecosystem by enabling real-time sync via a distributed event bus (Apache Kafka, GCP Pub/Sub) under an Event-Driven Architecture (EDA).",
+              "Standardized corporate SaaS integrations, accelerating time-to-market by 30% while strengthening interoperability and integration security."
+            ],
+            stack: [
+              "Java 17/21",
+              "Spring Boot",
+              "PL/SQL",
+              "Oracle DB",
+              "Event-Driven Architecture (Apache Kafka, GCP Pub/Sub)",
+              "GCP",
+              "Swagger/OpenAPI",
+              "AI-Assisted Dev (GitHub Copilot)",
+              "CI/CD (Gitlab)",
+              "Docker",
+              "Kubernetes",
+              "API Security (OAuth2, JWT)"
             ]
           },
           {
@@ -90,10 +139,27 @@ const resources = {
             location: "Spain",
             logo: "/exp/neurogenesis.jpeg",
             achievements: [
-              "Co-founded and led the technology strategy and product roadmap from incorporation to launch.",
-              "Developed an end-to-end AI system with 92% accuracy (CNN), based on the creation of a proprietary dataset of +10k images.",
-              "Designed Cloud-Native infrastructure on AWS to deploy scalable ML models and facilitate production (MLOps).",
-              "Technically led 7 innovation projects (+50 students) in AI and DevOps, aligning academic research with real commercial applications."
+              "Orchestrated the foundational technical strategy, transforming academic research into a scalable commercial product that successfully validated the business model.",
+              "Built a strategic Data Moat by engineering an automated pipeline to curate raw images and videos, structuring a proprietary dataset of 10,000+ records for the computer vision system.",
+              "Engineered the core Artificial Intelligence engine (AcuaMattic) by training a CNN model that achieved 92% accuracy, enabling the product's successful commercial launch.",
+              "Scaled production infrastructure by designing and implementing cloud-native MLOps architectures on AWS, guaranteeing high availability for AI models.",
+              "Directed a 50-person multidisciplinary team to deliver a portfolio of 7 AI and DevOps projects, optimizing resource allocation and accelerating time-to-market."
+            ],
+            stack: [
+              "Python",
+              "PyTorch",
+              "TensorFlow",
+              "Keras",
+              "Computer Vision (CNNs, OpenCV, Segmentation)",
+              "Transformers (Hugging Face, GPT-3 / OpenAI API)",
+              "ML Clásico (Scikit-Learn)",
+              "NumPy",
+              "Pandas",
+              "Matplotlib",
+              "Seaborn",
+              "SciPy",
+              "AWS (SageMaker, Rekognition, EC2, S3, IAM)",
+              "Jupyter Notebook"
             ]
           },
           {
@@ -103,9 +169,21 @@ const resources = {
             location: "Chile",
             logo: "/exp/nttdata.jpeg",
             achievements: [
-              "Designed high-availability architecture processing +1M daily transactions and reduced critical vulnerabilities by 50% by implementing OWASP and PCI standards.",
-              "Refactored critical modules with high technical debt, migrating monolithic logic to decoupled microservices to improve maintainability and deployment speed.",
-              "Established the test automation and static analysis framework (Shift-Left), drastically reducing the error rate detected in pre-production environments."
+              "Architected a high-availability transactional core, successfully processing 1M+ daily operations in Java and Spring Boot environments to support business scale.",
+              "Safeguarded the technical delivery lifecycle, slashing critical vulnerabilities by 50% through the enforcement of strict compliance standards including OWASP and PCI.",
+              "Accelerated the adoption of DevSecOps (Shift-Left) practices, automating secure code reviews within CI/CD pipelines by integrating Fortify and Kiuwan.",
+              "Led the modernization of the legacy ecosystem, orchestrating the strategic migration from monolithic applications to decoupled microservices architectures."
+            ],
+            stack: [
+              "Java 8/11",
+              "Spring Boot",
+              "Oracle DB",
+              "Ciberseguridad & Cumplimiento (PCI-DSS, OWASP Top 10)",
+              "Swagger/OpenAPI",
+              "API Security (OAuth2, JWT)",
+              "Fortify",
+              "Kiuwan",
+              "GitLab"
             ]
           }
         ]
@@ -116,7 +194,7 @@ const resources = {
         educations: [
           {
             institution: "LIDR.co | AI-Powered Careers",
-            degree: "AI4DEVS",
+            degree: "AI Engineer (AI4DEVS)",
             period: "2025",
             location: "Spain",
             logo: "/edu/lidr.jpeg",
@@ -207,7 +285,7 @@ const resources = {
         ]
       },
       projects: {
-        title: "Built & Scaled",
+        title: "Featured Enterprise Solutions",
         counter: "projects",
         more_info: "More Info",
         external_link: "External Link",
@@ -286,24 +364,24 @@ const resources = {
         title: "Capabilities & Stack",
         project_management: {
           title: "Leadership & Strategy",
-          skills: "Technical Leadership, Human-in-the-loop, Product Engineering, Agile Development, Mentoring",
+          skills: "Software Architecture, SDD, Product Engineering, API-First, Technical Leadership, Mentoring, Human-in-the-loop, Agile Development",
         },
         ai: {
           title: "AI & Intelligent Systems",
           skills:
-            "GenAI, LLM, RAG, LangChain, HuggingFace, Agentic Workflows, OpenCV, TensorFlow, PyTorch, CNN",
+            "Agentic Workflows, CNN, HuggingFace, RAG, TensorFlow, LLM, LangChain, GenAI, PyTorch, OpenCV",
         },
         backend: {
           title: "Architecture & Backend",
-          skills: "Java, Spring Boot, Python, FastAPI, Microservices, DDD, SQL, NoSQL",
+          skills: "Hexagonal Architecture, Java, Spring Boot, DDD, FastAPI, EDA, Python, BDD, OpenAPI, TDD, NoSQL, SQL",
         },
         cicd: {
           title: "Cloud & DevOps",
-          skills: "AWS, GCP, Kubernetes, Docker, Jenkins, GitHub Actions, Splunk, Dynatrace, Elasticsearch",
+          skills: "GitHub Actions, AWS, Elasticsearch, GCP, Kubernetes, Docker, Dynatrace, Jenkins, Splunk",
         },
         code_review: {
           title: "Clean Code & Shift-Left",
-          skills: "JUnit, Mockito, Spock, Karate, Checkstyle, Sonar, Veracode, ArchUnit",
+          skills: "SonarQube, SOLID, Veracode, Spock, ArchUnit, Karate, Fortify, Swagger, Kiuwan",
         },
         languages: {
           title: "Languages",
@@ -420,9 +498,9 @@ const resources = {
         flipHint: "Tap the card to flip it",
         back: {
           email: "readme.md@almapi.dev",
-          linkedin: "@alvaro-maldonado-ai",
+          linkedin: "@alvaro-maldonado-pinto-ai",
           github: "@aandmaldonado",
-          city: "Gandía, Spain | Global Remote"
+          city: "Spain"
         }
       },
       chatbot: chatbotTranslations.en
@@ -441,11 +519,11 @@ const resources = {
       },
       hero: {
         title: "¡Hola Mundo! Soy ",
-        subtitle: "Liderazgo Técnico | Arquitectura de Software | Human-in-the-loop",
-        contact_button: "Contáctame",
+        subtitle: "Arquitecto de Software | Líder Técnico Senior | Ingeniero de IA",
+        contact_button: "Hablemos",
       },
       about: {
-        location: "Gandía, España",
+        location: "España",
         title: "Trayectoria y Visión Estratégica",
         cards: [
           {
@@ -461,7 +539,7 @@ const resources = {
           {
             number: "03",
             title: "IA con Propósito",
-            description: "No veo la IA como una tendencia, sino como la herramienta definitiva para resolver problemas complejos. Diseño arquitecturas de Sistemas Inteligentes bajo la filosofía Human-in-the-loop, priorizando siempre el impacto real y medible."
+            description: "No veo la IA como una tendencia, sino como la herramienta definitiva para resolver problemas complejos. Diseño arquitecturas de Sistemas Inteligentes bajo la filosofía 'Human-in-the-loop', priorizando siempre el impacto real y medible."
           }
         ],
       },
@@ -471,6 +549,7 @@ const resources = {
         description: "Descripción",
         achievements: "Logros Clave",
         responsibilities: "Responsabilidades Principales",
+        stack: "Stack",
         experiences: [
           {
             company: "InAdvance Consulting Group",
@@ -479,9 +558,24 @@ const resources = {
             location: "Chile",
             logo: "/exp/inadvance.jpeg",
             achievements: [
-              "Lideré la modernización del sistema de tarjetas, soportando +500K transacciones diarias mediante una arquitectura de resiliencia en microservicios, garantizando disponibilidad total (24/7).",
-              "Reduje un 45% los incidentes críticos aplicando CI/CD, Trunk Based Development y Shift-Left Testing.",
-              "Transformé requerimientos financieros en soluciones escalables que eliminaron ambigüedades y aceleraron entregas."
+              "Lidero la modernización del núcleo de pagos, gestionando arquitecturas distribuidas basadas en microservicios con Java y Spring Boot que soportan 500.000 transacciones diarias sin interrupciones.",
+              "Reduje un 45% los incidentes críticos al definir y aplicar estándares de calidad, pipelines de CI/CD y pruebas Shift-Left, reforzando la fiabilidad y la seguridad del software.",
+              "Alineé los objetivos de negocio con la ejecución técnica mediante Domain-Driven Design (DDD), traduciendo requisitos financieros complejos en arquitecturas escalables, seguras y monitorizadas.",
+              "Reduje un 30% el cycle time y garanticé la interoperabilidad de servicios en la nube mediante Spec-Driven Development (SDD) y buenas prácticas de ingeniería backend asistida por IA."
+            ],
+            stack: [
+              "Java 17/21",
+              "Spring Boot",
+              "PostgreSQL/MongoDB",
+              "AI-Assisted Dev (GitHub Copilot, Cursor, Gemini, Antigravity)",
+              "Shift-Left Testing & Security (SonarQube, Veracode, Spock, Karate Framework, ArchUnit)",
+              "CI/CD (GitHub Actions, Jenkins, Azure DevOps)",
+              "Docker",
+              "Kubernetes",
+              "Splunk",
+              "Dynatrace",
+              "Swagger/OpenAPI",
+              "API Security (OAuth2, JWT)"
             ]
           },
           {
@@ -491,9 +585,27 @@ const resources = {
             location: "Chile",
             logo: "/exp/imagemaker.jpeg",
             achievements: [
-              "Reduje el tiempo de respuesta en un 99.9% (de 48h a <3s) mediante una PoC de IA que automatizó el análisis de 10,000 documentos legales mensuales.",
-              "Desarrollé microservicios Cloud-Native con CI/CD y revisiones automáticas, reduciendo deuda técnica en 30% y garantizando escalabilidad.",
-              "Disminuí en 60% el downtime en sistemas críticos implementando observabilidad proactiva con Splunk y Dynatrace para detección temprana."
+              "Diseñé un Motor de IA para análisis legal que procesa 10.000 documentos mensuales, reduciendo los tiempos de respuesta operativos de 48 horas a 3 segundos bajo una arquitectura cloud-native.",
+              "Aceleré el despliegue de producto y reduje la deuda técnica en un 30% al orquestar la transición hacia microservicios escalables con pipelines de CI/CD totalmente automatizados.",
+              "Blindé la continuidad del negocio en sistemas críticos, disminuyendo el downtime un 60% mediante la implementación de estrategias avanzadas de observabilidad y monitorización proactiva.",
+              "Lideré la alineación estratégica entre el equipo de ingeniería y los stakeholders de negocio, traduciendo requerimientos complejos en roadmaps técnicos que aseguraron la adopción exitosa de la nueva arquitectura cloud."
+            ],
+            stack: [
+              "Java 11/17/21",
+              "Spring Boot",
+              "Oracle DB",
+              "Python",
+              "FastAPI",
+              "GenAI (LLMs/RAG, OpenAI API)",
+              "AI-Assisted Dev (GitHub Copilot)",
+              "Shift-Left Testing & Security (SonarQube, Veracode, JUnit, Mockito)",
+              "CI/CD (Bamboo)",
+              "Amazon Web Services (AWS)",
+              "Docker",
+              "Kubernetes",
+              "Observabilidad (Splunk, Dynatrace, Elasticsearch)",
+              "Swagger/OpenAPI",
+              "API Security (OAuth2, JWT)"
             ]
           },
           {
@@ -503,9 +615,24 @@ const resources = {
             location: "Chile",
             logo: "/exp/falabella.jpeg",
             achievements: [
-              "Orquesté la transformación técnica del sistema de asistencia regional para +50,000 colaboradores, reduciendo la deuda técnica en un 35% mediante el desacoplamiento de dominios con DDD.",
-              "Diseñé un núcleo transaccional con DDD y arquitectura event-driven para procesar 2M eventos diarios con baja latencia.",
-              "Aceleré en 30% el time-to-market y eliminé inconsistencias de datos mediante integración de APIs SaaS estandarizadas."
+              "Dirigí la modernización tecnológica del sistema de asistencia corporativo para +50.000 empleados en LATAM, logrando una reducción del 35% en la deuda técnica con Java, Spring Boot y microservicios.",
+              "Garanticé alta disponibilidad sin caídas operativas para +50.000 usuarios activos mediante un núcleo transaccional desacoplado basado en Domain-Driven Design (DDD).",
+              "Eliminé al 100% las inconsistencias de datos entre el sistema core y el ecosistema SaaS externo, logrando sincronización en tiempo real con un bus de eventos distribuido (Apache Kafka, GCP Pub/Sub) bajo arquitectura Event-Driven (EDA).",
+              "Estandaricé la integración de ecosistemas SaaS a nivel corporativo, acelerando el time-to-market un 30% y reforzando la interoperabilidad y la seguridad en las integraciones."
+            ],
+            stack: [
+              "Java 17/21",
+              "Spring Boot",
+              "PL/SQL",
+              "Oracle DB",
+              "Event-Driven Architecture (Apache Kafka, GCP Pub/Sub)",
+              "GCP",
+              "Swagger/OpenAPI",
+              "AI-Assisted Dev (GitHub Copilot)",
+              "CI/CD (Gitlab)",
+              "Docker",
+              "Kubernetes",
+              "API Security (OAuth2, JWT)"
             ]
           },
           {
@@ -515,10 +642,27 @@ const resources = {
             location: "España",
             logo: "/exp/neurogenesis.jpeg",
             achievements: [
-              "Co-fundé y dirigí la estrategia tecnológica y el roadmap productivo desde la constitución hasta el lanzamiento.",
-              "Desarrollé un sistema IA end-to-end con 92% de precisión (CNN), fundamentado en la creación de un dataset propio de +10k imágenes.",
-              "Diseñé infraestructura Cloud-Native en AWS para desplegar modelos ML escalables y facilitar la producción (MLOps).",
-              "Lideré técnicamente 7 proyectos de innovación (+50 estudiantes) en IA y DevOps, alineando la investigación académica con aplicaciones comerciales reales."
+              "Orquesté la estrategia tecnológica fundacional, transformando investigación académica en un producto comercial escalable que validó el modelo de negocio de la compañía.",
+              "Construí una ventaja competitiva (Data Moat) mediante el diseño de un pipeline automatizado para curar imágenes y videos crudos, estructurando un dataset propietario de +10.000 registros para el sistema de visión artificial.",
+              "Desarrollé el motor principal de Inteligencia Artificial (AcuaMattic) entrenando un modelo CNN que alcanzó un 92% de precisión, viabilizando el lanzamiento comercial del producto.",
+              "Escale la infraestructura de producción al diseñar e implementar arquitecturas MLOps cloud-native sobre AWS, garantizando la alta disponibilidad de los modelos.",
+              "Dirigí un equipo multidisciplinar de 50 profesionales en la ejecución de un portafolio de 7 proyectos de IA y DevOps, optimizando los recursos y acelerando el time-to-market."
+            ],
+            stack: [
+              "Python",
+              "PyTorch",
+              "TensorFlow",
+              "Keras",
+              "Computer Vision (CNNs, OpenCV, Segmentation)",
+              "Transformers (Hugging Face, GPT-3 / OpenAI API)",
+              "ML Clásico (Scikit-Learn)",
+              "NumPy",
+              "Pandas",
+              "Matplotlib",
+              "Seaborn",
+              "SciPy",
+              "AWS (SageMaker, Rekognition, EC2, S3, IAM)",
+              "Jupyter Notebook"
             ]
           },
           {
@@ -528,9 +672,21 @@ const resources = {
             location: "Chile",
             logo: "/exp/nttdata.jpeg",
             achievements: [
-              "Diseñé arquitectura de alta disponibilidad procesando +1M transacciones diarias y reduje un 50% vulnerabilidades críticas implementando estándares OWASP y PCI.",
-              "Refactoricé módulos críticos con deuda técnica elevada, migrando lógica monolítica a microservicios desacoplados para mejorar la mantenibilidad y la velocidad de despliegue.",
-              "Establecí el framework de automatización de pruebas y análisis estático (Shift-Left), reduciendo drásticamente la tasa de errores detectados en entornos de pre-producción."
+              "Arquitecté un núcleo transaccional de alta disponibilidad, soportando con éxito el procesamiento de +1 millón de operaciones diarias en entornos Java y Spring Boot para escalar el negocio.",
+              "Blindé la seguridad del delivery técnico, reduciendo las vulnerabilidades críticas en un 50% al auditar e implementar estrictos estándares normativos como OWASP y PCI.",
+              "Aceleré la adopción de prácticas DevSecOps (Shift-Left), automatizando la revisión de código seguro en los pipelines de CI/CD mediante la integración de Fortify y Kiuwan.",
+              "Lideré la modernización del ecosistema legacy, orquestando la migración de complejas aplicaciones monolíticas hacia una arquitectura de microservicios desacoplados."
+            ],
+            stack: [
+              "Java 8/11",
+              "Spring Boot",
+              "Oracle DB",
+              "Ciberseguridad & Cumplimiento (PCI-DSS, OWASP Top 10)",
+              "Swagger/OpenAPI",
+              "API Security (OAuth2, JWT)",
+              "Fortify",
+              "Kiuwan",
+              "GitLab"
             ]
           }
         ]
@@ -541,7 +697,7 @@ const resources = {
         educations: [
           {
             institution: "LIDR.co | AI-Powered Careers",
-            degree: "AI4DEVS",
+            degree: "AI Engineer (AI4DEVS)",
             period: "2025",
             location: "España",
             logo: "/edu/lidr.jpeg",
@@ -632,7 +788,7 @@ const resources = {
         ]
       },
       projects: {
-        title: "Soluciones Implementadas",
+        title: "Casos de Éxito (Enterprise)",
         counter: "proyectos",
         more_info: "Más Info",
         external_link: "Link Externo",
@@ -711,24 +867,24 @@ const resources = {
         title: "Capacidades y Stack Técnico",
         project_management: {
           title: "Liderazgo & Estrategia",
-          skills: "Liderazgo Técnico, Human-in-the-loop, Ingeniería de Producto, Desarrollo Ágil, Mentoring",
+          skills: "Arquitectura de Software, SDD, Ingeniería de Producto, API-First, Liderazgo Técnico, Mentoring, Human-in-the-loop, Desarrollo Ágil",
         },
         ai: {
           title: "IA & Sistemas Inteligentes",
           skills:
-            "GenAI, LLM, RAG, LangChain, HuggingFace, Agentic Workflows, OpenCV, TensorFlow, PyTorch, CNN",
+            "Agentic Workflows, CNN, HuggingFace, RAG, TensorFlow, LLM, LangChain, GenAI, PyTorch, OpenCV",
         },
         backend: {
           title: "Arquitectura & Backend",
-          skills: "Java, Spring Boot, Python, FastAPI, Microservices, DDD, SQL, NoSQL",
+          skills: "Arquitectura Hexagonal, Java, Spring Boot, DDD, FastAPI, EDA, Python, BDD, OpenAPI, TDD, NoSQL, SQL",
         },
         cicd: {
           title: "Cloud & DevOps",
-          skills: "AWS, GCP, Kubernetes, Docker, Jenkins, GitHub Actions, Splunk, Dynatrace, Elasticsearch",
+          skills: "GitHub Actions, AWS, Elasticsearch, GCP, Kubernetes, Docker, Dynatrace, Jenkins, Splunk",
         },
         code_review: {
           title: "Clean Code & Shift-Left",
-          skills: "JUnit, Mockito, Spock, Karate, Checkstyle, Sonar, Veracode, ArchUnit",
+          skills: "SonarQube, SOLID, Veracode, Spock, ArchUnit, Karate, Fortify, Swagger, Kiuwan",
         },
         languages: {
           title: "Idiomas",
@@ -845,9 +1001,9 @@ const resources = {
         flipHint: "Toca la tarjeta para voltearla",
         back: {
           email: "readme.md@almapi.dev",
-          linkedin: "@alvaro-maldonado-ai",
+          linkedin: "@alvaro-maldonado-pinto-ai",
           github: "@aandmaldonado",
-          city: "Gandía, España | Remoto Global"
+          city: "España"
         }
       },
       chatbot: chatbotTranslations.es
